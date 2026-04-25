@@ -32,6 +32,9 @@ import AdminCalendar from './pages/AdminCalendar';
 import AdminMenu from './pages/AdminMenu';
 import AdminEvents from './pages/AdminEvents';
 import Events from './pages/Events';
+import Offers from './pages/Offers';
+import DiscoverLangenburg from './pages/DiscoverLangenburg';
+import AGB from './pages/AGB';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -85,6 +88,11 @@ const AuthenticatedApp = () => {
         <Route path="/admin/menu" element={<AdminMenu />} />
         <Route path="/admin/events" element={<AdminEvents />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/offers" element={<Offers />} />
+        <Route path="/arrangements" element={<Offers />} />
+        <Route path="/discover" element={<DiscoverLangenburg />} />
+        <Route path="/langenburg" element={<DiscoverLangenburg />} />
+        <Route path="/agb" element={<AGB />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

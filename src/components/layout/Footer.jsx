@@ -84,15 +84,17 @@ export default function Footer() {
           <h3 className="text-ivory/30 text-[10px] tracking-[0.3em] uppercase font-body font-medium mb-5">Navigation</h3>
           <ul className="space-y-2.5 text-sm font-body">
             {[
-              { to: '/menu', de: 'Speisekarte', en: 'Menu', it: 'Menu' },
               { to: '/rooms', de: 'Zimmer & Suiten', en: 'Rooms & Suites', it: 'Camere & Suite' },
-              { to: '/reserve', de: 'Tisch reservieren', en: 'Reserve a Table', it: 'Prenota' },
+              { to: '/offers', de: 'Arrangements', en: 'Offers', it: 'Offerte' },
+              { to: '/reserve', de: 'Tisch reservieren', en: 'Reserve a Table', it: 'Prenota tavolo' },
+              { to: '/menu', de: 'Speisekarte', en: 'Menu', it: 'Menu' },
               { to: '/weddings', de: 'Hochzeiten & Events', en: 'Weddings & Events', it: 'Matrimoni & Eventi' },
+              { to: '/discover', de: 'Langenburg entdecken', en: 'Discover Langenburg', it: 'Scopri Langenburg' },
               { to: '/gallery', de: 'Galerie', en: 'Gallery', it: 'Galleria' },
               { to: '/story', de: 'Unsere Geschichte', en: 'Our Story', it: 'La nostra storia' },
               { to: '/faq', de: 'FAQ', en: 'FAQ', it: 'FAQ' },
               { to: '/contact', de: 'Kontakt', en: 'Contact', it: 'Contatti' },
-              { to: '/account', de: 'Mein Konto', en: 'My Account', it: 'Il mio account' },
+              { to: '/agb', de: 'AGB', en: 'T&C', it: 'Condizioni' },
               { to: '/legal', de: 'Impressum', en: 'Legal', it: 'Note legali' },
             ].map(l => (
               <li key={l.to}>
@@ -115,12 +117,15 @@ export default function Footer() {
         <span className="text-ivory/25 text-xs font-body tracking-wide">
           © {new Date().getFullYear()} Krone Langenburg by Ammesso. {lang === 'de' ? 'Alle Rechte vorbehalten.' : lang === 'en' ? 'All rights reserved.' : 'Tutti i diritti riservati.'}
         </span>
-        <div className="flex gap-5">
+        <div className="flex gap-5 flex-wrap justify-center sm:justify-end">
           <Link to="/legal" className="text-ivory/25 hover:text-gold/60 transition-colors text-xs font-body tracking-wide">
             {lang === 'de' ? 'Impressum' : lang === 'en' ? 'Legal' : 'Note legali'}
           </Link>
           <Link to="/privacy" className="text-ivory/25 hover:text-gold/60 transition-colors text-xs font-body tracking-wide">
             {lang === 'de' ? 'Datenschutz' : lang === 'en' ? 'Privacy' : 'Privacy'}
+          </Link>
+          <Link to="/agb" className="text-ivory/25 hover:text-gold/60 transition-colors text-xs font-body tracking-wide">
+            AGB
           </Link>
         </div>
       </div>

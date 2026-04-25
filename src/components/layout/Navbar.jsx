@@ -42,10 +42,12 @@ export default function Navbar() {
     { to: '/weddings', label: tr('nav', 'weddings') },
     { to: '/contact', label: tr('nav', 'contact') },
   ];
-  // Mobile drawer gets all links including FAQ, Story, Gallery, Events
+  // Mobile drawer gets all links including FAQ, Story, Gallery, Events, Offers, Discover
   const mobileLinks = [
     ...navLinks,
+    { to: '/offers', label: lang === 'de' ? 'Arrangements' : lang === 'en' ? 'Offers' : 'Offerte' },
     { to: '/events', label: lang === 'de' ? 'Events' : lang === 'en' ? 'Events' : 'Eventi' },
+    { to: '/discover', label: lang === 'de' ? 'Langenburg entdecken' : lang === 'en' ? 'Discover Langenburg' : 'Scopri Langenburg' },
     { to: '/gallery', label: lang === 'de' ? 'Galerie' : lang === 'en' ? 'Gallery' : 'Galleria' },
     { to: '/story', label: tr('nav', 'story') },
     { to: '/faq', label: 'FAQ' },
