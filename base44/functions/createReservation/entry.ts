@@ -191,6 +191,7 @@ Deno.serve(async (req) => {
 
         // Try to send email. If recipient is external (not an app user), SendEmail will fail.
         // In that case, log it and leave status as 'new' for admin to confirm/email manually.
+        let emailSent = false;
         try {
           await base44.asServiceRole.integrations.Core.SendEmail({
             to: email,
@@ -198,45 +199,38 @@ Deno.serve(async (req) => {
             subject: template.subject,
             body: template.body
           });
-
-          // Email sent successfully — mark confirmed
-          await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
-            status: 'confirmed',
-            email_confirmation_sent: true,
-            email_confirmation_sent_at: new Date().toISOString(),
-            confirmed_at: new Date().toISOString(),
-          });
+          emailSent = true;
         } catch (emailErr) {
-          // Email failed (likely external address). Leave status as 'new' and log for admin.
-          console.warn('Email send failed, reservation stays in "new" status for admin confirmation:', emailErr.message);
-          // EmailLog will be recorded in catch block below
-          throw emailErr; // Re-throw to trigger outer catch
+          // External email address — platform limitation. Log for admin visibility.
+          console.warn('Email send failed (external address):', emailErr.message);
         }
+
+        // Always confirm the reservation regardless of email delivery
+        await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
+          status: 'confirmed',
+          email_confirmation_sent: emailSent,
+          email_confirmation_sent_at: emailSent ? new Date().toISOString() : null,
+          confirmed_at: new Date().toISOString(),
+        });
 
         await base44.asServiceRole.entities.EmailLog.create({
           recipient: email,
           subject: template.subject,
           template: 'reservation_confirmation',
           language: lang,
-          status: 'sent',
+          status: emailSent ? 'sent' : 'failed',
+          failure_reason: emailSent ? null : 'External address — platform limitation',
           sent_at: new Date().toISOString(),
           related_entity_type: 'RestaurantReservation',
           related_entity_id: reservation.id,
           related_ref: ref
-        });
+        }).catch(() => {});
       } catch (e) {
-        console.error('Email notification failed:', e.message);
-        await base44.asServiceRole.entities.EmailLog.create({
-          recipient: email,
-          subject: `Reservation ${ref}`,
-          template: 'reservation_confirmation',
-          language: lang,
-          status: 'failed',
-          failure_reason: e.message,
-          sent_at: new Date().toISOString(),
-          related_entity_type: 'RestaurantReservation',
-          related_entity_id: reservation.id,
-          related_ref: ref
+        console.error('Email/confirm flow failed:', e.message);
+        // Still try to confirm the reservation so it's not stuck as 'new'
+        await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
+          status: 'confirmed',
+          confirmed_at: new Date().toISOString(),
         }).catch(() => {});
       }
     })();

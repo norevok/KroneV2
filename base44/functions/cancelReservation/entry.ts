@@ -10,8 +10,12 @@ Deno.serve(async (req) => {
     if (!reservation_id) return Response.json({ error: 'Missing reservation_id' }, { status: 400 });
 
     // Fetch the reservation
-    const reservations = await base44.asServiceRole.entities.RestaurantReservation.filter({ id: reservation_id });
-    const r = reservations[0];
+    let r;
+    try {
+      r = await base44.asServiceRole.entities.RestaurantReservation.get(reservation_id);
+    } catch (_) {
+      r = null;
+    }
 
     if (!r) return Response.json({ error: 'Not found' }, { status: 404 });
 

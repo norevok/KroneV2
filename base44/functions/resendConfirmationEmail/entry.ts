@@ -11,8 +11,12 @@ Deno.serve(async (req) => {
     const { reservation_id } = await req.json();
     if (!reservation_id) return Response.json({ error: 'Missing reservation_id' }, { status: 400 });
 
-    const reservations = await base44.asServiceRole.entities.RestaurantReservation.filter({ id: reservation_id });
-    const r = reservations[0];
+    let r;
+    try {
+      r = await base44.asServiceRole.entities.RestaurantReservation.get(reservation_id);
+    } catch (_) {
+      r = null;
+    }
     if (!r) return Response.json({ error: 'Not found' }, { status: 404 });
 
     const lang = r.language || 'de';
@@ -94,31 +98,38 @@ Deno.serve(async (req) => {
 
     const tmpl = templates[lang] || templates.de;
 
-    await base44.asServiceRole.integrations.Core.SendEmail({
-      to: r.guest_email,
-      from_name: 'Krone Langenburg by Ammesso',
-      subject: tmpl.subject,
-      body: tmpl.body,
-    });
+    let emailSent = false;
+    try {
+      await base44.asServiceRole.integrations.Core.SendEmail({
+        to: r.guest_email,
+        from_name: 'Krone Langenburg by Ammesso',
+        subject: tmpl.subject,
+        body: tmpl.body,
+      });
+      emailSent = true;
+    } catch (emailErr) {
+      console.warn('Resend email failed (external address):', emailErr.message);
+    }
 
     await base44.asServiceRole.entities.RestaurantReservation.update(reservation_id, {
-      email_confirmation_sent: true,
-      email_confirmation_sent_at: new Date().toISOString(),
-    });
+      email_confirmation_sent: emailSent,
+      email_confirmation_sent_at: emailSent ? new Date().toISOString() : r.email_confirmation_sent_at,
+    }).catch(() => {});
 
     await base44.asServiceRole.entities.EmailLog.create({
       recipient: r.guest_email,
       subject: tmpl.subject,
       template: 'reservation_confirmation',
       language: lang,
-      status: 'sent',
+      status: emailSent ? 'sent' : 'failed',
+      failure_reason: emailSent ? null : 'External address — platform limitation',
       sent_at: new Date().toISOString(),
       related_entity_type: 'RestaurantReservation',
       related_entity_id: reservation_id,
       related_ref: ref,
-    });
+    }).catch(() => {});
 
-    return Response.json({ success: true });
+    return Response.json({ success: true, email_sent: emailSent });
   } catch (error) {
     console.error('resendConfirmationEmail error:', error.message);
     return Response.json({ error: error.message }, { status: 500 });

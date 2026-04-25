@@ -48,56 +48,39 @@ Deno.serve(async (req) => {
 
     const template = templates[lang] || templates.de;
 
-    // Send email
+    // Send email (non-crashing for external addresses)
+    let emailSent = false;
     try {
       await base44.asServiceRole.integrations.Core.SendEmail({
         to: guest_email,
+        from_name: 'Krone Langenburg by Ammesso',
         subject: template.subject,
         body: template.body
       });
-
-      // Log send
-      await base44.asServiceRole.entities.EmailLog.create({
-        recipient: guest_email,
-        subject: template.subject,
-        template: 'reservation_cancelled',
-        language: lang || 'de',
-        status: 'sent',
-        sent_at: new Date().toISOString(),
-        related_entity_type: 'RestaurantReservation',
-        related_entity_id: reservation.id,
-        related_ref: reservation_ref
-      }).catch(() => {});
-
-      // Update reservation
-      await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
-        cancellation_confirmation_sent: true,
-        cancellation_confirmation_sent_at: new Date().toISOString()
-      });
-
-      return Response.json({ success: true, ref: reservation_ref });
+      emailSent = true;
     } catch (emailErr) {
-      console.error('Email send failed:', emailErr.message);
-
-      // Log failure
-      await base44.asServiceRole.entities.EmailLog.create({
-        recipient: guest_email,
-        subject: template.subject,
-        template: 'reservation_cancelled',
-        language: lang || 'de',
-        status: 'failed',
-        failure_reason: emailErr.message,
-        sent_at: new Date().toISOString(),
-        related_entity_type: 'RestaurantReservation',
-        related_entity_id: reservation.id,
-        related_ref: reservation_ref
-      }).catch(() => {});
-
-      return Response.json(
-        { error: 'Email send failed' },
-        { status: 500 }
-      );
+      console.warn('Cancellation email failed (external address):', emailErr.message);
     }
+
+    await base44.asServiceRole.entities.EmailLog.create({
+      recipient: guest_email,
+      subject: template.subject,
+      template: 'reservation_cancelled',
+      language: lang || 'de',
+      status: emailSent ? 'sent' : 'failed',
+      failure_reason: emailSent ? null : 'External address — platform limitation',
+      sent_at: new Date().toISOString(),
+      related_entity_type: 'RestaurantReservation',
+      related_entity_id: reservation.id,
+      related_ref: reservation_ref
+    }).catch(() => {});
+
+    await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
+      cancellation_confirmation_sent: emailSent,
+      cancellation_confirmation_sent_at: emailSent ? new Date().toISOString() : null
+    }).catch(() => {});
+
+    return Response.json({ success: true, ref: reservation_ref, email_sent: emailSent });
   } catch (error) {
     console.error('sendCancellationEmail error:', error.message);
     return Response.json(

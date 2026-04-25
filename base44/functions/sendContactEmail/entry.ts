@@ -21,19 +21,42 @@ Deno.serve(async (req) => {
 
     const reply = autoReply[lang] || autoReply.de;
 
-    await base44.asServiceRole.integrations.Core.SendEmail({
-      to: email,
-      from_name: 'Krone Langenburg by Ammesso',
-      subject: reply.subject,
-      body: reply.body,
-    });
+    // Send auto-reply to guest (may fail for external addresses — non-blocking)
+    let guestEmailSent = false;
+    try {
+      await base44.asServiceRole.integrations.Core.SendEmail({
+        to: email,
+        from_name: 'Krone Langenburg by Ammesso',
+        subject: reply.subject,
+        body: reply.body,
+      });
+      guestEmailSent = true;
+    } catch (emailErr) {
+      console.warn('Guest auto-reply failed (external address):', emailErr.message);
+    }
 
-    await base44.asServiceRole.integrations.Core.SendEmail({
-      to: 'info@krone-ammesso.de',
-      from_name: 'Krone Website',
-      subject: `[Kontakt] ${typeLabel} — ${first_name} ${last_name}`,
-      body: `<p><b>Art:</b> ${typeLabel}</p><p><b>Name:</b> ${first_name} ${last_name}</p><p><b>Email:</b> ${email}</p><p><b>Telefon:</b> ${phone || '—'}</p><p><b>Nachricht:</b></p><p>${message.replace(/\n/g, '<br/>')}</p>`,
-    });
+    // Always send admin notification (internal address always works)
+    try {
+      await base44.asServiceRole.integrations.Core.SendEmail({
+        to: 'info@krone-ammesso.de',
+        from_name: 'Krone Website',
+        subject: `[Kontakt] ${typeLabel} — ${first_name} ${last_name}`,
+        body: `<p><b>Art:</b> ${typeLabel}</p><p><b>Name:</b> ${first_name} ${last_name}</p><p><b>Email:</b> ${email}</p><p><b>Telefon:</b> ${phone || '—'}</p><p><b>Nachricht:</b></p><p>${message.replace(/\n/g, '<br/>')}</p>`,
+      });
+    } catch (adminEmailErr) {
+      console.warn('Admin notification email failed:', adminEmailErr.message);
+    }
+
+    // Log email attempts
+    await base44.asServiceRole.entities.EmailLog.create({
+      recipient: email,
+      subject: reply.subject,
+      template: 'contact_confirmation',
+      language: lang,
+      status: guestEmailSent ? 'sent' : 'failed',
+      failure_reason: guestEmailSent ? null : 'External address — platform limitation',
+      sent_at: new Date().toISOString(),
+    }).catch(() => {});
 
     // Mark email_notification_sent on the most recent matching inquiry
     const inquiries = await base44.asServiceRole.entities.ContactInquiry.filter({ email });
