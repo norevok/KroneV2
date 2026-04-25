@@ -21,9 +21,9 @@ export default function BookingReturn() {
     if (ref) {
       const s = status === 'confirmed' || status === 'success' ? 'returned_confirmed'
         : status === 'cancelled' || status === 'cancel' ? 'returned_cancelled' : 'returned_pending';
-      base44.entities.BookingIntent.filter({ intent_ref: ref }).then(async items => {
+      base44.entities.HotelBookingIntent.filter({ intent_ref: ref }).then(async items => {
         if (items.length > 0) {
-          await base44.entities.BookingIntent.update(items[0].id, { status: s, returned_at: new Date().toISOString() });
+          await base44.entities.HotelBookingIntent.update(items[0].id, { status: s, returned_at: new Date().toISOString() });
         }
         // Notify Slack about return status
         base44.functions.invoke('notifySlack', {

@@ -6,7 +6,7 @@ import { UtensilsCrossed, BedDouble } from 'lucide-react';
 export default function StickyMobileCTA() {
   const { tr, lang } = useLang();
   const location = useLocation();
-  const hide = ['/reserve', '/rooms', '/book', '/admin', '/account', '/activity-log', '/dashboard'].some(p => location.pathname.startsWith(p));
+  const hide = ['/reserve', '/rooms', '/book', '/admin', '/account', '/activity-log', '/dashboard', '/booking-return'].some(p => location.pathname.startsWith(p));
   if (hide) return null;
 
   return (

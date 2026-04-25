@@ -117,7 +117,7 @@ const CAT_LABELS = {
 const CATS = ['all', 'dining', 'rooms', 'events', 'property', 'team'];
 
 // Lightbox component
-function Lightbox({ images, index, onClose, onPrev, onNext }) {
+function Lightbox({ images, index, onClose, onPrev, onNext, lang }) {
   const img = images[index];
   if (!img) return null;
 
@@ -148,7 +148,7 @@ function Lightbox({ images, index, onClose, onPrev, onNext }) {
         <img src={img.src} alt={img.de}
           className="max-h-[78vh] max-w-full w-auto rounded-xl object-contain shadow-2xl"
           style={{ userSelect: 'none' }} />
-        <p className="text-white/50 text-sm font-body mt-4 text-center">{img.de}</p>
+        <p className="text-white/50 text-sm font-body mt-4 text-center">{img[lang] || img.de}</p>
       </div>
     </div>
   );
@@ -373,6 +373,7 @@ export default function Gallery() {
             onClose={closeLightbox}
             onPrev={prev}
             onNext={next}
+            lang={lang}
           />
         </div>
       )}

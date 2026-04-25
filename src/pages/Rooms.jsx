@@ -74,13 +74,13 @@ export default function Rooms() {
     if (checkOut) p.set('checkout', checkOut);
     if (adults) p.set('adults', adults);
     const beds24Url = `${beds24Base}&${p.toString()}`;
-    base44.entities.BookingIntent.create({
+    base44.entities.HotelBookingIntent.create({
       intent_ref: ref,
-      status: 'redirected',
+      status: 'redirected_to_beds24',
       language: lang,
       source_page: 'rooms',
-      room_interest: roomId || '',
-      beds24_url_used: beds24Url,
+      room_category_interest: roomId || '',
+      beds24_booking_url_used: beds24Url,
       redirected_at: new Date().toISOString(),
     }).catch(() => {});
     base44.functions.invoke('notifySlack', {
@@ -556,6 +556,15 @@ export default function Rooms() {
             className="flex-1 w-full border-0 bg-white min-h-[60vh]"
             allow="payment"
           />
+          {/* Fallback for iframe load issues */}
+          <div className="flex-shrink-0 text-center py-3 px-5 bg-espresso border-t border-[#C9A96E]/10">
+            <p className="text-ivory/30 text-xs font-body">
+              {lang === 'de' ? 'Falls die Buchung nicht lädt:' : lang === 'en' ? 'If the booking widget does not load:' : 'Se il widget non carica:'}{' '}
+              <a href={beds24EmbedUrl} target="_blank" rel="noopener noreferrer" className="text-gold hover:underline">
+                {lang === 'de' ? 'Hier direkt buchen →' : lang === 'en' ? 'Book directly here →' : 'Prenota direttamente →'}
+              </a>
+            </p>
+          </div>
         </div>
       )}
     </div>
