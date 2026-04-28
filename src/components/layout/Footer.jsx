@@ -38,6 +38,7 @@ export default function Footer() {
       links3: [
         { to: '/story', l: 'Unsere Geschichte' },
         { to: '/gallery', l: 'Galerie' },
+        { to: '/shop', l: '🎁 Gutscheine' },
         { to: '/discover', l: 'Langenburg entdecken' },
         { to: '/karriere', l: 'Karriere' },
         { to: '/faq', l: 'FAQ' },
@@ -64,6 +65,7 @@ export default function Footer() {
       links3: [
         { to: '/story', l: 'Our Story' },
         { to: '/gallery', l: 'Gallery' },
+        { to: '/shop', l: '🎁 Vouchers' },
         { to: '/discover', l: 'Discover Langenburg' },
         { to: '/karriere', l: 'Careers' },
         { to: '/faq', l: 'FAQ' },

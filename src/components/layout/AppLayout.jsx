@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import StickyMobileCTA from './StickyMobileCTA';
 import WhatsAppButton from './WhatsAppButton';
+import ChatWidget from '../ChatWidget';
 
 
 export default function AppLayout() {
@@ -15,6 +16,7 @@ export default function AppLayout() {
       <Footer />
       <StickyMobileCTA />
       <WhatsAppButton />
+      <ChatWidget />
     </div>
   );
 }

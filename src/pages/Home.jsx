@@ -191,6 +191,10 @@ export default function Home() {
                 className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 border-2 border-ivory/60 hover:border-ivory text-ivory rounded-full text-xs tracking-[0.2em] uppercase font-body font-semibold transition-all">
                 <BedDouble className="w-3.5 h-3.5 flex-shrink-0" /> {c.book_room}
               </Link>
+              <Link to="/shop"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 text-gold-light/70 hover:text-gold-light text-[10px] tracking-[0.2em] uppercase font-body transition-colors">
+                🎁 {lang === 'de' ? 'Gutschein verschenken' : lang === 'en' ? 'Give a voucher' : 'Regala un voucher'}
+              </Link>
             </div>
             <div className="mt-6 flex items-center justify-center gap-2 text-ivory/30 text-xs font-body">
               <MapPin className="w-3 h-3 text-gold-light/50" />

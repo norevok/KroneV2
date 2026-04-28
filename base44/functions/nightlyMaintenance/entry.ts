@@ -86,6 +86,20 @@ Deno.serve(async (req) => {
       results.errors.push(`close_messages: ${e.message}`);
     }
 
+    // 4b. Expire stale pending_payment vouchers (>24 hours)
+    try {
+      const day1 = new Date(now - 24 * 60 * 60 * 1000).toISOString();
+      const staleVouchers = await base44.asServiceRole.entities.GiftVoucher.filter({
+        status: 'pending_payment',
+      }, '-created_date', 100);
+      const toExpire = staleVouchers.filter(v => v.created_date < day1);
+      for (const v of toExpire) {
+        await base44.asServiceRole.entities.GiftVoucher.update(v.id, { status: 'expired' });
+      }
+    } catch (e) {
+      results.errors.push(`expire_vouchers: ${e.message}`);
+    }
+
     // 4. Archive stale booking intents (>7 days, never progressed)
     try {
       const staleIntents = await base44.asServiceRole.entities.HotelBookingIntent.filter({

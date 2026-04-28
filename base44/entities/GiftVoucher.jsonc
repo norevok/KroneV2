@@ -1,0 +1,87 @@
+{
+  "name": "GiftVoucher",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Unique voucher code (KRONE-XXXXXX)"
+    },
+    "product_id": {
+      "type": "string",
+      "description": "Which product was purchased"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "amount_eur": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_payment",
+        "active",
+        "redeemed",
+        "expired",
+        "refunded"
+      ],
+      "default": "pending_payment"
+    },
+    "purchaser_email": {
+      "type": "string"
+    },
+    "purchaser_name": {
+      "type": "string"
+    },
+    "recipient_name": {
+      "type": "string",
+      "description": "Name to print on voucher"
+    },
+    "recipient_email": {
+      "type": "string",
+      "description": "Send voucher to this email"
+    },
+    "personal_message": {
+      "type": "string"
+    },
+    "stripe_payment_intent_id": {
+      "type": "string"
+    },
+    "stripe_session_id": {
+      "type": "string"
+    },
+    "paid_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "redeemed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "redeemed_by": {
+      "type": "string"
+    },
+    "email_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "de",
+        "en",
+        "it"
+      ],
+      "default": "de"
+    }
+  },
+  "required": [
+    "product_name",
+    "amount_eur",
+    "purchaser_email"
+  ]
+}

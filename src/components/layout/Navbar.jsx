@@ -49,6 +49,7 @@ export default function Navbar() {
     { to: '/events', label: 'Events' },
     { to: '/discover', label: lang === 'de' ? 'Langenburg entdecken' : 'Discover Langenburg' },
     { to: '/gallery', label: lang === 'de' ? 'Galerie' : 'Gallery' },
+    { to: '/shop', label: lang === 'de' ? 'Gutscheine' : 'Vouchers' },
     { to: '/karriere', label: lang === 'de' ? 'Karriere' : 'Careers' },
     { to: '/story', label: tr('nav', 'story') },
     { to: '/faq', label: 'FAQ' },
