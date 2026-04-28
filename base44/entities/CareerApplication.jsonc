@@ -1,0 +1,87 @@
+{
+  "name": "CareerApplication",
+  "type": "object",
+  "properties": {
+    "position": {
+      "type": "string",
+      "enum": [
+        "service",
+        "kitchen",
+        "reception",
+        "management",
+        "events",
+        "initiative"
+      ],
+      "default": "initiative",
+      "description": "Applied position"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string",
+      "description": "Motivation / cover letter text"
+    },
+    "cv_file_uri": {
+      "type": "string",
+      "description": "Private storage URI for uploaded CV"
+    },
+    "cv_filename": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "de",
+        "en",
+        "it"
+      ],
+      "default": "de"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "in_review",
+        "interview_scheduled",
+        "rejected",
+        "hired",
+        "archived"
+      ],
+      "default": "new"
+    },
+    "internal_notes": {
+      "type": "string"
+    },
+    "email_confirmation_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "slack_notified": {
+      "type": "boolean",
+      "default": false
+    },
+    "reviewed_by": {
+      "type": "string"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "email",
+    "position"
+  ]
+}

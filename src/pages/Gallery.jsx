@@ -201,10 +201,10 @@ export default function Gallery() {
   }[lang] || { title: 'Galerie', sub: '', reserve: 'Tisch reservieren', rooms: 'Zimmer', explore: 'Entdecken' };
 
   return (
-    <div className="min-h-screen bg-charcoal text-ivory pb-24 lg:pb-10">
+    <div className="min-h-screen bg-ivory text-charcoal pb-24 lg:pb-10">
 
       {/* Hero header */}
-      <div className="relative overflow-hidden bg-espresso pt-20 sm:pt-24 pb-12 sm:pb-16 px-5 border-b border-[#C9A96E]/10">
+      <div className="relative overflow-hidden bg-espresso pt-20 sm:pt-24 pb-12 sm:pb-16 px-5 border-b border-white/10">
         {/* Subtle background image */}
         <img
           src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=60"
@@ -236,14 +236,14 @@ export default function Gallery() {
             {CATS.map(cat => (
               <button key={cat} onClick={() => setActiveCat(cat)}
                 className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-body tracking-wider uppercase border transition-all ${activecat === cat
-                  ? 'border-gold bg-gold/10 text-gold'
-                  : 'border-[#C9A96E]/15 text-ivory/40 hover:border-[#C9A96E]/30 hover:text-ivory/60'}`}>
+                  ? 'border-gold bg-gold-pale text-gold'
+                  : 'border-stone-mid text-charcoal/50 hover:border-gold-light/50 hover:text-charcoal/75'}`}>
                 {labels[cat] || cat}
               </button>
             ))}
           </div>
           {/* Layout toggle */}
-          <div className="flex gap-1 bg-espresso rounded-xl p-1 border border-[#C9A96E]/10">
+          <div className="flex gap-1 bg-white rounded-xl p-1 border border-stone-mid shadow-card">
             <button onClick={() => setLayout('masonry')}
               className={`p-2 rounded-lg transition-all ${layout === 'masonry' ? 'bg-gold/20 text-gold' : 'text-ivory/30 hover:text-ivory/60'}`}>
               <LayoutGrid className="w-4 h-4" />
@@ -256,7 +256,7 @@ export default function Gallery() {
         </div>
 
         {/* Count */}
-        <p className="text-ivory/20 text-[10px] font-body tracking-widest uppercase mb-6">
+        <p className="text-[10px] font-body tracking-widest uppercase mb-6" style={{color:'#B0A090'}}>
           {filtered.length} {lang === 'de' ? 'Bilder' : lang === 'en' ? 'Photos' : 'Foto'}
         </p>
 
@@ -277,7 +277,7 @@ export default function Gallery() {
                 />
                 {/* Skeleton */}
                 {!loaded[`${activecat}-${i}`] && (
-                  <div className="absolute inset-0 bg-stone-warm animate-pulse min-h-[150px]" />
+                  <div className="absolute inset-0 bg-stone-mid animate-pulse min-h-[150px]" />
                 )}
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
@@ -337,24 +337,24 @@ export default function Gallery() {
 
         {/* CTAs */}
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-          <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-6 sm:p-8 text-center hover:border-[#C9A96E]/25 transition-all">
-            <UtensilsCrossed className="w-6 h-6 text-gold/60 mx-auto mb-3" />
-            <h3 className="font-display text-xl font-light text-ivory mb-2">
+          <div className="surface-card rounded-2xl p-6 sm:p-8 text-center hover:shadow-premium transition-all">
+            <UtensilsCrossed className="w-6 h-6 text-gold mx-auto mb-3" />
+            <h3 className="font-display text-xl font-light text-charcoal mb-2">
               {lang === 'de' ? 'Erleben Sie das Kulinarium' : lang === 'en' ? 'Experience the Kulinarium' : 'Scopri il Kulinarium'}
             </h3>
-            <p className="text-ivory/40 text-xs font-body mb-5">
+            <p className="text-xs font-body mb-5" style={{color:'#8A7A6A'}}>
               {lang === 'de' ? 'Mediterrane Küche mit Herz und Seele.' : lang === 'en' ? 'Mediterranean cuisine with heart and soul.' : 'Cucina mediterranea con cuore e anima.'}
             </p>
             <Link to="/reserve" className="inline-flex items-center gap-1.5 px-6 py-2.5 btn-gold rounded-full text-xs tracking-widest uppercase font-body font-semibold">
               {t.reserve}
             </Link>
           </div>
-          <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-6 sm:p-8 text-center hover:border-[#C9A96E]/25 transition-all">
-            <BedDouble className="w-6 h-6 text-gold/60 mx-auto mb-3" />
-            <h3 className="font-display text-xl font-light text-ivory mb-2">
+          <div className="surface-card rounded-2xl p-6 sm:p-8 text-center hover:shadow-premium transition-all">
+            <BedDouble className="w-6 h-6 text-gold mx-auto mb-3" />
+            <h3 className="font-display text-xl font-light text-charcoal mb-2">
               {lang === 'de' ? 'Komfortabel übernachten' : lang === 'en' ? 'Stay in comfort' : 'Soggiorno confortevole'}
             </h3>
-            <p className="text-ivory/40 text-xs font-body mb-5">
+            <p className="text-xs font-body mb-5" style={{color:'#8A7A6A'}}>
               {lang === 'de' ? 'Stilvoll schlafen im Herzen Hohenlohes.' : lang === 'en' ? 'Sleep stylishly in the heart of Hohenlohe.' : 'Dormire con stile nel cuore dell\'Hohenlohe.'}
             </p>
             <Link to="/rooms" className="inline-flex items-center gap-1.5 px-6 py-2.5 btn-gold rounded-full text-xs tracking-widest uppercase font-body font-semibold">

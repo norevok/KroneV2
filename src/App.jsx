@@ -35,6 +35,7 @@ import Events from './pages/Events';
 import Offers from './pages/Offers';
 import DiscoverLangenburg from './pages/DiscoverLangenburg';
 import AGB from './pages/AGB';
+import Karriere from './pages/Karriere';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -93,6 +94,7 @@ const AuthenticatedApp = () => {
         <Route path="/discover" element={<DiscoverLangenburg />} />
         <Route path="/langenburg" element={<DiscoverLangenburg />} />
         <Route path="/agb" element={<AGB />} />
+        <Route path="/karriere" element={<Karriere />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

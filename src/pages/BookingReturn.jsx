@@ -13,25 +13,32 @@ export default function BookingReturn() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const status = params.get('status') || 'pending';
-    const ref = params.get('ref') || '';
-    setIntentRef(ref);
+    const bookid = params.get('bookid') || params.get('ref') || '';
+    const token = params.get('token') || params.get('referer') || '';
+    const checkIn = params.get('checkin') || '';
+    const checkOut = params.get('checkout') || '';
+
+    setIntentRef(bookid);
     if (status === 'confirmed' || status === 'success' || status === 'completed') setState('confirmed');
     else if (status === 'cancelled' || status === 'cancel' || status === 'failed') setState('cancelled');
     else setState('pending');
-    if (ref) {
-      const s = status === 'confirmed' || status === 'success' ? 'returned_confirmed'
-        : status === 'cancelled' || status === 'cancel' ? 'returned_cancelled' : 'returned_pending';
-      base44.entities.HotelBookingIntent.filter({ intent_ref: ref }).then(async items => {
-        if (items.length > 0) {
-          await base44.entities.HotelBookingIntent.update(items[0].id, { status: s, returned_at: new Date().toISOString() });
+
+    // Call the secure return-sync function to reconcile booking + link to account
+    if (bookid || token) {
+      base44.functions.invoke('beds24BookingReturnSync', {
+        token, bookid, status, check_in: checkIn, check_out: checkOut,
+      }).catch(() => {
+        // Fallback: direct entity update if function call fails
+        if (bookid) {
+          const s = status === 'confirmed' || status === 'success' ? 'returned_confirmed'
+            : status === 'cancelled' || status === 'cancel' ? 'returned_cancelled' : 'returned_pending';
+          base44.entities.HotelBookingIntent.filter({ beds24_booking_ref: bookid }).then(items => {
+            if (items.length > 0) {
+              base44.entities.HotelBookingIntent.update(items[0].id, { status: s, returned_at: new Date().toISOString() });
+            }
+          }).catch(() => {});
         }
-        // Notify Slack about return status
-        base44.functions.invoke('notifySlack', {
-          type: 'booking_returned',
-          ref,
-          status: s,
-        }).catch(() => {});
-      }).catch(() => {});
+      });
     }
   }, []);
 

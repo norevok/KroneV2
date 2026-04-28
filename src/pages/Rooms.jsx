@@ -68,12 +68,24 @@ export default function Rooms() {
   async function handleBookNow(roomId = null) {
     setSavingIntent(true);
     const ref = `INT-${Date.now().toString(36).toUpperCase()}`;
+
+    // Generate account-linking token (works even if not logged in)
+    let token = '';
+    try {
+      const tokenRes = await base44.functions.invoke('generateBookingToken', {
+        check_in: checkIn, check_out: checkOut, adults, room_category: roomId || '',
+      });
+      token = tokenRes?.data?.token || '';
+    } catch (_) {}
+
     const p = new URLSearchParams();
     if (lang !== 'de') p.set('lang', lang);
     if (checkIn) p.set('checkin', checkIn);
     if (checkOut) p.set('checkout', checkOut);
     if (adults) p.set('adults', adults);
+    if (token) p.set('referer', token); // Account-linking token
     const beds24Url = `${beds24Base}&${p.toString()}`;
+
     base44.entities.HotelBookingIntent.create({
       intent_ref: ref,
       status: 'redirected_to_beds24',
@@ -83,14 +95,12 @@ export default function Rooms() {
       beds24_booking_url_used: beds24Url,
       redirected_at: new Date().toISOString(),
     }).catch(() => {});
+
     base44.functions.invoke('notifySlack', {
-      type: 'booking_intent',
-      ref,
-      name: '',
-      check_in: checkIn,
-      check_out: checkOut,
-      guests: String(adults),
+      type: 'booking_intent', ref, name: '',
+      check_in: checkIn, check_out: checkOut, guests: String(adults),
     }).catch(() => {});
+
     setSavingIntent(false);
     setShowBooking(true);
     setSelectedRoom(roomId);

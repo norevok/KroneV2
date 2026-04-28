@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
-import { CheckCircle, Clock, XCircle, AlertTriangle, UtensilsCrossed, Mail, RefreshCw, MessageSquare, BedDouble, Heart, FileText, Download, Activity, Calendar, BookOpen, Sparkles } from 'lucide-react';
+import { CheckCircle, Clock, XCircle, AlertTriangle, UtensilsCrossed, Mail, RefreshCw, MessageSquare, BedDouble, Heart, FileText, Download, Activity, Calendar, BookOpen, Sparkles, Briefcase } from 'lucide-react';
 import { format } from 'date-fns';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
@@ -58,6 +58,7 @@ export default function Admin() {
   const [intents, setIntents] = useState([]);
   const [guestDocs, setGuestDocs] = useState([]);
   const [guestMsgs, setGuestMsgs] = useState([]);
+  const [careerApps, setCareerApps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedRes, setSelectedRes] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
@@ -78,18 +79,20 @@ export default function Admin() {
   async function loadAll() {
     setLoading(true);
     const today = new Date().toISOString().split('T')[0];
-    const [res, inq, int_, docs, msgs] = await Promise.all([
+    const [res, inq, int_, docs, msgs, apps] = await Promise.all([
       base44.entities.RestaurantReservation.list('-created_date', 100),
       base44.entities.ContactInquiry.list('-created_date', 50),
       base44.entities.HotelBookingIntent.list('-created_date', 50).catch(() => []),
       base44.entities.GuestDocument.list('-created_date', 50).catch(() => []),
       base44.entities.GuestMessage.list('-created_date', 50).catch(() => []),
+      base44.entities.CareerApplication.list('-created_date', 50).catch(() => []),
     ]);
     setReservations(res);
     setInquiries(inq);
     setIntents(int_);
     setGuestDocs(docs);
     setGuestMsgs(msgs);
+    setCareerApps(apps);
     setStats({
       today: res.filter(r => r.reservation_date === today).length,
       pending: res.filter(r => r.status === 'new' || r.status === 'pending').length,
@@ -175,6 +178,7 @@ export default function Admin() {
     { id: 'bookings', label: 'Buchungen', icon: BedDouble, count: stats.intents },
     { id: 'documents', label: 'Dokumente', icon: FileText, count: stats.docs },
     { id: 'messages', label: 'Nachrichten', icon: Heart, count: stats.msgs },
+    { id: 'careers', label: 'Bewerbungen', icon: Briefcase, count: careerApps.filter(a => a.status === 'new').length },
   ];
 
   return (
@@ -489,6 +493,47 @@ export default function Admin() {
                         </button>
                       )}
                       <a href={`mailto:${msg.user_email}`}
+                        className="px-3 py-1.5 btn-ghost-gold border rounded-lg text-[10px] font-body tracking-widest uppercase flex items-center gap-1">
+                        <Mail className="w-3 h-3" /> E-Mail
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+
+        {/* CAREER APPLICATIONS */}
+        {tab === 'careers' && (
+          <div className="space-y-2">
+            {loading ? (
+              <div className="flex justify-center py-16"><div className="w-6 h-6 border-2 border-gold/20 border-t-gold rounded-full animate-spin" /></div>
+            ) : careerApps.length === 0 ? (
+              <div className="text-center py-16 text-ivory/30 font-body text-sm">Keine Bewerbungen</div>
+            ) : (
+              careerApps.map(app => (
+                <div key={app.id} className="glass-card border border-[#C9A96E]/08 rounded-xl p-4 hover:border-[#C9A96E]/20 transition-all">
+                  <div className="flex items-start gap-3 flex-wrap">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                        <span className="font-body text-sm text-ivory">{app.first_name} {app.last_name}</span>
+                        <StatusBadge status={app.status} />
+                        <span className="text-ivory/30 text-[10px] font-body uppercase tracking-widest">{app.position}</span>
+                      </div>
+                      <p className="text-ivory/30 text-xs font-body">{app.email} · {app.phone || '—'} · {app.created_date ? format(new Date(app.created_date), 'dd.MM.yy') : ''}</p>
+                      {app.message && <p className="text-ivory/40 text-xs font-body mt-1 line-clamp-2">{app.message}</p>}
+                    </div>
+                    <div className="flex gap-2 flex-shrink-0">
+                      {app.status === 'new' && (
+                        <button onClick={async () => {
+                          await base44.entities.CareerApplication.update(app.id, { status: 'in_review' });
+                          setCareerApps(prev => prev.map(a => a.id === app.id ? { ...a, status: 'in_review' } : a));
+                        }} className="px-3 py-1.5 bg-blue-900/40 border border-blue-700/30 text-blue-400 text-[10px] rounded-lg font-body tracking-widest uppercase">
+                          In Prüfung
+                        </button>
+                      )}
+                      <a href={`mailto:${app.email}`}
                         className="px-3 py-1.5 btn-ghost-gold border rounded-lg text-[10px] font-body tracking-widest uppercase flex items-center gap-1">
                         <Mail className="w-3 h-3" /> E-Mail
                       </a>

@@ -58,7 +58,7 @@ export default function Story() {
   const cv = c[lang] || c.de;
 
   return (
-    <div className="min-h-screen bg-charcoal text-ivory pb-20 lg:pb-0">
+    <div className="min-h-screen bg-ivory text-charcoal pb-20 lg:pb-0">
       {/* Hero */}
       <div className="relative h-[50vh] sm:h-[55vh] min-h-[320px] sm:min-h-[360px] overflow-hidden">
         <img src={RESTAURANT_IMG} alt="Kulinarium by Ammesso" className="w-full h-full object-cover" loading="eager" />
@@ -72,23 +72,23 @@ export default function Story() {
       </div>
 
       {/* Brand quote */}
-      <section className="py-14 px-5 bg-espresso border-y border-[#C9A96E]/10">
+      <section className="py-14 px-5 bg-stone border-y border-gold-light/15">
         <div className="max-w-2xl mx-auto text-center">
           <div className="section-divider mb-8" />
-          <p className="font-display text-2xl font-light text-ivory/70 italic">&ldquo;{cv.brand}&rdquo;</p>
+          <p className="font-display text-2xl font-light italic" style={{color:'#5A4A3A'}}>&ldquo;{cv.brand}&rdquo;</p>
           <div className="section-divider mt-8" />
         </div>
       </section>
 
       {/* Story text */}
-      <section className="py-16 px-5">
+      <section className="py-16 px-5 bg-ivory">
         <div className="max-w-3xl mx-auto space-y-8">
-          <p className="font-body text-ivory/70 text-lg leading-relaxed">{cv.text1}</p>
-          <p className="font-body text-ivory/55 leading-relaxed">{cv.text2}</p>
+          <p className="font-body text-lg leading-relaxed" style={{color:'#3A2E25'}}>{cv.text1}</p>
+          <p className="font-body leading-relaxed" style={{color:'#5A4A3A'}}>{cv.text2}</p>
           
           {/* Additional context */}
-          <div className="pt-8 border-t border-[#C9A96E]/10 space-y-4">
-            <h3 className="font-display text-xl font-light text-ivory">
+          <div className="pt-8 border-t border-stone-mid space-y-4">
+            <h3 className="font-display text-xl font-light text-charcoal">
               {lang === 'de' ? 'Inspiration & Handwerk' : lang === 'en' ? 'Inspiration & Craft' : 'Ispirazione & Mestiere'}
             </h3>
             <p className="text-ivory/45 text-sm leading-relaxed">
@@ -126,14 +126,14 @@ export default function Story() {
       </section>
 
       {/* Values */}
-      <section className="py-12 sm:py-16 px-4 sm:px-5">
+      <section className="py-12 sm:py-16 px-4 sm:px-5 bg-ivory">
         <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
           {cv.values.map((v, i) => (
-            <div key={i} className="glass-card rounded-2xl p-6 sm:p-8 border border-[#C9A96E]/10 flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 text-left sm:text-center">
+            <div key={i} className="surface-card rounded-2xl p-6 sm:p-8 flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 text-left sm:text-center">
               <div className="text-3xl sm:text-4xl sm:mb-4 flex-shrink-0">{v.e}</div>
               <div>
-                <h3 className="font-display text-xl font-light text-ivory mb-1 sm:mb-2">{v.t}</h3>
-                <p className="text-ivory/40 text-sm font-body leading-relaxed">{v.d}</p>
+                <h3 className="font-display text-xl font-light text-charcoal mb-1 sm:mb-2">{v.t}</h3>
+                <p className="text-sm font-body leading-relaxed" style={{color:'#7A6A5A'}}>{v.d}</p>
               </div>
             </div>
           ))}
@@ -141,7 +141,7 @@ export default function Story() {
       </section>
 
       {/* CTA */}
-      <section className="bg-espresso py-12 sm:py-14 px-4 sm:px-5 text-center border-t border-[#C9A96E]/10">
+      <section className="bg-espresso py-12 sm:py-14 px-4 sm:px-5 text-center">
         <h2 className="font-display text-3xl sm:text-4xl font-light text-ivory mb-5 sm:mb-6">
           {lang === 'de' ? 'Erleben Sie es selbst.' : lang === 'en' ? 'Come experience it.' : 'Vieni a scoprirlo.'}
         </h2>

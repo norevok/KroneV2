@@ -1,0 +1,67 @@
+{
+  "name": "BookingLinkSession",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "Opaque signed token appended to Beds24 launch URL"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "Base44 user ID of the logged-in guest who initiated booking"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email of the guest for fallback email-matching"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "used",
+        "expired",
+        "failed"
+      ],
+      "default": "pending"
+    },
+    "beds24_booking_ref": {
+      "type": "string",
+      "description": "Beds24 bookid once booking is completed"
+    },
+    "check_in": {
+      "type": "string",
+      "format": "date"
+    },
+    "check_out": {
+      "type": "string",
+      "format": "date"
+    },
+    "room_category": {
+      "type": "string"
+    },
+    "adults": {
+      "type": "number"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Token expiry \u2014 2 hours after creation"
+    },
+    "used_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "return_params": {
+      "type": "string",
+      "description": "JSON-serialized return params from Beds24 return URL"
+    },
+    "linked_intent_id": {
+      "type": "string",
+      "description": "Link to HotelBookingIntent once reconciled"
+    }
+  },
+  "required": [
+    "token",
+    "user_email"
+  ]
+}

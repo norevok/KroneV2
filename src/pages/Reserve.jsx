@@ -297,11 +297,11 @@ export default function Reserve() {
   const steps = [c.step1, c.step2, c.step3];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-white to-stone-100 text-stone-800 pt-12 pb-24 lg:pb-10 lg:pt-16">
+    <div className="min-h-screen text-charcoal pt-12 pb-24 lg:pb-10 lg:pt-16" style={{background:'#FAF7F2'}}>
 
       {/* Hero header */}
       <div className="relative overflow-hidden w-full">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1410] to-[#0F0D0B]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-espresso to-charcoal" />
         <img
           src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80"
           alt="Restaurant"

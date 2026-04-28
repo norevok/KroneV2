@@ -44,16 +44,16 @@ export default function Contact() {
   };
   const t = c[lang] || c.de;
 
-  const inputClass = "w-full bg-[#1A1410] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory placeholder-ivory/20 focus:outline-none focus:border-gold/40 transition-colors font-body";
+  const inputClass = "w-full bg-white border border-stone-mid rounded-xl px-4 py-3 text-sm text-charcoal placeholder-stone-dark focus:outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/10 transition-all font-body";
 
   return (
-    <div className="min-h-screen bg-charcoal text-ivory pt-16 sm:pt-20 pb-24">
+    <div className="min-h-screen bg-ivory text-charcoal pt-16 sm:pt-20 pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-5">
         {/* Header */}
         <div className="text-center py-10 sm:py-14">
           <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-3">Krone Langenburg by Ammesso</p>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-light text-ivory mb-2 sm:mb-3">{t.title}</h1>
-          <p className="text-ivory/40 font-body text-sm sm:text-base">{t.sub}</p>
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-light text-charcoal mb-2 sm:mb-3">{t.title}</h1>
+          <p className="font-body text-sm sm:text-base" style={{color:'#7A6A5A'}}>{t.sub}</p>
           {/* WhatsApp CTA - prominent on mobile */}
           <a href={`https://wa.me/4979054177`} target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-5 px-6 py-3 bg-[#25D366] text-[#0F0D0B] rounded-full text-xs font-body font-semibold tracking-widest uppercase shadow-md">
@@ -67,11 +67,11 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-10">
           {/* Info */}
           <div className="lg:col-span-2 space-y-4 sm:space-y-5">
-            <div className="glass-card rounded-2xl p-5 sm:p-6 border border-[#C9A96E]/10">
-              <h2 className="text-ivory/30 text-[10px] tracking-[0.3em] uppercase font-body mb-5">{t.addr_title}</h2>
+            <div className="surface-card rounded-2xl p-5 sm:p-6">
+              <h2 className="text-[10px] tracking-[0.3em] uppercase font-body mb-5" style={{color:'#8A7A6A'}}>{t.addr_title}</h2>
               <ul className="space-y-4 text-sm font-body">
-                <li className="flex gap-3 text-ivory/60">
-                  <MapPin className="w-4 h-4 text-gold/60 mt-0.5 flex-shrink-0" />
+                <li className="flex gap-3" style={{color:'#5A4A3A'}}>
+                  <MapPin className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" />
                   <span>{s.address_street}<br />{s.address_zip} {s.address_city}<br />{s.address_country}</span>
                 </li>
                 <li className="flex gap-3">
@@ -90,23 +90,23 @@ export default function Contact() {
               </a>
             </div>
 
-            <div className="glass-card rounded-2xl p-6 border border-[#C9A96E]/10">
+            <div className="surface-card rounded-2xl p-6">
               <div className="flex items-center gap-2 mb-5">
-                <Clock className="w-3.5 h-3.5 text-gold/60" />
-                <h2 className="text-ivory/30 text-[10px] tracking-[0.3em] uppercase font-body">{t.hours_title}</h2>
+                <Clock className="w-3.5 h-3.5 text-gold" />
+                <h2 className="text-[10px] tracking-[0.3em] uppercase font-body" style={{color:'#8A7A6A'}}>{t.hours_title}</h2>
               </div>
               <ul className="space-y-3 text-sm font-body">
-                <li className="flex justify-between text-ivory/30">
+                <li className="flex justify-between" style={{color:'#B0A090'}}>
                   <span>{lang === 'de' ? 'Montag' : lang === 'en' ? 'Monday' : 'Lunedì'}</span>
                   <span>{lang === 'de' ? 'Ruhetag' : lang === 'en' ? 'Closed' : 'Chiuso'}</span>
                 </li>
                 <li>
-                  <div className="text-ivory/60">{lang === 'de' ? 'Di – Sa' : lang === 'en' ? 'Tue – Sat' : 'Mar – Sab'}</div>
-                  <div className="text-ivory/35 text-xs mt-0.5">12:00 – 14:30 · 17:30 – 22:00</div>
+                  <div style={{color:'#5A4A3A'}}>{lang === 'de' ? 'Di – Sa' : lang === 'en' ? 'Tue – Sat' : 'Mar – Sab'}</div>
+                  <div className="text-xs mt-0.5" style={{color:'#8A7A6A'}}>12:00 – 14:30 · 17:30 – 22:00</div>
                 </li>
                 <li>
-                  <div className="text-ivory/60">{lang === 'de' ? 'Sonntag' : lang === 'en' ? 'Sunday' : 'Domenica'}</div>
-                  <div className="text-ivory/35 text-xs mt-0.5">12:00 – 20:00</div>
+                  <div style={{color:'#5A4A3A'}}>{lang === 'de' ? 'Sonntag' : lang === 'en' ? 'Sunday' : 'Domenica'}</div>
+                  <div className="text-xs mt-0.5" style={{color:'#8A7A6A'}}>12:00 – 20:00</div>
                 </li>
               </ul>
             </div>
@@ -126,13 +126,13 @@ export default function Contact() {
           {/* Form */}
           <div className="lg:col-span-3">
             {done ? (
-              <div className="glass-card rounded-2xl p-8 sm:p-12 text-center border border-[#C9A96E]/10 h-full flex flex-col items-center justify-center">
+              <div className="surface-card rounded-2xl p-8 sm:p-12 text-center h-full flex flex-col items-center justify-center">
                 <CheckCircle className="w-12 h-12 text-gold mb-4" />
-                <h2 className="font-display text-2xl font-light text-ivory mb-2">{t.success}</h2>
-                <p className="text-ivory/40 text-sm font-body">{s.email_info}</p>
+                <h2 className="font-display text-2xl font-light text-charcoal mb-2">{t.success}</h2>
+                <p className="text-sm font-body" style={{color:'#8A7A6A'}}>{s.email_info}</p>
               </div>
             ) : (
-              <div className="glass-card rounded-2xl p-5 sm:p-7 border border-[#C9A96E]/10">
+              <div className="surface-card rounded-2xl p-5 sm:p-7">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-ivory/40 text-[10px] tracking-[0.25em] uppercase font-body mb-2">{t.inquiry_type}</label>
