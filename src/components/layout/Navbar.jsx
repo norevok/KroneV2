@@ -82,14 +82,20 @@ export default function Navbar() {
 
             {/* Desktop nav */}
             <div className="hidden lg:flex items-center gap-7">
-              {navLinks.map(l => (
-                <Link key={l.to} to={l.to}
-                  className={`font-body text-xs tracking-widest uppercase transition-colors duration-200 ${
-                    location.pathname === l.to ? linkActive : linkColor
-                  }`}>
-                  {l.label}
-                </Link>
-              ))}
+              {navLinks.map(l => {
+                const isActive = location.pathname === l.to;
+                return (
+                  <Link key={l.to} to={l.to}
+                    className={`relative font-body text-xs tracking-widest uppercase transition-all duration-200 hover:scale-105 ${
+                      isActive ? linkActive : linkColor
+                    }`}>
+                    {l.label}
+                    {isActive && (
+                      <span className={`absolute -bottom-1 left-0 right-0 h-px ${isLight ? 'bg-gold' : 'bg-gold-light'}`} />
+                    )}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Right actions */}

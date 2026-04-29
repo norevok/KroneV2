@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 import { Gift, ShoppingCart, X, Check, ArrowRight, Star, Heart, UtensilsCrossed, BedDouble } from 'lucide-react';
@@ -170,15 +170,16 @@ export default function Shop() {
     setLoading(false);
   }
 
-  // Check for Stripe return
-  const urlParams = new URLSearchParams(window.location.search);
-  const stripeStatus = urlParams.get('payment');
-  const sessionId = urlParams.get('session_id');
-
-  if (stripeStatus === 'success' && sessionId && step !== 'success') {
-    setStep('success');
-    setVoucherCode(urlParams.get('code') || '');
-  }
+  // Check for Stripe return — handled in useEffect to avoid render-phase state mutation
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const stripeStatus = urlParams.get('payment');
+    const sessionId = urlParams.get('session_id');
+    if (stripeStatus === 'success' && sessionId) {
+      setStep('success');
+      setVoucherCode(urlParams.get('code') || '');
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-ivory text-charcoal pb-24 lg:pb-10">

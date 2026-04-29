@@ -221,7 +221,7 @@ export default function Admin() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-3 mb-6 sm:mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-2 sm:gap-3 mb-6 sm:mb-8">
           <StatCard icon={UtensilsCrossed} label="Heute" value={stats.today} color="text-gold" />
           <StatCard icon={Clock} label="Ausstehend" value={stats.pending} color="text-gold/70" />
           <StatCard icon={CheckCircle} label="Bestätigt" value={stats.confirmed} color="text-emerald-400" />

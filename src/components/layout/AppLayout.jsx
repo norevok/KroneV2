@@ -4,6 +4,7 @@ import Footer from './Footer';
 import StickyMobileCTA from './StickyMobileCTA';
 import WhatsAppButton from './WhatsAppButton';
 import ChatWidget from '../ChatWidget';
+import CookieBanner from '../CookieBanner';
 
 
 export default function AppLayout() {
@@ -17,6 +18,7 @@ export default function AppLayout() {
       <StickyMobileCTA />
       <WhatsAppButton />
       <ChatWidget />
+      <CookieBanner />
     </div>
   );
 }
