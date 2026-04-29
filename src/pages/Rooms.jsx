@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
@@ -9,6 +9,31 @@ const AMENITIES = {
   de: ['Kostenloses WLAN', 'Klimaanlage', 'Eigenes Bad', 'Premium-Bettwäsche', 'Arbeitsbereich', 'Stadtblick'],
   en: ['Free WiFi', 'Air Conditioning', 'Private Bathroom', 'Premium Bedding', 'Work Desk', 'City View'],
   it: ['WiFi gratuito', 'Aria condizionata', 'Bagno privato', 'Biancheria premium', 'Scrivania', 'Vista città'],
+};
+
+// Real photo galleries for each room
+const ROOM_PHOTOS = {
+  deluxe_single: [
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/fa83a17cd_krone-kingsuite-1-balkon-aussicht-01.jpg',
+  ],
+  deluxe_double: [
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg',
+  ],
+  superior_suite: [
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c914d145e_krone-kingsuite-1-zimmer-bett-02.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d09aea914_krone-kingsuite-1-balkon-aussicht-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/fa83a17cd_krone-kingsuite-1-balkon-aussicht-01.jpg',
+  ],
+  superior_suite_2: [
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8457db47b_krone-kingsuite-2-zimmer-wohnbereich-02.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0449ddce1_krone-kingsuite-2-zimmer-bett-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0d680f3_krone-kingsuite-2-zimmer-balkon-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a0d03ed2c_krone-kingsuite-2-aussicht-landschaft-01.jpg',
+  ],
 };
 
 const ROOM_DETAILS = {
@@ -47,6 +72,7 @@ const ROOM_DETAILS = {
 export default function Rooms() {
   const { lang } = useLang();
   const [showBooking, setShowBooking] = useState(false);
+  const [activePhotos, setActivePhotos] = useState({});
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [savingIntent, setSavingIntent] = useState(false);
   const [checkIn, setCheckIn] = useState('');
@@ -369,19 +395,34 @@ export default function Rooms() {
             const features = details.features?.[lang] || details.features?.de || [];
             const bed = details.bed?.[lang] || details.bed?.de || '';
             const isReversed = idx % 2 === 1;
+            const photos = ROOM_PHOTOS[r.id] || [r.image];
+            const activePhoto = activePhotos[r.id] || 0;
             return (
               <div key={r.id}
                 className="glass-card border border-[#C9A96E]/10 rounded-3xl overflow-hidden">
                 <div className={`grid grid-cols-1 lg:grid-cols-2 ${isReversed ? 'lg:grid-flow-dense' : ''}`}>
-                  {/* Image */}
-                  <div className={`relative h-56 sm:h-72 lg:h-auto lg:min-h-[320px] overflow-hidden group ${isReversed ? 'lg:col-start-2' : ''}`}>
-                    <img src={r.image} alt={lang === 'de' ? r.key_de : lang === 'en' ? r.key_en : r.key_it}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-charcoal/20" />
-                    {/* Size badge */}
-                    {details.size_m2 && (
-                      <div className="absolute top-5 left-5 bg-charcoal/70 backdrop-blur-sm border border-[#C9A96E]/20 rounded-full px-3 py-1.5 text-[10px] font-body text-gold/70 tracking-wider">
-                        {details.size_m2} m²
+                  {/* Image with thumbnail strip */}
+                  <div className={`relative flex flex-col ${isReversed ? 'lg:col-start-2' : ''}`}>
+                    <div className="relative h-56 sm:h-72 lg:h-[320px] overflow-hidden group flex-1">
+                      <img src={photos[activePhoto] || r.image}
+                        alt={lang === 'de' ? r.key_de : lang === 'en' ? r.key_en : r.key_it}
+                        className="w-full h-full object-cover transition-all duration-500" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent" />
+                      {details.size_m2 && (
+                        <div className="absolute top-4 left-4 bg-charcoal/70 backdrop-blur-sm border border-[#C9A96E]/20 rounded-full px-3 py-1.5 text-[10px] font-body text-gold/70 tracking-wider">
+                          {details.size_m2} m²
+                        </div>
+                      )}
+                    </div>
+                    {/* Thumbnail strip — only shown when >1 photo */}
+                    {photos.length > 1 && (
+                      <div className="flex gap-1.5 p-2 bg-charcoal/80 overflow-x-auto no-scrollbar">
+                        {photos.map((p, pi) => (
+                          <button key={pi} onClick={() => setActivePhotos(prev => ({ ...prev, [r.id]: pi }))}
+                            className={`flex-shrink-0 w-14 h-10 rounded-md overflow-hidden border-2 transition-all ${activePhoto === pi ? 'border-gold' : 'border-transparent opacity-60 hover:opacity-90'}`}>
+                            <img src={p} alt="" className="w-full h-full object-cover" loading="lazy" />
+                          </button>
+                        ))}
                       </div>
                     )}
                   </div>

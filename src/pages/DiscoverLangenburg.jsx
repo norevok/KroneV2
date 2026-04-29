@@ -7,14 +7,14 @@ const ATTRACTIONS = [
   {
     id: 'schloss',
     icon: Castle,
-    image: 'https://images.unsplash.com/photo-1560347876-aeef00ee58a1?w=800&q=80',
+    image: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/f1bffa80a_Schloss_Langenburg.jpg',
     de: { title: 'Schloss Langenburg', desc: 'Das fürstliche Schloss Langenburg thront majestätisch über dem Jagsttal und zählt zu den beeindruckendsten Barockschlössern Baden-Württembergs. Geführte Touren, Ausstellungen und eine atemberaubende Aussicht über das Hohenloher Land erwarten Sie.', tag: '5 min zu Fuß' },
     en: { title: 'Langenburg Castle', desc: 'The princely Langenburg Castle majestically overlooks the Jagst valley and is one of the most impressive Baroque castles in Baden-Württemberg. Guided tours, exhibitions and breathtaking views over the Hohenlohe countryside await you.', tag: '5 min walk' },
   },
   {
     id: 'jagsttal',
     icon: Mountain,
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+    image: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a0d03ed2c_krone-kingsuite-2-aussicht-landschaft-01.jpg',
     de: { title: 'Jagsttal & Wanderungen', desc: 'Das Jagsttal gehört zu den schönsten Flusstälern Süddeutschlands. Malerische Wanderwege führen durch Wiesen, Wälder und historische Dörfer. Der Jagsttalweg verbindet auf über 200 km Kilometer Natur und Kultur.', tag: 'Wanderparadies' },
     en: { title: 'Jagst Valley & Hiking', desc: 'The Jagst valley is one of the most beautiful river valleys in southern Germany. Scenic hiking trails lead through meadows, forests and historic villages. The Jagst Valley Trail connects over 200 km of nature and culture.', tag: 'Hiking paradise' },
   },
@@ -33,9 +33,16 @@ const ATTRACTIONS = [
     en: { title: 'Hohenlohe Wine & Pleasure', desc: 'The Hohenlohe region is known for its wine culture. Discover local wineries, seasonal wine taverns and culinary specialities of the region. Pair wine enjoyment with an evening dinner at our Kulinarium.', tag: 'Wine culture' },
   },
   {
+    id: 'automuseum',
+    icon: Compass,
+    image: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/ae4be06cc_deutsches-automuseum.jpg',
+    de: { title: 'Deutsches Automuseum Schloss Langenburg', desc: 'Direkt neben Schloss Langenburg befindet sich eines der faszinierendsten Automuseen Deutschlands. Historische Rennwagen, edle Oldtimer und Motorsport-Geschichte pur — ein unvergessliches Erlebnis für die ganze Familie.', tag: '5 min zu Fuß' },
+    en: { title: 'German Car Museum Langenburg Castle', desc: 'Right next to Langenburg Castle lies one of Germany\'s most fascinating car museums. Historic racing cars, classic automobiles and pure motorsport history — an unforgettable experience for the whole family.', tag: '5 min walk' },
+  },
+  {
     id: 'ausflug',
     icon: Compass,
-    image: 'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80',
+    image: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/98d90eae8_krone-kingsuite-2-aussicht-landschaft-02.jpg',
     de: { title: 'Ausflugsziele in der Nähe', desc: 'Langenburg ist idealer Ausgangspunkt für Tagesausflüge nach Schwäbisch Hall, Bad Mergentheim, Rothenburg ob der Tauber oder in den Schwarzwald. Alle sind bequem in unter zwei Stunden erreichbar.', tag: 'Tagesausflüge' },
     en: { title: 'Day Trip Destinations Nearby', desc: 'Langenburg is the ideal base for day trips to Schwäbisch Hall, Bad Mergentheim, Rothenburg ob der Tauber or the Black Forest. All are easily reachable within two hours.', tag: 'Day trips' },
   },
@@ -88,8 +95,8 @@ export default function DiscoverLangenburg() {
       {/* Hero */}
       <div className="relative h-[55vh] sm:h-[65vh] min-h-[360px] overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=85"
-          alt="Hohenlohe Landschaft"
+          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
+          alt="Hohenlohe Landschaft — Aussicht von der Krone Langenburg"
           className="absolute inset-0 w-full h-full object-cover scale-[1.03]"
           loading="eager"
         />

@@ -74,7 +74,7 @@ export const ROOMS = [
     description_en: "A quiet, comfortable single room — ideal for business travellers and solo stays.",
     features_de: ['Ruhige Lage', 'Modernes Bad', 'Schreibtisch & Stuhl', 'WLAN', 'Stadtblick', 'Minikühlschrank'],
     features_en: ['Quiet location', 'Modern bathroom', 'Work desk & chair', 'WiFi', 'City view', 'Mini fridge'],
-    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+    image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/fa83a17cd_krone-kingsuite-1-balkon-aussicht-01.jpg",
   },
   {
     id: "deluxe_double",
@@ -89,7 +89,7 @@ export const ROOMS = [
     description_en: "Spacious double room with tasteful décor and views over Langenburg's old town.",
     features_de: ['Panoramafenster', 'Regendusche', 'Schreibtisch', 'WLAN', 'Stadtblick', 'Minibar'],
     features_en: ['Panoramic window', 'Rain shower', 'Work desk', 'WiFi', 'City view', 'Minibar'],
-    image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80",
+    image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg",
   },
   {
     id: "superior_suite",
@@ -104,7 +104,7 @@ export const ROOMS = [
     description_en: "Generous suite with separate living area and freestanding bathtub — ideal for romantic stays.",
     features_de: ['Separater Wohnbereich', 'Freistehende Badewanne', 'Premium-Minibar', 'WLAN', 'Exklusiver Blick'],
     features_en: ['Separate living area', 'Freestanding bathtub', 'Premium minibar', 'WiFi', 'Exclusive view'],
-    image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80",
+    image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg",
   },
   {
     id: "superior_suite_2",
@@ -119,7 +119,7 @@ export const ROOMS = [
     description_en: "Our most exclusive accommodation — spacious with lounge area and the finest view over Langenburg.",
     features_de: ['Großzügiger Loungebereich', 'Freistehende Badewanne & Dusche', 'Premium-Minibar', 'WLAN', 'Langenburg-Panorama'],
     features_en: ['Generous lounge area', 'Freestanding bathtub & shower', 'Premium minibar', 'WiFi', 'Langenburg panorama'],
-    image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+    image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg",
   },
 ];
 
