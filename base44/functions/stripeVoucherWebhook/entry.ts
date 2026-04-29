@@ -117,6 +117,30 @@ Deno.serve(async (req) => {
       }
 
       console.log(`Voucher ${voucher_code} activated for ${purchaserEmail}`);
+
+      // Notify admin about voucher purchase
+      try {
+        await base44.asServiceRole.integrations.Core.SendEmail({
+          to: 'info@krone-ammesso.de',
+          from_name: 'Krone Shop',
+          subject: `[Gutschein] ${purchaser_name || purchaserEmail} — ${voucher_code} — €${amount}`,
+          body: `<html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#333;">
+            <h2 style="font-family:Georgia,serif;font-weight:300;">Neuer Gutschein-Kauf ✓</h2>
+            <table style="width:100%;border-collapse:collapse;font-size:14px;">
+              <tr><td style="padding:6px 0;color:#666;">Code</td><td style="padding:6px 0;font-weight:bold;letter-spacing:2px;">${voucher_code}</td></tr>
+              <tr><td style="padding:6px 0;color:#666;">Wert</td><td style="padding:6px 0;font-weight:bold;">€${amount}</td></tr>
+              <tr><td style="padding:6px 0;color:#666;">Produkt</td><td style="padding:6px 0;">${session.metadata?.product_name || '—'}</td></tr>
+              <tr><td style="padding:6px 0;color:#666;">Käufer</td><td style="padding:6px 0;">${purchaser_name || '—'}</td></tr>
+              <tr><td style="padding:6px 0;color:#666;">Käufer E-Mail</td><td style="padding:6px 0;">${purchaserEmail}</td></tr>
+              ${recipient_name ? `<tr><td style="padding:6px 0;color:#666;">Empfänger</td><td style="padding:6px 0;">${recipient_name}</td></tr>` : ''}
+              <tr><td style="padding:6px 0;color:#666;">Stripe Session</td><td style="padding:6px 0;font-size:11px;">${session.id}</td></tr>
+            </table>
+            <p style="margin-top:20px;color:#666;font-size:13px;">Der Gutschein ist nun aktiv und wurde an den Käufer gesendet.</p>
+          </body></html>`,
+        });
+      } catch (adminEmailErr) {
+        console.warn('Admin voucher notification failed:', adminEmailErr.message);
+      }
     }
 
     if (event.type === 'payment_intent.payment_failed') {

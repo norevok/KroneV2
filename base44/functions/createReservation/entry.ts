@@ -205,6 +205,32 @@ Deno.serve(async (req) => {
           console.warn('Email send failed (external address):', emailErr.message);
         }
 
+        // Send admin notification email
+        try {
+          await base44.asServiceRole.integrations.Core.SendEmail({
+            to: 'info@krone-ammesso.de',
+            from_name: 'Krone Reservierungen',
+            subject: `[Neue Reservierung] ${first_name} ${last_name} — ${date} ${time} — ${guests} P.`,
+            body: `<html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#333;">
+              <h2 style="font-family:Georgia,serif;font-weight:300;">Neue Tischreservierung ✓</h2>
+              <table style="width:100%;border-collapse:collapse;font-size:14px;">
+                <tr><td style="padding:6px 0;color:#666;">Referenz</td><td style="padding:6px 0;font-weight:bold;">${ref}</td></tr>
+                <tr><td style="padding:6px 0;color:#666;">Name</td><td style="padding:6px 0;">${first_name} ${last_name}</td></tr>
+                <tr><td style="padding:6px 0;color:#666;">E-Mail</td><td style="padding:6px 0;">${email}</td></tr>
+                <tr><td style="padding:6px 0;color:#666;">Telefon</td><td style="padding:6px 0;">${phone || '—'}</td></tr>
+                <tr><td style="padding:6px 0;color:#666;">Datum</td><td style="padding:6px 0;font-weight:bold;">${date}</td></tr>
+                <tr><td style="padding:6px 0;color:#666;">Uhrzeit</td><td style="padding:6px 0;font-weight:bold;">${time} Uhr</td></tr>
+                <tr><td style="padding:6px 0;color:#666;">Personen</td><td style="padding:6px 0;font-weight:bold;">${guests}</td></tr>
+                ${requests ? `<tr><td style="padding:6px 0;color:#666;">Sonderwünsche</td><td style="padding:6px 0;">${requests}</td></tr>` : ''}
+                <tr><td style="padding:6px 0;color:#666;">Sprache</td><td style="padding:6px 0;">${lang.toUpperCase()}</td></tr>
+              </table>
+              <p style="margin-top:16px;"><a href="https://krone.base44.app/admin" style="background:#8B6914;color:#fff;padding:10px 20px;border-radius:20px;text-decoration:none;font-size:13px;">Im Admin öffnen →</a></p>
+            </body></html>`,
+          });
+        } catch (adminErr) {
+          console.warn('Admin notification email failed:', adminErr.message);
+        }
+
         // Always confirm the reservation regardless of email delivery
         await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
           status: 'confirmed',

@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
-import { CheckCircle, Clock, XCircle, AlertTriangle, UtensilsCrossed, Mail, RefreshCw, MessageSquare, BedDouble, Heart, FileText, Download, Activity, Calendar, BookOpen, Sparkles, Briefcase, Gift } from 'lucide-react';
+import { CheckCircle, Clock, XCircle, AlertTriangle, UtensilsCrossed, Mail, RefreshCw, MessageSquare, BedDouble, Heart, FileText, Download, Activity, Calendar, BookOpen, Sparkles, Briefcase, Gift, Hotel, Users } from 'lucide-react';
 import { format } from 'date-fns';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
@@ -209,9 +209,17 @@ export default function Admin() {
               <Sparkles className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Events</span>
             </Link>
-            <Link to="/activity-log" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
+            <Link to="/admin/guest-calendar" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
+              <Users className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Gästekal.</span>
+            </Link>
+            <Link to="/admin/beds24" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
+              <BedDouble className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Beds24</span>
+            </Link>
+            <Link to="/admin/audit" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
               <Activity className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Log</span>
+              <span className="hidden sm:inline">Audit</span>
             </Link>
             <button onClick={loadAll} className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-ivory text-xs font-body transition-colors">
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
