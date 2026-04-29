@@ -14,7 +14,7 @@ const PRODUCTS = [
     en_desc: 'Perfect for a lovely restaurant evening. Valid for all food and drinks at the Kulinarium.',
     de_for: 'Restaurant · Gültig 2 Jahre',
     en_for: 'Restaurant · Valid 2 Years',
-    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80',
     popular: false,
   },
   {
@@ -27,7 +27,7 @@ const PRODUCTS = [
     en_desc: 'For a full dinner experience or hotel stay. Our most popular voucher.',
     de_for: 'Restaurant & Hotel · Gültig 2 Jahre',
     en_for: 'Restaurant & Hotel · Valid 2 Years',
-    image: 'https://images.unsplash.com/photo-1551183053-bf91798d792e?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
     popular: true,
   },
   {
@@ -40,7 +40,7 @@ const PRODUCTS = [
     en_desc: 'Multi-course dinner, hotel night or a combination — entirely as desired.',
     de_for: 'Restaurant & Hotel · Gültig 2 Jahre',
     en_for: 'Restaurant & Hotel · Valid 2 Years',
-    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=600&q=80',
     popular: false,
   },
   {
@@ -53,7 +53,7 @@ const PRODUCTS = [
     en_desc: 'Suite overnight, champagne, romantic dinner — the ultimate gift.',
     de_for: 'Volle Flexibilität · Gültig 2 Jahre',
     en_for: 'Full Flexibility · Valid 2 Years',
-    image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80',
     popular: false,
   },
 ];
