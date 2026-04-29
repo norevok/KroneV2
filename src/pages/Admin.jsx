@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
-import { CheckCircle, Clock, XCircle, AlertTriangle, UtensilsCrossed, Mail, RefreshCw, MessageSquare, BedDouble, Heart, FileText, Download, Activity, Calendar, BookOpen, Sparkles, Briefcase } from 'lucide-react';
+import { CheckCircle, Clock, XCircle, AlertTriangle, UtensilsCrossed, Mail, RefreshCw, MessageSquare, BedDouble, Heart, FileText, Download, Activity, Calendar, BookOpen, Sparkles, Briefcase, Gift } from 'lucide-react';
 import { format } from 'date-fns';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
@@ -59,12 +59,13 @@ export default function Admin() {
   const [guestDocs, setGuestDocs] = useState([]);
   const [guestMsgs, setGuestMsgs] = useState([]);
   const [careerApps, setCareerApps] = useState([]);
+  const [vouchers, setVouchers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedRes, setSelectedRes] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
   const [expandedDocId, setExpandedDocId] = useState(null);
   const [docNotes, setDocNotes] = useState({});
-  const [stats, setStats] = useState({ today: 0, pending: 0, confirmed: 0, contacts: 0, intents: 0, docs: 0, msgs: 0 });
+  const [stats, setStats] = useState({ today: 0, pending: 0, confirmed: 0, contacts: 0, intents: 0, docs: 0, msgs: 0, vouchers: 0 });
 
   useEffect(() => {
     base44.auth.me().then(u => {
@@ -79,13 +80,14 @@ export default function Admin() {
   async function loadAll() {
     setLoading(true);
     const today = new Date().toISOString().split('T')[0];
-    const [res, inq, int_, docs, msgs, apps] = await Promise.all([
+    const [res, inq, int_, docs, msgs, apps, voucs] = await Promise.all([
       base44.entities.RestaurantReservation.list('-created_date', 100),
       base44.entities.ContactInquiry.list('-created_date', 50),
       base44.entities.HotelBookingIntent.list('-created_date', 50).catch(() => []),
       base44.entities.GuestDocument.list('-created_date', 50).catch(() => []),
       base44.entities.GuestMessage.list('-created_date', 50).catch(() => []),
       base44.entities.CareerApplication.list('-created_date', 50).catch(() => []),
+      base44.entities.GiftVoucher.list('-created_date', 100).catch(() => []),
     ]);
     setReservations(res);
     setInquiries(inq);
@@ -93,6 +95,7 @@ export default function Admin() {
     setGuestDocs(docs);
     setGuestMsgs(msgs);
     setCareerApps(apps);
+    setVouchers(voucs);
     setStats({
       today: res.filter(r => r.reservation_date === today).length,
       pending: res.filter(r => r.status === 'new' || r.status === 'pending').length,
@@ -101,6 +104,7 @@ export default function Admin() {
       intents: int_.filter(i => i.status === 'initiated' || i.status === 'redirected_to_beds24').length,
       docs: docs.filter(d => d.status === 'uploaded').length,
       msgs: msgs.filter(m => m.status === 'new').length,
+      vouchers: voucs.filter(v => v.status === 'active').length,
     });
     setLoading(false);
   }
@@ -179,6 +183,7 @@ export default function Admin() {
     { id: 'documents', label: 'Dokumente', icon: FileText, count: stats.docs },
     { id: 'messages', label: 'Nachrichten', icon: Heart, count: stats.msgs },
     { id: 'careers', label: 'Bewerbungen', icon: Briefcase, count: careerApps.filter(a => a.status === 'new').length },
+    { id: 'vouchers', label: 'Gutscheine', icon: Gift, count: stats.vouchers },
   ];
 
   return (
@@ -216,7 +221,7 @@ export default function Admin() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-3 mb-6 sm:mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 sm:gap-3 mb-6 sm:mb-8">
           <StatCard icon={UtensilsCrossed} label="Heute" value={stats.today} color="text-gold" />
           <StatCard icon={Clock} label="Ausstehend" value={stats.pending} color="text-gold/70" />
           <StatCard icon={CheckCircle} label="Bestätigt" value={stats.confirmed} color="text-emerald-400" />
@@ -224,6 +229,7 @@ export default function Admin() {
           <StatCard icon={BedDouble} label="Buchungen" value={stats.intents} color="text-ivory/50" />
           <StatCard icon={FileText} label="Dokumente" value={stats.docs} color="text-ivory/50" />
           <StatCard icon={Heart} label="Nachrichten" value={stats.msgs} color="text-rose-400" />
+          <StatCard icon={Gift} label="Gutscheine aktiv" value={stats.vouchers} color="text-gold-light" />
         </div>
 
         {/* Pending alerts */}
@@ -537,6 +543,57 @@ export default function Admin() {
                         className="px-3 py-1.5 btn-ghost-gold border rounded-lg text-[10px] font-body tracking-widest uppercase flex items-center gap-1">
                         <Mail className="w-3 h-3" /> E-Mail
                       </a>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+
+        {/* VOUCHERS */}
+        {tab === 'vouchers' && (
+          <div className="space-y-2">
+            {loading ? (
+              <div className="flex justify-center py-16"><div className="w-6 h-6 border-2 border-gold/20 border-t-gold rounded-full animate-spin" /></div>
+            ) : vouchers.length === 0 ? (
+              <div className="text-center py-16 text-ivory/30 font-body text-sm">Keine Gutscheine</div>
+            ) : (
+              vouchers.map(v => (
+                <div key={v.id} className="glass-card border border-[#C9A96E]/08 rounded-xl p-4 hover:border-[#C9A96E]/20 transition-all">
+                  <div className="flex items-start gap-3 flex-wrap">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                        <span className="font-body text-sm text-ivory font-semibold tracking-widest">{v.code || '—'}</span>
+                        <StatusBadge status={v.status} />
+                        <span className="font-display text-lg font-light text-gold">€{v.amount_eur}</span>
+                      </div>
+                      <p className="text-ivory/50 text-xs font-body">{v.product_name}</p>
+                      <p className="text-ivory/30 text-xs font-body mt-0.5">
+                        Käufer: {v.purchaser_name || '—'} · {v.purchaser_email}
+                        {v.recipient_name && ` → ${v.recipient_name}`}
+                      </p>
+                      <p className="text-ivory/20 text-[10px] font-body mt-0.5">
+                        {v.created_date ? format(new Date(v.created_date), 'dd.MM.yy HH:mm') : ''}
+                        {v.paid_at ? ` · Bezahlt: ${format(new Date(v.paid_at), 'dd.MM.yy HH:mm')}` : ''}
+                        {v.expires_at ? ` · Läuft ab: ${format(new Date(v.expires_at), 'dd.MM.yyyy')}` : ''}
+                      </p>
+                    </div>
+                    <div className="flex gap-2 flex-shrink-0">
+                      {v.status === 'active' && (
+                        <button onClick={async () => {
+                          await base44.entities.GiftVoucher.update(v.id, { status: 'redeemed', redeemed_at: new Date().toISOString(), redeemed_by: user?.email });
+                          setVouchers(prev => prev.map(x => x.id === v.id ? { ...x, status: 'redeemed' } : x));
+                        }} className="px-3 py-1.5 bg-emerald-900/40 border border-emerald-700/30 text-emerald-400 text-[10px] rounded-lg font-body hover:bg-emerald-900/60 transition-colors tracking-widest uppercase">
+                          ✓ Eingelöst
+                        </button>
+                      )}
+                      {v.purchaser_email && (
+                        <a href={`mailto:${v.purchaser_email}`}
+                          className="px-3 py-1.5 btn-ghost-gold border rounded-lg text-[10px] font-body tracking-widest uppercase flex items-center gap-1">
+                          <Mail className="w-3 h-3" /> E-Mail
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
