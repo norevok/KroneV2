@@ -40,6 +40,7 @@ import Shop from './pages/Shop';
 import AdminBeds24 from './pages/AdminBeds24';
 import AdminGuestCalendar from './pages/AdminGuestCalendar';
 import AdminAuditLog from './pages/AdminAuditLog';
+import AdminCreditAudit from './pages/AdminCreditAudit';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -104,6 +105,7 @@ const AuthenticatedApp = () => {
         <Route path="/admin/beds24" element={<AdminBeds24 />} />
         <Route path="/admin/guest-calendar" element={<AdminGuestCalendar />} />
         <Route path="/admin/audit" element={<AdminAuditLog />} />
+        <Route path="/admin/credits" element={<AdminCreditAudit />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

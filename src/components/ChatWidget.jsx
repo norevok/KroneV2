@@ -1,10 +1,17 @@
-import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, BedDouble, UtensilsCrossed, Gift, Phone, ArrowRight } from 'lucide-react';
+/**
+ * ChatWidget — STATIC FAQ version (no LLM / no integration credits)
+ *
+ * CREDIT OPTIMIZATION: Previously called InvokeLLM on every message.
+ * Replaced with a static FAQ + quick-link widget that consumes ZERO credits.
+ * If AI chat is needed in future, it must be explicitly re-enabled by admin.
+ */
+
+import { useState } from 'react';
+import { MessageCircle, X, UtensilsCrossed, BedDouble, Gift, Phone, ChevronRight } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
-import { base44 } from '@/api/base44Client';
 import { Link } from 'react-router-dom';
 
-const QUICK_ACTIONS = {
+const QUICK_LINKS = {
   de: [
     { label: 'Tisch reservieren', icon: UtensilsCrossed, to: '/reserve' },
     { label: 'Zimmer buchen', icon: BedDouble, to: '/rooms' },
@@ -19,90 +26,50 @@ const QUICK_ACTIONS = {
   ],
 };
 
-const SYSTEM_PROMPT = `You are a friendly and professional AI assistant for Krone Langenburg by Ammesso, a boutique hotel and restaurant in Langenburg, Baden-Württemberg, Germany.
-
-Key information:
-- Restaurant: Kulinarium by Ammesso – Mediterranean cuisine with heart. Open Tue-Sat 12:00-14:30 & 17:30-22:00, Sunday 12:00-20:00. Monday closed.
-- Hotel: 4 rooms/suites (Deluxe Single from €89, Deluxe Double from €119, Superior Suite from €159, Superior Suite 2 from €179). Direct booking via Beds24.
-- Address: Hauptstraße 24, 74595 Langenburg, Germany. Phone: +49 7905 41770. Email: info@krone-ammesso.de
-- Chef: Omar Ammesso – self-taught, Mediterranean passion, Hohenlohe roots.
-- Vouchers/gifts available in the shop (€50, €100, €150, €250).
-- Reservations: table at /reserve, hotel rooms at /rooms, gift vouchers at /shop.
-
-Answer questions helpfully and concisely in the language the user writes in (primarily German or English). Keep answers under 3 sentences. For reservations, direct users to the relevant page. Be warm, elegant, and professional.`;
+const FAQ = {
+  de: [
+    { q: 'Wann ist das Restaurant geöffnet?', a: 'Di–Sa: 12:00–14:30 & 17:30–22:00 · So: 12:00–20:00 · Montag Ruhetag.' },
+    { q: 'Wie kann ich reservieren?', a: 'Online über unser Reservierungsformular oder telefonisch unter +49 7905 41770.' },
+    { q: 'Gibt es Parkplätze?', a: 'Ja, direkt am Hotel stehen Parkplätze zur Verfügung — kostenlos für Gäste.' },
+    { q: 'Kann ich ein Zimmer direkt buchen?', a: 'Ja — direkt über unsere Website zum besten Preis, ohne Buchungsgebühren.' },
+    { q: 'Bieten Sie Frühstück an?', a: 'Ja, Frühstück auf Anfrage für €14 pro Person.' },
+    { q: 'Sind Haustiere erlaubt?', a: 'Bitte kontaktieren Sie uns direkt unter info@krone-ammesso.de.' },
+  ],
+  en: [
+    { q: 'When is the restaurant open?', a: 'Tue–Sat: 12:00–14:30 & 17:30–22:00 · Sun: 12:00–20:00 · Monday closed.' },
+    { q: 'How can I make a reservation?', a: 'Online via our reservation form or by phone at +49 7905 41770.' },
+    { q: 'Is parking available?', a: 'Yes, parking is available directly at the hotel — free for guests.' },
+    { q: 'Can I book a room directly?', a: 'Yes — directly via our website at the best rate, no booking fees.' },
+    { q: 'Do you offer breakfast?', a: 'Yes, breakfast on request for €14 per person.' },
+    { q: 'Are pets allowed?', a: 'Please contact us directly at info@krone-ammesso.de.' },
+  ],
+};
 
 export default function ChatWidget() {
   const { lang } = useLang();
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [hasGreeted, setHasGreeted] = useState(false);
-  const messagesEndRef = useRef(null);
+  const [expandedFaq, setExpandedFaq] = useState(null);
 
-  const quickActions = QUICK_ACTIONS[lang] || QUICK_ACTIONS.de;
-
-  const greetings = {
-    de: 'Guten Tag! Ich bin Ihr digitaler Assistent der Krone Langenburg. Wie kann ich Ihnen helfen? 🏨',
-    en: 'Good day! I\'m your digital assistant at Krone Langenburg. How can I help you? 🏨',
-  };
-
-  function openChat() {
-    setOpen(true);
-    if (!hasGreeted) {
-      setMessages([{ role: 'assistant', content: greetings[lang] || greetings.de }]);
-      setHasGreeted(true);
-    }
-  }
-
-  async function sendMessage(text) {
-    const userMsg = text || input.trim();
-    if (!userMsg) return;
-    setInput('');
-    const newMessages = [...messages, { role: 'user', content: userMsg }];
-    setMessages(newMessages);
-    setLoading(true);
-    try {
-      const conversation = newMessages
-        .map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
-        .join('\n');
-      const res = await base44.integrations.Core.InvokeLLM({
-        prompt: `${SYSTEM_PROMPT}\n\nConversation:\n${conversation}\n\nAssistant:`,
-        model: 'gpt_5_mini',
-      });
-      setMessages(prev => [...prev, { role: 'assistant', content: typeof res === 'string' ? res : res?.response || 'Ich stehe Ihnen gleich zur Verfügung.' }]);
-    } catch {
-      setMessages(prev => [...prev, { role: 'assistant', content: lang === 'de' ? 'Entschuldigung, ein Fehler ist aufgetreten. Rufen Sie uns gerne an: +49 7905 41770' : 'Sorry, an error occurred. Please call us: +49 7905 41770' }]);
-    }
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    if (open) messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, open]);
-
-  function handleKey(e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-  }
+  const links = QUICK_LINKS[lang] || QUICK_LINKS.de;
+  const faqs = FAQ[lang] || FAQ.de;
 
   return (
     <>
       {/* Bubble button */}
       <button
-        onClick={open ? () => setOpen(false) : openChat}
+        onClick={() => setOpen(p => !p)}
         className="fixed bottom-24 right-4 lg:bottom-6 lg:right-6 z-50 w-14 h-14 bg-gold hover:bg-[#7A5A0F] text-white rounded-full shadow-premium flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"
-        aria-label="Chat öffnen"
+        aria-label="Hilfe"
       >
         {open ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
-        {!open && messages.length === 0 && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white animate-pulse" />
+        {!open && (
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white" />
         )}
       </button>
 
-      {/* Chat window */}
+      {/* Panel */}
       {open && (
-        <div className="fixed bottom-40 right-4 lg:bottom-24 lg:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm bg-white rounded-2xl shadow-2xl border border-stone-200 flex flex-col overflow-hidden" style={{maxWidth: '22rem'}}
-          style={{ height: '480px' }}>
+        <div className="fixed bottom-40 right-4 lg:bottom-24 lg:right-6 z-50 w-[calc(100vw-2rem)] max-w-sm bg-white rounded-2xl shadow-2xl border border-stone-200 flex flex-col overflow-hidden" style={{ height: '500px' }}>
 
           {/* Header */}
           <div className="bg-espresso px-5 py-4 flex items-center gap-3 flex-shrink-0">
@@ -111,72 +78,72 @@ export default function ChatWidget() {
             </div>
             <div>
               <p className="font-display text-base font-light text-ivory">Krone Langenburg</p>
-              <p className="text-gold-light text-[9px] tracking-[0.3em] uppercase font-body">AI Assistent · {lang === 'de' ? 'Online' : 'Online'}</p>
+              <p className="text-gold-light text-[9px] tracking-[0.3em] uppercase font-body">
+                {lang === 'de' ? 'Hilfe & Kontakt' : 'Help & Contact'}
+              </p>
             </div>
             <button onClick={() => setOpen(false)} className="ml-auto text-ivory/40 hover:text-ivory/80 transition-colors">
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-stone-50">
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm font-body leading-relaxed ${
-                  msg.role === 'user'
-                    ? 'bg-gold text-white rounded-br-sm'
-                    : 'bg-white text-charcoal border border-stone-100 shadow-sm rounded-bl-sm'
-                }`}>
-                  {msg.content}
-                </div>
-              </div>
-            ))}
-            {loading && (
-              <div className="flex justify-start">
-                <div className="bg-white border border-stone-100 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1.5 items-center">
-                  <div className="w-1.5 h-1.5 bg-gold/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <div className="w-1.5 h-1.5 bg-gold/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <div className="w-1.5 h-1.5 bg-gold/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
+          {/* Scrollable content */}
+          <div className="flex-1 overflow-y-auto">
 
-          {/* Quick actions (only if no conversation yet) */}
-          {messages.length <= 1 && (
-            <div className="px-4 py-3 border-t border-stone-100 flex flex-wrap gap-2 bg-white flex-shrink-0">
-              {quickActions.map((action, i) => (
-                action.to ? (
-                  <Link key={i} to={action.to} onClick={() => setOpen(false)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 hover:bg-gold-pale border border-stone-200 hover:border-gold/30 rounded-full text-[10px] font-body text-charcoal/70 hover:text-gold transition-all">
-                    <action.icon className="w-3 h-3" /> {action.label}
-                  </Link>
-                ) : (
-                  <a key={i} href={action.href}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-stone-50 hover:bg-gold-pale border border-stone-200 hover:border-gold/30 rounded-full text-[10px] font-body text-charcoal/70 hover:text-gold transition-all">
-                    <action.icon className="w-3 h-3" /> {action.label}
-                  </a>
-                )
-              ))}
+            {/* Quick links */}
+            <div className="px-4 pt-4 pb-3 border-b border-stone-100">
+              <p className="text-[9px] tracking-[0.3em] uppercase font-body text-charcoal/30 mb-3">
+                {lang === 'de' ? 'Schnellzugriff' : 'Quick Access'}
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {links.map((action, i) =>
+                  action.to ? (
+                    <Link key={i} to={action.to} onClick={() => setOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2.5 bg-stone-50 hover:bg-gold-pale border border-stone-200 hover:border-gold/30 rounded-xl text-xs font-body text-charcoal/70 hover:text-gold transition-all">
+                      <action.icon className="w-3.5 h-3.5 flex-shrink-0" /> {action.label}
+                    </Link>
+                  ) : (
+                    <a key={i} href={action.href}
+                      className="flex items-center gap-2 px-3 py-2.5 bg-stone-50 hover:bg-gold-pale border border-stone-200 hover:border-gold/30 rounded-xl text-xs font-body text-charcoal/70 hover:text-gold transition-all">
+                      <action.icon className="w-3.5 h-3.5 flex-shrink-0" /> {action.label}
+                    </a>
+                  )
+                )}
+              </div>
             </div>
-          )}
 
-          {/* Input */}
-          <div className="px-4 py-3 border-t border-stone-100 flex gap-2 bg-white flex-shrink-0">
-            <input
-              type="text"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKey}
-              placeholder={lang === 'de' ? 'Schreiben Sie uns…' : 'Write to us…'}
-              className="flex-1 bg-stone-50 border border-stone-200 rounded-full px-4 py-2 text-sm font-body text-charcoal placeholder-stone-400 focus:outline-none focus:border-gold/40 focus:ring-1 focus:ring-gold/20 transition-all"
-              disabled={loading}
-            />
-            <button onClick={() => sendMessage()} disabled={loading || !input.trim()}
-              className="w-9 h-9 bg-gold hover:bg-[#7A5A0F] disabled:bg-stone-200 text-white rounded-full flex items-center justify-center transition-colors flex-shrink-0">
-              <Send className="w-3.5 h-3.5" />
-            </button>
+            {/* FAQ */}
+            <div className="px-4 py-3">
+              <p className="text-[9px] tracking-[0.3em] uppercase font-body text-charcoal/30 mb-3">
+                {lang === 'de' ? 'Häufige Fragen' : 'Frequently Asked'}
+              </p>
+              <div className="space-y-1.5">
+                {faqs.map((faq, i) => (
+                  <div key={i} className="border border-stone-100 rounded-xl overflow-hidden">
+                    <button
+                      onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
+                      className="w-full flex items-center justify-between gap-2 px-3 py-2.5 text-left hover:bg-stone-50 transition-colors"
+                    >
+                      <span className="text-xs font-body text-charcoal/75 font-medium leading-tight">{faq.q}</span>
+                      <ChevronRight className={`w-3.5 h-3.5 text-charcoal/30 flex-shrink-0 transition-transform ${expandedFaq === i ? 'rotate-90' : ''}`} />
+                    </button>
+                    {expandedFaq === i && (
+                      <div className="px-3 pb-3 text-xs font-body text-charcoal/60 leading-relaxed border-t border-stone-100 pt-2">
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact strip */}
+            <div className="px-4 pb-4">
+              <a href="mailto:info@krone-ammesso.de"
+                className="flex items-center justify-center gap-2 w-full py-2.5 border border-stone-200 rounded-xl text-xs font-body text-charcoal/50 hover:text-gold hover:border-gold/30 transition-all">
+                info@krone-ammesso.de
+              </a>
+            </div>
           </div>
         </div>
       )}

@@ -70,38 +70,14 @@ Deno.serve(async (req) => {
       related_entity_id: message.id
     }).catch(() => {});
 
-    // Notify admin via Slack
-    try {
-      const settings = await base44.asServiceRole.entities.SiteSettings.filter(
-        { key: 'global' },
-        undefined,
-        1
-      );
-
-      if (settings && settings[0] && settings[0].slack_webhook_url_env_key) {
-        const webhookUrl = Deno.env.get(settings[0].slack_webhook_url_env_key);
-        if (webhookUrl) {
-          await fetch(webhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              text: `💬 Guest Message`,
-              blocks: [
-                {
-                  type: 'section',
-                  text: {
-                    type: 'mrkdwn',
-                    text: `*Guest Message*\n*Type:* ${message_type}\n*From:* ${user.email}\n*Subject:* ${subject}\n*Preview:* ${body.substring(0, 100)}...`
-                  }
-                }
-              ]
-            })
-          });
-        }
-      }
-    } catch (e) {
-      console.error('Slack notification failed:', e);
-    }
+    // Notify admin via Slack using notifySlack (no extra SiteSettings fetch needed)
+    base44.asServiceRole.functions.invoke('notifySlack', {
+      type: 'guest_message',
+      name: user.full_name || user.email,
+      email: user.email,
+      inquiry_type: message_type || 'general_question',
+      message: body.substring(0, 200),
+    }).catch(() => {});
 
     return Response.json({
       success: true,

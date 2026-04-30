@@ -119,16 +119,20 @@ Deno.serve(async (req) => {
 
     const duration = Date.now() - startTime;
 
-    // 5. Log execution in ActivityLog
-    await base44.asServiceRole.entities.ActivityLog.create({
-      actor_email: callerEmail,
-      actor_role: 'system',
-      action: 'admin_status_change',
-      entity_type: 'RestaurantReservation',
-      description: `Nightly maintenance completed in ${duration}ms — archived: ${results.archived_reservations} reservations, ${results.archived_intents} intents; closed: ${results.closed_inquiries} inquiries, ${results.closed_messages} messages`,
-      metadata: { ...results, duration_ms: duration },
-      performed_at: now.toISOString(),
-    }).catch(() => {});
+    // CREDIT OPTIMIZATION: Only log to ActivityLog if something was actually changed,
+    // or if there were errors. Skip the write when nothing happened.
+    const somethingChanged = results.archived_reservations + results.closed_inquiries + results.closed_messages + results.archived_intents > 0 || results.errors.length > 0;
+    if (somethingChanged) {
+      await base44.asServiceRole.entities.ActivityLog.create({
+        actor_email: callerEmail,
+        actor_role: 'system',
+        action: 'admin_status_change',
+        entity_type: 'RestaurantReservation',
+        description: `Nightly maintenance: archived ${results.archived_reservations} reservations, ${results.archived_intents} intents; closed ${results.closed_inquiries} inquiries, ${results.closed_messages} messages`,
+        metadata: { ...results, duration_ms: duration },
+        performed_at: now.toISOString(),
+      }).catch(() => {});
+    }
 
     return Response.json({
       success: true,

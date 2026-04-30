@@ -42,14 +42,10 @@ Deno.serve(async (req) => {
   const bookid = String(payload.bookid || payload.booking_id || '').trim();
   const eventType = payload.type || payload.event || 'unknown';
 
-  // Log raw webhook event immediately (idempotency key = bookid + eventType + timestamp)
-  const webhookLog = await base44.asServiceRole.entities.HotelBookingSyncIssue.create({
-    issue_type: 'api_failure',
-    description: `Beds24 webhook received: ${eventType} — bookid: ${bookid || 'none'}`,
-    detected_at: new Date().toISOString(),
-    severity: 'info',
-    status: 'new',
-  }).catch(() => null);
+  // CREDIT OPTIMIZATION: Removed per-event info log write.
+  // Only create SyncIssue records on real failures (below).
+  const webhookLog = null;
+  console.log(`Beds24 webhook received: ${eventType} — bookid: ${bookid || 'none'}`);
 
   if (!bookid) {
     console.warn('Beds24 webhook: no bookid in payload');
