@@ -1,320 +1,264 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { TrendingUp, Calendar, Users, MessageSquare, CheckCircle, Clock, Activity, LayoutDashboard } from 'lucide-react';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
+import { TrendingUp, Calendar, Users, MessageSquare, CheckCircle, Clock, Activity, LayoutDashboard, RefreshCw, UtensilsCrossed, BedDouble, Gift, FileText, AlertTriangle, ChevronRight } from 'lucide-react';
 import { format, subDays, startOfDay } from 'date-fns';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
 
-export default function Dashboard() {
-  const { lang } = useLang();
-  const [loading, setLoading] = useState(true);
-  const [metrics, setMetrics] = useState({
-    totalReservations: 0,
-    confirmedReservations: 0,
-    pendingReservations: 0,
-    cancelledReservations: 0,
-    totalBookingIntents: 0,
-    guestMessages: 0,
-  });
-  const [chartData, setChartData] = useState({
-    reservationTrend: [],
-    reservationStatus: [],
-    bookingStatus: [],
-    activityByDay: [],
-  });
-
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    base44.auth.me().then(u => {
-      if (u && (ADMIN_EMAILS.includes(u.email) || u.role === 'admin')) setIsAdmin(true);
-    }).catch(() => {});
-    loadDashboardData();
-  }, []);
-
-  async function loadDashboardData() {
-    try {
-      setLoading(true);
-      const [reservations, intents, messages] = await Promise.all([
-        base44.entities.RestaurantReservation.list('-created_date', 500).catch(() => []),
-        base44.entities.HotelBookingIntent.list('-created_date', 500).catch(() => []),
-        base44.entities.GuestMessage.list('-created_date', 500).catch(() => []),
-      ]);
-
-      // Calculate metrics
-      const confirmed = reservations.filter(r => r.status === 'confirmed').length;
-      const pending = reservations.filter(r => r.status === 'new' || r.status === 'pending').length;
-      const cancelled = reservations.filter(r => r.status === 'cancelled_by_guest' || r.status === 'cancelled_by_staff').length;
-
-      setMetrics({
-        totalReservations: reservations.length,
-        confirmedReservations: confirmed,
-        pendingReservations: pending,
-        cancelledReservations: cancelled,
-        totalBookingIntents: intents.length,
-        guestMessages: messages.length,
-      });
-
-      // Prepare chart data - Last 14 days
-      const today = new Date();
-      const activityByDay = [];
-      for (let i = 13; i >= 0; i--) {
-        const date = startOfDay(subDays(today, i));
-        const dateStr = format(date, 'yyyy-MM-dd');
-        const resCount = reservations.filter(r => r.created_date?.startsWith(dateStr)).length;
-        const intentCount = intents.filter(i => i.created_date?.startsWith(dateStr)).length;
-        activityByDay.push({
-          date: format(date, 'MMM dd'),
-          reservations: resCount,
-          bookings: intentCount,
-        });
-      }
-
-      // Reservation status breakdown
-      const reservationStatus = [
-        { name: lang === 'de' ? 'Bestätigt' : lang === 'en' ? 'Confirmed' : 'Confermato', value: confirmed, color: '#10b981' },
-        { name: lang === 'de' ? 'Ausstehend' : lang === 'en' ? 'Pending' : 'In attesa', value: pending, color: '#f59e0b' },
-        { name: lang === 'de' ? 'Abgesagt' : lang === 'en' ? 'Cancelled' : 'Annullato', value: cancelled, color: '#ef4444' },
-      ];
-
-      // Booking intent status
-      const redirected = intents.filter(i => i.status === 'redirected_to_beds24').length;
-      const syncedConfirmed = intents.filter(i => i.status === 'synced_confirmed').length;
-      const bookingStatus = [
-        { name: lang === 'de' ? 'Weitergeleitet' : 'Redirected', value: redirected, color: '#3b82f6' },
-        { name: lang === 'de' ? 'Synchronisiert' : 'Synced', value: syncedConfirmed, color: '#8b5cf6' },
-        { name: lang === 'de' ? 'Sonstiges' : 'Other', value: intents.length - redirected - syncedConfirmed, color: '#6b7280' },
-      ];
-
-      setChartData({
-        reservationTrend: activityByDay,
-        reservationStatus,
-        bookingStatus,
-        activityByDay,
-      });
-      setLoading(false);
-    } catch (error) {
-      console.error('Dashboard load error:', error);
-      setLoading(false);
-    }
-  }
-
-  const C = {
-    de: {
-      title: 'Dashboard',
-      subtitle: 'Plattformleistung & Aktivitätsübersicht',
-      metrics: 'Schlüsselmetriken',
-      charts: 'Aktivitätsanalyse',
-      total_reservations: 'Gesamtreservierungen',
-      confirmed: 'Bestätigt',
-      pending: 'Ausstehend',
-      cancelled: 'Abgesagt',
-      total_intents: 'Buchungsintents',
-      messages: 'Gästenachrichten',
-      activity_trend: 'Aktivitätstrend (14 Tage)',
-      status_breakdown: 'Reservierungsstatus',
-      booking_breakdown: 'Buchungsstatus',
-    },
-    en: {
-      title: 'Dashboard',
-      subtitle: 'Platform Performance & Activity Overview',
-      metrics: 'Key Metrics',
-      charts: 'Activity Analytics',
-      total_reservations: 'Total Reservations',
-      confirmed: 'Confirmed',
-      pending: 'Pending',
-      cancelled: 'Cancelled',
-      total_intents: 'Booking Intents',
-      messages: 'Guest Messages',
-      activity_trend: 'Activity Trend (14 Days)',
-      status_breakdown: 'Reservation Status',
-      booking_breakdown: 'Booking Status',
-    },
-    it: {
-      title: 'Dashboard',
-      subtitle: 'Panoramica delle prestazioni e dell\'attività',
-      metrics: 'Metriche chiave',
-      charts: 'Analitiche di attività',
-      total_reservations: 'Prenotazioni totali',
-      confirmed: 'Confermato',
-      pending: 'In attesa',
-      cancelled: 'Annullato',
-      total_intents: 'Intenti di prenotazione',
-      messages: 'Messaggi ospiti',
-      activity_trend: 'Tendenza attività (14 giorni)',
-      status_breakdown: 'Status prenotazione',
-      booking_breakdown: 'Status prenotazione',
-    },
-  };
-  const c = C[lang] || C.de;
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-charcoal flex items-center justify-center pt-20">
-        <div className="text-center">
-          <div className="w-8 h-8 border-2 border-gold/20 border-t-gold rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-ivory/30 text-sm font-body">…</p>
-        </div>
-      </div>
-    );
-  }
-
+function MetricCard({ icon: Icon, label, value, color, sub }) {
   return (
-    <div className="min-h-screen bg-charcoal text-ivory pt-20 pb-20 px-5">
-      <div className="max-w-7xl mx-auto">
-
-        {/* Header */}
-        <div className="flex items-start justify-between gap-4 mb-10 sm:mb-12 flex-wrap">
-          <div>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-ivory mb-2">{c.title}</h1>
-            <p className="text-ivory/40 font-body text-sm">{c.subtitle}</p>
-          </div>
-          {isAdmin && (
-            <div className="flex gap-2 flex-shrink-0">
-              <Link to="/admin" className="flex items-center gap-1.5 px-4 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
-                <LayoutDashboard className="w-3.5 h-3.5" /> Admin
-              </Link>
-              <Link to="/activity-log" className="flex items-center gap-1.5 px-4 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
-                <Activity className="w-3.5 h-3.5" /> Log
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-          <MetricCard
-            icon={Calendar}
-            label={c.total_reservations}
-            value={metrics.totalReservations}
-            color="text-blue-400"
-          />
-          <MetricCard
-            icon={CheckCircle}
-            label={c.confirmed}
-            value={metrics.confirmedReservations}
-            color="text-emerald-400"
-          />
-          <MetricCard
-            icon={Clock}
-            label={c.pending}
-            value={metrics.pendingReservations}
-            color="text-amber-400"
-          />
-          <MetricCard
-            icon={Users}
-            label={c.total_intents}
-            value={metrics.totalBookingIntents}
-            color="text-purple-400"
-          />
-          <MetricCard
-            icon={MessageSquare}
-            label={c.messages}
-            value={metrics.guestMessages}
-            color="text-pink-400"
-          />
-          <MetricCard
-            icon={TrendingUp}
-            label={c.cancelled}
-            value={metrics.cancelledReservations}
-            color="text-red-400"
-          />
-        </div>
-
-        {/* Charts */}
-        <div className="space-y-6">
-
-          {/* Activity Trend Chart */}
-          <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-6">
-            <h2 className="font-display text-2xl font-light text-ivory mb-6">{c.activity_trend}</h2>
-            <div className="overflow-x-auto">
-              <ResponsiveContainer width="100%" height={300} minWidth={500}>
-                <LineChart data={chartData.reservationTrend}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(201,169,110,0.1)" />
-                  <XAxis dataKey="date" stroke="rgba(245,239,227,0.4)" style={{ fontSize: '12px' }} />
-                  <YAxis stroke="rgba(245,239,227,0.4)" style={{ fontSize: '12px' }} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: '#1A1410', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '8px' }}
-                    labelStyle={{ color: '#F5EFE3' }}
-                  />
-                  <Legend />
-                  <Line type="monotone" dataKey="reservations" stroke="#3b82f6" strokeWidth={2} name={lang === 'de' ? 'Reservierungen' : 'Reservations'} />
-                  <Line type="monotone" dataKey="bookings" stroke="#8b5cf6" strokeWidth={2} name={lang === 'de' ? 'Buchungen' : 'Bookings'} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          {/* Status Charts - Side by side */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-            {/* Reservation Status */}
-            <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-6">
-              <h3 className="font-display text-xl font-light text-ivory mb-6">{c.status_breakdown}</h3>
-              <ResponsiveContainer width="100%" height={250}>
-                <PieChart>
-                  <Pie
-                    data={chartData.reservationStatus}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={({ name, value }) => `${name}: ${value}`}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                  >
-                    {chartData.reservationStatus.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{ backgroundColor: '#1A1410', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '8px', color: '#F5EFE3' }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-
-            {/* Booking Status */}
-            <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-6">
-              <h3 className="font-display text-xl font-light text-ivory mb-6">{c.booking_breakdown}</h3>
-              <ResponsiveContainer width="100%" height={250}>
-                <BarChart data={chartData.bookingStatus}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(201,169,110,0.1)" />
-                  <XAxis dataKey="name" stroke="rgba(245,239,227,0.4)" style={{ fontSize: '12px' }} />
-                  <YAxis stroke="rgba(245,239,227,0.4)" style={{ fontSize: '12px' }} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: '#1A1410', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '8px', color: '#F5EFE3' }}
-                  />
-                  <Bar dataKey="value" fill="#C9A96E" radius={[8, 8, 0, 0]}>
-                    {chartData.bookingStatus.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-
-          </div>
-
-        </div>
+    <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 flex items-start gap-4 hover:border-[#C9A96E]/20 transition-all">
+      <div className={`w-10 h-10 rounded-full bg-[#1A1410] border border-[#C9A96E]/10 flex items-center justify-center flex-shrink-0`}>
+        <Icon className={`w-5 h-5 ${color}`} />
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-ivory/40 text-[10px] font-body uppercase tracking-wider mb-1">{label}</p>
+        <p className={`font-display text-3xl font-light ${color}`}>{value}</p>
+        {sub && <p className="text-ivory/25 text-[10px] font-body mt-0.5">{sub}</p>}
       </div>
     </div>
   );
 }
 
-function MetricCard({ icon: Icon, label, value, color }) {
-  return (
-    <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-6 flex items-start gap-4">
-      <div className={`w-10 h-10 rounded-full bg-[#1A1410] border border-[#C9A96E]/10 flex items-center justify-center flex-shrink-0 ${color}`}>
-        <Icon className="w-5 h-5" />
+export default function Dashboard() {
+  const { lang } = useLang();
+  const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser] = useState(null);
+  const [metrics, setMetrics] = useState({
+    totalReservations: 0, confirmedReservations: 0, pendingReservations: 0,
+    cancelledReservations: 0, totalBookingIntents: 0, guestMessages: 0,
+    activeVouchers: 0, pendingDocs: 0, todayReservations: 0,
+  });
+  const [chartData, setChartData] = useState({ activityByDay: [], statusBreakdown: [] });
+  const [recentReservations, setRecentReservations] = useState([]);
+  const [pendingAlerts, setPendingAlerts] = useState([]);
+
+  useEffect(() => {
+    base44.auth.me().then(u => {
+      if (!u) return;
+      setUser(u);
+      if (ADMIN_EMAILS.includes(u.email) || u.role === 'admin') setIsAdmin(true);
+    }).catch(() => {});
+    loadData();
+  }, []);
+
+  async function loadData() {
+    setLoading(true);
+    const today = new Date().toISOString().split('T')[0];
+    const [reservations, intents, messages, vouchers, docs] = await Promise.all([
+      base44.entities.RestaurantReservation.list('-created_date', 500).catch(() => []),
+      base44.entities.HotelBookingIntent.list('-created_date', 200).catch(() => []),
+      base44.entities.GuestMessage.list('-created_date', 100).catch(() => []),
+      base44.entities.GiftVoucher.list('-created_date', 100).catch(() => []),
+      base44.entities.GuestDocument.list('-created_date', 100).catch(() => []),
+    ]);
+
+    const confirmed = reservations.filter(r => r.status === 'confirmed').length;
+    const pending = reservations.filter(r => r.status === 'new' || r.status === 'pending').length;
+    const cancelled = reservations.filter(r => r.status?.includes('cancelled')).length;
+    const todayRes = reservations.filter(r => r.reservation_date === today).length;
+    const activeVouchers = vouchers.filter(v => v.status === 'active').length;
+    const pendingDocs = docs.filter(d => d.status === 'uploaded').length;
+    const newMsgs = messages.filter(m => m.status === 'new').length;
+
+    setMetrics({ totalReservations: reservations.length, confirmedReservations: confirmed, pendingReservations: pending, cancelledReservations: cancelled, totalBookingIntents: intents.length, guestMessages: messages.length, activeVouchers, pendingDocs, todayReservations: todayRes });
+    setRecentReservations(reservations.slice(0, 8));
+
+    // Alerts
+    const alerts = [];
+    if (pending > 0) alerts.push({ type: 'warning', msg: lang === 'de' ? `${pending} Reservierungen ausstehend` : `${pending} reservations pending`, link: '/admin' });
+    if (pendingDocs > 0) alerts.push({ type: 'info', msg: lang === 'de' ? `${pendingDocs} Dokumente zur Prüfung` : `${pendingDocs} documents to review`, link: '/admin' });
+    if (newMsgs > 0) alerts.push({ type: 'info', msg: lang === 'de' ? `${newMsgs} neue Nachrichten` : `${newMsgs} new messages`, link: '/admin' });
+    setPendingAlerts(alerts);
+
+    // Chart — last 14 days
+    const now = new Date();
+    const activityByDay = Array.from({ length: 14 }, (_, i) => {
+      const d = startOfDay(subDays(now, 13 - i));
+      const dateStr = format(d, 'yyyy-MM-dd');
+      return {
+        date: format(d, 'dd.MM'),
+        Reservierungen: reservations.filter(r => r.created_date?.startsWith(dateStr)).length,
+        Buchungen: intents.filter(x => x.created_date?.startsWith(dateStr)).length,
+      };
+    });
+
+    const statusBreakdown = [
+      { name: lang === 'de' ? 'Bestätigt' : 'Confirmed', value: confirmed, color: '#10b981' },
+      { name: lang === 'de' ? 'Ausstehend' : 'Pending', value: pending, color: '#f59e0b' },
+      { name: lang === 'de' ? 'Abgesagt' : 'Cancelled', value: cancelled, color: '#ef4444' },
+      { name: lang === 'de' ? 'Abgeschlossen' : 'Completed', value: reservations.filter(r => r.status === 'completed').length, color: '#6b7280' },
+    ];
+
+    setChartData({ activityByDay, statusBreakdown });
+    setLoading(false);
+  }
+
+  if (loading) return (
+    <div className="min-h-screen bg-charcoal flex items-center justify-center pt-20">
+      <div className="text-center">
+        <div className="w-8 h-8 border-2 border-gold/20 border-t-gold rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-ivory/30 text-sm font-body">…</p>
       </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-ivory/40 text-xs font-body uppercase tracking-wider mb-1">{label}</p>
-        <p className="font-display text-3xl font-light text-ivory">{value}</p>
+    </div>
+  );
+
+  const STATUS_BADGE = {
+    new: 'text-gold/80 bg-gold/10 border-gold/20',
+    pending: 'text-gold/80 bg-gold/10 border-gold/20',
+    confirmed: 'text-emerald-400 bg-emerald-950/40 border-emerald-800/30',
+    cancelled_by_guest: 'text-red-400 bg-red-950/30 border-red-800/20',
+    cancelled_by_staff: 'text-red-400 bg-red-950/30 border-red-800/20',
+    completed: 'text-ivory/30 bg-ivory/5 border-ivory/10',
+    no_show: 'text-red-400/60 bg-red-950/20 border-red-900/15',
+  };
+
+  return (
+    <div className="min-h-screen bg-charcoal text-ivory pt-16 sm:pt-20 pb-20 px-4 sm:px-5">
+      <div className="max-w-7xl mx-auto">
+
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4 py-7 sm:py-10 flex-wrap">
+          <div>
+            <p className="text-gold text-[10px] tracking-[0.45em] uppercase font-body mb-2">Krone Langenburg</p>
+            <h1 className="font-display text-3xl sm:text-4xl font-light text-ivory mb-1">
+              {lang === 'de' ? 'Übersicht' : 'Overview'}
+            </h1>
+            <p className="text-ivory/35 text-sm font-body">
+              {format(new Date(), 'EEEE, d. MMMM yyyy')} · {user?.email}
+            </p>
+          </div>
+          <div className="flex items-center gap-2 flex-wrap">
+            {isAdmin && (
+              <>
+                <Link to="/admin" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
+                  <LayoutDashboard className="w-3.5 h-3.5" /> Admin
+                </Link>
+                <Link to="/activity-log" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
+                  <Activity className="w-3.5 h-3.5" /> Log
+                </Link>
+              </>
+            )}
+            <button onClick={loadData} className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-ivory text-xs font-body transition-colors">
+              <RefreshCw className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Alerts */}
+        {pendingAlerts.length > 0 && (
+          <div className="space-y-2 mb-8">
+            {pendingAlerts.map((a, i) => (
+              <Link key={i} to={a.link} className="flex items-center gap-3 border border-gold/20 bg-gold/6 rounded-xl px-4 py-3 hover:bg-gold/10 transition-colors">
+                <AlertTriangle className="w-4 h-4 text-gold flex-shrink-0" />
+                <p className="text-ivory/70 text-sm font-body flex-1">{a.msg}</p>
+                <ChevronRight className="w-4 h-4 text-gold/40 flex-shrink-0" />
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Metrics */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-10">
+          <MetricCard icon={UtensilsCrossed} label={lang === 'de' ? 'Heute' : 'Today'} value={metrics.todayReservations} color="text-gold" sub={lang === 'de' ? 'Reservierungen' : 'reservations'} />
+          <MetricCard icon={Clock} label={lang === 'de' ? 'Ausstehend' : 'Pending'} value={metrics.pendingReservations} color="text-amber-400" />
+          <MetricCard icon={CheckCircle} label={lang === 'de' ? 'Bestätigt' : 'Confirmed'} value={metrics.confirmedReservations} color="text-emerald-400" />
+          <MetricCard icon={BedDouble} label={lang === 'de' ? 'Buchungen' : 'Bookings'} value={metrics.totalBookingIntents} color="text-blue-400" />
+          <MetricCard icon={Gift} label={lang === 'de' ? 'Gutscheine' : 'Vouchers'} value={metrics.activeVouchers} color="text-gold-light" sub={lang === 'de' ? 'aktiv' : 'active'} />
+          <MetricCard icon={MessageSquare} label={lang === 'de' ? 'Nachrichten' : 'Messages'} value={metrics.guestMessages} color="text-pink-400" />
+          <MetricCard icon={FileText} label={lang === 'de' ? 'Dokumente' : 'Documents'} value={metrics.pendingDocs} color="text-purple-400" sub={lang === 'de' ? 'zur Prüfung' : 'to review'} />
+          <MetricCard icon={Calendar} label={lang === 'de' ? 'Gesamt Res.' : 'Total Res.'} value={metrics.totalReservations} color="text-ivory/50" />
+          <MetricCard icon={TrendingUp} label={lang === 'de' ? 'Abgesagt' : 'Cancelled'} value={metrics.cancelledReservations} color="text-red-400" />
+        </div>
+
+        {/* Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-8">
+          {/* Trend - 2/3 width */}
+          <div className="lg:col-span-2 glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6">
+            <h2 className="font-display text-xl font-light text-ivory mb-5">{lang === 'de' ? 'Aktivität (14 Tage)' : 'Activity (14 Days)'}</h2>
+            <div className="overflow-x-auto">
+              <ResponsiveContainer width="100%" height={240} minWidth={400}>
+                <LineChart data={chartData.activityByDay}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(201,169,110,0.08)" />
+                  <XAxis dataKey="date" stroke="rgba(245,239,227,0.3)" style={{ fontSize: '11px' }} />
+                  <YAxis stroke="rgba(245,239,227,0.3)" style={{ fontSize: '11px' }} />
+                  <Tooltip contentStyle={{ backgroundColor: '#1A1410', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '8px', color: '#F5EFE3', fontSize: '12px' }} />
+                  <Legend wrapperStyle={{ fontSize: '11px', color: 'rgba(245,239,227,0.5)' }} />
+                  <Line type="monotone" dataKey="Reservierungen" stroke="#C9A96E" strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="Buchungen" stroke="#3b82f6" strokeWidth={2} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Status breakdown - 1/3 width */}
+          <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6">
+            <h2 className="font-display text-xl font-light text-ivory mb-5">{lang === 'de' ? 'Reservierungsstatus' : 'Reservation Status'}</h2>
+            <div className="space-y-3">
+              {chartData.statusBreakdown.filter(s => s.value > 0).map((s, i) => (
+                <div key={i}>
+                  <div className="flex justify-between text-xs font-body mb-1">
+                    <span style={{ color: s.color }}>{s.name}</span>
+                    <span className="text-ivory/50">{s.value}</span>
+                  </div>
+                  <div className="h-1.5 bg-ivory/5 rounded-full overflow-hidden">
+                    <div className="h-full rounded-full transition-all duration-700"
+                      style={{ width: `${metrics.totalReservations ? Math.round(s.value / metrics.totalReservations * 100) : 0}%`, backgroundColor: s.color }} />
+                  </div>
+                </div>
+              ))}
+              {metrics.totalReservations === 0 && (
+                <p className="text-ivory/20 text-xs font-body text-center py-4">{lang === 'de' ? 'Keine Daten' : 'No data'}</p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Recent Reservations */}
+        {recentReservations.length > 0 && (
+          <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="font-display text-xl font-light text-ivory">{lang === 'de' ? 'Letzte Reservierungen' : 'Recent Reservations'}</h2>
+              <Link to="/admin" className="text-gold/60 hover:text-gold text-xs font-body tracking-wider transition-colors">
+                {lang === 'de' ? 'Alle anzeigen →' : 'View all →'}
+              </Link>
+            </div>
+            <div className="space-y-2 overflow-x-auto">
+              <table className="w-full min-w-[500px]">
+                <thead>
+                  <tr className="border-b border-[#C9A96E]/08">
+                    {['Gast', 'Datum', 'Zeit', 'Pers.', 'Status'].map(h => (
+                      <th key={h} className="text-left text-[10px] tracking-widest uppercase font-body text-ivory/25 pb-3 pr-4">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentReservations.map(r => (
+                    <tr key={r.id} className="border-b border-[#C9A96E]/05 hover:bg-white/2 transition-colors">
+                      <td className="py-2.5 pr-4">
+                        <p className="text-ivory/75 text-sm font-body">{r.guest_first_name} {r.guest_last_name}</p>
+                        <p className="text-ivory/25 text-[10px] font-body truncate max-w-[140px]">{r.guest_email}</p>
+                      </td>
+                      <td className="py-2.5 pr-4 text-ivory/50 text-sm font-body">{r.reservation_date}</td>
+                      <td className="py-2.5 pr-4 text-ivory/50 text-sm font-body">{r.reservation_time}</td>
+                      <td className="py-2.5 pr-4 text-ivory/50 text-sm font-body">{r.party_size}</td>
+                      <td className="py-2.5">
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-body border uppercase tracking-wider ${STATUS_BADGE[r.status] || 'text-ivory/30 bg-ivory/5 border-ivory/10'}`}>
+                          {r.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

@@ -6,9 +6,9 @@ import { SITE_DEFAULTS } from '@/lib/siteData';
 import { base44 } from '@/api/base44Client';
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1800&q=85",
+  "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/9adaad6b9_generated_image.png",
+  "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg",
   "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85",
-  "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1800&q=85",
   "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1800&q=85",
 ];
 
