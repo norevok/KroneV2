@@ -34,18 +34,24 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Get current
-    const reservations = await base44.asServiceRole.entities.Reservation.filter(
-      { id: reservation_id },
-      undefined,
-      1
-    );
+    // Get current — use canonical RestaurantReservation entity
+    let oldReservation = null;
+    try {
+      oldReservation = await base44.asServiceRole.entities.RestaurantReservation.get(reservation_id);
+    } catch (_) {}
 
-    if (!reservations || reservations.length === 0) {
+    // Fallback: try filter by id in case get() isn't supported
+    if (!oldReservation) {
+      const rows = await base44.asServiceRole.entities.RestaurantReservation.filter(
+        { id: reservation_id }, undefined, 1
+      );
+      oldReservation = rows?.[0] || null;
+    }
+
+    if (!oldReservation) {
       return Response.json({ error: 'Reservation not found' }, { status: 404 });
     }
 
-    const oldReservation = reservations[0];
     const oldStatus = oldReservation.status;
 
     // Validate state transition
@@ -75,7 +81,7 @@ Deno.serve(async (req) => {
     if (new_status === 'no_show') updates.completed_at = new Date().toISOString();
     if (internal_notes) updates.internal_notes = internal_notes;
 
-    await base44.asServiceRole.entities.Reservation.update(reservation_id, updates);
+    await base44.asServiceRole.entities.RestaurantReservation.update(reservation_id, updates);
 
     // Audit log
     await base44.asServiceRole.entities.AdminAuditEntry.create({
