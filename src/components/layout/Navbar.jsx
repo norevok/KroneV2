@@ -1,14 +1,35 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, ChevronDown, LayoutDashboard, UserCircle, UtensilsCrossed } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, LayoutDashboard, UserCircle, UtensilsCrossed, BedDouble } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
 const FLAG = { de: '🇩🇪', en: '🇬🇧', it: '🇮🇹' };
 
+const NAV_LINKS = {
+  de: [
+    { to: '/restaurant', label: 'Restaurant' },
+    { to: '/menu', label: 'Speisekarte' },
+    { to: '/rooms', label: 'Zimmer & Suiten' },
+    { to: '/weddings', label: 'Hochzeiten & Events' },
+    { to: '/discover', label: 'Langenburg' },
+    { to: '/shop', label: 'Gutscheine' },
+    { to: '/contact', label: 'Kontakt' },
+  ],
+  en: [
+    { to: '/restaurant', label: 'Restaurant' },
+    { to: '/menu', label: 'Menu' },
+    { to: '/rooms', label: 'Rooms & Suites' },
+    { to: '/weddings', label: 'Weddings & Events' },
+    { to: '/discover', label: 'Langenburg' },
+    { to: '/shop', label: 'Vouchers' },
+    { to: '/contact', label: 'Contact' },
+  ],
+};
+
 export default function Navbar() {
-  const { lang, setLang, tr, supported } = useLang();
+  const { lang, setLang, supported } = useLang();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -23,7 +44,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -31,67 +52,44 @@ export default function Navbar() {
   useEffect(() => { setOpen(false); setLangOpen(false); }, [location]);
 
   const isHome = location.pathname === '/';
+  const isTransparent = isHome && !scrolled;
 
-  // On home page: transparent until scrolled. On all other pages: always light.
-  const isLight = !isHome || scrolled;
-
-  const navLinks = [
-    { to: '/restaurant', label: tr('nav', 'restaurant') },
-    { to: '/menu', label: tr('nav', 'menu') },
-    { to: '/rooms', label: tr('nav', 'rooms') },
-    { to: '/weddings', label: tr('nav', 'weddings') },
-    { to: '/contact', label: tr('nav', 'contact') },
-  ];
-
-  const mobileLinks = [
-    ...navLinks,
-    { to: '/offers', label: lang === 'de' ? 'Arrangements' : 'Offers' },
-    { to: '/events', label: 'Events' },
-    { to: '/discover', label: lang === 'de' ? 'Langenburg entdecken' : 'Discover Langenburg' },
-    { to: '/gallery', label: lang === 'de' ? 'Galerie' : 'Gallery' },
-    { to: '/shop', label: lang === 'de' ? 'Gutscheine' : 'Vouchers' },
-    { to: '/karriere', label: lang === 'de' ? 'Karriere' : 'Careers' },
-    { to: '/story', label: tr('nav', 'story') },
-    { to: '/faq', label: 'FAQ' },
-  ];
-
-  const navBg = isLight
-    ? 'bg-ivory/95 backdrop-blur-md border-b border-stone-mid shadow-sm'
-    : 'bg-transparent border-b border-transparent';
-
-  const logoColor = isLight ? 'text-charcoal' : 'text-ivory';
-  const logoSub = isLight ? 'text-gold' : 'text-gold-light';
-  const linkColor = isLight ? 'text-charcoal/60 hover:text-charcoal' : 'text-ivory/70 hover:text-ivory';
-  const linkActive = isLight ? 'text-gold' : 'text-gold-light';
-  const iconColor = isLight ? 'text-charcoal/40 hover:text-gold' : 'text-ivory/40 hover:text-gold-light';
+  const navLinks = NAV_LINKS[lang] || NAV_LINKS.de;
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${navBg}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isTransparent
+          ? 'bg-transparent border-b border-transparent'
+          : 'bg-white border-b border-[#EDE6D8] shadow-sm'
+      }`}>
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
+
             {/* Logo */}
-            <Link to="/" className="flex flex-col leading-none group">
-              <span className={`font-display text-base sm:text-lg font-light tracking-[0.15em] uppercase transition-colors ${logoColor}`}>
-                Krone <span className="hidden sm:inline">Langenburg</span>
+            <Link to="/" className="flex flex-col leading-none group flex-shrink-0">
+              <span className={`font-display text-base sm:text-lg font-light tracking-[0.12em] uppercase transition-colors ${isTransparent ? 'text-white' : 'text-[#1C1714]'}`}>
+                Krone Langenburg
               </span>
-              <span className={`text-[10px] tracking-[0.3em] uppercase font-body font-medium transition-colors ${logoSub}`}>
+              <span className={`text-[10px] tracking-[0.3em] uppercase font-body font-semibold transition-colors ${isTransparent ? 'text-[#C9A96E]' : 'text-[#8B6914]'}`}>
                 by Ammesso
               </span>
             </Link>
 
-            {/* Desktop nav */}
-            <div className="hidden lg:flex items-center gap-7">
+            {/* Desktop center nav */}
+            <div className="hidden xl:flex items-center gap-6">
               {navLinks.map(l => {
-                const isActive = location.pathname === l.to;
+                const isActive = location.pathname === l.to || (l.to !== '/' && location.pathname.startsWith(l.to));
                 return (
                   <Link key={l.to} to={l.to}
-                    className={`relative font-body text-xs tracking-widest uppercase transition-all duration-200 hover:scale-105 ${
-                      isActive ? linkActive : linkColor
+                    className={`relative font-body text-[11px] tracking-widest uppercase transition-all duration-200 hover:scale-105 pb-0.5 ${
+                      isActive
+                        ? (isTransparent ? 'text-[#C9A96E]' : 'text-[#8B6914]')
+                        : (isTransparent ? 'text-white/80 hover:text-white' : 'text-[#1C1714]/60 hover:text-[#1C1714]')
                     }`}>
                     {l.label}
                     {isActive && (
-                      <span className={`absolute -bottom-1 left-0 right-0 h-px ${isLight ? 'bg-gold' : 'bg-gold-light'}`} />
+                      <span className={`absolute -bottom-0.5 left-0 right-0 h-px ${isTransparent ? 'bg-[#C9A96E]' : 'bg-[#8B6914]'}`} />
                     )}
                   </Link>
                 );
@@ -99,20 +97,20 @@ export default function Navbar() {
             </div>
 
             {/* Right actions */}
-            <div className="flex items-center gap-3">
-              {/* Language switcher */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* Language */}
               <div className="relative">
                 <button onClick={() => setLangOpen(p => !p)}
-                  className={`flex items-center gap-1 transition-colors text-xs tracking-wider uppercase font-body ${iconColor}`}>
+                  className={`flex items-center gap-1 text-[11px] tracking-wider uppercase font-body transition-colors ${isTransparent ? 'text-white/70 hover:text-white' : 'text-[#1C1714]/50 hover:text-[#8B6914]'}`}>
                   <Globe className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">{lang}</span>
                   <ChevronDown className={`w-3 h-3 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {langOpen && (
-                  <div className="absolute right-0 top-full mt-2 bg-white border border-stone-mid rounded-xl shadow-card py-1 min-w-[90px]">
+                  <div className="absolute right-0 top-full mt-2 bg-white border border-[#EDE6D8] rounded-xl shadow-lg py-1 min-w-[90px] z-50">
                     {supported.map(l => (
                       <button key={l} onClick={() => { setLang(l); setLangOpen(false); }}
-                        className={`w-full text-left px-4 py-2.5 text-xs flex items-center gap-2 transition-colors hover:bg-stone ${lang === l ? 'text-gold font-medium' : 'text-charcoal/60'}`}>
+                        className={`w-full text-left px-4 py-2.5 text-xs flex items-center gap-2 transition-colors hover:bg-[#F7F3EC] ${lang === l ? 'text-[#8B6914] font-semibold' : 'text-[#1C1714]/60'}`}>
                         <span>{FLAG[l]}</span><span className="uppercase">{l}</span>
                       </button>
                     ))}
@@ -120,39 +118,41 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Admin / Account icon (desktop) */}
-              {isAdmin && (
-                <Link to="/admin" title="Admin" className={`hidden md:flex w-8 h-8 items-center justify-center transition-colors ${iconColor}`}>
-                  <LayoutDashboard className="w-4 h-4" />
-                </Link>
-              )}
-              {isLoggedIn && !isAdmin && (
-                <Link to="/account" title="Konto" className={`hidden md:flex w-8 h-8 items-center justify-center transition-colors ${iconColor}`}>
-                  <UserCircle className="w-4 h-4" />
-                </Link>
-              )}
-
               {/* Reserve CTA */}
               <Link to="/reserve"
-                className="hidden lg:inline-flex items-center gap-1.5 px-5 py-2.5 btn-gold rounded-full text-xs tracking-widest uppercase font-body font-semibold">
+                className={`hidden lg:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[11px] tracking-widest uppercase font-body font-semibold transition-all ${
+                  isTransparent
+                    ? 'bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/40 text-white'
+                    : 'bg-[#8B6914] hover:bg-[#7A5A0F] text-white'
+                }`}>
                 <UtensilsCrossed className="w-3.5 h-3.5" />
                 {lang === 'de' ? 'Reservieren' : lang === 'en' ? 'Reserve' : 'Prenota'}
               </Link>
 
-              {/* Account CTA (desktop) */}
-              <Link to={isAdmin ? '/admin' : '/account'}
-                className={`hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all ${
-                  isLight
-                    ? 'border-2 border-charcoal/20 text-charcoal hover:border-charcoal hover:bg-charcoal hover:text-ivory'
-                    : 'border-2 border-ivory/40 text-ivory hover:border-ivory hover:bg-ivory/10'
-                }`}>
-                <UserCircle className="w-4 h-4" />
-                {isAdmin ? 'Admin' : (lang === 'de' ? 'Mein Bereich' : 'My Account')}
-              </Link>
+              {/* Account / Admin */}
+              {isAdmin ? (
+                <Link to="/admin"
+                  className={`hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border-2 text-[11px] tracking-widest uppercase font-body font-semibold transition-all ${
+                    isTransparent
+                      ? 'border-white/40 text-white hover:bg-white/10'
+                      : 'border-[#1C1714]/20 text-[#1C1714]/70 hover:border-[#1C1714] hover:text-[#1C1714]'
+                  }`}>
+                  <LayoutDashboard className="w-3.5 h-3.5" /> Admin
+                </Link>
+              ) : (
+                <Link to="/account"
+                  className={`hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border-2 text-[11px] tracking-widest uppercase font-body font-semibold transition-all ${
+                    isTransparent
+                      ? 'border-white/40 text-white hover:bg-white/10'
+                      : 'border-[#1C1714]/20 text-[#1C1714]/70 hover:border-[#1C1714] hover:text-[#1C1714]'
+                  }`}>
+                  <UserCircle className="w-3.5 h-3.5" /> {lang === 'de' ? 'Mein Bereich' : 'My Account'}
+                </Link>
+              )}
 
               {/* Mobile toggle */}
               <button onClick={() => setOpen(p => !p)}
-                className={`lg:hidden w-9 h-9 flex items-center justify-center transition-colors ${iconColor}`}>
+                className={`xl:hidden w-9 h-9 flex items-center justify-center transition-colors ${isTransparent ? 'text-white/80 hover:text-white' : 'text-[#1C1714]/60 hover:text-[#1C1714]'}`}>
                 {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
@@ -161,39 +161,44 @@ export default function Navbar() {
 
         {/* Mobile drawer */}
         {open && (
-          <div className="lg:hidden bg-ivory border-t border-stone-mid max-h-[calc(100vh-4rem)] overflow-y-auto">
-            <div className="px-5 py-5 space-y-0.5">
-              {mobileLinks.map(l => (
+          <div className="xl:hidden bg-white border-t border-[#EDE6D8] max-h-[calc(100vh-5rem)] overflow-y-auto">
+            <div className="px-5 py-5">
+              {navLinks.map(l => (
                 <Link key={l.to} to={l.to}
-                  className={`flex items-center py-3.5 text-sm tracking-widest uppercase font-body border-b border-stone-mid/50 transition-colors ${
-                    location.pathname === l.to ? 'text-gold' : 'text-charcoal/70'
+                  className={`flex items-center py-3.5 text-base font-body border-b border-[#EDE6D8] transition-colors ${
+                    location.pathname === l.to ? 'text-[#8B6914] font-semibold' : 'text-[#1C1714]/70'
                   }`}>
                   {l.label}
                 </Link>
               ))}
-              {isLoggedIn && (
-                <Link to={isAdmin ? '/admin' : '/account'}
-                  className="flex items-center py-3.5 text-sm tracking-widest uppercase font-body border-b border-stone-mid/50 text-gold/80">
-                  {isAdmin ? '⚙ Admin' : (lang === 'de' ? 'Mein Konto' : 'My Account')}
+              {isAdmin && (
+                <Link to="/admin" className="flex items-center py-3.5 text-base font-body border-b border-[#EDE6D8] text-[#8B6914]/80">
+                  ⚙ Admin Dashboard
                 </Link>
               )}
-              <div className="pt-5 space-y-2.5">
-                <Link to="/reserve" className="block w-full text-center py-4 btn-gold rounded-2xl text-xs tracking-widest uppercase font-body font-semibold">
+              {isLoggedIn && !isAdmin && (
+                <Link to="/account" className="flex items-center py-3.5 text-base font-body border-b border-[#EDE6D8] text-[#1C1714]/70">
+                  {lang === 'de' ? 'Mein Konto' : 'My Account'}
+                </Link>
+              )}
+              <div className="pt-5 space-y-3">
+                <Link to="/reserve" className="block w-full text-center py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-2xl text-sm tracking-widest uppercase font-body font-semibold transition-all">
                   {lang === 'de' ? 'Tisch reservieren' : 'Reserve Table'}
                 </Link>
-                <Link to="/rooms" className="block w-full text-center py-4 btn-ghost-gold rounded-2xl text-xs tracking-widest uppercase font-body font-semibold">
+                <Link to="/rooms" className="block w-full text-center py-4 border-2 border-[#8B6914] text-[#8B6914] hover:bg-[#F2E8D0] rounded-2xl text-sm tracking-widest uppercase font-body font-semibold transition-all">
                   {lang === 'de' ? 'Zimmer buchen' : 'Book Room'}
                 </Link>
                 <a href="https://wa.me/4979054177" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full text-center py-3 text-charcoal/40 hover:text-gold text-[10px] tracking-widest uppercase font-body transition-colors">
+                  className="flex items-center justify-center gap-2 w-full text-center py-3 text-[#1C1714]/40 hover:text-[#8B6914] text-sm font-body transition-colors">
                   💬 WhatsApp
                 </a>
               </div>
-              <div className="flex gap-2 pt-4 pb-2">
+              {/* Language */}
+              <div className="flex gap-2 pt-5 pb-2">
                 {supported.map(l => (
                   <button key={l} onClick={() => setLang(l)}
-                    className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border transition-colors ${
-                      lang === l ? 'border-gold text-gold bg-gold-pale' : 'border-stone-mid text-charcoal/40'
+                    className={`flex items-center gap-1.5 text-sm px-3 py-2 rounded-full border transition-colors ${
+                      lang === l ? 'border-[#8B6914] text-[#8B6914] bg-[#F2E8D0]' : 'border-[#EDE6D8] text-[#1C1714]/40'
                     }`}>
                     {FLAG[l]} <span className="uppercase">{l}</span>
                   </button>

@@ -10,15 +10,15 @@ export default function StickyMobileCTA() {
   if (hide) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-ivory/97 backdrop-blur-md border-t border-stone-mid shadow-lg" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white border-t border-[#EDE6D8] shadow-lg" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <div className="grid grid-cols-3">
         <Link to="/reserve"
-          className="flex flex-col items-center justify-center gap-1 py-3 bg-gold text-white text-[10px] tracking-widest uppercase font-body font-semibold active:opacity-80 transition-opacity">
+          className="flex flex-col items-center justify-center gap-1 py-3.5 bg-[#8B6914] text-white text-[10px] tracking-widest uppercase font-body font-semibold active:opacity-80 transition-opacity">
           <UtensilsCrossed className="w-4 h-4" />
           {lang === 'de' ? 'Reserv.' : lang === 'en' ? 'Reserve' : 'Prenota'}
         </Link>
         <Link to="/rooms"
-          className="flex flex-col items-center justify-center gap-1 py-3 text-gold border-x border-stone-mid text-[10px] tracking-widest uppercase font-body font-semibold active:bg-gold-pale transition-colors">
+          className="flex flex-col items-center justify-center gap-1 py-3.5 text-[#8B6914] border-x border-[#EDE6D8] text-[10px] tracking-widest uppercase font-body font-semibold bg-white hover:bg-[#F7F3EC] transition-colors">
           <BedDouble className="w-4 h-4" />
           {lang === 'de' ? 'Zimmer' : lang === 'en' ? 'Rooms' : 'Camere'}
         </Link>
