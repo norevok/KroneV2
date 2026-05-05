@@ -213,6 +213,10 @@ export default function Admin() {
               <span className="text-[10px]">⚡</span>
               <span className="hidden sm:inline text-xs">Credits</span>
             </Link>
+            <Link to="/admin/credit-dashboard" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-emerald-700/20 rounded-xl text-emerald-400/50 hover:text-emerald-400 text-xs font-body transition-colors">
+              <span className="text-[10px]">🛡</span>
+              <span className="hidden sm:inline text-xs">Guard</span>
+            </Link>
             <button onClick={loadAll} className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-ivory text-xs font-body transition-colors">
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
               <span className="hidden sm:inline">Refresh</span>

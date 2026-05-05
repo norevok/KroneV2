@@ -1,0 +1,78 @@
+{
+  "name": "CreditUsageLog",
+  "type": "object",
+  "properties": {
+    "project_name": {
+      "type": "string",
+      "description": "Which project/app triggered this (e.g. Krone Langenburg)"
+    },
+    "workflow_name": {
+      "type": "string",
+      "description": "Function name or automation name that consumed credits"
+    },
+    "trigger_type": {
+      "type": "string",
+      "enum": [
+        "stripe_webhook",
+        "beds24_webhook",
+        "guest_action",
+        "admin_action",
+        "form_submit",
+        "scheduled_job",
+        "unknown"
+      ],
+      "description": "What caused this credit usage"
+    },
+    "event_source": {
+      "type": "string",
+      "description": "ID of the triggering event (stripe_event_id, reservation_id, etc.)"
+    },
+    "event_id": {
+      "type": "string",
+      "description": "Concrete business entity ID that justified this credit usage"
+    },
+    "related_entity": {
+      "type": "string",
+      "description": "Entity type involved (RestaurantReservation, GiftVoucher, etc.)"
+    },
+    "integration_name": {
+      "type": "string",
+      "enum": [
+        "SendEmail",
+        "Slack",
+        "UploadPrivateFile",
+        "CreateFileSignedUrl",
+        "Stripe",
+        "Beds24",
+        "None"
+      ],
+      "description": "Which integration was called"
+    },
+    "estimated_credit_usage": {
+      "type": "number",
+      "description": "Estimated credits consumed (1 = 1 SendEmail, 0.1 = Slack webhook fetch)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "allowed",
+        "blocked",
+        "failed"
+      ],
+      "default": "allowed"
+    },
+    "blocked_reason": {
+      "type": "string",
+      "description": "Why the call was blocked (if status=blocked)"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional context"
+    }
+  },
+  "required": [
+    "workflow_name",
+    "trigger_type",
+    "integration_name"
+  ]
+}
