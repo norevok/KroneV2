@@ -223,7 +223,7 @@ export default function AdminCreditDashboard() {
                 02:00 CET täglich · Archiviert alte Reservierungen, schließt stale Anfragen, läuft Gutschein-Ablauf.
                 DB-Operationen only. Kein SendEmail, kein Slack, kein LLM. ActivityLog nur bei tatsächlichen Änderungen.
               </p>
-              <p className="text-emerald-400/60 text-[10px] font-body mt-1.5">13/13 Runs erfolgreich · Letzter Run: heute 02:00</p>
+              <p className="text-emerald-400/60 text-[10px] font-body mt-1.5">22/22 Runs erfolgreich · Kein einziger Fehler · Letzter Run: 13.05.2026 02:00 CET</p>
             </div>
             <div className="glass-card border border-emerald-700/15 rounded-xl p-3">
               <p className="text-ivory/35 text-xs font-body">
