@@ -62,7 +62,7 @@ const PREVIOUSLY_REMOVED = [
   'ChatWidget InvokeLLM — replaced with static FAQ (was 1 credit per chat message)',
   'sendReservationEmail — duplicate of createReservation inline flow',
   'sendReservationConfirmation — second duplicate confirmation sender',
-  'sendGuestMessageEmail — exact duplicate of guestSendMessage',
+  'sendGuestMessageEmail — GuestMessages page called non-existent function; fixed to call guestSendMessage',
   'handleBookingReturn — older Beds24 handler, superseded by handleHotelBookingReturn',
   'detectAnomalies — never triggered by any automation',
   'syncHealthStatus — on-demand diagnostic, no automation',
@@ -71,6 +71,14 @@ const PREVIOUSLY_REMOVED = [
   'Beds24 webhook per-event DB write on every ping — now only writes on failure',
   'Admin logActivity call on every status change click — removed, status visible in DB',
   'nightlyMaintenance ActivityLog on no-op runs — now conditional only',
+  'adminGetReservations audit log on every list read — DB write on every admin page load removed',
+  'adminUpdateReservation call to sendReservationStatusNotification (non-existent function) — removed',
+  'getReservationTimeSlots querying old Reservation entity — fixed to use RestaurantReservation',
+  'guestUploadDocument SiteSettings.filter() to find webhook key — replaced with direct env read',
+  'cancelReservation duplicate inline Slack blocks — refactored to delegate to notifySlack',
+  'guestSendMessage fake EmailLog write (no email was sent) — removed misleading log',
+  'Reserve page logActivity after submit — redundant, createReservation already handles logging',
+  'Contact page logActivity after submit — redundant, entity create + sendContactEmail is sufficient',
 ];
 
 function Badge({ verdict }) {

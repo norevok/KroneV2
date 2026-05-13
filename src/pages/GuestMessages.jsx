@@ -52,11 +52,11 @@ export default function GuestMessages() {
       ...form, user_email: u.email, guest_name: fullName, language: lang, status: 'new',
     });
     // Notify hotel via secure backend function (never call integrations from frontend)
-    base44.functions.invoke('sendGuestMessageEmail', {
-      guest_name: fullName,
-      request_type: form.message_type,
+    base44.functions.invoke('guestSendMessage', {
+      message_type: form.message_type,
       subject: form.subject,
       body: form.body,
+      language: lang,
     }).catch(() => {});
     setMessages(prev => [msg, ...prev]);
     setForm({ message_type: 'general_question', subject: '', body: '' });
