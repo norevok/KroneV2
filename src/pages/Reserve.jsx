@@ -260,14 +260,6 @@ export default function Reserve() {
     setReservationRef(res.data.ref);
     setSuccess(true);
     setSubmitting(false);
-    // Log the activity (non-blocking)
-    base44.functions.invoke('logActivity', {
-      action: 'reservation_created',
-      description: `Tischreservierung erstellt: ${date} ${time} für ${guests} Personen`,
-      entity_type: 'Reservation',
-      entity_ref: res.data.ref,
-      metadata: { date, time, guests: String(guests), lang },
-    }).catch(() => {});
   }
 
   if (success) {

@@ -23,12 +23,6 @@ export default function Contact() {
     setSubmitting(true);
     await base44.entities.ContactInquiry.create({ ...form, language: lang, source: 'website' });
     base44.functions.invoke('sendContactEmail', { ...form, lang }).catch(() => {});
-    base44.functions.invoke('logActivity', {
-      action: 'contact_inquiry_submitted',
-      description: `Kontaktanfrage von ${form.first_name} ${form.last_name} (${form.inquiry_type})`,
-      entity_type: 'ContactInquiry',
-      metadata: { inquiry_type: form.inquiry_type, email: form.email },
-    }).catch(() => {});
     base44.functions.invoke('notifySlack', {
       type: 'contact', name: `${form.first_name} ${form.last_name}`,
       email: form.email, inquiry_type: form.inquiry_type, message: form.message.slice(0, 200),
