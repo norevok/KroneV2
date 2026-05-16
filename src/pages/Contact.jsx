@@ -66,7 +66,7 @@ export default function Contact() {
             className="inline-flex items-center gap-2 mt-5 px-6 py-3 bg-[#25D366] text-[#0F0D0B] rounded-full text-xs font-body font-semibold tracking-widest uppercase shadow-md">
             💬 {lang === 'de' ? 'Direkt auf WhatsApp schreiben' : lang === 'en' ? 'Message us on WhatsApp' : 'Scrivici su WhatsApp'}
           </a>
-          <p className="text-ivory/25 text-[10px] font-body mt-2">
+          <p className="text-[#8A7A6A]/60 text-[10px] font-body mt-2">
             {lang === 'de' ? '· Antwort meist in unter 2 Stunden ·' : lang === 'en' ? '· Usually responds within 2 hours ·' : '· Di solito risponde entro 2 ore ·'}
           </p>
         </div>
@@ -83,11 +83,11 @@ export default function Contact() {
                 </li>
                 <li className="flex gap-3">
                   <Phone className="w-4 h-4 text-gold/60 mt-0.5 flex-shrink-0" />
-                  <a href={`tel:${s.phone}`} className="text-ivory/60 hover:text-gold transition-colors">{s.phone}</a>
+                  <a href={`tel:${s.phone}`} className="text-[#5A4A3A] hover:text-gold transition-colors">{s.phone}</a>
                 </li>
                 <li className="flex gap-3">
                   <Mail className="w-4 h-4 text-gold/60 mt-0.5 flex-shrink-0" />
-                  <a href={`mailto:${s.email_info}`} className="text-ivory/60 hover:text-gold transition-colors">{s.email_info}</a>
+                  <a href={`mailto:${s.email_info}`} className="text-[#5A4A3A] hover:text-gold transition-colors">{s.email_info}</a>
                 </li>
               </ul>
               <a href="https://www.google.com/maps/dir/?api=1&destination=Hauptstra%C3%9Fe+24%2C+74595+Langenburg"
@@ -120,11 +120,11 @@ export default function Contact() {
 
             <div className="flex gap-3">
               <a href={s.social_instagram} target="_blank" rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3 glass-card rounded-xl text-ivory/40 hover:text-gold border border-[#C9A96E]/10 hover:border-[#C9A96E]/30 transition-all text-xs font-body tracking-widest uppercase">
+                className="flex-1 flex items-center justify-center gap-2 py-3 bg-white border border-[#EDE6D8] rounded-xl text-[#8A7A6A] hover:text-gold hover:border-[#C9A96E]/30 transition-all text-xs font-body tracking-widest uppercase">
                 <Instagram className="w-4 h-4" /> Instagram
               </a>
               <a href={s.social_facebook} target="_blank" rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3 glass-card rounded-xl text-ivory/40 hover:text-gold border border-[#C9A96E]/10 hover:border-[#C9A96E]/30 transition-all text-xs font-body tracking-widest uppercase">
+                className="flex-1 flex items-center justify-center gap-2 py-3 bg-white border border-[#EDE6D8] rounded-xl text-[#8A7A6A] hover:text-gold hover:border-[#C9A96E]/30 transition-all text-xs font-body tracking-widest uppercase">
                 <Facebook className="w-4 h-4" /> Facebook
               </a>
             </div>
@@ -142,13 +142,13 @@ export default function Contact() {
               <div className="surface-card rounded-2xl p-5 sm:p-7">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-ivory/40 text-[10px] tracking-[0.25em] uppercase font-body mb-2">{t.inquiry_type}</label>
+                    <label className="block text-[#8A7A6A] text-[10px] tracking-[0.25em] uppercase font-body mb-2">{t.inquiry_type}</label>
                     <div className="grid grid-cols-2 gap-2">
                       {TYPES.map(tp => (
                         <button key={tp.id} type="button"
                           onClick={() => setForm(f => ({ ...f, inquiry_type: tp.id }))}
                           className={`px-3 py-2.5 rounded-xl text-xs font-body text-left border transition-all ${
-                            form.inquiry_type === tp.id ? 'border-gold bg-gold/10 text-gold' : 'border-[#C9A96E]/10 text-ivory/40 hover:border-[#C9A96E]/30'
+                            form.inquiry_type === tp.id ? 'border-gold bg-gold/10 text-gold' : 'border-[#EDE6D8] text-[#8A7A6A] hover:border-[#C9A96E]/50'
                           }`}>
                           {lang === 'de' ? tp.de : lang === 'en' ? tp.en : tp.it}
                         </button>
@@ -157,24 +157,24 @@ export default function Contact() {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-ivory/40 text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.first} *</label>
+                      <label className="block text-[#8A7A6A] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.first} *</label>
                       <input type="text" required value={form.first_name} onChange={e => setForm(f => ({ ...f, first_name: e.target.value }))} className={inputClass} />
                     </div>
                     <div>
-                      <label className="block text-ivory/40 text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.last} *</label>
+                      <label className="block text-[#8A7A6A] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.last} *</label>
                       <input type="text" required value={form.last_name} onChange={e => setForm(f => ({ ...f, last_name: e.target.value }))} className={inputClass} />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-ivory/40 text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.email} *</label>
+                    <label className="block text-[#8A7A6A] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.email} *</label>
                     <input type="email" required value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} className={inputClass} />
                   </div>
                   <div>
-                    <label className="block text-ivory/40 text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.phone}</label>
+                    <label className="block text-[#8A7A6A] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.phone}</label>
                     <input type="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className={inputClass} />
                   </div>
                   <div>
-                    <label className="block text-ivory/40 text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.message} *</label>
+                    <label className="block text-[#8A7A6A] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5">{t.message} *</label>
                     <textarea rows={5} required value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                       className={`${inputClass} resize-none`} />
                   </div>
@@ -217,7 +217,7 @@ export default function Contact() {
 
         {/* Google Maps */}
         <div className="mt-12 sm:mt-16">
-          <h2 className="font-display text-2xl font-light text-ivory mb-6 text-center">
+          <h2 className="font-display text-2xl font-light text-charcoal mb-6 text-center">
             {lang === 'de' ? 'Finden Sie uns' : lang === 'en' ? 'Find Us' : 'Trovaci'}
           </h2>
           <div className="rounded-2xl overflow-hidden border border-[#C9A96E]/10 h-[400px] sm:h-[500px]">

@@ -24,22 +24,29 @@ const IMAGES = {
   suite2: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg",
 };
 
-function useInView(threshold = 0.1) {
+function useInView(threshold = 0.05) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold });
-    if (ref.current) obs.observe(ref.current);
+    if (!ref.current) { setVisible(true); return; }
+    // Show immediately if already in/near viewport
+    const rect = ref.current.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100) { setVisible(true); return; }
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold, rootMargin: '100px 0px 0px 0px' }
+    );
+    obs.observe(ref.current);
     return () => obs.disconnect();
   }, []);
   return [ref, visible];
 }
 
 function FadeUp({ children, delay = 0, className = '' }) {
-  const [ref, visible] = useInView();
+  const [ref, visible] = useInView(0.05);
   return (
     <div ref={ref} style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}>
+      className={`transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} ${className}`}>
       {children}
     </div>
   );
@@ -155,7 +162,9 @@ export default function Home() {
         {HERO_IMAGES.map((src, i) => (
           <img key={src} src={src} alt={`Krone Langenburg ${i + 1}`}
             className={`absolute inset-0 w-full h-full object-cover scale-[1.04] transition-all duration-[2000ms] ease-in-out ${heroReady && i === heroSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.04]'}`}
-            loading={i === 0 ? 'eager' : 'lazy'} />
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchPriority={i === 0 ? 'high' : 'low'}
+            decoding={i === 0 ? 'sync' : 'async'} />
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/70" />
 
