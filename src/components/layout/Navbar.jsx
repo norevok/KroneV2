@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, ChevronDown, LayoutDashboard, UserCircle, UtensilsCrossed, BedDouble } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown, LayoutDashboard, UserCircle, UtensilsCrossed, BedDouble, Search } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 
@@ -9,21 +9,19 @@ const FLAG = { de: '🇩🇪', en: '🇬🇧', it: '🇮🇹' };
 
 const NAV_LINKS = {
   de: [
-    { to: '/restaurant', label: 'Restaurant' },
-    { to: '/menu', label: 'Speisekarte' },
     { to: '/rooms', label: 'Zimmer & Suiten' },
-    { to: '/weddings', label: 'Hochzeiten & Events' },
-    { to: '/discover', label: 'Langenburg' },
-    { to: '/shop', label: 'Gutscheine' },
+    { to: '/restaurant', label: 'Restaurant' },
+    { to: '/events', label: 'Events & Feiern' },
+    { to: '/gallery', label: 'Galerie' },
+    { to: '/story', label: 'Unsere Geschichte' },
     { to: '/contact', label: 'Kontakt' },
   ],
   en: [
-    { to: '/restaurant', label: 'Restaurant' },
-    { to: '/menu', label: 'Menu' },
     { to: '/rooms', label: 'Rooms & Suites' },
-    { to: '/weddings', label: 'Weddings & Events' },
-    { to: '/discover', label: 'Langenburg' },
-    { to: '/shop', label: 'Vouchers' },
+    { to: '/restaurant', label: 'Restaurant' },
+    { to: '/events', label: 'Events & Meetings' },
+    { to: '/gallery', label: 'Gallery' },
+    { to: '/story', label: 'Our Story' },
     { to: '/contact', label: 'Contact' },
   ],
 };
@@ -118,15 +116,25 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Reserve CTA */}
-              <Link to="/reserve"
+              {/* Primary CTA: Jetzt buchen (rooms) */}
+              <Link to="/rooms"
                 className={`hidden lg:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[11px] tracking-widest uppercase font-body font-semibold transition-all ${
                   isTransparent
                     ? 'bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/40 text-white'
-                    : 'bg-[#8B6914] hover:bg-[#7A5A0F] text-white'
+                    : 'bg-[#8B6914] hover:bg-[#7A5A0F] text-white shadow-sm'
+                }`}>
+                <BedDouble className="w-3.5 h-3.5" />
+                {lang === 'de' ? 'Jetzt buchen' : lang === 'en' ? 'Book Now' : 'Prenota'}
+              </Link>
+              {/* Secondary CTA: Table reservation */}
+              <Link to="/reserve"
+                className={`hidden xl:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[11px] tracking-widest uppercase font-body font-semibold transition-all border-2 ${
+                  isTransparent
+                    ? 'border-white/40 text-white hover:bg-white/10'
+                    : 'border-[#8B6914]/40 text-[#8B6914] hover:border-[#8B6914] hover:bg-[#F2E8D0]'
                 }`}>
                 <UtensilsCrossed className="w-3.5 h-3.5" />
-                {lang === 'de' ? 'Reservieren' : lang === 'en' ? 'Reserve' : 'Prenota'}
+                {lang === 'de' ? 'Tisch' : lang === 'en' ? 'Reserve' : 'Prenota'}
               </Link>
 
               {/* Account / Admin */}
@@ -182,11 +190,11 @@ export default function Navbar() {
                 </Link>
               )}
               <div className="pt-5 space-y-3">
-                <Link to="/reserve" className="block w-full text-center py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-2xl text-sm tracking-widest uppercase font-body font-semibold transition-all">
-                  {lang === 'de' ? 'Tisch reservieren' : 'Reserve Table'}
+                <Link to="/rooms" className="block w-full text-center py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-2xl text-sm tracking-widest uppercase font-body font-semibold transition-all">
+                  {lang === 'de' ? 'Jetzt buchen' : 'Book Now'}
                 </Link>
-                <Link to="/rooms" className="block w-full text-center py-4 border-2 border-[#8B6914] text-[#8B6914] hover:bg-[#F2E8D0] rounded-2xl text-sm tracking-widest uppercase font-body font-semibold transition-all">
-                  {lang === 'de' ? 'Zimmer buchen' : 'Book Room'}
+                <Link to="/reserve" className="block w-full text-center py-4 border-2 border-[#8B6914] text-[#8B6914] hover:bg-[#F2E8D0] rounded-2xl text-sm tracking-widest uppercase font-body font-semibold transition-all">
+                  {lang === 'de' ? 'Tisch reservieren' : 'Reserve Table'}
                 </Link>
                 <a href="https://wa.me/4979054177" target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full text-center py-3 text-[#1C1714]/40 hover:text-[#8B6914] text-sm font-body transition-colors">

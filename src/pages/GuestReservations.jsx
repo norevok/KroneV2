@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
-import { ArrowLeft, Calendar, Clock, Users, XCircle, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Users, XCircle, AlertTriangle, Search, CheckCircle, BedDouble } from 'lucide-react';
 import { format } from 'date-fns';
 
 const STATUS_MAP = {
@@ -73,6 +73,40 @@ export default function GuestReservations() {
     setConfirmCancel(null);
   }
 
+  // Booking lookup state
+  const [lookupForm, setLookupForm] = useState({ confirmation_number: '', first_name: '', last_name: '', email: '', check_in: '' });
+  const [lookupSubmitting, setLookupSubmitting] = useState(false);
+  const [lookupDone, setLookupDone] = useState(false);
+
+  async function handleLookup(e) {
+    e.preventDefault();
+    setLookupSubmitting(true);
+    // Save lookup request to DB (admin manually links later)
+    const u = user;
+    await base44.entities.HotelBookingIntent.create({
+      intent_ref: `LOOKUP-${Date.now().toString(36).toUpperCase()}`,
+      status: 'needs_review',
+      guest_email: (lookupForm.email || u?.email || '').toLowerCase(),
+      guest_first_name: lookupForm.first_name,
+      guest_last_name: lookupForm.last_name,
+      check_in: lookupForm.check_in,
+      beds24_booking_ref: lookupForm.confirmation_number,
+      manual_review_required: true,
+      sync_notes: `Guest lookup request via account page. Conf#: ${lookupForm.confirmation_number}`,
+    }).catch(() => {});
+    // Notify admin
+    base44.functions.invoke('notifySlack', {
+      type: 'booking_intent',
+      ref: lookupForm.confirmation_number || 'LOOKUP',
+      name: `${lookupForm.first_name} ${lookupForm.last_name}`,
+      email: lookupForm.email || u?.email,
+      check_in: lookupForm.check_in,
+      message: 'Guest booking lookup request — manual review needed.',
+    }).catch(() => {});
+    setLookupDone(true);
+    setLookupSubmitting(false);
+  }
+
   const C = {
     de: {
       title: 'Meine Reservierungen',
@@ -84,6 +118,13 @@ export default function GuestReservations() {
       cancel_yes: 'Ja, stornieren',
       cancel_no: 'Abbrechen',
       cancel_policy: 'Stornierung kostenlos bis 24h vor dem Termin.',
+      lookup_title: 'Hotelbuchung finden',
+      lookup_sub: 'Haben Sie eine Buchung über Beds24 oder direkt per E-Mail gemacht? Geben Sie Ihre Daten ein — wir verknüpfen Ihre Buchung manuell.',
+      lookup_conf: 'Bestätigungsnummer / Buchungsref.',
+      lookup_first: 'Vorname', lookup_last: 'Nachname',
+      lookup_email: 'E-Mail der Buchung', lookup_checkin: 'Check-in-Datum',
+      lookup_submit: 'Buchung anfragen',
+      lookup_success: 'Ihre Anfrage wurde gespeichert. Wir prüfen die Buchung und melden uns innerhalb von 24 Stunden.',
     },
     en: {
       title: 'My Reservations',
@@ -95,6 +136,13 @@ export default function GuestReservations() {
       cancel_yes: 'Yes, cancel',
       cancel_no: 'Keep it',
       cancel_policy: 'Free cancellation up to 24h before.',
+      lookup_title: 'Find Hotel Booking',
+      lookup_sub: 'Made a booking via Beds24 or directly by email? Enter your details — we will link your booking manually.',
+      lookup_conf: 'Confirmation Number / Booking Ref.',
+      lookup_first: 'First Name', lookup_last: 'Last Name',
+      lookup_email: 'Booking Email', lookup_checkin: 'Check-in Date',
+      lookup_submit: 'Find My Booking',
+      lookup_success: 'Your request has been saved. We will review your booking and be in touch within 24 hours.',
     },
     it: {
       title: 'Le mie prenotazioni',
@@ -106,6 +154,13 @@ export default function GuestReservations() {
       cancel_yes: 'Sì, annulla',
       cancel_no: 'Torna indietro',
       cancel_policy: 'Annullamento gratuito fino a 24h prima.',
+      lookup_title: 'Trova prenotazione hotel',
+      lookup_sub: 'Hai prenotato tramite Beds24 o direttamente? Inserisci i tuoi dati — collegheremo la prenotazione manualmente.',
+      lookup_conf: 'Numero di conferma / Ref.',
+      lookup_first: 'Nome', lookup_last: 'Cognome',
+      lookup_email: 'Email prenotazione', lookup_checkin: 'Data check-in',
+      lookup_submit: 'Cerca prenotazione',
+      lookup_success: 'La tua richiesta è stata salvata. Verificheremo la prenotazione e ci faremo vivi entro 24 ore.',
     },
   };
   const c = C[lang] || C.de;
@@ -226,6 +281,70 @@ export default function GuestReservations() {
             ))}
           </div>
         )}
+
+        {/* Hotel Booking Lookup — Marriott-style "Find My Booking" */}
+        <div className="mt-10 glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-7">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+              <BedDouble className="w-4 h-4 text-gold/70" />
+            </div>
+            <div>
+              <h2 className="font-display text-xl font-light text-ivory">{c.lookup_title}</h2>
+              <p className="text-ivory/35 text-xs font-body mt-0.5">{c.lookup_sub}</p>
+            </div>
+          </div>
+
+          {lookupDone ? (
+            <div className="bg-emerald-950/30 border border-emerald-800/30 rounded-xl p-4 flex gap-3">
+              <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+              <p className="text-emerald-300 text-sm font-body">{c.lookup_success}</p>
+            </div>
+          ) : (
+            <form onSubmit={handleLookup} className="space-y-3">
+              <div>
+                <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_conf}</label>
+                <input type="text" value={lookupForm.confirmation_number}
+                  onChange={e => setLookupForm(f => ({ ...f, confirmation_number: e.target.value }))}
+                  className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body placeholder-ivory/20"
+                  placeholder="z.B. 123456 oder KRONE-2025-001" />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_first}</label>
+                  <input type="text" required value={lookupForm.first_name}
+                    onChange={e => setLookupForm(f => ({ ...f, first_name: e.target.value }))}
+                    className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body" />
+                </div>
+                <div>
+                  <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_last}</label>
+                  <input type="text" required value={lookupForm.last_name}
+                    onChange={e => setLookupForm(f => ({ ...f, last_name: e.target.value }))}
+                    className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body" />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_email}</label>
+                  <input type="email" value={lookupForm.email}
+                    onChange={e => setLookupForm(f => ({ ...f, email: e.target.value }))}
+                    className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body" />
+                </div>
+                <div>
+                  <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_checkin}</label>
+                  <input type="date" value={lookupForm.check_in}
+                    onChange={e => setLookupForm(f => ({ ...f, check_in: e.target.value }))}
+                    className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body" />
+                </div>
+              </div>
+              <button type="submit" disabled={lookupSubmitting}
+                className="w-full py-3 btn-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
+                {lookupSubmitting
+                  ? <div className="w-4 h-4 border-2 border-charcoal/30 border-t-charcoal rounded-full animate-spin" />
+                  : <><Search className="w-3.5 h-3.5" /> {c.lookup_submit}</>}
+              </button>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );
