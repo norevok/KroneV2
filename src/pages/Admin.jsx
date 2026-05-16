@@ -123,7 +123,7 @@ export default function Admin() {
     // Fire notifications after status change
     const r = reservations.find(res => res.id === id);
     if (!r) return;
-    if (status === 'cancelled_by_staff' || status === 'cancelled_by_guest') {
+    if (status === 'cancelled_by_staff' || status === 'cancelled_by_guest' || status === 'cancelled') {
       base44.functions.invoke('sendCancellationEmail', {
         reservation_ref: r.reservation_ref,
         guest_email: r.guest_email,

@@ -7,9 +7,10 @@ import { MapPin, Phone, Mail, CheckCircle, Instagram, Facebook, Clock } from 'lu
 export default function Contact() {
   const { lang } = useLang();
   const s = SITE_DEFAULTS;
-  const [form, setForm] = useState({ first_name: '', last_name: '', email: '', phone: '', message: '', inquiry_type: 'general' });
+  const [form, setForm] = useState({ first_name: '', last_name: '', email: '', phone: '', message: '', inquiry_type: 'general', gdpr: false, honeypot: '' });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const [gdprError, setGdprError] = useState(false);
 
   const TYPES = [
     { id: 'general', de: 'Allgemeine Anfrage', en: 'General Enquiry', it: 'Richiesta generale' },
@@ -20,9 +21,21 @@ export default function Contact() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (form.honeypot) return; // spam bot trap
+    if (!form.gdpr) { setGdprError(true); return; }
+    setGdprError(false);
     setSubmitting(true);
-    await base44.entities.ContactInquiry.create({ ...form, language: lang, source: 'website' });
-    base44.functions.invoke('sendContactEmail', { ...form, lang }).catch(() => {});
+    await base44.entities.ContactInquiry.create({
+      first_name: form.first_name, last_name: form.last_name,
+      email: form.email.toLowerCase().trim(), phone: form.phone,
+      message: form.message, inquiry_type: form.inquiry_type,
+      language: lang, status: 'new',
+    });
+    base44.functions.invoke('sendContactEmail', {
+      first_name: form.first_name, last_name: form.last_name,
+      email: form.email, phone: form.phone, message: form.message,
+      inquiry_type: form.inquiry_type, lang,
+    }).catch(() => {});
     base44.functions.invoke('notifySlack', {
       type: 'contact', name: `${form.first_name} ${form.last_name}`,
       email: form.email, inquiry_type: form.inquiry_type, message: form.message.slice(0, 200),
@@ -165,6 +178,33 @@ export default function Contact() {
                     <textarea rows={5} required value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                       className={`${inputClass} resize-none`} />
                   </div>
+                  {/* Honeypot — hidden, bots fill it, humans don't */}
+                  <input type="text" tabIndex={-1} autoComplete="off" style={{ display: 'none' }}
+                    value={form.honeypot} onChange={e => setForm(f => ({ ...f, honeypot: e.target.value }))} />
+
+                  {/* GDPR consent */}
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <div
+                      className={`w-5 h-5 flex-shrink-0 mt-0.5 rounded border-2 transition-colors flex items-center justify-center ${form.gdpr ? 'bg-[#8B6914] border-[#8B6914]' : gdprError ? 'border-red-500' : 'border-[#C8BEA8] group-hover:border-[#8B6914]/50'}`}
+                      onClick={() => { setForm(f => ({ ...f, gdpr: !f.gdpr })); setGdprError(false); }}>
+                      {form.gdpr && <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                    </div>
+                    <span className="text-[#4A3F35]/60 text-xs font-body leading-relaxed">
+                      {lang === 'de'
+                        ? 'Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu.'
+                        : lang === 'en'
+                        ? 'I have read the privacy policy and agree to the processing of my data.'
+                        : 'Ho letto l\'informativa sulla privacy e acconsento al trattamento dei miei dati.'
+                      }{' '}
+                      <a href="/privacy" className="text-[#8B6914] hover:underline" target="_blank">
+                        {lang === 'de' ? 'Datenschutz' : lang === 'en' ? 'Privacy Policy' : 'Privacy'}
+                      </a>
+                    </span>
+                  </label>
+                  {gdprError && <p className="text-red-500 text-xs font-body">
+                    {lang === 'de' ? 'Bitte Datenschutz bestätigen.' : 'Please accept the privacy policy.'}
+                  </p>}
+
                   <button type="submit" disabled={submitting}
                     className="w-full py-4 btn-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold disabled:opacity-50 transition-all">
                     {submitting ? '...' : t.send}

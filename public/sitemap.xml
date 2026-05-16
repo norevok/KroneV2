@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://krone-ammesso.de/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/rooms</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/booking</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/restaurant</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/menu</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/reserve</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/events</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/weddings</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/gallery</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/story</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/contact</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/discover</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/shop</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/faq</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/karriere</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/legal</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/privacy</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://krone-ammesso.de/agb</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
