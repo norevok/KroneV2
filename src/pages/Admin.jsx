@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
 import { CheckCircle, Clock, XCircle, AlertTriangle, UtensilsCrossed, Mail, RefreshCw, MessageSquare, BedDouble, Heart, FileText, Download, Activity, Calendar, BookOpen, Sparkles, Briefcase, Gift, Hotel, Users } from 'lucide-react';
+import AdminMessageCenter from '@/components/admin/AdminMessageCenter';
 import { format } from 'date-fns';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
@@ -473,45 +474,14 @@ export default function Admin() {
           </div>
         )}
 
-        {/* GUEST MESSAGES */}
+        {/* GUEST MESSAGES — full message center */}
         {tab === 'messages' && (
-          <div className="space-y-2">
-            {loading ? (
-              <div className="flex justify-center py-16"><div className="w-6 h-6 border-2 border-gold/20 border-t-gold rounded-full animate-spin" /></div>
-            ) : guestMsgs.length === 0 ? (
-              <div className="text-center py-16 text-ivory/30 font-body text-sm">Keine Nachrichten</div>
-            ) : (
-              guestMsgs.map(msg => (
-                <div key={msg.id} className="glass-card border border-[#C9A96E]/08 rounded-xl p-4 hover:border-[#C9A96E]/20 transition-all">
-                  <div className="flex items-start gap-3 flex-wrap">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <span className="font-body text-sm text-ivory">{msg.guest_name || msg.user_email}</span>
-                        <StatusBadge status={msg.status} />
-                        <span className="text-ivory/30 text-[10px] font-body uppercase tracking-widest">{msg.request_type}</span>
-                      </div>
-                      <p className="text-ivory/50 text-xs font-body">{msg.subject}</p>
-                      {msg.body && <p className="text-ivory/35 text-xs font-body mt-1 line-clamp-2">{msg.body}</p>}
-                    </div>
-                    <div className="flex gap-2 flex-shrink-0">
-                      {msg.status === 'new' && (
-                        <button onClick={async () => {
-                          await base44.entities.GuestMessage.update(msg.id, { status: 'in_progress' });
-                          setGuestMsgs(prev => prev.map(m => m.id === msg.id ? { ...m, status: 'in_progress' } : m));
-                        }} className="px-3 py-1.5 bg-blue-900/40 border border-blue-700/30 text-blue-400 text-[10px] rounded-lg font-body tracking-widest uppercase">
-                          In Bearbeitung
-                        </button>
-                      )}
-                      <a href={`mailto:${msg.user_email}`}
-                        className="px-3 py-1.5 btn-ghost-gold border rounded-lg text-[10px] font-body tracking-widest uppercase flex items-center gap-1">
-                        <Mail className="w-3 h-3" /> E-Mail
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+          <AdminMessageCenter
+            messages={guestMsgs}
+            loading={loading}
+            currentUser={user}
+            onUpdate={loadAll}
+          />
         )}
 
         {/* CAREER APPLICATIONS */}
