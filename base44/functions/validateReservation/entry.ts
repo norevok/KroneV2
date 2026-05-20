@@ -168,33 +168,12 @@ Deno.serve(async (req) => {
       return Response.json({ valid: false, errors }, { status: 409 });
     }
 
-    // All checks passed - create reservation
-    const reservationRef = `RES-${reservation_date.replace(/-/g, '')}-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
-
-    const newRes = await base44.asServiceRole.entities.RestaurantReservation.create({
-      reservation_ref: reservationRef,
-      guest_email: guest_email.toLowerCase(),
-      guest_first_name: guest_first_name.trim(),
-      guest_last_name: guest_last_name.trim(),
-      guest_phone: guest_phone || '',
-      reservation_date,
-      reservation_time,
-      party_size,
-      notes: notes || '',
-      dietary_notes: dietary_notes || '',
-      occasion: occasion || 'regular',
-      language: language || 'de',
-      source: source || 'website_form',
-      source_page: source_page || '',
-      status: 'new',
-      duplicate_check_key: dupKey
-    });
-
+    // All checks passed — return valid: true WITHOUT creating any record.
+    // Record creation is handled exclusively by createReservation to avoid duplicates.
     return Response.json({
       valid: true,
       errors: [],
-      reservation_id: newRes.id,
-      reservation_ref: reservationRef
+      available_seats: availableSeats - party_size,
     });
   } catch (error) {
     console.error('Reservation validation error:', error);

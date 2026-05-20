@@ -79,6 +79,8 @@ const PREVIOUSLY_REMOVED = [
   'guestSendMessage fake EmailLog write (no email was sent) — removed misleading log',
   'Reserve page logActivity after submit — redundant, createReservation already handles logging',
   'Contact page logActivity after submit — redundant, entity create + sendContactEmail is sufficient',
+  'validateReservation entity creation removed (Phase 16 audit) — was silently creating orphaned reservation records on every validation call without sending emails, leading to DB bloat and potential duplicate submissions',
+  'stripeVoucherWebhook idempotency added (Phase 16 audit) — now checks voucher.status === active && stripe_session_id matches before processing; prevents duplicate emails on Stripe webhook retries',
 ];
 
 function Badge({ verdict }) {

@@ -42,6 +42,14 @@ Deno.serve(async (req) => {
         return Response.json({ received: true });
       }
 
+      // Idempotency: check if this session was already processed
+      const existingVouchers = await base44.asServiceRole.entities.GiftVoucher.filter({ id: voucher_id }, undefined, 1).catch(() => []);
+      const existingVoucher = existingVouchers[0];
+      if (existingVoucher?.status === 'active' && existingVoucher?.stripe_session_id === session.id) {
+        console.log(`Voucher ${voucher_id} already activated for session ${session.id} — skipping duplicate`);
+        return Response.json({ received: true, skipped: 'already_processed' });
+      }
+
       // Activate the voucher
       await base44.asServiceRole.entities.GiftVoucher.update(voucher_id, {
         status: 'active',
@@ -102,7 +110,7 @@ Deno.serve(async (req) => {
         </body></html>`,
       };
 
-      if (purchaserEmail) {
+      if (purchaserEmail && !existingVoucher?.email_sent) {
         try {
           await base44.asServiceRole.integrations.Core.SendEmail({
             to: purchaserEmail,
