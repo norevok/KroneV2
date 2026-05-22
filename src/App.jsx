@@ -8,7 +8,7 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import AppLayout from './components/layout/AppLayout';
 
 // Pages
-import Home from './pages/Home';
+import Home from './pages/Home.jsx';
 import Reserve from './pages/Reserve';
 import Rooms from './pages/Rooms';
 import MenuPage from './pages/MenuPage';
