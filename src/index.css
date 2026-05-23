@@ -159,44 +159,102 @@
   .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
   .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(28,23,20,0.12), 0 4px 8px rgba(28,23,20,0.06); }
 
-  /* Buttons */
+  /* ── BUTTONS — eckig-premium, gut lesbar ── */
   .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     background: var(--gold);
     color: #FFFFFF;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid transparent;
+    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 14px rgba(139,105,20,0.25);
   }
   .btn-gold:hover {
     background: #7A5A0F;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(139,105,20,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(139,105,20,0.35);
   }
-  .btn-gold:active { transform: translateY(0); }
+  .btn-gold:active { transform: translateY(0); box-shadow: none; }
+
+  .btn-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #17352C;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid transparent;
+    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 14px rgba(23,53,44,0.2);
+  }
+  .btn-dark:hover {
+    background: #0F2920;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(23,53,44,0.3);
+  }
+  .btn-dark:active { transform: translateY(0); box-shadow: none; }
 
   .btn-ghost-gold {
-    border: 1.5px solid var(--gold);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 2px solid var(--gold);
     color: var(--gold);
     background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border-radius: 0.5rem;
     transition: all 0.25s ease;
   }
   .btn-ghost-gold:hover {
     background: var(--gold-pale);
     border-color: #7A5A0F;
     color: #5C4010;
+    transform: translateY(-1px);
   }
 
   .btn-outline-dark {
-    border: 1.5px solid var(--charcoal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 2px solid var(--charcoal);
     color: var(--charcoal);
     background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border-radius: 0.5rem;
     transition: all 0.25s ease;
-    font-weight: 500;
-    letter-spacing: 0.05em;
   }
   .btn-outline-dark:hover {
     background: var(--charcoal);
     color: #FAF7F2;
+    transform: translateY(-1px);
   }
 
   /* Hero dark overlay utilities — for dark hero sections */

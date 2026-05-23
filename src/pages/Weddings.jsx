@@ -143,7 +143,7 @@ export default function Weddings() {
 
       {/* Hero */}
       <div className="relative h-[55vh] sm:h-[65vh] min-h-[360px] sm:min-h-[440px] overflow-hidden">
-        <img src={IMAGES.hero} alt="Weddings at Krone Langenburg" className="w-full h-full object-cover" loading="eager" />
+        <img src={IMAGES.hero} alt="Hochzeit & Events Krone Langenburg by Ammesso — Eventlocation Hohenlohe" className="w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/65 via-charcoal/30 to-charcoal" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-transparent to-charcoal/40" />
         <div className="absolute inset-0 flex items-end pb-14 px-5">
@@ -189,9 +189,13 @@ export default function Weddings() {
       {/* Gallery strip */}
       <section className="px-5 pb-10">
         <div className="max-w-6xl mx-auto grid grid-cols-3 gap-4 h-56 md:h-72">
-          {[IMAGES.table, IMAGES.dining, IMAGES.exterior].map((src, i) => (
+          {[
+            { src: IMAGES.table, alt: 'Hochzeitstafel Krone Langenburg — festlich gedeckter Tisch' },
+            { src: IMAGES.dining, alt: 'Kulinarium by Ammesso — Eventküche mediterrane Festtafel' },
+            { src: IMAGES.exterior, alt: 'Krone Langenburg Eventlocation Außenbereich' },
+          ].map((item, i) => (
             <div key={i} className={`relative rounded-2xl overflow-hidden ${i === 1 ? '' : 'opacity-70'}`}>
-              <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+              <img src={item.src} alt={item.alt} className="w-full h-full object-cover" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
             </div>
           ))}

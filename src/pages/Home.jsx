@@ -311,13 +311,13 @@ export default function Home() {
             transition={{ delay: 0.45, duration: 0.7 }}>
             <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link to="/booking"
-                className="px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-xs tracking-widest uppercase rounded-full transition-all shadow-[0_8px_30px_rgba(201,169,110,0.35)] flex items-center gap-2">
+                className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-[0_8px_30px_rgba(201,169,110,0.35)] flex items-center gap-2">
                 <BedDouble className="w-4 h-4" /> {c.rooms_book}
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link to="/reserve"
-                className="px-7 py-3.5 bg-white/10 hover:bg-white/20 border border-white/40 text-white font-body font-semibold text-xs tracking-widest uppercase rounded-full transition-all backdrop-blur-sm flex items-center gap-2">
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 border-2 border-white/50 text-white font-body font-semibold text-sm tracking-widest uppercase rounded-lg transition-all backdrop-blur-sm flex items-center gap-2">
                 <UtensilsCrossed className="w-4 h-4" /> {c.restaurant_reserve}
               </Link>
             </motion.div>
@@ -379,17 +379,17 @@ export default function Home() {
             {!isLoggedIn ? (
               <>
                 <button onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                  className="px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-semibold text-xs tracking-widest uppercase rounded-full transition-all shadow-lg">
+                  className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg">
                   {c.register}
                 </button>
                 <button onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                  className="px-7 py-3.5 border border-white/20 text-white/60 hover:text-white hover:border-white/40 font-body text-xs tracking-wider uppercase rounded-full transition-all">
+                  className="px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 font-body text-sm font-semibold tracking-wider uppercase rounded-lg transition-all">
                   {c.already}
                 </button>
               </>
             ) : (
               <Link to="/account"
-                className="px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-semibold text-xs tracking-widest uppercase rounded-full transition-all shadow-lg inline-flex items-center gap-2">
+                className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg inline-flex items-center gap-2">
                 {c.account_cta} <ArrowRight className="w-4 h-4" />
               </Link>
             )}
@@ -459,24 +459,28 @@ export default function Home() {
                 ))}
               </div>
               <Link to="/rooms"
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all shadow-lg">
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-lg">
                 {c.rooms_cta} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-2xl overflow-hidden h-48 sm:h-56">
+              {/* Top-left: King Suite overview — large portrait */}
+              <div className="rounded-xl overflow-hidden h-52 sm:h-60 shadow-md">
                 <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg"
                   alt="King Suite Krone Langenburg Hotel Zimmer Übersicht" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              <div className="rounded-2xl overflow-hidden h-48 sm:h-56 mt-6">
+              {/* Top-right: King Suite 2 — offset down */}
+              <div className="rounded-xl overflow-hidden h-52 sm:h-60 mt-8 shadow-md">
                 <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
                   alt="King Suite 2 Boutique Hotel Langenburg Zimmer buchen" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              <div className="rounded-2xl overflow-hidden h-36 sm:h-40">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg"
-                  alt="Doppelzimmer Hotel Krone Langenburg Bett Detail" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+              {/* Bottom-left: Doppelzimmer Stadtblick / Panorama — REPLACED safe image */}
+              <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
+                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg"
+                  alt="Doppelzimmer Panoramaaussicht Hotel Krone Langenburg Stadtblick" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              <div className="rounded-2xl overflow-hidden h-36 sm:h-40 -mt-6">
+              {/* Bottom-right: Panorama view — offset up */}
+              <div className="rounded-xl overflow-hidden h-40 sm:h-44 -mt-8 shadow-md">
                 <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
                   alt="Panorama Aussicht Hotel Langenburg Hohenlohe" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
@@ -510,11 +514,11 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link to="/reserve"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all">
                   <UtensilsCrossed className="w-4 h-4" /> {c.restaurant_reserve}
                 </Link>
                 <Link to="/restaurant"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/20 text-white/70 hover:text-white hover:border-white/40 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all">
                   {lang === 'de' ? 'Zum Restaurant' : lang === 'en' ? 'To the Restaurant' : 'Al ristorante'} <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -600,13 +604,13 @@ export default function Home() {
           <div className="flex flex-wrap gap-3 justify-center">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link to="/discover"
-                className="px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all shadow-[0_8px_30px_rgba(201,169,110,0.3)]">
+                className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_8px_30px_rgba(201,169,110,0.3)]">
                 {c.discover_btn}
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link to="/contact"
-                className="px-7 py-3.5 border border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
+                className="px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all">
                 {c.contact_btn}
               </Link>
             </motion.div>

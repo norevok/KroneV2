@@ -89,7 +89,7 @@ export default function Restaurant() {
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <div className="relative h-[65vh] sm:h-[70vh] min-h-[400px] sm:min-h-[480px] overflow-hidden">
-        <img src={IMG_RESTAURANT} alt="Kulinarium by Ammesso" className="w-full h-full object-cover" loading="eager" />
+        <img src={IMG_RESTAURANT} alt="Kulinarium by Ammesso — Restaurant Krone Langenburg, mediterrane Küche Hohenlohe" className="w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/20 to-charcoal" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-transparent to-charcoal/40" />
         <div className="absolute inset-0 flex items-end pb-12 px-5">
@@ -175,16 +175,16 @@ export default function Restaurant() {
       <section className="py-6 px-4 sm:px-5 bg-espresso">
         <div className="max-w-5xl mx-auto grid grid-cols-3 gap-2 sm:gap-4">
           <div className="relative rounded-xl sm:rounded-2xl overflow-hidden aspect-square col-span-2 group">
-            <img src={IMG_FOOD1} alt="Pasta Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <img src={IMG_FOOD1} alt="Pasta fresca Kulinarium by Ammesso — Krone Langenburg Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent" />
           </div>
           <div className="flex flex-col gap-2 sm:gap-4">
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_FOOD2} alt="Kulinarium Gericht" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src={IMG_FOOD2} alt="Mediterrane Hauptspeise Kulinarium Ammesso Langenburg" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
             </div>
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_PASTA} alt="Pasta fresca" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src={IMG_PASTA} alt="Handgemachte Pasta Kulinarium by Ammesso — Restaurant Krone Langenburg" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
             </div>
           </div>

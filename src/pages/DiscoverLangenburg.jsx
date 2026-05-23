@@ -28,24 +28,16 @@ const ATTRACTIONS = [
     icon: Camera,
     // Schloss Langenburg entrance courtyard — correct Langenburg old town feel (Wikimedia CC BY-SA 4.0)
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Schloss-Langenburg-Eingangsbereich-2022.jpg/1280px-Schloss-Langenburg-Eingangsbereich-2022.jpg',
-    de: { title: 'Altstadt & Marktplatz Langenburg', desc: 'Die malerische Altstadt Langenburgs lädt zum Spazieren und Entdecken ein. Historische Fachwerkhäuser, gepflasterte Gassen und eine entspannte Atmosphäre machen Langenburg zu einem der schönsten kleinen Städte Hohenlohes.', tag: 'Stadtspaziergang' },
-    en: { title: 'Langenburg Old Town', desc: 'The picturesque old town of Langenburg invites you to stroll and discover. Historic half-timbered houses, cobbled alleys and a relaxed atmosphere make Langenburg one of the most beautiful small towns in Hohenlohe.', tag: 'Town walk' },
+    de: { title: 'Altstadt & Marktplatz Langenburg', desc: 'Die malerische Altstadt Langenburgs lädt zum Spazieren und Entdecken ein. Historische Fachwerkhäuser, gepflasterte Gassen und eine entspannte Atmosphäre machen Langenburg zu einem der schönsten kleinen Städte Hohenlohes — direkt vor unserer Haustür.', tag: 'Stadtspaziergang' },
+    en: { title: 'Langenburg Old Town', desc: 'The picturesque old town of Langenburg invites you to stroll and discover. Historic half-timbered houses, cobbled alleys and a relaxed atmosphere make Langenburg one of the most beautiful small towns in Hohenlohe — right on our doorstep.', tag: 'Town walk' },
   },
   {
     id: 'wein',
     icon: Wine,
-    // Real Hohenlohe vineyard — Niedernhall vineyard in Hohenlohe district, free Unsplash
+    // Hohenlohe vineyard — warm golden-hour vines, Unsplash
     image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=85',
     de: { title: 'Hohenloher Wein & Genuss', desc: 'Die Region Hohenlohe ist für ihre Weinbaukultur bekannt. Entdecken Sie lokale Weingüter, Straußenwirtschaften und kulinarische Besonderheiten der Region. Paaren Sie den Weingenuss mit einem Abendessen bei uns im Kulinarium.', tag: 'Weinkultur' },
     en: { title: 'Hohenlohe Wine & Pleasure', desc: 'The Hohenlohe region is known for its wine culture. Discover local wineries, seasonal wine taverns and culinary specialities of the region. Pair wine enjoyment with an evening dinner at our Kulinarium.', tag: 'Wine culture' },
-  },
-  {
-    id: 'altstadt',
-    icon: Camera,
-    // Langenburg Schloss entrance courtyard — historic cobblestone, baroque architecture
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Schloss-Langenburg-Eingangsbereich-2022.jpg/1280px-Schloss-Langenburg-Eingangsbereich-2022.jpg',
-    de: { title: 'Historische Altstadt Langenburg', desc: 'Die charmante Altstadt von Langenburg lädt zum Flanieren ein. Historische Fachwerkhäuser, gepflasterte Gassen und das barocke Schloss machen Langenburg zu einem der schönsten kleinen Städte Hohenlohes — und das alles direkt vor unserer Haustür.', tag: 'Stadtspaziergang' },
-    en: { title: 'Historic Old Town Langenburg', desc: 'The charming old town of Langenburg invites you to stroll. Historic half-timbered houses, cobbled streets and the baroque castle make Langenburg one of the most beautiful small towns in Hohenlohe — right on our doorstep.', tag: 'Town walk' },
   },
   {
     id: 'ausflug',
@@ -227,8 +219,8 @@ export default function DiscoverLangenburg() {
                           transition={{ duration: 0.4 }}
                           className="mt-5 pt-5 border-t border-[#EDE6D8]">
                           <Link
-                            to={att.id === 'automuseum' ? 'https://www.deutsches-automuseum.de' : att.id === 'schloss' ? 'https://schloss-langenburg.de' : '/contact'}
-                            target={att.id === 'automuseum' || att.id === 'schloss' ? '_blank' : undefined}
+                            to={att.id === 'schloss' ? 'https://schloss-langenburg.de' : att.id === 'ausflug' ? '/discover' : '/contact'}
+                            target={att.id === 'schloss' ? '_blank' : undefined}
                             className="inline-flex items-center gap-2 text-[#8B6914] text-xs font-body font-semibold tracking-widest uppercase hover:gap-3 transition-all">
                             {lang === 'de' ? 'Mehr erfahren' : 'Learn more'} <ArrowRight className="w-3.5 h-3.5" />
                           </Link>

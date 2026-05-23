@@ -390,7 +390,7 @@ export default function Rooms() {
               { e: '🏰', de: 'Schloss Langenburg', en: 'Langenburg Castle' },
               { e: '🌊', de: 'Jagsttal', en: 'Jagst Valley' },
               { e: '🍷', de: 'Hohenloher Wein', en: 'Hohenlohe Wine' },
-              { e: '🚗', de: 'Automuseum', en: 'Car Museum' },
+              { e: '🏘', de: 'Altstadt Langenburg', en: 'Langenburg Old Town' },
             ].map((item, i) => (
               <div key={i} className="bg-white border border-[#EDE6D8] rounded-xl p-4 text-center">
                 <div className="text-2xl mb-2">{item.e}</div>
