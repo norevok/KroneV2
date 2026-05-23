@@ -15,16 +15,16 @@ const SLIDES = [
     it: { title: 'Arrivare. Gustare. Restare.', sub: 'Il vostro hotel boutique nel cuore di Langenburg — vicino al castello.' },
   },
   {
-    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg',
+    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
     de: { title: 'Zimmer mit Ruhe und Charakter', sub: 'Entdecken Sie unsere 13 Zimmer für Geschäftsreisen, Wochenenden und besondere Anlässe.' },
     en: { title: 'Rooms with Peace and Character', sub: 'Discover our 13 rooms for business trips, weekends and special occasions.' },
     it: { title: 'Camere con carattere e tranquillità', sub: 'Scoprite le nostre 13 camere per viaggi di lavoro, weekend e occasioni speciali.' },
   },
   {
     url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
-    de: { title: 'Direkt buchen. Einfach ankommen.', sub: 'Prüfen Sie Verfügbarkeit und buchen Sie sicher über unsere Buchungsseite.' },
-    en: { title: 'Book Direct. Arrive Easy.', sub: 'Check availability and book securely via our booking page.' },
-    it: { title: 'Prenota direttamente. Arriva facilmente.', sub: 'Verifica disponibilità e prenota in sicurezza tramite la nostra pagina di prenotazione.' },
+    de: { title: 'Die King-Suite — Ihr Rückzugsort.', sub: 'Großzügig, stilvoll, unvergesslich — buchen Sie direkt zum besten Preis.' },
+    en: { title: 'The King Suite — Your Retreat.', sub: 'Spacious, stylish, unforgettable — book directly at the best price.' },
+    it: { title: 'La King Suite — Il vostro rifugio.', sub: 'Spaziosa, elegante, indimenticabile — prenota direttamente al miglior prezzo.' },
   },
   {
     url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=80',
@@ -96,7 +96,7 @@ export default function Home() {
       desc_de: '13 stilvolle Zimmer für Geschäftsreisende, Paare und besondere Anlässe',
       desc_en: '13 stylish rooms for business travellers, couples and special occasions',
       desc_it: '13 camere eleganti per viaggiatori d\'affari, coppie e occasioni speciali',
-      img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
+      img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
     },
     {
       icon: UtensilsCrossed,
