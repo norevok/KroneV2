@@ -51,11 +51,11 @@ const FUNCTION_AUDIT = [
   { name: 'adminUpdateReservationStatus', trigger: 'Admin action',         credits: 'DB + conditional notifs',  verdict: 'safe',    category: 'Admin' },
   { name: 'adminVerifyAccess',        trigger: 'Admin page load',          credits: 'DB read only — 0',         verdict: 'safe',    category: 'Admin' },
   // ── SCHEDULED (1 only) ───────────────────────────────────────────
-  { name: 'nightlyMaintenance',       trigger: 'Scheduled 02:00 CET/day',  credits: '1 invocation + conditional DB writes', verdict: 'scheduled', category: 'Maintenance' },
+  { name: 'nightlyMaintenance',       trigger: 'Scheduled 00:00 UTC/day (02:00 CET)',  credits: '1 invocation + conditional DB writes', verdict: 'scheduled', category: 'Maintenance' },
 ];
 
 const OVERNIGHT_ANALYSIS = [
-  { item: 'nightlyMaintenance (02:00 CET)', cost: '1 invocation', external_api: 'None', justified: true, note: 'DB cleanup only. No SendEmail, no Slack, no AI.' },
+  { item: 'nightlyMaintenance (00:00 UTC / 02:00 CET)', cost: '1 invocation', external_api: 'None', justified: true, note: 'DB cleanup only. No SendEmail, no Slack, no AI.' },
   { item: 'All other functions', cost: '0', external_api: 'None', justified: true, note: 'Only fire on real business events. Zero idle consumption.' },
 ];
 
@@ -277,10 +277,10 @@ export default function AdminCreditDashboard() {
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-body bg-emerald-950/30 border border-emerald-700/20 text-emerald-400 uppercase tracking-wider">✓ Keine externen APIs</span>
               </div>
               <p className="text-ivory/45 text-xs font-body">
-                02:00 CET täglich · Archiviert alte Reservierungen, schließt stale Anfragen, läuft Gutschein-Ablauf.
+                00:00 UTC (02:00 CET) täglich · Archiviert alte Reservierungen, schließt stale Anfragen, läuft Gutschein-Ablauf.
                 DB-Operationen only. Kein SendEmail, kein Slack, kein LLM. ActivityLog nur bei tatsächlichen Änderungen.
               </p>
-              <p className="text-emerald-400/60 text-[10px] font-body mt-1.5">22/22 Runs erfolgreich · Kein einziger Fehler · Letzter Run: 13.05.2026 02:00 CET</p>
+              <p className="text-emerald-400/60 text-[10px] font-body mt-1.5">32/32 Runs erfolgreich · Kein einziger Fehler · Letzter Run: 23.05.2026 00:01 UTC</p>
             </div>
             <div className="glass-card border border-emerald-700/15 rounded-xl p-3">
               <p className="text-ivory/35 text-xs font-body">
