@@ -8,7 +8,7 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import AppLayout from './components/layout/AppLayout';
 
 // Pages
-import Home from './pages/Home.jsx';
+import Home from './pages/Home';
 
 import Reserve from './pages/Reserve';
 import Rooms from './pages/Rooms';
@@ -44,6 +44,8 @@ import AdminGuestCalendar from './pages/AdminGuestCalendar';
 import AdminAuditLog from './pages/AdminAuditLog';
 import AdminCreditAudit from './pages/AdminCreditAudit';
 import AdminCreditDashboard from './pages/AdminCreditDashboard';
+import AdminHeroSlides from './pages/AdminHeroSlides';
+import AdminOffers from './pages/AdminOffers';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -111,6 +113,8 @@ const AuthenticatedApp = () => {
         <Route path="/admin/audit" element={<AdminAuditLog />} />
         <Route path="/admin/credits" element={<AdminCreditAudit />} />
         <Route path="/admin/credit-dashboard" element={<AdminCreditDashboard />} />
+        <Route path="/admin/hero" element={<AdminHeroSlides />} />
+        <Route path="/admin/offers" element={<AdminOffers />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

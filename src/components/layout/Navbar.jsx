@@ -10,29 +10,29 @@ const LANG_LABEL = { de: 'Deutsch', en: 'English', it: 'Italiano' };
 
 const NAV_LINKS = {
   de: [
-    { to: '/rooms', label: 'Suchen & Reservieren' },
+    { to: '/booking', label: 'Suchen & Reservieren' },
     { to: '/rooms', label: 'Zimmer & Suiten' },
-    { to: '/restaurant', label: 'Restaurant' },
-    { to: '/weddings', label: 'Events & Feiern' },
     { to: '/offers', label: 'Angebote' },
+    { to: '/restaurant', label: 'Restaurant + Bar' },
+    { to: '/weddings', label: 'Events & Feiern' },
     { to: '/story', label: 'Unsere Geschichte' },
     { to: '/contact', label: 'Kontakt' },
   ],
   en: [
-    { to: '/rooms', label: 'Search & Reserve' },
+    { to: '/booking', label: 'Search & Book' },
     { to: '/rooms', label: 'Rooms & Suites' },
-    { to: '/restaurant', label: 'Restaurant' },
-    { to: '/weddings', label: 'Events & Celebrations' },
     { to: '/offers', label: 'Offers' },
+    { to: '/restaurant', label: 'Restaurant + Bar' },
+    { to: '/weddings', label: 'Events & Celebrations' },
     { to: '/story', label: 'Our Story' },
     { to: '/contact', label: 'Contact' },
   ],
   it: [
-    { to: '/rooms', label: 'Cerca & Prenota' },
+    { to: '/booking', label: 'Cerca & Prenota' },
     { to: '/rooms', label: 'Camere & Suite' },
-    { to: '/restaurant', label: 'Ristorante' },
-    { to: '/weddings', label: 'Events & Feste' },
     { to: '/offers', label: 'Offerte' },
+    { to: '/restaurant', label: 'Ristorante + Bar' },
+    { to: '/weddings', label: 'Events & Feste' },
     { to: '/story', label: 'La Nostra Storia' },
     { to: '/contact', label: 'Contatti' },
   ],
@@ -111,10 +111,10 @@ export default function Navbar() {
 
             <div className="hidden sm:block h-3 w-px bg-white/20" />
 
-            {/* My Reservations */}
-            <Link to="/account/reservations"
+            {/* My Trips */}
+            <Link to="/account"
               className="hidden sm:flex items-center gap-1 text-white/50 hover:text-white/80 text-[11px] font-body tracking-wider transition-colors">
-              {lang === 'de' ? 'Meine Reservierungen' : lang === 'en' ? 'My Reservations' : 'Le mie prenotazioni'}
+              {lang === 'de' ? 'Meine Reisen' : lang === 'en' ? 'My Trips' : 'I miei viaggi'}
             </Link>
 
             <div className="hidden sm:block h-3 w-px bg-white/20" />
@@ -131,7 +131,7 @@ export default function Navbar() {
                 className="flex items-center gap-1 text-white/50 hover:text-[#C9A96E] text-[11px] font-body tracking-wider transition-colors">
                 <UserCircle className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">
-                  {lang === 'de' ? 'Einloggen oder Registrieren' : lang === 'en' ? 'Sign In or Register' : 'Accedi o Registrati'}
+                  {lang === 'de' ? 'Einloggen oder Mitglied werden' : lang === 'en' ? 'Sign In or Join' : 'Accedi o Iscriviti'}
                 </span>
               </button>
             )}

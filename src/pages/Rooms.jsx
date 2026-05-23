@@ -376,7 +376,7 @@ export default function Rooms() {
           <h3 className="font-display text-2xl sm:text-3xl font-light text-[#1C1714] mb-5 text-center">{t.location_title}</h3>
           <div className="rounded-2xl overflow-hidden border border-[#EDE6D8] h-[380px] sm:h-[480px] shadow-sm">
             <iframe width="100%" height="100%" style={{ border: 0 }} loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade"
-              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyA-OPJc_4CvKv_S8YToDdmlS9hE7f1R1AU&q=${encodeURIComponent('Hauptstraße 24, 74595 Langenburg, Germany')}`}
+              src="https://www.openstreetmap.org/export/embed.html?bbox=9.855%2C49.241%2C9.900%2C49.258&layer=mapnik&marker=49.2489%2C9.8753"
               title="Krone Langenburg Standort" />
           </div>
         </div>

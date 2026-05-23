@@ -29,7 +29,6 @@ export const SITE_DEFAULTS = {
   social_instagram: "https://www.instagram.com/kulinarium.ammesso/",
   social_facebook: "https://www.facebook.com/pages/H%C3%A4llisches%20Kulinarium%20by%20Ammesso",
   social_tripadvisor: "https://www.tripadvisor.de/Restaurant_Review-g198538-d26012517-Reviews-Hallisches_Kulinarium_by_Ammesso-Schwabisch_Hall_Baden_Wurttemberg.html",
-  whatsapp_number: "+4979054177",
   breakfast_price: 14,
 };
 

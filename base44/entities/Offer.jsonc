@@ -1,0 +1,58 @@
+{
+  "name": "Offer",
+  "type": "object",
+  "properties": {
+    "title_de": {
+      "type": "string"
+    },
+    "title_en": {
+      "type": "string"
+    },
+    "description_de": {
+      "type": "string"
+    },
+    "description_en": {
+      "type": "string"
+    },
+    "offer_type": {
+      "type": "string",
+      "enum": [
+        "direktbucher",
+        "wochenende",
+        "geschaeftsreise",
+        "gruppe",
+        "saisonal",
+        "other"
+      ],
+      "default": "direktbucher"
+    },
+    "price_info": {
+      "type": "string"
+    },
+    "valid_from": {
+      "type": "string",
+      "format": "date"
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0
+    },
+    "cta_link": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title_de"
+  ]
+}
