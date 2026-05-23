@@ -452,7 +452,7 @@ export default function Home() {
             )}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* ── FEATURE CARDS ── */}
       <motion.div 
@@ -704,8 +704,7 @@ export default function Home() {
           </div>
         </div>
       </motion.div>
-
-    </motion.div>
+    </div>
 
     {/* AI Chat Widget */}
     <ChatWidget />
