@@ -133,6 +133,7 @@ export default function AdminCalendar() {
           </div>
           <div className="flex gap-2">
             <Link to="/admin" className="px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">← Admin</Link>
+            <Link to="/admin/opening-hours" className="px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">🕐</Link>
             <button onClick={() => setShowNewForm(true)} className="flex items-center gap-1.5 px-4 py-2 btn-gold rounded-xl text-xs font-body font-semibold tracking-widest uppercase">
               <Plus className="w-3.5 h-3.5" /> Neu
             </button>
@@ -388,6 +389,10 @@ export default function AdminCalendar() {
                                   Sitzt
                                 </button>
                               )}
+                              <button onClick={() => updateStatus(r.id, 'no_show')} disabled={updatingId === r.id}
+                                className="px-2.5 py-1 bg-ivory/5 border border-ivory/10 text-ivory/30 text-[10px] rounded-lg font-body hover:text-amber-400 hover:border-amber-900/30 transition-colors">
+                                NS
+                              </button>
                               <button onClick={() => updateStatus(r.id, 'cancelled_by_staff')} disabled={updatingId === r.id}
                                 className="px-2.5 py-1 bg-red-950/40 border border-red-900/30 text-red-400 text-[10px] rounded-lg font-body hover:bg-red-950/60 transition-colors">
                                 ✕

@@ -46,6 +46,7 @@ import AdminCreditAudit from './pages/AdminCreditAudit';
 import AdminCreditDashboard from './pages/AdminCreditDashboard';
 import AdminHeroSlides from './pages/AdminHeroSlides';
 import AdminOffers from './pages/AdminOffers';
+import AdminOpeningHours from './pages/AdminOpeningHours';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -115,6 +116,7 @@ const AuthenticatedApp = () => {
         <Route path="/admin/credit-dashboard" element={<AdminCreditDashboard />} />
         <Route path="/admin/hero" element={<AdminHeroSlides />} />
         <Route path="/admin/offers" element={<AdminOffers />} />
+        <Route path="/admin/opening-hours" element={<AdminOpeningHours />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

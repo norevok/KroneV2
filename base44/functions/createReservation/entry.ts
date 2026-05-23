@@ -41,21 +41,58 @@ Deno.serve(async (req) => {
 
     const maxCapacity = 120;
 
-    // ── Validate day is not Monday (closed) ──
-    const dayOfWeek = new Date(date + 'T12:00:00').getDay();
-    if (dayOfWeek === 1) {
-      return Response.json({ error: 'Restaurant closed on this date' }, { status: 400 });
+    // ── Check SpecialOpeningRule (blocked/closed dates) ──
+    const specialRules = await base44.asServiceRole.entities.SpecialOpeningRule.filter({
+      entity_type: 'restaurant',
+    }).catch(() => []);
+    const applicableRule = specialRules
+      .filter(r => r.effective_date <= date && (!r.end_date || r.end_date >= date))
+      .sort((a, b) => (b.priority || 0) - (a.priority || 0))[0];
+    if (applicableRule) {
+      if (applicableRule.is_closed || applicableRule.rule_type === 'fully_closed' || applicableRule.rule_type === 'maintenance' || applicableRule.rule_type === 'private_event') {
+        return Response.json({ error: 'closed' }, { status: 400 });
+      }
+      if (applicableRule.fully_booked || applicableRule.rule_type === 'fully_booked') {
+        return Response.json({ error: 'full' }, { status: 409 });
+      }
     }
 
-    // ── Validate time within service windows ──
-    const LUNCH = { start: '12:00', end: '14:15' };
-    const DINNER = { start: '17:30', end: '21:30' };
-    const SUNDAY = { start: '12:00', end: '19:30' };
-    const isSunday = dayOfWeek === 0;
-    const windows = isSunday ? [SUNDAY] : [LUNCH, DINNER];
-    const timeValid = windows.some(w => time >= w.start && time <= w.end);
-    if (!timeValid) {
-      return Response.json({ error: 'Time not available for booking' }, { status: 400 });
+    // ── Validate day is not Monday (closed) ──
+    const dayOfWeek = new Date(date + 'T12:00:00').getDay();
+
+    // Check OpeningHour overrides for this day of week
+    const openingHours = await base44.asServiceRole.entities.OpeningHour.filter({
+      entity_type: 'restaurant',
+      day_of_week: dayOfWeek,
+    }).catch(() => []);
+    const dayConfig = openingHours.find(o => o.is_active !== false);
+
+    if (dayConfig) {
+      if (dayConfig.is_closed) {
+        return Response.json({ error: 'closed' }, { status: 400 });
+      }
+      // Validate time within configured service windows
+      const windows = (dayConfig.service_windows || []).filter(w => w.is_bookable !== false);
+      if (windows.length > 0) {
+        const timeValid = windows.some(w => time >= w.start && time <= w.end);
+        if (!timeValid) {
+          return Response.json({ error: 'Time not available for booking' }, { status: 400 });
+        }
+      }
+    } else {
+      // Fallback: hardcoded defaults
+      if (dayOfWeek === 1) {
+        return Response.json({ error: 'closed' }, { status: 400 });
+      }
+      const LUNCH = { start: '12:00', end: '14:15' };
+      const DINNER = { start: '17:30', end: '21:30' };
+      const SUNDAY = { start: '12:00', end: '19:30' };
+      const isSunday = dayOfWeek === 0;
+      const windows = isSunday ? [SUNDAY] : [LUNCH, DINNER];
+      const timeValid = windows.some(w => time >= w.start && time <= w.end);
+      if (!timeValid) {
+        return Response.json({ error: 'Time not available for booking' }, { status: 400 });
+      }
     }
 
     // ── Anti-spam: same user submitted in last 2 minutes ──

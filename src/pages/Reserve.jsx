@@ -179,6 +179,23 @@ export default function Reserve() {
     setTime('');
     setLoading(true);
     setError('');
+
+    // Check SpecialOpeningRule for this date
+    const specialRules = await base44.entities.SpecialOpeningRule.filter({ entity_type: 'restaurant' }).catch(() => []);
+    const blockingRule = specialRules
+      .filter(r => r.effective_date <= d && (!r.end_date || r.end_date >= d))
+      .sort((a, b) => (b.priority || 0) - (a.priority || 0))[0];
+    if (blockingRule && (blockingRule.is_closed || blockingRule.fully_booked || ['fully_closed','maintenance','private_event','fully_booked'].includes(blockingRule.rule_type))) {
+      const msg = blockingRule.is_closed || ['fully_closed','maintenance','private_event'].includes(blockingRule.rule_type)
+        ? (lang === 'de' ? `Das Restaurant ist an diesem Tag geschlossen (${blockingRule.rule_name}).` : lang === 'en' ? `The restaurant is closed on this day (${blockingRule.rule_name}).` : `Il ristorante è chiuso (${blockingRule.rule_name}).`)
+        : (lang === 'de' ? 'Dieser Tag ist bereits ausgebucht.' : lang === 'en' ? 'This day is fully booked.' : 'Questo giorno è tutto esaurito.');
+      setSlots([]);
+      setUsedCapacity({});
+      setError(msg);
+      setLoading(false);
+      return;
+    }
+
     const daySlots = getDaySlots(d);
     if (daySlots.length === 0) { setSlots([]); setUsedCapacity({}); setLoading(false); return; }
     const existing = await base44.entities.RestaurantReservation.filter({ reservation_date: d });
