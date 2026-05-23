@@ -88,6 +88,32 @@ Deno.serve(async (req) => {
       }
     }
 
+    // Slack notification (non-blocking)
+    const webhookUrl = Deno.env.get('SLACK_WEBHOOK_URL');
+    if (webhookUrl) {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          blocks: [
+            { type: 'header', text: { type: 'plain_text', text: '🏨 Neue Buchungsanfrage (Beds24)', emoji: true } },
+            {
+              type: 'section',
+              fields: [
+                { type: 'mrkdwn', text: `*Ref:*\n${intentRef}` },
+                { type: 'mrkdwn', text: `*Check-in:*\n${check_in || '—'}` },
+                { type: 'mrkdwn', text: `*Check-out:*\n${check_out || '—'}` },
+                { type: 'mrkdwn', text: `*Personen:*\n${guests_adults || 1} Erw.${guests_children ? ` + ${guests_children} Kinder` : ''}` },
+                ...(guest_email ? [{ type: 'mrkdwn', text: `*Gast:*\n${guest_first_name ? guest_first_name + ' ' + guest_last_name : guest_email}` }] : []),
+                ...(room_category_interest ? [{ type: 'mrkdwn', text: `*Zimmer:*\n${room_category_interest}` }] : []),
+              ]
+            },
+            { type: 'divider' }
+          ]
+        })
+      }).catch(() => {});
+    }
+
     return Response.json({
       success: true,
       intent_id: intent.id,

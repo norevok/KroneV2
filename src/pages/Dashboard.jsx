@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie } from 'recharts';
 import { TrendingUp, Calendar, Users, MessageSquare, CheckCircle, Clock, Activity, LayoutDashboard, RefreshCw, UtensilsCrossed, BedDouble, Gift, FileText, AlertTriangle, ChevronRight } from 'lucide-react';
 import { format, subDays, startOfDay } from 'date-fns';
 
@@ -33,7 +33,7 @@ export default function Dashboard() {
     cancelledReservations: 0, totalBookingIntents: 0, guestMessages: 0,
     activeVouchers: 0, pendingDocs: 0, todayReservations: 0,
   });
-  const [chartData, setChartData] = useState({ activityByDay: [], statusBreakdown: [] });
+  const [chartData, setChartData] = useState({ activityByDay: [], statusBreakdown: [], bookingSummary: [] });
   const [recentReservations, setRecentReservations] = useState([]);
   const [pendingAlerts, setPendingAlerts] = useState([]);
 
@@ -94,7 +94,19 @@ export default function Dashboard() {
       { name: lang === 'de' ? 'Abgeschlossen' : 'Completed', value: reservations.filter(r => r.status === 'completed').length, color: '#6b7280' },
     ];
 
-    setChartData({ activityByDay, statusBreakdown });
+    // Booking summary — last 6 months
+    const bookingSummary = Array.from({ length: 6 }, (_, i) => {
+      const d = new Date(now.getFullYear(), now.getMonth() - (5 - i), 1);
+      const monthStr = format(d, 'yyyy-MM');
+      const label = format(d, 'MMM yy');
+      return {
+        month: label,
+        Tischreservierungen: reservations.filter(r => r.reservation_date?.startsWith(monthStr)).length,
+        Hotelbuchungen: intents.filter(x => x.created_date?.startsWith(monthStr)).length,
+      };
+    });
+
+    setChartData({ activityByDay, statusBreakdown, bookingSummary });
     setLoading(false);
   }
 
@@ -215,6 +227,29 @@ export default function Dashboard() {
                 <p className="text-ivory/20 text-xs font-body text-center py-4">{lang === 'de' ? 'Keine Daten' : 'No data'}</p>
               )}
             </div>
+          </div>
+        </div>
+
+        {/* Booking Summary Chart */}
+        <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6 mb-8">
+          <h2 className="font-display text-xl font-light text-ivory mb-5">
+            {lang === 'de' ? 'Buchungsübersicht (6 Monate)' : 'Booking Summary (6 Months)'}
+          </h2>
+          <div className="overflow-x-auto">
+            <ResponsiveContainer width="100%" height={260} minWidth={400}>
+              <BarChart data={chartData.bookingSummary} barGap={4} barCategoryGap="30%">
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(201,169,110,0.08)" vertical={false} />
+                <XAxis dataKey="month" stroke="rgba(245,239,227,0.3)" style={{ fontSize: '11px' }} />
+                <YAxis allowDecimals={false} stroke="rgba(245,239,227,0.3)" style={{ fontSize: '11px' }} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#1A1410', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '8px', color: '#F5EFE3', fontSize: '12px' }}
+                  cursor={{ fill: 'rgba(201,169,110,0.05)' }}
+                />
+                <Legend wrapperStyle={{ fontSize: '11px', color: 'rgba(245,239,227,0.5)' }} />
+                <Bar dataKey="Tischreservierungen" fill="#C9A96E" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Hotelbuchungen" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
