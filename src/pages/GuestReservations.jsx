@@ -400,11 +400,11 @@ export default function GuestReservations() {
         {/* Quick action buttons */}
         <div className="grid grid-cols-2 gap-2 mb-6">
           <Link to="/reserve"
-            className="flex items-center justify-center gap-2 py-3 bg-[#17352C] hover:bg-[#0F2920] text-white rounded-xl text-xs font-body font-semibold tracking-wider uppercase transition-all shadow-sm">
+            className="flex items-center justify-center gap-2 py-3.5 bg-[#17352C] hover:bg-[#0F2920] text-white rounded-lg text-xs font-body font-bold tracking-widest uppercase transition-all shadow-md hover:-translate-y-px">
             <UtensilsCrossed className="w-3.5 h-3.5" /> {c.cta_reserve}
           </Link>
           <Link to="/rooms"
-            className="flex items-center justify-center gap-2 py-3 bg-white border-2 border-[#17352C] text-[#17352C] hover:bg-[#17352C] hover:text-white rounded-xl text-xs font-body font-semibold tracking-wider uppercase transition-all">
+            className="flex items-center justify-center gap-2 py-3.5 bg-white border-2 border-[#17352C] text-[#17352C] hover:bg-[#17352C] hover:text-white rounded-lg text-xs font-body font-bold tracking-widest uppercase transition-all">
             <BedDouble className="w-3.5 h-3.5" /> {c.cta_rooms}
           </Link>
         </div>

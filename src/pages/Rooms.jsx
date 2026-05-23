@@ -219,7 +219,7 @@ export default function Rooms() {
                 {Math.round((new Date(checkOut) - new Date(checkIn)) / 86400000)} {t.nights_label} · {adults} {t.adults_label}
               </p>
               <button onClick={() => handleBookNow(null)} disabled={savingIntent}
-                className="flex items-center gap-2 px-7 py-3 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-full text-sm font-body font-semibold tracking-widest uppercase transition-all disabled:opacity-50">
+                className="flex items-center gap-2 px-8 py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-lg text-sm font-body font-bold tracking-widest uppercase transition-all disabled:opacity-50 shadow-md hover:-translate-y-px">
                 {t.check_avail} <ExternalLink className="w-4 h-4" />
               </button>
             </div>
@@ -319,7 +319,7 @@ export default function Rooms() {
                     )}
 
                     <button onClick={() => handleBookNow(room.id)} disabled={savingIntent}
-                      className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-full text-sm font-body font-semibold tracking-widest uppercase transition-all self-start disabled:opacity-50">
+                      className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-lg text-sm font-body font-bold tracking-widest uppercase transition-all self-start disabled:opacity-50 shadow-md hover:-translate-y-px">
                       {t.view_book} <ExternalLink className="w-4 h-4" />
                     </button>
                   </div>
@@ -365,7 +365,7 @@ export default function Rooms() {
             {lang === 'de' ? 'Direkt online buchen — sicher, schnell und zum besten Preis.' : 'Book directly online — secure, fast, best price guaranteed.'}
           </p>
           <button onClick={() => handleBookNow(null)} disabled={savingIntent}
-            className="inline-flex items-center gap-2.5 px-10 py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-full text-sm font-body font-semibold tracking-widest uppercase transition-all shadow-lg disabled:opacity-60">
+            className="inline-flex items-center gap-2.5 px-10 py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-lg text-base font-body font-bold tracking-widest uppercase transition-all shadow-lg disabled:opacity-60 hover:-translate-y-px">
             {t.book_now} <ExternalLink className="w-4 h-4" />
           </button>
           <p className="text-white/25 text-xs font-body mt-4">{t.breakfast}</p>
@@ -390,7 +390,7 @@ export default function Rooms() {
               { e: '🏰', de: 'Schloss Langenburg', en: 'Langenburg Castle' },
               { e: '🌊', de: 'Jagsttal', en: 'Jagst Valley' },
               { e: '🍷', de: 'Hohenloher Wein', en: 'Hohenlohe Wine' },
-              { e: '🏘', de: 'Altstadt Langenburg', en: 'Langenburg Old Town' },
+              { e: '🚗', de: 'Automuseum', en: 'Car Museum' },
             ].map((item, i) => (
               <div key={i} className="bg-white border border-[#EDE6D8] rounded-xl p-4 text-center">
                 <div className="text-2xl mb-2">{item.e}</div>
@@ -412,10 +412,10 @@ export default function Rooms() {
             <p className="text-[#4A3F35] text-base font-body leading-relaxed">{t.group_text}</p>
           </div>
           <div className="flex gap-3 md:justify-end">
-            <Link to="/weddings" className="flex items-center gap-2 px-6 py-3 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-full text-sm font-body font-semibold tracking-widest uppercase transition-all">
+            <Link to="/weddings" className="flex items-center gap-2 px-6 py-3.5 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-lg text-sm font-body font-bold tracking-widest uppercase transition-all shadow-md hover:-translate-y-px">
               {t.enquire} <ChevronRight className="w-4 h-4" />
             </Link>
-            <Link to="/contact" className="flex items-center gap-2 px-6 py-3 border-2 border-[#8B6914] text-[#8B6914] hover:bg-[#F2E8D0] rounded-full text-sm font-body font-semibold tracking-widest uppercase transition-all">
+            <Link to="/contact" className="flex items-center gap-2 px-6 py-3.5 border-2 border-[#8B6914] text-[#8B6914] hover:bg-[#F2E8D0] rounded-lg text-sm font-body font-bold tracking-widest uppercase transition-all">
               {lang === 'de' ? 'Kontakt' : 'Contact'}
             </Link>
           </div>

@@ -479,7 +479,7 @@ export default function Reserve() {
                 )}
                 <p className="text-xs text-stone-400 font-body leading-relaxed">{c.policy}</p>
                 <button type="submit" disabled={submitting || !gdprConsent}
-                  className="w-full py-4 bg-[#C9A96E] hover:bg-[#B8924A] disabled:opacity-50 text-white rounded-2xl text-sm font-body font-semibold tracking-wider transition-all shadow-lg flex items-center justify-center gap-2">
+                  className="w-full py-4 bg-[#8B6914] hover:bg-[#7A5A0F] disabled:opacity-50 text-white rounded-lg text-sm font-body font-bold tracking-widest uppercase transition-all shadow-lg flex items-center justify-center gap-2 hover:-translate-y-px">
                   {submitting
                     ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     : <><UtensilsCrossed className="w-4 h-4" /> {c.confirm}</>}
