@@ -1,18 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar } from 'lucide-react';
+import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 import HeroBookingBar from '@/components/home/HeroBookingBar';
+import ChatWidget from '@/components/ChatWidget';
 import { base44 } from '@/api/base44Client';
 
 const SLIDES = [
   {
-    // Hotel arrival / boutique exterior feeling — warm European hotel entrance
-    url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1800&q=85',
-    de: { title: 'Ankommen. Genießen. Bleiben.', sub: 'Ihr Boutique-Hotel im Herzen von Langenburg — direkt neben Schloss Langenburg.' },
-    en: { title: 'Arrive. Enjoy. Stay.', sub: 'Your boutique hotel in the heart of Langenburg — right next to Langenburg Castle.' },
-    it: { title: 'Arrivare. Gustare. Restare.', sub: 'Il vostro hotel boutique nel cuore di Langenburg — vicino al castello.' },
+    // Krone Langenburg exterior — generated professional hotel photo
+    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dd30effe5_generated_image.png',
+    de: { title: 'Willkommen im Krone Langenburg.', sub: 'Ihr Boutique-Hotel im Herzen von Langenburg — direkt neben Schloss Langenburg.' },
+    en: { title: 'Welcome to Krone Langenburg.', sub: 'Your boutique hotel in the heart of Langenburg — right next to Langenburg Castle.' },
+    it: { title: 'Benvenuti al Krone Langenburg.', sub: 'Il vostro hotel boutique nel cuore di Langenburg — vicino al castello.' },
   },
   {
     // Premium hotel room — warm lighting, clean bed detail
@@ -280,22 +281,38 @@ export default function Home() {
 
         {/* Hero text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pb-44 sm:pb-36 lg:pb-32 z-10">
+          <motion.div
+            key={`badge-${current}`}
+            className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-4 py-2 mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}>
+            <Sparkles className="w-3.5 h-3.5 text-[#C9A96E]" />
+            <span className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.3em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
+          </motion.div>
           <motion.p
             key={`eyebrow-${current}`}
-            className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.6em] uppercase font-body mb-5"
+            className="text-[#C9A96E]/80 text-[9px] sm:text-[10px] tracking-[0.6em] uppercase font-body mb-5"
             initial={{ opacity: 0, letterSpacing: '0.8em' }}
             animate={{ opacity: 1, letterSpacing: '0.6em' }}
-            transition={{ duration: 1 }}>
+            transition={{ duration: 1, delay: 0.1 }}>
             Krone Langenburg · by Ammesso
           </motion.p>
           <motion.h1
             key={`title-${current}`}
-            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-5 leading-[0.92] max-w-4xl"
+            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-5 leading-[0.92] max-w-4xl drop-shadow-lg"
             initial={{ opacity: 0, y: 40, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
             {slideText.title}
           </motion.h1>
+          <motion.div
+            key={`divider-${current}`}
+            className="w-24 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-5"
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: 96 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          />
           <motion.p
             key={`sub-${current}`}
             className="text-white/65 font-body text-sm sm:text-lg max-w-xl leading-relaxed"
@@ -311,13 +328,13 @@ export default function Home() {
             transition={{ delay: 0.45, duration: 0.7 }}>
             <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link to="/booking"
-                className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-[0_8px_30px_rgba(201,169,110,0.35)] flex items-center gap-2">
+                className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-[0_8px_30px_rgba(201,169,110,0.35)] flex items-center gap-2 hover:shadow-[0_12px_40px_rgba(201,169,110,0.5)]">
                 <BedDouble className="w-4 h-4" /> {c.rooms_book}
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link to="/reserve"
-                className="px-8 py-4 bg-white/10 hover:bg-white/20 border-2 border-white/50 text-white font-body font-semibold text-sm tracking-widest uppercase rounded-lg transition-all backdrop-blur-sm flex items-center gap-2">
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 border-2 border-white/50 text-white font-body font-semibold text-sm tracking-widest uppercase rounded-lg transition-all backdrop-blur-sm flex items-center gap-2 hover:border-white/70 hover:shadow-[0_8px_24px_rgba(255,255,255,0.15)]">
                 <UtensilsCrossed className="w-4 h-4" /> {c.restaurant_reserve}
               </Link>
             </motion.div>
@@ -352,18 +369,43 @@ export default function Home() {
       </div>
 
       {/* ── BENEFIT STRIP ── */}
-      <div className="bg-[#1C1714] py-10 sm:py-12 px-4 sm:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-8">
+      <motion.div 
+        className="bg-[#1C1714] py-10 sm:py-12 px-4 sm:px-8 relative overflow-hidden"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}>
+        {/* Animated background accent */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#C9A96E]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#C9A96E]/5 rounded-full blur-3xl" />
+        <div className="max-w-6xl mx-auto relative z-10">
+          <motion.div 
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}>
             <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body mb-2">{c.benefits_eyebrow}</p>
             <h2 className="font-display text-2xl sm:text-3xl font-light text-white">{c.benefits_title}</h2>
-          </div>
+          </motion.div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
             {BENEFITS.map((b, i) => (
-              <div key={i} className="flex flex-col items-center text-center gap-3">
-                <div className="w-11 h-11 bg-[#C9A96E]/10 border border-[#C9A96E]/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <motion.div 
+                key={i} 
+                className="flex flex-col items-center text-center gap-3"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -4, scale: 1.02 }}
+              >
+                <motion.div 
+                  className="w-11 h-11 bg-[#C9A96E]/10 border border-[#C9A96E]/20 rounded-full flex items-center justify-center flex-shrink-0"
+                  whileHover={{ scale: 1.1, rotate: 5, borderColor: 'rgba(201,169,110,0.4)' }}
+                  transition={{ duration: 0.3 }}
+                >
                   <b.icon className="w-5 h-5 text-[#C9A96E]" />
-                </div>
+                </motion.div>
                 <div>
                   <p className="text-white font-body text-sm font-semibold mb-0.5">
                     {lang === 'de' ? b.de : lang === 'en' ? b.en : b.it}
@@ -372,74 +414,109 @@ export default function Home() {
                     {lang === 'de' ? b.desc_de : lang === 'en' ? b.desc_en : b.desc_it}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-          <div className="mt-8 text-center flex flex-col sm:flex-row gap-3 justify-center">
+          <motion.div 
+            className="mt-8 text-center flex flex-col sm:flex-row gap-3 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}>
             {!isLoggedIn ? (
               <>
-                <button onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                  className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg">
+                <motion.button 
+                  onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg"
+                >
                   {c.register}
-                </button>
-                <button onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                  className="px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 font-body text-sm font-semibold tracking-wider uppercase rounded-lg transition-all">
+                </motion.button>
+                <motion.button 
+                  onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 font-body text-sm font-semibold tracking-wider uppercase rounded-lg transition-all"
+                >
                   {c.already}
-                </button>
+                </motion.button>
               </>
             ) : (
-              <Link to="/account"
-                className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg inline-flex items-center gap-2">
-                {c.account_cta} <ArrowRight className="w-4 h-4" />
-              </Link>
+              <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
+                <Link to="/account"
+                  className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg inline-flex items-center gap-2">
+                  {c.account_cta} <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* ── FEATURE CARDS ── */}
-      <div className="bg-[#FAF7F2] py-16 sm:py-20 px-4 sm:px-8">
+      <motion.div 
+        className="bg-[#FAF7F2] py-16 sm:py-20 px-4 sm:px-8"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}>
             <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body mb-3">{c.discover}</p>
             <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714]">{c.experience}</h2>
-          </div>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((f, i) => (
-              <motion.div key={i} whileHover={{ y: -6, scale: 1.01 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.25 }}>
-              <Link to={f.to}
-                className="group bg-white border border-[#EDE6D8] rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 block">
-                <div className="h-52 overflow-hidden">
-                  <img
-                    src={f.img}
-                    alt={f.alt || (f[lang] || f.de) + ' — Krone Langenburg by Ammesso'}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-6">
-                  <div className="w-10 h-10 bg-[#8B6914]/8 border border-[#8B6914]/15 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#8B6914]/15 transition-colors">
-                    <f.icon className="w-4.5 h-4.5 text-[#8B6914]" />
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -6, scale: 1.01 }} 
+                whileTap={{ scale: 0.98 }} 
+                transition={{ duration: 0.25 }}
+                className="bg-white border border-[#EDE6D8] rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 block"
+              >
+                <Link to={f.to} className="block">
+                  <div className="h-52 overflow-hidden">
+                    <img
+                      src={f.img}
+                      alt={f.alt || (f[lang] || f.de) + ' — Krone Langenburg by Ammesso'}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                    />
                   </div>
-                  <h3 className="font-display text-xl font-light text-[#1C1714] mb-2">
-                    {f[lang] || f.es || f.de}
-                  </h3>
-                  <p className="font-body text-sm text-[#8A7A6A] leading-relaxed mb-4">
-                    {lang === 'de' ? f.desc_de : lang === 'en' ? f.desc_en : lang === 'es' ? f.desc_es : f.desc_it}
-                  </p>
-                  <span className="text-[#8B6914] text-xs tracking-[0.2em] uppercase font-body font-semibold group-hover:underline">
-                    {c.learn_more}
-                  </span>
-                </div>
-              </Link>
+                  <div className="p-6">
+                    <div className="w-10 h-10 bg-[#8B6914]/8 border border-[#8B6914]/15 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#8B6914]/15 transition-colors">
+                      <f.icon className="w-4.5 h-4.5 text-[#8B6914]" />
+                    </div>
+                    <h3 className="font-display text-xl font-light text-[#1C1714] mb-2">
+                      {f[lang] || f.es || f.de}
+                    </h3>
+                    <p className="font-body text-sm text-[#8A7A6A] leading-relaxed mb-4">
+                      {lang === 'de' ? f.desc_de : lang === 'en' ? f.desc_en : lang === 'es' ? f.desc_es : f.desc_it}
+                    </p>
+                    <span className="text-[#8B6914] text-xs tracking-[0.2em] uppercase font-body font-semibold group-hover:underline">
+                      {c.learn_more}
+                    </span>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* ── ROOMS PREVIEW ── */}
-      <div className="bg-white py-16 sm:py-20 px-4 sm:px-8 border-t border-[#EDE6D8]">
+      <motion.div 
+        className="bg-white py-16 sm:py-20 px-4 sm:px-8 border-t border-[#EDE6D8]"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
@@ -487,10 +564,15 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* ── RESTAURANT PREVIEW ── */}
-      <div className="bg-[#1C1714] py-16 sm:py-20 px-4 sm:px-8">
+      <motion.div 
+        className="bg-[#1C1714] py-16 sm:py-20 px-4 sm:px-8"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden h-72 sm:h-96">
@@ -525,10 +607,15 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* ── LOCATION TEASER ── */}
-      <div className="relative bg-[#1C1714] py-20 sm:py-28 px-4 sm:px-8 overflow-hidden">
+      <motion.div 
+        className="relative bg-[#1C1714] py-20 sm:py-28 px-4 sm:px-8 overflow-hidden"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}>
         {/* Background parallax image */}
         <div className="absolute inset-0">
           <img
@@ -616,8 +703,11 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-    </div>
+    </motion.div>
+
+    {/* AI Chat Widget */}
+    <ChatWidget />
   );
 }
