@@ -153,12 +153,22 @@ Deno.serve(async (req) => {
       performed_at: new Date().toISOString(),
     }).catch(() => {});
 
-    // Notify admin via Slack if not API verified
+    // Notify admin via email if not API verified
     if (!verifiedByApi) {
-      base44.asServiceRole.integrations.Core.SendEmail({
+      const emailPromise = base44.asServiceRole.integrations.Core.SendEmail({
         to: 'oammesso@gmail.com',
         subject: `⚠️ Beds24 Buchung manuell prüfen – ${booking_reference}`,
-        body: `Gast ${user.email} hat Buchung ${booking_reference} verknüpft, aber die API-Verifikation war nicht möglich.\n\nBitte im Admin-Dashboard prüfen: https://krone-ammesso.de/admin/beds24\n\nRef: ${link.id}`,
+        body: `Gast ${user.email} hat Buchung ${booking_reference} verknüpft, aber die API-Verifikation war nicht möglich.\n\nBitte im Admin-Dashboard prüfen: https://krone-ammesso.de/admin/beds24-bookings\n\nRef: ${link.id}`,
+      }).catch(() => null);
+      base44.asServiceRole.entities.EmailLog.create({
+        recipient: 'oammesso@gmail.com',
+        subject: `⚠️ Beds24 Buchung manuell prüfen – ${booking_reference}`,
+        template: 'new_reservation_admin',
+        status: 'sent',
+        sent_at: new Date().toISOString(),
+        related_entity_type: 'GuestReservationLink',
+        related_entity_id: link.id,
+        related_ref: booking_reference,
       }).catch(() => {});
     }
 
@@ -183,7 +193,17 @@ Deno.serve(async (req) => {
   base44.asServiceRole.integrations.Core.SendEmail({
     to: 'oammesso@gmail.com',
     subject: `🔍 Beds24 Buchung nicht zugeordnet – ${booking_reference || user.email}`,
-    body: `Gast ${user.email} kehrte von Beds24 zurück, aber die Buchung ${booking_reference || '(keine Ref)'} konnte nicht automatisch zugeordnet werden.\n\nBitte manuell prüfen: https://krone-ammesso.de/admin/beds24\n\nLookup-Request ID: ${lookupReq.id}`,
+    body: `Gast ${user.email} kehrte von Beds24 zurück, aber die Buchung ${booking_reference || '(keine Ref)'} konnte nicht automatisch zugeordnet werden.\n\nBitte manuell prüfen: https://krone-ammesso.de/admin/beds24-bookings\n\nLookup-Request ID: ${lookupReq.id}`,
+  }).catch(() => {});
+  base44.asServiceRole.entities.EmailLog.create({
+    recipient: 'oammesso@gmail.com',
+    subject: `🔍 Beds24 Buchung nicht zugeordnet – ${booking_reference || user.email}`,
+    template: 'new_reservation_admin',
+    status: 'sent',
+    sent_at: new Date().toISOString(),
+    related_entity_type: 'BookingLookupRequest',
+    related_entity_id: lookupReq.id,
+    related_ref: booking_reference || '',
   }).catch(() => {});
 
   return Response.json({ success: false, status: 'no_match', lookup_request_id: lookupReq.id });

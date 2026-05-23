@@ -58,11 +58,38 @@ Deno.serve(async (req) => {
       admin_notes: body.admin_notes,
     });
 
-    // Notify guest
-    base44.asServiceRole.integrations.Core.SendEmail({
-      to: lookupReq.guest_email,
-      subject: 'Ihre Buchung wurde mit Ihrem Krone Gäste-Konto verknüpft',
-      body: `Liebe/r Gast,\n\nIhre Zimmerbuchung bei Krone Langenburg wurde erfolgreich Ihrem Gäste-Konto zugeordnet.\n\nSie können Ihre Buchung jetzt unter "Meine Reisen" einsehen: https://krone-ammesso.de/account/reservations\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nMit herzlichen Grüßen\nIhr Team Krone Langenburg by Ammesso`,
+    // Notify guest — only if email_sent flag not set
+    if (!lookupReq.email_sent_to_guest) {
+      base44.asServiceRole.integrations.Core.SendEmail({
+        to: lookupReq.guest_email,
+        subject: 'Ihre Buchung wurde mit Ihrem Krone Gäste-Konto verknüpft',
+        body: `Liebe/r Gast,\n\nIhre Zimmerbuchung bei Krone Langenburg wurde erfolgreich Ihrem Gäste-Konto zugeordnet.\n\nSie können Ihre Buchung jetzt unter "Meine Reisen" einsehen: https://krone-ammesso.de/account/reservations\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nMit herzlichen Grüßen\nIhr Team Krone Langenburg by Ammesso`,
+      }).catch(() => {});
+      base44.asServiceRole.entities.EmailLog.create({
+        recipient: lookupReq.guest_email,
+        subject: 'Ihre Buchung wurde mit Ihrem Krone Gäste-Konto verknüpft',
+        template: 'guest_welcome',
+        status: 'sent',
+        sent_at: new Date().toISOString(),
+        related_entity_type: 'GuestReservationLink',
+        related_entity_id: link.id,
+        related_ref: link.source_reference,
+      }).catch(() => {});
+      // Mark as sent to prevent duplicates
+      base44.asServiceRole.entities.BookingLookupRequest.update(lookup_request_id, {
+        email_sent_to_guest: true,
+      }).catch(() => {});
+    }
+
+    // Admin audit entry
+    base44.asServiceRole.entities.AdminAuditEntry.create({
+      admin_email: user.email,
+      action: 'manual_sync',
+      entity_type: 'GuestReservationLink',
+      entity_id: link.id,
+      entity_ref: link.source_reference,
+      change_summary: `Admin ${user.email} manually linked booking ${link.source_reference} to guest ${lookupReq.guest_email}`,
+      performed_at: new Date().toISOString(),
     }).catch(() => {});
 
     return Response.json({ success: true, link });
