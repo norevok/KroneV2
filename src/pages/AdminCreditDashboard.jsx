@@ -9,12 +9,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { format, subHours, startOfDay } from 'date-fns';
+import { format, subHours, startOfDay, subDays, parseISO } from 'date-fns';
 import {
   Zap, AlertTriangle, CheckCircle, XCircle, Clock, ArrowLeft,
   RefreshCw, Shield, Activity, Mail, MessageSquare, Server,
   TrendingUp, Ban, Info
 } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
 
@@ -108,6 +109,7 @@ export default function AdminCreditDashboard() {
   const [loading, setLoading] = useState(false);
   const [automations, setAutomations] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [bookingChartData, setBookingChartData] = useState([]);
 
   useEffect(() => {
     base44.auth.me().then(u => {
@@ -124,8 +126,25 @@ export default function AdminCreditDashboard() {
   async function loadLogs() {
     setLoading(true);
     try {
-      const data = await base44.entities.CreditUsageLog.list('-created_date', 100);
-      setLogs(data || []);
+      const [creditData, intents, reservations] = await Promise.all([
+        base44.entities.CreditUsageLog.list('-created_date', 100).catch(() => []),
+        base44.entities.HotelBookingIntent.list('-created_date', 300).catch(() => []),
+        base44.entities.RestaurantReservation.list('-created_date', 300).catch(() => []),
+      ]);
+      setLogs(creditData || []);
+
+      // Build last-30-days chart data
+      const today = new Date();
+      const days = Array.from({ length: 30 }, (_, i) => {
+        const d = subDays(today, 29 - i);
+        const dateStr = format(d, 'yyyy-MM-dd');
+        return {
+          date: format(d, 'dd.MM'),
+          'Hotel-Buchungen': intents.filter(x => x.created_date?.startsWith(dateStr)).length,
+          'Tischres.': reservations.filter(x => x.created_date?.startsWith(dateStr)).length,
+        };
+      });
+      setBookingChartData(days);
     } catch (_) {}
     setLoading(false);
   }
@@ -218,6 +237,34 @@ export default function AdminCreditDashboard() {
               )}
             </div>
           ))}
+        </div>
+
+        {/* BOOKINGS TREND — last 30 days */}
+        <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6 mb-10">
+          <div className="flex items-center gap-3 mb-5">
+            <TrendingUp className="w-5 h-5 text-gold flex-shrink-0" />
+            <h2 className="font-display text-2xl font-light text-ivory">Buchungstrend — letzte 30 Tage</h2>
+          </div>
+          {bookingChartData.length === 0 ? (
+            <p className="text-ivory/30 text-sm font-body text-center py-8">Lade Daten…</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <ResponsiveContainer width="100%" height={260} minWidth={500}>
+                <BarChart data={bookingChartData} barGap={2} barCategoryGap="35%">
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(201,169,110,0.08)" vertical={false} />
+                  <XAxis dataKey="date" stroke="rgba(245,239,227,0.25)" style={{ fontSize: '10px' }} interval={4} />
+                  <YAxis allowDecimals={false} stroke="rgba(245,239,227,0.25)" style={{ fontSize: '10px' }} />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: '#1A1410', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '8px', color: '#F5EFE3', fontSize: '11px' }}
+                    cursor={{ fill: 'rgba(201,169,110,0.04)' }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '11px', color: 'rgba(245,239,227,0.5)' }} />
+                  <Bar dataKey="Hotel-Buchungen" fill="#3b82f6" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="Tischres." fill="#C9A96E" radius={[3, 3, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </div>
 
         {/* AUTOMATIONS STATUS */}
