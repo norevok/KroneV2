@@ -182,20 +182,22 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop center nav — scrollable */}
-            <div className="hidden lg:flex items-center gap-5 xl:gap-6 overflow-x-auto no-scrollbar flex-1 justify-center px-4">
+            <div className="hidden lg:flex items-center gap-5 xl:gap-7 overflow-x-auto no-scrollbar flex-1 justify-center px-4">
               {navLinks.map((l, i) => {
                 const isActive = location.pathname === l.to && i > 0;
                 return (
                   <Link key={`${l.to}-${i}`} to={l.to}
-                    className={`relative font-body text-[10px] xl:text-[11px] tracking-widest uppercase whitespace-nowrap transition-all duration-200 pb-0.5 flex-shrink-0 ${
+                    className={`relative font-body text-[10px] xl:text-[11px] tracking-[0.12em] uppercase whitespace-nowrap transition-all duration-200 group pb-1 flex-shrink-0 ${
                       isActive
                         ? (isTransparent ? 'text-[#C9A96E]' : 'text-[#8B6914]')
-                        : (isTransparent ? 'text-white/80 hover:text-white' : 'text-[#1C1714]/60 hover:text-[#1C1714]')
+                        : (isTransparent ? 'text-white/75 hover:text-white' : 'text-[#1C1714]/55 hover:text-[#1C1714]')
                     }`}>
                     {l.label}
-                    {isActive && (
-                      <span className={`absolute -bottom-0.5 left-0 right-0 h-px ${isTransparent ? 'bg-[#C9A96E]' : 'bg-[#8B6914]'}`} />
-                    )}
+                    <span className={`absolute bottom-0 left-0 h-px transition-all duration-300 ${
+                      isActive
+                        ? `right-0 ${isTransparent ? 'bg-[#C9A96E]' : 'bg-[#8B6914]'}`
+                        : `right-full group-hover:right-0 ${isTransparent ? 'bg-[#C9A96E]/60' : 'bg-[#8B6914]/50'}`
+                    }`} />
                   </Link>
                 );
               })}
@@ -204,19 +206,19 @@ export default function Navbar() {
             {/* Right: Book Now CTA + mobile toggle */}
             <div className="flex items-center gap-2 flex-shrink-0">
               <Link to="/booking"
-                className={`hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[11px] tracking-widest uppercase font-body font-semibold transition-all ${
+                className={`hidden md:inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-[11px] tracking-[0.1em] uppercase font-body font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-px ${
                   isTransparent
-                    ? 'bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714]'
-                    : 'bg-[#1C1714] hover:bg-[#2A2118] text-white'
+                    ? 'bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] shadow-[0_4px_16px_rgba(201,169,110,0.35)]'
+                    : 'bg-[#17352C] hover:bg-[#0F2920] text-white shadow-[0_4px_16px_rgba(23,53,44,0.25)]'
                 }`}>
                 <BedDouble className="w-3.5 h-3.5" />
-                {lang === 'de' ? 'Zimmer buchen' : lang === 'en' ? 'Book Now' : lang === 'es' ? 'Reservar' : 'Prenota'}
+                {lang === 'de' ? 'Jetzt buchen' : lang === 'en' ? 'Book Now' : lang === 'es' ? 'Reservar' : 'Prenota'}
               </Link>
               <Link to="/reserve"
-                className={`hidden xl:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[11px] tracking-widest uppercase font-body font-semibold transition-all border ${
+                className={`hidden xl:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[11px] tracking-[0.1em] uppercase font-body font-semibold transition-all border ${
                   isTransparent
-                    ? 'border-white/40 text-white hover:bg-white/10'
-                    : 'border-[#1C1714]/20 text-[#1C1714]/60 hover:border-[#1C1714] hover:text-[#1C1714]'
+                    ? 'border-white/40 text-white/80 hover:bg-white/12 hover:text-white hover:border-white/60'
+                    : 'border-[#8B6914]/30 text-[#8B6914] hover:border-[#8B6914] hover:bg-[#F2E8D0]'
                 }`}>
                 <UtensilsCrossed className="w-3.5 h-3.5" />
                 {lang === 'de' ? 'Tisch' : lang === 'es' ? 'Mesa' : lang === 'it' ? 'Tavolo' : 'Table'}
@@ -248,19 +250,21 @@ export default function Navbar() {
                   Admin Dashboard
                 </Link>
               )}
-              <div className="pt-5 space-y-3">
-                <Link to="/booking" className="block w-full text-center py-4 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-2xl text-sm tracking-widest uppercase font-body font-semibold transition-all">
-                  {lang === 'de' ? 'Zimmer buchen' : 'Book Now'}
+              <div className="pt-5 space-y-2.5">
+                <Link to="/booking" className="flex items-center justify-center gap-2 w-full py-4 bg-[#17352C] hover:bg-[#0F2920] text-white rounded-2xl text-sm tracking-[0.1em] uppercase font-body font-bold transition-all shadow-md">
+                  <BedDouble className="w-4 h-4" />
+                  {lang === 'de' ? 'Jetzt Zimmer buchen' : 'Book Room Now'}
                 </Link>
-                <Link to="/reserve" className="block w-full text-center py-4 border-2 border-[#8B6914] text-[#8B6914] hover:bg-[#F2E8D0] rounded-2xl text-sm tracking-widest uppercase font-body font-semibold transition-all">
-                  {lang === 'de' ? 'Tisch reservieren' : 'Reserve Table'}
+                <Link to="/reserve" className="flex items-center justify-center gap-2 w-full py-4 border-2 border-[#8B6914] text-[#8B6914] hover:bg-[#F2E8D0] rounded-2xl text-sm tracking-[0.1em] uppercase font-body font-semibold transition-all">
+                  <UtensilsCrossed className="w-4 h-4" />
+                  {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve Table' : lang === 'it' ? 'Prenota tavolo' : 'Reservar mesa'}
                 </Link>
                 {!isLoggedIn && (
                   <button
                     onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                    className="flex items-center justify-center gap-2 w-full text-center py-3 text-[#1C1714]/50 hover:text-[#8B6914] text-sm font-body transition-colors border border-[#EDE6D8] rounded-2xl">
+                    className="flex items-center justify-center gap-2 w-full py-3.5 text-[#1C1714]/50 hover:text-[#8B6914] text-sm font-body transition-colors border border-[#EDE6D8] rounded-2xl hover:border-[#8B6914]/30">
                     <UserCircle className="w-4 h-4" />
-                    {lang === 'de' ? 'Einloggen / Registrieren' : lang === 'en' ? 'Sign In / Register' : lang === 'es' ? 'Iniciar sesión / Registrarse' : 'Accedi / Registrati'}
+                    {lang === 'de' ? 'Einloggen / Registrieren' : lang === 'en' ? 'Sign In / Register' : lang === 'it' ? 'Accedi / Registrati' : 'Iniciar sesión'}
                   </button>
                 )}
               </div>

@@ -18,8 +18,8 @@ const ATTRACTIONS = [
   {
     id: 'jagsttal',
     icon: Mountain,
-    // Real Jagst river valley — scenic river bend in Hohenlohe, free Unsplash
-    image: 'https://images.unsplash.com/photo-1565814236723-b42294c9676c?w=1200&q=85',
+    // Gentle rolling German countryside / river valley — meadows, forests, typical Hohenlohe feel
+    image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=85',
     de: { title: 'Jagsttal & Wanderungen', desc: 'Das Jagsttal gehört zu den schönsten Flusstälern Süddeutschlands. Malerische Wanderwege führen durch Wiesen, Wälder und historische Dörfer. Der Jagsttalweg verbindet auf über 200 km Kilometer Natur und Kultur.', tag: 'Wanderparadies' },
     en: { title: 'Jagst Valley & Hiking', desc: 'The Jagst valley is one of the most beautiful river valleys in southern Germany. Scenic hiking trails lead through meadows, forests and historic villages. The Jagst Valley Trail connects over 200 km of nature and culture.', tag: 'Hiking paradise' },
   },
@@ -40,11 +40,12 @@ const ATTRACTIONS = [
     en: { title: 'Hohenlohe Wine & Pleasure', desc: 'The Hohenlohe region is known for its wine culture. Discover local wineries, seasonal wine taverns and culinary specialities of the region. Pair wine enjoyment with an evening dinner at our Kulinarium.', tag: 'Wine culture' },
   },
   {
-    id: 'automuseum',
-    icon: Compass,
-    image: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/ae4be06cc_deutsches-automuseum.jpg',
-    de: { title: 'Deutsches Automuseum Schloss Langenburg', desc: 'Direkt neben Schloss Langenburg befindet sich eines der faszinierendsten Automuseen Deutschlands. Historische Rennwagen, edle Oldtimer und Motorsport-Geschichte pur — ein unvergessliches Erlebnis für die ganze Familie.', tag: '5 min zu Fuß' },
-    en: { title: 'German Car Museum Langenburg Castle', desc: 'Right next to Langenburg Castle lies one of Germany\'s most fascinating car museums. Historic racing cars, classic automobiles and pure motorsport history — an unforgettable experience for the whole family.', tag: '5 min walk' },
+    id: 'altstadt',
+    icon: Camera,
+    // Langenburg Schloss entrance courtyard — historic cobblestone, baroque architecture
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Schloss-Langenburg-Eingangsbereich-2022.jpg/1280px-Schloss-Langenburg-Eingangsbereich-2022.jpg',
+    de: { title: 'Historische Altstadt Langenburg', desc: 'Die charmante Altstadt von Langenburg lädt zum Flanieren ein. Historische Fachwerkhäuser, gepflasterte Gassen und das barocke Schloss machen Langenburg zu einem der schönsten kleinen Städte Hohenlohes — und das alles direkt vor unserer Haustür.', tag: 'Stadtspaziergang' },
+    en: { title: 'Historic Old Town Langenburg', desc: 'The charming old town of Langenburg invites you to stroll. Historic half-timbered houses, cobbled streets and the baroque castle make Langenburg one of the most beautiful small towns in Hohenlohe — right on our doorstep.', tag: 'Town walk' },
   },
   {
     id: 'ausflug',
@@ -184,7 +185,7 @@ export default function DiscoverLangenburg() {
                     className={`relative h-64 sm:h-80 md:h-auto md:min-h-[320px] overflow-hidden ${isReversed ? 'md:col-start-2' : ''}`}>
                     <motion.img
                       src={att.image}
-                      alt={content.title}
+                      alt={`${content.title} — Krone Langenburg Hotel Hohenlohe`}
                       className="w-full h-full object-cover"
                       whileHover={{ scale: 1.06 }}
                       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
