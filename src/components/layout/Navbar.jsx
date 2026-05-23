@@ -5,8 +5,8 @@ import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
-const FLAG = { de: '🇩🇪', en: '🇬🇧', it: '🇮🇹' };
-const LANG_LABEL = { de: 'Deutsch', en: 'English', it: 'Italiano' };
+const FLAG = { de: '🇩🇪', en: '🇬🇧', it: '🇮🇹', es: '🇪🇸' };
+const LANG_LABEL = { de: 'Deutsch', en: 'English', it: 'Italiano', es: 'Español' };
 
 const NAV_LINKS = {
   de: [
@@ -38,6 +38,16 @@ const NAV_LINKS = {
     { to: '/story', label: 'La Nostra Storia' },
     { to: '/discover', label: 'Scopri' },
     { to: '/contact', label: 'Contatti' },
+  ],
+  es: [
+    { to: '/booking', label: 'Buscar & Reservar' },
+    { to: '/rooms', label: 'Habitaciones & Suites' },
+    { to: '/offers', label: 'Ofertas' },
+    { to: '/restaurant', label: 'Restaurante + Bar' },
+    { to: '/weddings', label: 'Eventos & Celebraciones' },
+    { to: '/story', label: 'Nuestra Historia' },
+    { to: '/discover', label: 'Descubrir' },
+    { to: '/contact', label: 'Contacto' },
   ],
 };
 
@@ -200,7 +210,7 @@ export default function Navbar() {
                     : 'bg-[#1C1714] hover:bg-[#2A2118] text-white'
                 }`}>
                 <BedDouble className="w-3.5 h-3.5" />
-                {lang === 'de' ? 'Zimmer buchen' : lang === 'en' ? 'Book Now' : 'Prenota'}
+                {lang === 'de' ? 'Zimmer buchen' : lang === 'en' ? 'Book Now' : lang === 'es' ? 'Reservar' : 'Prenota'}
               </Link>
               <Link to="/reserve"
                 className={`hidden xl:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[11px] tracking-widest uppercase font-body font-semibold transition-all border ${
@@ -209,7 +219,7 @@ export default function Navbar() {
                     : 'border-[#1C1714]/20 text-[#1C1714]/60 hover:border-[#1C1714] hover:text-[#1C1714]'
                 }`}>
                 <UtensilsCrossed className="w-3.5 h-3.5" />
-                {lang === 'de' ? 'Tisch' : 'Table'}
+                {lang === 'de' ? 'Tisch' : lang === 'es' ? 'Mesa' : lang === 'it' ? 'Tavolo' : 'Table'}
               </Link>
 
               {/* Mobile toggle */}
@@ -250,7 +260,7 @@ export default function Navbar() {
                     onClick={() => base44.auth.redirectToLogin(window.location.href)}
                     className="flex items-center justify-center gap-2 w-full text-center py-3 text-[#1C1714]/50 hover:text-[#8B6914] text-sm font-body transition-colors border border-[#EDE6D8] rounded-2xl">
                     <UserCircle className="w-4 h-4" />
-                    {lang === 'de' ? 'Einloggen / Registrieren' : 'Sign In / Register'}
+                    {lang === 'de' ? 'Einloggen / Registrieren' : lang === 'en' ? 'Sign In / Register' : lang === 'es' ? 'Iniciar sesión / Registrarse' : 'Accedi / Registrati'}
                   </button>
                 )}
               </div>

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { t } from './i18n';
 
 const LANG_KEY = 'krone_lang';
-const SUPPORTED = ['de', 'en', 'it'];
+const SUPPORTED = ['de', 'en', 'it', 'es'];
 
 export function useLang() {
   const [lang, setLangState] = useState(() => {

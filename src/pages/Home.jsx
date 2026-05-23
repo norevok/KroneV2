@@ -92,28 +92,31 @@ export default function Home() {
     {
       icon: BedDouble,
       to: '/rooms',
-      de: 'Zimmer & Suiten', en: 'Rooms & Suites', it: 'Camere & Suite',
-      desc_de: '13 stilvolle Zimmer für Geschäftsreisende, Paare und besondere Anlässe',
-      desc_en: '13 stylish rooms for business travellers, couples and special occasions',
-      desc_it: '13 camere eleganti per viaggiatori d\'affari, coppie e occasioni speciali',
+      de: 'Zimmer & Suiten', en: 'Rooms & Suites', it: 'Camere & Suite', es: 'Habitaciones & Suites',
+      desc_de: '10 exklusive Zimmer — sieben Doppelzimmer, ein Einzelzimmer und zwei großzügige King-Suites',
+      desc_en: '10 exclusive rooms — seven double rooms, one single room and two generous King Suites',
+      desc_it: '10 camere esclusive — sette doppie, una singola e due generose King Suite',
+      desc_es: '10 habitaciones exclusivas — siete dobles, una individual y dos generosas King Suites',
       img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
     },
     {
       icon: UtensilsCrossed,
       to: '/restaurant',
-      de: 'Restaurant + Bar', en: 'Restaurant + Bar', it: 'Ristorante + Bar',
-      desc_de: 'Mediterrane Küche mit regionalen Zutaten — Di–Sa zu Mittag & Abend, So ganztags',
+      de: 'Restaurant + Bar', en: 'Restaurant + Bar', it: 'Ristorante + Bar', es: 'Restaurante + Bar',
+      desc_de: 'Mediterrane Küche mit regionalen Zutaten — Di–Sa Mittag & Abend, So ganztags geöffnet',
       desc_en: 'Mediterranean cuisine with regional ingredients — Tue–Sat lunch & dinner, Sun all day',
       desc_it: 'Cucina mediterranea con ingredienti regionali — Mar–Sab pranzo & cena, Dom tutto il giorno',
+      desc_es: 'Cocina mediterránea con ingredientes regionales — Mar–Sáb almuerzo & cena, Dom todo el día',
       img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
     },
     {
       icon: Star,
       to: '/weddings',
-      de: 'Events & Feiern', en: 'Events & Celebrations', it: 'Events & Feste',
-      desc_de: 'Hochzeiten, Firmenfeiern und private Feste — maßgeschneidert und unvergesslich',
-      desc_en: 'Weddings, corporate events and private celebrations — tailored and unforgettable',
+      de: 'Events & Feiern', en: 'Events & Celebrations', it: 'Events & Feste', es: 'Eventos & Celebraciones',
+      desc_de: 'Hochzeiten, Firmenevents und private Feste — individuell gestaltet und unvergesslich',
+      desc_en: 'Weddings, corporate events and private celebrations — individually crafted and unforgettable',
       desc_it: 'Matrimoni, eventi aziendali e feste private — su misura e indimenticabili',
+      desc_es: 'Bodas, eventos corporativos y celebraciones privadas — a medida e inolvidables',
       img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
     },
   ];
@@ -130,45 +133,98 @@ export default function Home() {
       already: 'Bereits Mitglied? Einloggen',
       location_eyebrow: 'Mitten in Langenburg',
       location_title: 'Im Herzen des Hohenloher Landes',
-      location_text: 'Unser Hotel liegt direkt im historischen Zentrum von Langenburg — nur wenige Schritte vom Schloss Langenburg und dem malerischen Jagsttal entfernt. Der perfekte Ausgangspunkt für Ausflüge in die Region.',
+      location_text: 'Unser Hotel liegt direkt im historischen Zentrum von Langenburg — nur wenige Schritte vom Schloss Langenburg und dem malerischen Jagsttal entfernt. Der ideale Ausgangspunkt für Ausflüge ins Hohenloher Land.',
       discover_btn: 'Region entdecken',
       contact_btn: 'Kontakt aufnehmen',
       restaurant_reserve: 'Tisch reservieren',
       rooms_book: 'Zimmer buchen',
+      rooms_section: 'Unterkunft',
+      rooms_title: '10 Zimmer & Suiten',
+      rooms_text: 'Sieben stilvolle Doppelzimmer, ein Einzelzimmer und zwei großzügige King-Suites — jedes Zimmer verbindet historischen Charme mit zeitlosem Komfort. Schlafen, wo Geschichte lebt.',
+      rooms_cta: 'Alle Zimmer ansehen',
+      chip_castle: 'Schloss Langenburg',
+      chip_nature: 'Jagsttal-Natur',
+      chip_wine: 'Hohenloher Wein',
+      chip_museum: 'Automuseum',
+      account_cta: 'Zum Gäste-Konto',
     },
     en: {
       discover: 'Discover',
       experience: 'The Krone Experience',
-      learn_more: 'Learn more →',
+      learn_more: 'Explore →',
       benefits_eyebrow: 'Krone Guest Account',
-      benefits_title: 'Your Membership Benefits',
-      benefits_sub: 'Create a free account and enjoy exclusive benefits with every stay.',
-      register: 'Register for free',
+      benefits_title: 'Exclusive Member Benefits',
+      benefits_sub: 'Create a free guest account and unlock exclusive advantages with every stay.',
+      register: 'Create Free Account',
       already: 'Already a member? Sign in',
-      location_eyebrow: 'In the Heart of Langenburg',
-      location_title: 'At the Centre of the Hohenlohe Region',
-      location_text: 'Our hotel is located in the historic centre of Langenburg — just steps from Langenburg Castle and the picturesque Jagst Valley. The perfect base for exploring the region.',
-      discover_btn: 'Discover the Region',
-      contact_btn: 'Get in Touch',
+      location_eyebrow: 'Heart of Langenburg',
+      location_title: 'At the Centre of Hohenlohe',
+      location_text: 'Our hotel occupies a prime position in the historic heart of Langenburg — steps from the princely castle and the scenic Jagst Valley. The ideal starting point for excursions into one of Germany\'s most beautiful regions.',
+      discover_btn: 'Explore the Region',
+      contact_btn: 'Contact Us',
       restaurant_reserve: 'Reserve a Table',
       rooms_book: 'Book a Room',
+      rooms_section: 'Accommodation',
+      rooms_title: '10 Rooms & Suites',
+      rooms_text: 'Seven elegant double rooms, one single room and two spacious King Suites — each space blends historic character with refined modern comfort. Sleep where history lives.',
+      rooms_cta: 'View All Rooms',
+      chip_castle: 'Langenburg Castle',
+      chip_nature: 'Jagst Valley',
+      chip_wine: 'Hohenlohe Wine',
+      chip_museum: 'Automotive Museum',
+      account_cta: 'Go to Guest Account',
     },
     it: {
       discover: 'Scopri',
-      experience: "L'esperienza Krone",
-      learn_more: 'Scopri di più →',
+      experience: "L'Esperienza Krone",
+      learn_more: 'Scopri →',
       benefits_eyebrow: 'Account Ospiti Krone',
-      benefits_title: 'I vantaggi per i membri',
-      benefits_sub: 'Crea un account gratuito e goditi vantaggi esclusivi ad ogni soggiorno.',
-      register: 'Registrati gratuitamente',
+      benefits_title: 'Vantaggi esclusivi per i membri',
+      benefits_sub: 'Crea il tuo account gratuito e goditi vantaggi esclusivi ad ogni soggiorno.',
+      register: 'Crea account gratuito',
       already: 'Già membro? Accedi',
-      location_eyebrow: 'Nel cuore di Langenburg',
-      location_title: 'Al centro della regione di Hohenlohe',
-      location_text: 'Il nostro hotel si trova nel centro storico di Langenburg — a pochi passi dal castello e dalla pittoresca valle del Jagst. La base perfetta per esplorare la regione.',
-      discover_btn: 'Scopri la regione',
+      location_eyebrow: 'Cuore di Langenburg',
+      location_title: 'Nel cuore della regione di Hohenlohe',
+      location_text: 'Il nostro hotel occupa una posizione privilegiata nel centro storico di Langenburg — a pochi passi dal castello principesco e dalla pittoresca valle del Jagst. La base ideale per esplorare una delle regioni più belle della Germania.',
+      discover_btn: 'Esplora la regione',
       contact_btn: 'Contattaci',
       restaurant_reserve: 'Prenota un tavolo',
       rooms_book: 'Prenota una camera',
+      rooms_section: 'Alloggio',
+      rooms_title: '10 Camere & Suite',
+      rooms_text: 'Sette eleganti camere doppie, una camera singola e due spaziose King Suite — ogni spazio unisce fascino storico e comfort moderno raffinato. Dormite dove vive la storia.',
+      rooms_cta: 'Vedi tutte le camere',
+      chip_castle: 'Castello di Langenburg',
+      chip_nature: 'Valle del Jagst',
+      chip_wine: 'Vino di Hohenlohe',
+      chip_museum: 'Museo dell\'automobile',
+      account_cta: 'Vai all\'account ospiti',
+    },
+    es: {
+      discover: 'Descubra',
+      experience: 'La Experiencia Krone',
+      learn_more: 'Descubrir →',
+      benefits_eyebrow: 'Cuenta de Huéspedes Krone',
+      benefits_title: 'Ventajas exclusivas para socios',
+      benefits_sub: 'Crea tu cuenta gratuita y disfruta de ventajas exclusivas en cada estancia.',
+      register: 'Crear cuenta gratuita',
+      already: '¿Ya eres socio? Inicia sesión',
+      location_eyebrow: 'Corazón de Langenburg',
+      location_title: 'En el corazón de la región de Hohenlohe',
+      location_text: 'Nuestro hotel ocupa una posición privilegiada en el centro histórico de Langenburg — a pocos pasos del castillo principesco y del pintoresco valle del Jagst. El punto de partida ideal para explorar una de las regiones más bellas de Alemania.',
+      discover_btn: 'Explorar la región',
+      contact_btn: 'Contáctenos',
+      restaurant_reserve: 'Reservar mesa',
+      rooms_book: 'Reservar habitación',
+      rooms_section: 'Alojamiento',
+      rooms_title: '10 Habitaciones & Suites',
+      rooms_text: 'Siete elegantes habitaciones dobles, una individual y dos amplias King Suites — cada espacio combina el encanto histórico con un confort moderno refinado. Duerma donde vive la historia.',
+      rooms_cta: 'Ver todas las habitaciones',
+      chip_castle: 'Castillo de Langenburg',
+      chip_nature: 'Valle del Jagst',
+      chip_wine: 'Vino de Hohenlohe',
+      chip_museum: 'Museo del automóvil',
+      account_cta: 'Ir a mi cuenta',
     },
   };
   const c = t[lang] || t.de;
@@ -324,7 +380,7 @@ export default function Home() {
             ) : (
               <Link to="/account"
                 className="px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-semibold text-xs tracking-widest uppercase rounded-full transition-all shadow-lg inline-flex items-center gap-2">
-                {lang === 'de' ? 'Zum Gäste-Konto' : lang === 'en' ? 'Go to Guest Account' : 'Vai all\'account ospiti'} <ArrowRight className="w-4 h-4" />
+                {c.account_cta} <ArrowRight className="w-4 h-4" />
               </Link>
             )}
           </div>
@@ -356,10 +412,10 @@ export default function Home() {
                     <f.icon className="w-4.5 h-4.5 text-[#8B6914]" />
                   </div>
                   <h3 className="font-display text-xl font-light text-[#1C1714] mb-2">
-                    {f[lang] || f.de}
+                    {f[lang] || f.es || f.de}
                   </h3>
                   <p className="font-body text-sm text-[#8A7A6A] leading-relaxed mb-4">
-                    {lang === 'de' ? f.desc_de : lang === 'en' ? f.desc_en : f.desc_it}
+                    {lang === 'de' ? f.desc_de : lang === 'en' ? f.desc_en : lang === 'es' ? f.desc_es : f.desc_it}
                   </p>
                   <span className="text-[#8B6914] text-xs tracking-[0.2em] uppercase font-body font-semibold group-hover:underline">
                     {c.learn_more}
@@ -377,24 +433,14 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body mb-3">
-                {lang === 'de' ? 'Unterkunft' : lang === 'en' ? 'Accommodation' : 'Alloggio'}
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714] mb-5">
-                {lang === 'de' ? '13 Zimmer & Suiten' : lang === 'en' ? '13 Rooms & Suites' : '13 Camere & Suite'}
-              </h2>
-              <p className="font-body text-[#4A3F35] leading-relaxed mb-8">
-                {lang === 'de'
-                  ? 'Von eleganten Einzelzimmern bis zur großzügigen Superior Suite — jeder Raum im Krone Langenburg verbindet historisches Flair mit modernem Komfort. Schlafen, wo Geschichte lebt.'
-                  : lang === 'en'
-                  ? 'From elegant single rooms to the spacious Superior Suite — every room combines historic character with modern comfort. Sleep where history lives.'
-                  : 'Dalle eleganti camere singole alla spaziosa Superior Suite — ogni camera combina carattere storico con comfort moderno.'}
-              </p>
+              <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body mb-3">{c.rooms_section}</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714] mb-5">{c.rooms_title}</h2>
+              <p className="font-body text-[#4A3F35] leading-relaxed mb-8">{c.rooms_text}</p>
               <div className="space-y-3 mb-8">
                 {[
-                  lang === 'de' ? 'Bester Preis bei Direktbuchung' : lang === 'en' ? 'Best price on direct booking' : 'Miglior prezzo con prenotazione diretta',
-                  lang === 'de' ? 'Frühstück optional ab €14 p.P.' : lang === 'en' ? 'Breakfast optional from €14 p.p.' : 'Colazione opzionale da €14 a persona',
-                  lang === 'de' ? 'Gratis WLAN in allen Zimmern' : lang === 'en' ? 'Free Wi-Fi in all rooms' : 'Wi-Fi gratuito in tutte le camere',
+                  lang === 'de' ? 'Bester Preis bei Direktbuchung' : lang === 'en' ? 'Best rate guaranteed on direct booking' : lang === 'es' ? 'Mejor precio garantizado al reservar directo' : 'Miglior prezzo garantito con prenotazione diretta',
+                  lang === 'de' ? 'Frühstück optional ab €14 p.P.' : lang === 'en' ? 'Breakfast available from €14 per person' : lang === 'es' ? 'Desayuno disponible desde €14 por persona' : 'Colazione disponibile da €14 a persona',
+                  lang === 'de' ? 'Kostenloses WLAN in allen Zimmern' : lang === 'en' ? 'Complimentary Wi-Fi throughout' : lang === 'es' ? 'Wi-Fi gratuito en todas las habitaciones' : 'Wi-Fi gratuito in tutte le camere',
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-[#8B6914] flex-shrink-0" />
@@ -404,7 +450,7 @@ export default function Home() {
               </div>
               <Link to="/rooms"
                 className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all shadow-lg">
-                {lang === 'de' ? 'Alle Zimmer ansehen' : lang === 'en' ? 'View All Rooms' : 'Vedi tutte le camere'} <ArrowRight className="w-4 h-4" />
+                {c.rooms_cta} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -468,34 +514,84 @@ export default function Home() {
       </div>
 
       {/* ── LOCATION TEASER ── */}
-      <div className="bg-[#FAF7F2] py-16 sm:py-20 px-4 sm:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          <MapPin className="w-6 h-6 text-[#8B6914] mx-auto mb-4" />
-          <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body mb-3">{c.location_eyebrow}</p>
-          <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714] mb-5">{c.location_title}</h2>
-          <p className="font-body text-[#4A3F35] text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">{c.location_text}</p>
-          <div className="flex flex-wrap gap-4 justify-center mb-10">
+      <div className="relative bg-[#1C1714] py-20 sm:py-28 px-4 sm:px-8 overflow-hidden">
+        {/* Background parallax image */}
+        <div className="absolute inset-0">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg"
+            alt="Langenburg"
+            className="w-full h-full object-cover opacity-20"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/80 via-[#1C1714]/60 to-[#1C1714]/95" />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}>
+            <MapPin className="w-5 h-5 text-[#C9A96E] mx-auto mb-4" />
+            <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-3">{c.location_eyebrow}</p>
+            <h2 className="font-display text-3xl sm:text-5xl font-light text-white mb-6">{c.location_title}</h2>
+            <p className="font-body text-white/55 text-sm sm:text-base max-w-2xl mx-auto mb-12 leading-relaxed">{c.location_text}</p>
+          </motion.div>
+
+          {/* Premium 3D-style highlight cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
             {[
-              { e: '🏰', de: 'Schloss Langenburg', en: 'Langenburg Castle' },
-              { e: '🌿', de: 'Jagsttal-Natur', en: 'Jagst Valley Nature' },
-              { e: '🍷', de: 'Hohenloher Wein', en: 'Hohenlohe Wine' },
-              { e: '🚗', de: 'Auto- & Technikmuseum', en: 'Automotive Museum' },
+              {
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Schloss-Langenburg-Eingangsbereich-2022.jpg/800px-Schloss-Langenburg-Eingangsbereich-2022.jpg',
+                label: c.chip_castle, dist: '5 min',
+              },
+              {
+                img: 'https://images.unsplash.com/photo-1565814236723-b42294c9676c?w=600&q=80',
+                label: c.chip_nature, dist: '0 min',
+              },
+              {
+                img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=80',
+                label: c.chip_wine, dist: '15 min',
+              },
+              {
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/ae4be06cc_deutsches-automuseum.jpg',
+                label: c.chip_museum, dist: '5 min',
+              },
             ].map((item, i) => (
-              <div key={i} className="bg-white border border-[#EDE6D8] rounded-xl px-5 py-3.5 flex items-center gap-3 shadow-sm">
-                <span className="text-xl">{item.e}</span>
-                <span className="text-[#4A3F35] font-body text-sm">{lang === 'en' ? item.en : item.de}</span>
-              </div>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="relative rounded-2xl overflow-hidden h-36 sm:h-44 group cursor-default"
+                style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,110,0.15)' }}>
+                <img src={item.img} alt={item.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                {/* Gold top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#C9A96E]/60 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                  <p className="text-white font-body text-xs font-semibold leading-tight">{item.label}</p>
+                  <p className="text-[#C9A96E] text-[10px] font-body mt-0.5 tracking-wider">{item.dist}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
+
           <div className="flex flex-wrap gap-3 justify-center">
-            <Link to="/discover"
-              className="px-6 py-3 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all shadow-lg">
-              {c.discover_btn}
-            </Link>
-            <Link to="/contact"
-              className="px-6 py-3 border border-[#8B6914]/40 text-[#8B6914] hover:bg-[#8B6914]/5 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
-              {c.contact_btn}
-            </Link>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link to="/discover"
+                className="px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all shadow-[0_8px_30px_rgba(201,169,110,0.3)]">
+                {c.discover_btn}
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <Link to="/contact"
+                className="px-7 py-3.5 border border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
+                {c.contact_btn}
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>
