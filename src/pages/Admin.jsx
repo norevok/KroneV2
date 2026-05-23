@@ -238,6 +238,10 @@ export default function Admin() {
               <UtensilsCrossed className="w-3.5 h-3.5" />
               <span className="hidden sm:inline text-xs">Reservierungen</span>
             </Link>
+            <Link to="/admin/guests" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
+              <Users className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline text-xs">Gäste</span>
+            </Link>
             <button onClick={loadAll} className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-ivory text-xs font-body transition-colors">
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
               <span className="hidden sm:inline">Refresh</span>

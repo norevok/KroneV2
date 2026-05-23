@@ -50,6 +50,7 @@ import AdminOpeningHours from './pages/AdminOpeningHours';
 import BookingConfirmed from './pages/BookingConfirmed';
 import AdminBeds24Bookings from './pages/AdminBeds24Bookings';
 import AdminReservations from './pages/AdminReservations';
+import AdminGuests from './pages/AdminGuests';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -123,6 +124,7 @@ const AuthenticatedApp = () => {
         <Route path="/booking-confirmed" element={<BookingConfirmed />} />
         <Route path="/admin/beds24-bookings" element={<AdminBeds24Bookings />} />
         <Route path="/admin/reservations" element={<AdminReservations />} />
+        <Route path="/admin/guests" element={<AdminGuests />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

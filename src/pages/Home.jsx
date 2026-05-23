@@ -9,18 +9,11 @@ import { base44 } from '@/api/base44Client';
 
 const SLIDES = [
   {
-    // Krone Langenburg exterior — generated professional hotel photo
-    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dd30effe5_generated_image.png',
-    de: { title: 'Willkommen im Krone Langenburg.', sub: 'Ihr Boutique-Hotel im Herzen von Langenburg — direkt neben Schloss Langenburg.' },
-    en: { title: 'Welcome to Krone Langenburg.', sub: 'Your boutique hotel in the heart of Langenburg — right next to Langenburg Castle.' },
-    it: { title: 'Benvenuti al Krone Langenburg.', sub: 'Il vostro hotel boutique nel cuore di Langenburg — vicino al castello.' },
-  },
-  {
-    // Premium hotel room — warm lighting, clean bed detail
-    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
-    de: { title: 'Zimmer mit Ruhe und Charakter', sub: 'Entdecken Sie unsere 13 Zimmer für Geschäftsreisen, Wochenenden und besondere Anlässe.' },
-    en: { title: 'Rooms with Peace and Character', sub: 'Discover our 13 rooms for business trips, weekends and special occasions.' },
-    it: { title: 'Camere con carattere e tranquillità', sub: 'Scoprite le nostre 13 camere per viaggi di lavoro, weekend e occasioni speciali.' },
+    // Doppelzimmer mit Stadtblick — premium room with city view
+    url: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1800&q=85',
+    de: { title: 'Doppelzimmer mit Stadtblick.', sub: 'Historischer Charme trifft modernen Komfort — Blick auf die malerische Altstadt von Langenburg.' },
+    en: { title: 'Double Room with City View.', sub: 'Historic charm meets modern comfort — overlooking the picturesque old town of Langenburg.' },
+    it: { title: 'Camera doppia con vista sulla città.', sub: 'Fascino storico incontra il comfort moderno — vista sulla pittoresca città vecchia di Langenburg.' },
   },
   {
     // King Suite — own hotel photo
@@ -42,13 +35,6 @@ const SLIDES = [
     de: { title: 'Hochzeiten & Events in Langenburg', sub: 'Hochzeiten, Firmenevents und Familienfeiern — wir gestalten Ihren besonderen Moment.' },
     en: { title: 'Weddings & Events in Langenburg', sub: 'Weddings, corporate events and family celebrations — we create your special moment.' },
     it: { title: 'Matrimoni & eventi a Langenburg', sub: 'Matrimoni, eventi aziendali e feste di famiglia — creiamo il vostro momento speciale.' },
-  },
-  {
-    // Schloss Langenburg — Wikimedia CC BY-SA 4.0, morning fog, real castle
-    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg',
-    de: { title: 'Schloss Langenburg & Hohenlohe', sub: 'Idyllisch gelegen — Ausflüge, Natur und Geschichte direkt vor der Tür.' },
-    en: { title: 'Langenburg Castle & Hohenlohe', sub: 'Idyllically located — excursions, nature and history right at your doorstep.' },
-    it: { title: 'Castello di Langenburg e Hohenlohe', sub: 'Situato idillicamente — escursioni, natura e storia a due passi.' },
   },
 ];
 
@@ -704,9 +690,10 @@ export default function Home() {
           </div>
         </div>
       </motion.div>
-    </div>
+      </div>
 
-    {/* AI Chat Widget */}
-    <ChatWidget />
+      {/* AI Chat Widget */}
+      <ChatWidget />
+    </div>
   );
 }

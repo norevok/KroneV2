@@ -1,155 +1,296 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
-import { ArrowRight } from 'lucide-react';
-
-const CHEF_IMG = "https://static.wixstatic.com/media/e6b39b_b2703a4b8aa7481b9e9ec3a3a9eb6892~mv2.webp/v1/fill/w_324,h_434,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ammesso-6512-1bfcdeba.webp";
-const RESTAURANT_IMG = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80";
+import { motion } from 'framer-motion';
+import { Calendar, MapPin, Users, UtensilsCrossed, BedDouble, Heart, Star, ArrowRight, Wine, Music, History } from 'lucide-react';
 
 export default function Story() {
   const { lang } = useLang();
 
-  const c = {
+  const content = {
     de: {
-      label: 'Unsere Geschichte', title: 'Ein Traum, der seit Jahren köchelt',
-      brand: 'Kulinarium by Ammesso — Wo Geschmack zu Hause ist',
-      text1: 'Mitten im Herzen Hohenlohes vereint Kulinarium by Ammesso mediterrane Leichtigkeit mit deutscher Bodenständigkeit. Unsere Küche ist ehrlich, emotional und voller Persönlichkeit.',
-      text2: 'Hier entstehen Gerichte, die Geschichten erzählen — mit Liebe zum Detail, Leidenschaft fürs Handwerk und einer tiefen Verbundenheit zu hochwertigen Zutaten. Bei uns steht der Mensch im Mittelpunkt — sowohl in der Küche als auch am Tisch.',
-      chef_label: 'Chefkoch & Gründer',
-      quote: '"Ammesso bringt Gefühl auf den Teller – bei ihm schmeckt man Herz, Vergangenheit und Vision in jedem Bissen."',
-      chef_bio: 'Omar Ammesso, mit vollem Namen Omar Ouardaoui, ist nicht nur der Gründer von Kulinarium, sondern auch dessen kreativer Kern. Seine Leidenschaft fürs Kochen entdeckte er früh – inspiriert von den Aromen seiner Kindheit und einer tiefen Liebe zur mediterranen Küche. Ausgebildet in verschiedenen Küchen Europas, entwickelte er schnell seinen eigenen Stil: kraftvoll, persönlich und voller Emotion. Für Ammesso ist Kochen kein Beruf – es ist Sprache, Identität, und eine tägliche Liebeserklärung an das Leben.',
+      title: 'Unsere Geschichte',
+      subtitle: 'Von der historischen Krone zum modernen Kulinarium by Ammesso',
+      krone_title: 'Die Krone Langenburg – Eine Historie',
+      krone_period: 'Historie seit dem 16. Jahrhundert',
+      krone_text: `Die Krone in Langenburg blickt auf eine beeindruckende Geschichte zurück, die bis ins 16. Jahrhundert reicht. Erstmals erwähnt wurde das Gasthaus in den Chroniken der Region, als es bereits als zentraler Treffpunkt der Hohenloher Gesellschaft diente.
+
+Über die Jahrhunderte war die Krone Zeuge zahlreicher historischer Ereignisse – von Fürstenhochzeiten im benachbarten Schloss Langenburg bis zu den gesellschaftlichen Veränderungen der Moderne. Das Gebäude selbst ist ein prachtvolles Beispiel traditioneller deutscher Gasthaus-Architektur mit charakteristischen Fachwerk-Elementen und historischen Gewölbekellern.
+
+Bis in die jüngste Vergangenheit blieb die Krone ein wichtiger Bestandteil des kulturellen Lebens in Langenburg – ein Ort, an dem Generationen zusammenkamen, feierten und die regionale Küche genossen.`,
+      amesso_title: 'Die Neue Ära – Kulinarium by Ammesso',
+      amesso_period: 'Seit 2025 – Omar Ammesso',
+      amesso_text: `Im Jahr 2025 begann ein neues Kapitel in der Geschichte der Krone. Omar Ammesso, ein junger Gastronom mit Vision und Leidenschaft für die mediterrane Küche, erkannte das Potenzial dieses historischen Ortes.
+
+Mit tiefem Respekt vor der Tradition und einem modernen Blick auf die Gastronomie entstand das Kulinarium by Ammesso – eine einzigartige Symbiose aus der historischen Substanz der Krone und der zeitgenössischen, leidenschaftlichen Küche von Omar und seinem Team.
+
+Die Philosophie ist einfach und doch außergewöhnlich: Die Wärme der italienischen Küche mit den besten Zutaten der Region Hohenlohe zu verbinden. Pasta wird hausgemacht, Fleisch und Fisch mit Liebe zubereitet, und jedes Gericht erzählt eine Geschichte – von der Vergangenheit der Krone bis zur Vision von Ammesso.
+
+Was als Traum begann, ist heute Realität geworden: Ein Ort, an dem Geschichte auf Moderne trifft, an dem Tradition und Innovation Hand in Hand gehen, und an dem jeder Gast Teil dieser besonderen Geschichte wird.`,
+      values_title: 'Unsere Werte',
       values: [
-        { e: '🫀', t: 'Mit Herz', d: 'Jedes Gericht ist eine persönliche Aussage.' },
-        { e: '🌿', t: 'Mit Ehrlichkeit', d: 'Hochwertige, ehrliche Zutaten ohne Kompromisse.' },
-        { e: '🏡', t: 'Mit Wärme', d: 'Jeder Gast fühlt sich wie zu Hause.' },
+        { icon: History, title: 'Tradition bewahren', desc: 'Respekt vor der Geschichte der Krone' },
+        { icon: UtensilsCrossed, title: 'Leidenschaft kochen', desc: 'Mediterrane Küche mit Herz' },
+        { icon: Users, title: 'Gastfreundschaft leben', desc: 'Jeder Gast ist Familie' },
+        { icon: Star, title: 'Qualität liefern', desc: 'Nur die besten Zutaten' },
       ],
-      cta: 'Tisch reservieren',
+      cta_title: 'Erleben Sie unsere Geschichte',
+      cta_subtitle: 'Besuchen Sie uns und werden Sie Teil des Kulinarium by Ammesso',
+      cta_reserve: 'Tisch reservieren',
+      cta_rooms: 'Zimmer buchen',
     },
     en: {
-      label: 'Our Story', title: 'A Dream Years in the Making',
-      brand: 'Kulinarium by Ammesso — Where Taste Feels Like Home',
-      text1: 'In the heart of Hohenlohe, Kulinarium by Ammesso combines Mediterranean lightness with German groundedness. Our cuisine is honest, emotional and full of personality.',
-      text2: 'Dishes are created that tell stories — with attention to detail, passion for craftsmanship and a deep connection to quality ingredients. The person is at the centre — in the kitchen and at the table.',
-      chef_label: 'Head Chef & Founder',
-      quote: '"Ammesso brings feeling to the plate — in every bite you taste heart, history and vision."',
-      chef_bio: 'Omar Ammesso, born Omar Ouardaoui, is not only the founder of Kulinarium but also its creative core. His passion for cooking started early — inspired by the aromas of his childhood and a deep love for Mediterranean cuisine. Trained in various European kitchens, he quickly developed his own style: powerful, personal and full of emotion. For Ammesso, cooking is not a profession — it is language, identity, and a daily declaration of love for life.',
+      title: 'Our Story',
+      subtitle: 'From the historic Krone to the modern Kulinarium by Ammesso',
+      krone_title: 'The Krone Langenburg – A History',
+      krone_period: 'History since the 16th century',
+      krone_text: `The Krone in Langenburg looks back on an impressive history dating back to the 16th century. The inn was first mentioned in the chronicles of the region, where it already served as a central meeting point of Hohenlohe society.
+
+Over the centuries, the Krone witnessed numerous historical events – from princely weddings at the nearby Langenburg Castle to the social changes of modern times. The building itself is a magnificent example of traditional German inn architecture with characteristic half-timbered elements and historic vaulted cellars.
+
+Until recently, the Krone remained an important part of cultural life in Langenburg – a place where generations came together to celebrate and enjoy regional cuisine.`,
+      amesso_title: 'The New Era – Kulinarium by Ammesso',
+      amesso_period: 'Since 2025 – Omar Ammesso',
+      amesso_text: `In 2025, a new chapter began in the history of the Krone. Omar Ammesso, a young restaurateur with vision and passion for Mediterranean cuisine, recognized the potential of this historic location.
+
+With deep respect for tradition and a modern perspective on gastronomy, Kulinarium by Ammesso was born – a unique symbiosis of the Krone's historical substance and Omar's contemporary, passionate cuisine with his team.
+
+The philosophy is simple yet extraordinary: to combine the warmth of Italian cuisine with the finest ingredients from the Hohenlohe region. Pasta is homemade, meat and fish prepared with love, and every dish tells a story – from the Krone's past to Ammesso's vision.
+
+What began as a dream has become reality: a place where history meets modernity, where tradition and innovation go hand in hand, and where every guest becomes part of this special story.`,
+      values_title: 'Our Values',
       values: [
-        { e: '🫀', t: 'With Heart', d: 'Every dish is a personal statement.' },
-        { e: '🌿', t: 'With Honesty', d: 'Quality, honest ingredients without compromise.' },
-        { e: '🏡', t: 'With Warmth', d: 'Every guest feels at home.' },
+        { icon: History, title: 'Preserve Tradition', desc: 'Respect for the Krone history' },
+        { icon: UtensilsCrossed, title: 'Cook with Passion', desc: 'Mediterranean cuisine with heart' },
+        { icon: Users, title: 'Live Hospitality', desc: 'Every guest is family' },
+        { icon: Star, title: 'Deliver Quality', desc: 'Only the finest ingredients' },
       ],
-      cta: 'Reserve a Table',
+      cta_title: 'Experience Our Story',
+      cta_subtitle: 'Visit us and become part of Kulinarium by Ammesso',
+      cta_reserve: 'Reserve a Table',
+      cta_rooms: 'Book Rooms',
     },
     it: {
-      label: 'La nostra storia', title: 'Un sogno cucinato per anni',
-      brand: 'Kulinarium by Ammesso — Dove il gusto è di casa',
-      text1: 'Nel cuore dell\'Hohenlohe, Kulinarium by Ammesso unisce la leggerezza mediterranea con la concretezza tedesca. La nostra cucina è onesta, emozionale e piena di personalità.',
-      text2: 'Qui nascono piatti che raccontano storie — con attenzione ai dettagli, passione per l\'artigianato e un profondo legame con ingredienti di qualità.',
-      chef_label: 'Chef & Fondatore',
-      quote: '"Ammesso porta emozione nel piatto — in ogni boccone si sente cuore, passato e visione."',
-      chef_bio: 'Omar Ammesso, vero nome Omar Ouardaoui, non è solo il fondatore di Kulinarium, ma anche il suo cuore creativo. La sua passione per la cucina è nata presto — ispirata dagli aromi della sua infanzia e da un profondo amore per la cucina mediterranea.',
+      title: 'La Nostra Storia',
+      subtitle: 'Dalla storica Krone al moderno Kulinarium by Ammesso',
+      krone_title: 'La Krone Langenburg – Una Storia',
+      krone_period: 'Storia dal XVI secolo',
+      krone_text: `La Krone di Langenburg vanta una storia impressionante che risale al XVI secolo. La locanda fu menzionata per la prima volta nelle cronache della regione, dove già serviva come punto di incontro centrale della società di Hohenlohe.
+
+Nel corso dei secoli, la Krone è stata testimone di numerosi eventi storici – dai matrimoni principeschi nel vicino Castello di Langenburg ai cambiamenti sociali dell'età moderna. L'edificio stesso è un magnifico esempio di architettura tradizionale tedesca con caratteristici elementi a graticcio e storiche cantine a volta.
+
+Fino a poco tempo fa, la Krone è rimasta una parte importante della vita culturale di Langenburg – un luogo dove le generazioni si incontravano per celebrare e gustare la cucina regionale.`,
+      amesso_title: 'La Nuova Era – Kulinarium by Ammesso',
+      amesso_period: 'Dal 2025 – Omar Ammesso',
+      amesso_text: `Nel 2025 è iniziato un nuovo capitolo nella storia della Krone. Omar Ammesso, un giovane ristoratore con visione e passione per la cucina mediterranea, ha riconosciuto il potenziale di questo luogo storico.
+
+Con profondo rispetto per la tradizione e una prospettiva moderna sulla gastronomia, è nato il Kulinarium by Ammesso – una simbiosi unica tra la sostanza storica della Krone e la cucina contemporanea e appassionata di Omar con il suo team.
+
+La filosofia è semplice ma straordinaria: combinare il calore della cucina italiana con i migliori ingredienti della regione di Hohenlohe. La pasta è fatta in casa, carne e pesce preparati con amore, e ogni piatto racconta una storia – dal passato della Krone alla visione di Ammesso.
+
+Quello che è iniziato come un sogno è diventato realtà: un luogo dove la storia incontra la modernità, dove tradizione e innovazione vanno di pari passo, e dove ogni ospite diventa parte di questa storia speciale.`,
+      values_title: 'I Nostri Valori',
       values: [
-        { e: '🫀', t: 'Con Cuore', d: 'Ogni piatto è una dichiarazione personale.' },
-        { e: '🌿', t: 'Con Onestà', d: 'Ingredienti di alta qualità, senza compromessi.' },
-        { e: '🏡', t: 'Con Calore', d: 'Ogni ospite si sente a casa.' },
+        { icon: History, title: 'Preservare la Tradizione', desc: 'Rispetto per la storia della Krone' },
+        { icon: UtensilsCrossed, title: 'Cucinare con Passione', desc: 'Cucina mediterranea con cuore' },
+        { icon: Users, title: 'Vivere l\'Ospitalità', desc: 'Ogni ospite è famiglia' },
+        { icon: Star, title: 'Offrire Qualità', desc: 'Solo i migliori ingredienti' },
       ],
-      cta: 'Prenota un tavolo',
+      cta_title: 'Vivi la Nostra Storia',
+      cta_subtitle: 'Visitateci e diventate parte del Kulinarium by Ammesso',
+      cta_reserve: 'Prenota un tavolo',
+      cta_rooms: 'Prenota camere',
     },
   };
-  const cv = c[lang] || c.de;
+
+  const c = content[lang] || content.de;
 
   return (
-    <div className="min-h-screen bg-ivory text-charcoal pb-20 lg:pb-0">
-      {/* Hero */}
-      <div className="relative h-[50vh] sm:h-[55vh] min-h-[320px] sm:min-h-[360px] overflow-hidden">
-        <img src={RESTAURANT_IMG} alt="Kulinarium by Ammesso" className="w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/25 to-charcoal" />
-        <div className="absolute inset-0 flex items-end pb-10 sm:pb-12 px-5">
-          <div className="max-w-3xl mx-auto w-full">
-            <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-3">{cv.label}</p>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl font-light text-ivory leading-tight">{cv.title}</h1>
+    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pt-20 pb-16">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-gradient-to-b from-[#2A2118] to-[#1C1714] py-20 sm:py-28">
+        <div className="absolute inset-0 opacity-20">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1400&q=85" alt="Historic Restaurant Interior" className="w-full h-full object-cover" />
+        </div>
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-5">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-3"
+          >
+            Krone Langenburg by Ammesso
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-display text-3xl sm:text-5xl font-light text-white mb-4"
+          >
+            {c.title}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-white/60 font-body text-sm sm:text-base"
+          >
+            {c.subtitle}
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Timeline Section */}
+      <div className="max-w-5xl mx-auto px-5 py-16">
+        {/* Krone History */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <History className="w-6 h-6 text-[#8B6914]" />
+                <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body">{c.krone_period}</p>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714] mb-6">{c.krone_title}</h2>
+              <div className="space-y-4 font-body text-[#4A3F35] leading-relaxed whitespace-pre-line">
+                {c.krone_text.split('\n\n').map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+            </div>
+            <div className="relative">
+              <div className="rounded-2xl overflow-hidden shadow-2xl premium-shadow">
+                <img
+                  src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?w=800&q=85"
+                  alt="Historic Krone Building Langenburg"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#C9A96E]/10 rounded-full blur-2xl" />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Divider */}
+        <div className="flex items-center gap-4 my-16">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/30 to-transparent" />
+          <div className="w-12 h-12 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center">
+            <Star className="w-5 h-5 text-[#C9A96E]" />
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/30 to-transparent" />
+        </div>
+
+        {/* Amesso Story */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="order-2 lg:order-1 relative">
+              <div className="rounded-2xl overflow-hidden shadow-2xl premium-shadow">
+                <img
+                  src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=800&q=85"
+                  alt="Kulinarium by Ammesso Modern Restaurant"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#C9A96E]/10 rounded-full blur-2xl" />
+            </div>
+            <div className="order-1 lg:order-2">
+              <div className="flex items-center gap-3 mb-4">
+                <Star className="w-6 h-6 text-[#8B6914]" />
+                <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body">{c.amesso_period}</p>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714] mb-6">{c.amesso_title}</h2>
+              <div className="space-y-4 font-body text-[#4A3F35] leading-relaxed whitespace-pre-line">
+                {c.amesso_text.split('\n\n').map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Values Section */}
+      <div className="bg-white border-t border-[#EDE6D8] py-16">
+        <div className="max-w-6xl mx-auto px-5">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body mb-3">{c.values_title}</p>
+          </motion.div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {c.values.map((v, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                className="text-center p-6"
+              >
+                <div className="w-14 h-14 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center mx-auto mb-4">
+                  <v.icon className="w-6 h-6 text-[#C9A96E]" />
+                </div>
+                <h3 className="font-display text-lg font-light text-[#1C1714] mb-2">{v.title}</h3>
+                <p className="font-body text-sm text-[#8A7A6A]">{v.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Brand quote */}
-      <section className="py-14 px-5 bg-stone border-y border-gold-light/15">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="section-divider mb-8" />
-          <p className="font-display text-2xl font-light italic" style={{color:'#5A4A3A'}}>&ldquo;{cv.brand}&rdquo;</p>
-          <div className="section-divider mt-8" />
+      {/* CTA Section */}
+      <div className="bg-gradient-to-b from-[#1C1714] to-[#2A2118] py-16 sm:py-20">
+        <div className="max-w-4xl mx-auto text-center px-5">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-display text-3xl sm:text-4xl font-light text-white mb-4"
+          >
+            {c.cta_title}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-white/50 font-body text-sm mb-8"
+          >
+            {c.cta_subtitle}
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link to="/reserve" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-lg">
+              <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
+            </Link>
+            <Link to="/rooms" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all">
+              <BedDouble className="w-4 h-4" /> {c.cta_rooms}
+            </Link>
+          </motion.div>
         </div>
-      </section>
-
-      {/* Story text */}
-      <section className="py-16 px-5 bg-ivory">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <p className="font-body text-lg leading-relaxed" style={{color:'#3A2E25'}}>{cv.text1}</p>
-          <p className="font-body leading-relaxed" style={{color:'#5A4A3A'}}>{cv.text2}</p>
-          
-          {/* Additional context */}
-          <div className="pt-8 border-t border-stone-mid space-y-4">
-            <h3 className="font-display text-xl font-light text-charcoal">
-              {lang === 'de' ? 'Inspiration & Handwerk' : lang === 'en' ? 'Inspiration & Craft' : 'Ispirazione & Mestiere'}
-            </h3>
-            <p className="text-ivory/45 text-sm leading-relaxed">
-              {lang === 'de'
-                ? 'Unsere Küche speist sich aus drei Quellen: den klassischen Techniken Süditaliens, der Frische des Hohenloher Marktes und der persönlichen Vision des Küchenchefs. Das Ergebnis sind Gerichte, die sich anfühlen wie die Heimat schmeckt — vertraut, warmherzig und unvergesslich.'
-                : lang === 'en'
-                ? 'Our cuisine draws from three sources: the classic techniques of Southern Italy, the freshness of the Hohenlohe market, and the personal vision of our chef. The result is cuisine that tastes like home feels — familiar, warm-hearted, and unforgettable.'
-                : 'La nostra cucina attinge da tre fonti: le tecniche classiche dell\'Italia meridionale, la freschezza del mercato di Hohenlohe e la visione personale dello chef. Il risultato sono piatti che profumano di casa — familiari, calorosi e indimenticabili.'}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Chef section */}
-      <section className="py-12 sm:py-16 px-4 sm:px-5 bg-espresso">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <div className="relative rounded-2xl overflow-hidden h-72 sm:h-[480px] shadow-premium">
-            <img src={CHEF_IMG} alt="Chef Omar Ammesso" className="w-full h-full object-cover object-top" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <p className="font-display text-2xl text-ivory font-light">Omar Ammesso</p>
-              <p className="text-gold text-xs tracking-widest font-body mt-0.5">{cv.chef_label}</p>
-            </div>
-          </div>
-          <div>
-            <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-4">{cv.chef_label}</p>
-            <h2 className="font-display text-4xl font-light text-ivory mb-2">Omar Ammesso</h2>
-            <p className="text-ivory/35 text-sm italic font-body mb-6">Omar Ouardaoui</p>
-            <blockquote className="border-l-2 border-gold/40 pl-5 mb-6 italic font-display text-xl text-ivory/60 leading-relaxed">
-              {cv.quote}
-            </blockquote>
-            <p className="text-ivory/50 font-body text-sm leading-relaxed">{cv.chef_bio}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="py-12 sm:py-16 px-4 sm:px-5 bg-ivory">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
-          {cv.values.map((v, i) => (
-            <div key={i} className="surface-card rounded-2xl p-6 sm:p-8 flex sm:flex-col items-center sm:items-center gap-4 sm:gap-0 text-left sm:text-center">
-              <div className="text-3xl sm:text-4xl sm:mb-4 flex-shrink-0">{v.e}</div>
-              <div>
-                <h3 className="font-display text-xl font-light text-charcoal mb-1 sm:mb-2">{v.t}</h3>
-                <p className="text-sm font-body leading-relaxed" style={{color:'#7A6A5A'}}>{v.d}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-espresso py-12 sm:py-14 px-4 sm:px-5 text-center">
-        <h2 className="font-display text-3xl sm:text-4xl font-light text-ivory mb-5 sm:mb-6">
-          {lang === 'de' ? 'Erleben Sie es selbst.' : lang === 'en' ? 'Come experience it.' : 'Vieni a scoprirlo.'}
-        </h2>
-        <Link to="/reserve"
-          className="inline-flex items-center gap-2.5 px-8 py-4 btn-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold shadow-gold-glow">
-          {cv.cta} <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
-      </section>
+      </div>
     </div>
   );
 }
