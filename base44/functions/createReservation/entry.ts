@@ -7,10 +7,19 @@ Deno.serve(async (req) => {
 
     const {
       first_name, last_name, email, phone = '',
-      date, time, guests, requests = '', lang = 'de',
+      date, time, guests, requests = '', lang = 'de', gdpr_consent = false,
     } = body;
 
-    // Input validation
+    // ── Auth check: require logged-in user ──
+    let currentUser = null;
+    try {
+      currentUser = await base44.auth.me();
+    } catch (_) {}
+    if (!currentUser) {
+      return Response.json({ error: 'Authentication required' }, { status: 401 });
+    }
+
+    // ── Input validation ──
     if (!first_name || !last_name || !email || !date || !time || !guests) {
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
@@ -20,8 +29,11 @@ Deno.serve(async (req) => {
     if (!/^[\w.+-]+@[\w-]+\.[\w.]+$/.test(email)) {
       return Response.json({ error: 'Invalid email address' }, { status: 400 });
     }
+    if (!gdpr_consent) {
+      return Response.json({ error: 'GDPR consent required' }, { status: 400 });
+    }
 
-    // Validate date is not in the past
+    // ── Validate date not in past ──
     const today = new Date().toISOString().split('T')[0];
     if (date < today) {
       return Response.json({ error: 'Date must be today or in the future' }, { status: 400 });
@@ -29,13 +41,13 @@ Deno.serve(async (req) => {
 
     const maxCapacity = 120;
 
-    // Validate day is not Monday (closed)
+    // ── Validate day is not Monday (closed) ──
     const dayOfWeek = new Date(date + 'T12:00:00').getDay();
     if (dayOfWeek === 1) {
       return Response.json({ error: 'Restaurant closed on this date' }, { status: 400 });
     }
 
-    // Validate time is within service windows
+    // ── Validate time within service windows ──
     const LUNCH = { start: '12:00', end: '14:15' };
     const DINNER = { start: '17:30', end: '21:30' };
     const SUNDAY = { start: '12:00', end: '19:30' };
@@ -46,7 +58,7 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Time not available for booking' }, { status: 400 });
     }
 
-    // Anti-spam: check if same email submitted in last 2 minutes
+    // ── Anti-spam: same user submitted in last 2 minutes ──
     const twoMinsAgo = new Date(Date.now() - 2 * 60 * 1000).toISOString();
     const recentByEmail = await base44.asServiceRole.entities.RestaurantReservation.filter({ guest_email: email.toLowerCase() });
     const veryRecent = recentByEmail.filter(r => r.created_date && r.created_date > twoMinsAgo);
@@ -54,7 +66,7 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Please wait a moment before submitting again' }, { status: 429 });
     }
 
-    // Duplicate check: same email + date + time
+    // ── Duplicate check: same email + date + time ──
     const dupKey = `${email.toLowerCase()}|${date}|${time}`;
     const dups = await base44.asServiceRole.entities.RestaurantReservation.filter({ duplicate_check_key: dupKey });
     const activeDups = dups.filter(d => !['cancelled_by_guest','cancelled_by_staff','no_show','archived'].includes(d.status));
@@ -62,7 +74,7 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'duplicate' }, { status: 409 });
     }
 
-    // Capacity check immediately before create (prevent race condition)
+    // ── Final capacity check (server-side, prevents race condition) ──
     const finalCheck = await base44.asServiceRole.entities.RestaurantReservation.filter({
       reservation_date: date,
       reservation_time: time,
@@ -75,12 +87,13 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'full', retry_after_ms: 2000 }, { status: 409 });
     }
 
-    // Generate ref
+    // ── Generate ref ──
     const dateStr = date.replace(/-/g, '');
     const rand = Math.random().toString(36).substring(2, 7).toUpperCase();
     const ref = `RES-${dateStr}-${rand}`;
+    const now = new Date().toISOString();
 
-    // Create reservation in RestaurantReservation entity
+    // ── Create reservation ──
     const reservation = await base44.asServiceRole.entities.RestaurantReservation.create({
       reservation_ref: ref,
       status: 'new',
@@ -99,9 +112,32 @@ Deno.serve(async (req) => {
       slack_notified: false,
     });
 
-    // Fire confirmation email (non-blocking)
-    // NOTE: Base44 SendEmail can only send to app users, not external emails.
-    // For external guests, we log the attempt and admin must trigger manually via admin dashboard.
+    // ── ConsentLog (GDPR) ──
+    base44.asServiceRole.entities.ConsentLog.create({
+      user_email: currentUser.email,
+      consent_type: 'reservation',
+      consent_given: true,
+      consent_text: 'I agree to the processing of my data in accordance with the privacy policy.',
+      source_page: '/reserve',
+      source_form: 'reservation',
+      language: lang,
+      related_entity_type: 'RestaurantReservation',
+      related_entity_id: reservation.id,
+      consented_at: now,
+    }).catch(() => {});
+
+    // ── ActivityLog ──
+    base44.asServiceRole.entities.ActivityLog.create({
+      actor_email: currentUser.email,
+      action: 'reservation_created',
+      entity_type: 'RestaurantReservation',
+      entity_id: reservation.id,
+      entity_ref: ref,
+      description: `Reservation ${ref} created by ${currentUser.email} for ${date} ${time}, ${guests} guests`,
+      performed_at: now,
+    }).catch(() => {});
+
+    // ── Fire confirmation emails + Slack (non-blocking) ──
     (async () => {
       try {
         const templates = {
@@ -125,11 +161,9 @@ Deno.serve(async (req) => {
                 </table>
               </div>
               <p style="color:#666;font-size:14px;">Bitte erscheinen Sie pünktlich. Wir bitten um Absage mindestens 24 Stunden vorher.</p>
-              <p style="color:#666;font-size:14px;">Bei Fragen kontaktieren Sie uns unter <a href="mailto:info@krone-ammesso.de" style="color:#C9A96E;">info@krone-ammesso.de</a> oder <a href="tel:+4979054177" style="color:#C9A96E;">+49 7905 41770</a>.</p>
+              <p style="color:#666;font-size:14px;">Fragen? <a href="mailto:info@krone-ammesso.de" style="color:#C9A96E;">info@krone-ammesso.de</a> · <a href="tel:+4979054177" style="color:#C9A96E;">+49 7905 41770</a></p>
               <p>Viele Grüße,<br/><strong>Team Krone Langenburg by Ammesso</strong></p>
-              <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:24px;color:#999;font-size:12px;">
-                Hauptstraße 24 · 74595 Langenburg · info@krone-ammesso.de
-              </div>
+              <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:24px;color:#999;font-size:12px;">Hauptstraße 24 · 74595 Langenburg</div>
             </body></html>`
           },
           en: {
@@ -152,11 +186,9 @@ Deno.serve(async (req) => {
                 </table>
               </div>
               <p style="color:#666;font-size:14px;">Please arrive on time. We kindly ask for cancellations at least 24 hours in advance.</p>
-              <p style="color:#666;font-size:14px;">For questions contact us at <a href="mailto:info@krone-ammesso.de" style="color:#C9A96E;">info@krone-ammesso.de</a> or <a href="tel:+4979054177" style="color:#C9A96E;">+49 7905 41770</a>.</p>
+              <p style="color:#666;font-size:14px;"><a href="mailto:info@krone-ammesso.de" style="color:#C9A96E;">info@krone-ammesso.de</a> · <a href="tel:+4979054177" style="color:#C9A96E;">+49 7905 41770</a></p>
               <p>Kind regards,<br/><strong>Team Krone Langenburg by Ammesso</strong></p>
-              <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:24px;color:#999;font-size:12px;">
-                Hauptstraße 24 · 74595 Langenburg · info@krone-ammesso.de
-              </div>
+              <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:24px;color:#999;font-size:12px;">Hauptstraße 24 · 74595 Langenburg</div>
             </body></html>`
           },
           it: {
@@ -178,19 +210,15 @@ Deno.serve(async (req) => {
                   ${requests ? `<tr><td style="padding:6px 0;color:#666;">Richieste speciali</td><td style="padding:6px 0;">${requests}</td></tr>` : ''}
                 </table>
               </div>
-              <p style="color:#666;font-size:14px;">Vi preghiamo di arrivare puntuali. Cancellazioni entro 24 ore prima.</p>
-              <p style="color:#666;font-size:14px;">Per domande: <a href="mailto:info@krone-ammesso.de" style="color:#C9A96E;">info@krone-ammesso.de</a></p>
+              <p style="color:#666;font-size:14px;"><a href="mailto:info@krone-ammesso.de" style="color:#C9A96E;">info@krone-ammesso.de</a></p>
               <p>Cordiali saluti,<br/><strong>Team Krone Langenburg by Ammesso</strong></p>
-              <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:24px;color:#999;font-size:12px;">
-                Hauptstraße 24 · 74595 Langenburg · info@krone-ammesso.de
-              </div>
+              <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:24px;color:#999;font-size:12px;">Hauptstraße 24 · 74595 Langenburg</div>
             </body></html>`
           }
         };
         const template = templates[lang] || templates.de;
 
-        // Try to send email. If recipient is external (not an app user), SendEmail will fail.
-        // In that case, log it and leave status as 'new' for admin to confirm/email manually.
+        // Guest confirmation email
         let emailSent = false;
         try {
           await base44.asServiceRole.integrations.Core.SendEmail({
@@ -201,11 +229,10 @@ Deno.serve(async (req) => {
           });
           emailSent = true;
         } catch (emailErr) {
-          // External email address — platform limitation. Log for admin visibility.
-          console.warn('Email send failed (external address):', emailErr.message);
+          console.warn('Guest email send failed:', emailErr.message);
         }
 
-        // Send admin notification email
+        // Admin notification email
         try {
           await base44.asServiceRole.integrations.Core.SendEmail({
             to: 'info@krone-ammesso.de',
@@ -222,6 +249,7 @@ Deno.serve(async (req) => {
                 <tr><td style="padding:6px 0;color:#666;">Uhrzeit</td><td style="padding:6px 0;font-weight:bold;">${time} Uhr</td></tr>
                 <tr><td style="padding:6px 0;color:#666;">Personen</td><td style="padding:6px 0;font-weight:bold;">${guests}</td></tr>
                 ${requests ? `<tr><td style="padding:6px 0;color:#666;">Sonderwünsche</td><td style="padding:6px 0;">${requests}</td></tr>` : ''}
+                <tr><td style="padding:6px 0;color:#666;">Konto</td><td style="padding:6px 0;">${currentUser.email}</td></tr>
                 <tr><td style="padding:6px 0;color:#666;">Sprache</td><td style="padding:6px 0;">${lang.toUpperCase()}</td></tr>
               </table>
               <p style="margin-top:16px;"><a href="https://krone.base44.app/admin" style="background:#8B6914;color:#fff;padding:10px 20px;border-radius:20px;text-decoration:none;font-size:13px;">Im Admin öffnen →</a></p>
@@ -231,42 +259,54 @@ Deno.serve(async (req) => {
           console.warn('Admin notification email failed:', adminErr.message);
         }
 
-        // Always confirm the reservation regardless of email delivery
+        // Update reservation: confirm + track email status
         await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
           status: 'confirmed',
           email_confirmation_sent: emailSent,
-          email_confirmation_sent_at: emailSent ? new Date().toISOString() : null,
-          confirmed_at: new Date().toISOString(),
+          email_confirmation_sent_at: emailSent ? now : null,
+          confirmed_at: now,
         });
 
+        // EmailLog
         await base44.asServiceRole.entities.EmailLog.create({
           recipient: email,
           subject: template.subject,
           template: 'reservation_confirmation',
           language: lang,
           status: emailSent ? 'sent' : 'failed',
-          failure_reason: emailSent ? null : 'External address — platform limitation',
-          sent_at: new Date().toISOString(),
+          failure_reason: emailSent ? null : 'External address or platform limitation',
+          sent_at: now,
           related_entity_type: 'RestaurantReservation',
           related_entity_id: reservation.id,
           related_ref: ref
         }).catch(() => {});
+
+        // AdminAuditEntry
+        base44.asServiceRole.entities.AdminAuditEntry.create({
+          admin_email: currentUser.email,
+          action: 'create',
+          entity_type: 'RestaurantReservation',
+          entity_id: reservation.id,
+          entity_ref: ref,
+          change_summary: `Reservation ${ref} created: ${date} ${time}, ${guests} guests, ${email}`,
+          performed_at: now,
+        }).catch(() => {});
+
       } catch (e) {
         console.error('Email/confirm flow failed:', e.message);
-        // Still try to confirm the reservation so it's not stuck as 'new'
+        // Ensure reservation is still confirmed even if email fails
         await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
           status: 'confirmed',
-          confirmed_at: new Date().toISOString(),
+          confirmed_at: now,
         }).catch(() => {});
       }
     })();
 
-    // Send Slack notification (non-blocking)
+    // ── Slack notification (non-blocking) ──
     (async () => {
       try {
         const webhookUrl = Deno.env.get('SLACK_WEBHOOK_URL');
         if (!webhookUrl) return;
-
         await fetch(webhookUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -281,7 +321,7 @@ Deno.serve(async (req) => {
                   { type: 'mrkdwn', text: `*Datum:*\n${date}` },
                   { type: 'mrkdwn', text: `*Zeit:*\n${time} Uhr` },
                   { type: 'mrkdwn', text: `*Personen:*\n${guests}` },
-                  { type: 'mrkdwn', text: `*Sprache:*\n${lang.toUpperCase()}` },
+                  { type: 'mrkdwn', text: `*Konto:*\n${currentUser.email}` },
                 ]
               },
               ...(requests ? [{ type: 'section', text: { type: 'mrkdwn', text: `*Sonderwünsche:*\n${requests}` } }] : []),
@@ -289,29 +329,27 @@ Deno.serve(async (req) => {
             ]
           })
         });
-
         await base44.asServiceRole.entities.RestaurantReservation.update(reservation.id, {
           slack_notified: true,
-          slack_notified_at: new Date().toISOString(),
+          slack_notified_at: now,
         });
-
-        await base44.asServiceRole.entities.SlackLog.create({
+        base44.asServiceRole.entities.SlackLog.create({
           channel: '#krone-reservations',
           message_type: 'new_reservation',
           status: 'sent',
-          sent_at: new Date().toISOString(),
+          sent_at: now,
           related_entity_type: 'RestaurantReservation',
           related_entity_id: reservation.id,
           related_ref: ref
-        });
+        }).catch(() => {});
       } catch (e) {
         console.error('Slack notification failed:', e.message);
-        await base44.asServiceRole.entities.SlackLog.create({
+        base44.asServiceRole.entities.SlackLog.create({
           channel: '#krone-reservations',
           message_type: 'new_reservation',
           status: 'failed',
           failure_reason: e.message,
-          sent_at: new Date().toISOString(),
+          sent_at: now,
           related_entity_type: 'RestaurantReservation',
           related_ref: ref
         }).catch(() => {});
