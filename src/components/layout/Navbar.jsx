@@ -16,6 +16,7 @@ const NAV_LINKS = {
     { to: '/restaurant', label: 'Restaurant + Bar' },
     { to: '/weddings', label: 'Events & Feiern' },
     { to: '/story', label: 'Unsere Geschichte' },
+    { to: '/discover', label: 'Entdecken' },
     { to: '/contact', label: 'Kontakt' },
   ],
   en: [
@@ -25,6 +26,7 @@ const NAV_LINKS = {
     { to: '/restaurant', label: 'Restaurant + Bar' },
     { to: '/weddings', label: 'Events & Celebrations' },
     { to: '/story', label: 'Our Story' },
+    { to: '/discover', label: 'Discover' },
     { to: '/contact', label: 'Contact' },
   ],
   it: [
@@ -34,6 +36,7 @@ const NAV_LINKS = {
     { to: '/restaurant', label: 'Ristorante + Bar' },
     { to: '/weddings', label: 'Events & Feste' },
     { to: '/story', label: 'La Nostra Storia' },
+    { to: '/discover', label: 'Scopri' },
     { to: '/contact', label: 'Contatti' },
   ],
 };

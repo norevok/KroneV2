@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 import HeroBookingBar from '@/components/home/HeroBookingBar';
@@ -7,10 +8,11 @@ import { base44 } from '@/api/base44Client';
 
 const SLIDES = [
   {
-    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg',
-    de: { title: 'Ankommen. Genießen. Bleiben.', sub: 'Ihr Boutique-Hotel im Herzen von Langenburg.' },
-    en: { title: 'Arrive. Enjoy. Stay.', sub: 'Your boutique hotel in the heart of Langenburg.' },
-    it: { title: 'Arrivare. Gustare. Restare.', sub: 'Il vostro hotel boutique nel cuore di Langenburg.' },
+    // Schloss Langenburg in morning fog — award-winning Wikimedia CC BY-SA 4.0, Matthias Süßen
+    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg',
+    de: { title: 'Ankommen. Genießen. Bleiben.', sub: 'Ihr Boutique-Hotel im Herzen von Langenburg — direkt neben Schloss Langenburg.' },
+    en: { title: 'Arrive. Enjoy. Stay.', sub: 'Your boutique hotel in the heart of Langenburg — right next to Langenburg Castle.' },
+    it: { title: 'Arrivare. Gustare. Restare.', sub: 'Il vostro hotel boutique nel cuore di Langenburg — vicino al castello.' },
   },
   {
     url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg',
@@ -174,62 +176,107 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
 
-      {/* ── HERO ── */}
+      {/* ── HERO — Premium 3D Ken Burns Slider ── */}
       <div className="relative h-screen min-h-[600px] max-h-[900px] overflow-hidden">
-        {/* Slides */}
+        {/* Slides with Ken Burns zoom effect */}
         {SLIDES.map((s, i) => (
-          <div key={i}
-            className={`absolute inset-0 transition-opacity duration-1000 ${i === current ? 'opacity-100' : 'opacity-0'}`}>
-            <img
-              src={s.url}
-              alt={s.de.title}
-              className="w-full h-full object-cover"
-              loading={i === 0 ? 'eager' : 'lazy'}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
-          </div>
+          <AnimatePresence key={i}>
+            {i === current && (
+              <motion.div
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.2, ease: 'easeInOut' }}>
+                <motion.img
+                  src={s.url}
+                  alt={s.de.title}
+                  className="w-full h-full object-cover"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  initial={{ scale: 1.08, filter: 'brightness(0.85)' }}
+                  animate={{ scale: 1.0, filter: 'brightness(1)' }}
+                  transition={{ duration: 6, ease: 'easeOut' }}
+                />
+                {/* Multi-layer gradient for depth */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/80" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
+              </motion.div>
+            )}
+          </AnimatePresence>
         ))}
 
-        {/* Hero text */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pb-44 sm:pb-36 lg:pb-32">
-          <p className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.5em] uppercase font-body mb-4 animate-fade-in">
-            Krone Langenburg · by Ammesso
-          </p>
-          <h1 key={`${current}-title`}
-            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-4 leading-tight max-w-4xl animate-fade-up">
-            {slideText.title}
-          </h1>
-          <p className="text-white/70 font-body text-sm sm:text-lg max-w-xl animate-fade-in leading-relaxed">
-            {slideText.sub}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 mt-8">
-            <Link to="/booking"
-              className="px-7 py-3.5 bg-[#1C1714] hover:bg-[#2A2118] text-white font-body font-semibold text-xs tracking-widest uppercase rounded-full transition-all shadow-lg">
-              {c.rooms_book}
-            </Link>
-            <Link to="/reserve"
-              className="px-7 py-3.5 bg-white/15 hover:bg-white/25 border border-white/40 text-white font-body font-semibold text-xs tracking-widest uppercase rounded-full transition-all backdrop-blur-sm">
-              {c.restaurant_reserve}
-            </Link>
-          </div>
+        {/* Slide counter top-right */}
+        <div className="absolute top-28 right-6 z-10 hidden sm:flex items-center gap-2">
+          <span className="font-display text-2xl font-light text-white/60">{String(current + 1).padStart(2, '0')}</span>
+          <div className="w-px h-6 bg-white/20 mx-1" />
+          <span className="font-display text-sm font-light text-white/30">{String(SLIDES.length).padStart(2, '0')}</span>
         </div>
 
-        {/* Arrow controls */}
-        <button onClick={prev}
-          className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/30 hover:bg-black/50 border border-white/20 rounded-full flex items-center justify-center text-white transition-all backdrop-blur-sm z-10">
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button onClick={next}
-          className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/30 hover:bg-black/50 border border-white/20 rounded-full flex items-center justify-center text-white transition-all backdrop-blur-sm z-10">
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        {/* Hero text */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pb-44 sm:pb-36 lg:pb-32 z-10">
+          <motion.p
+            key={`eyebrow-${current}`}
+            className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.6em] uppercase font-body mb-5"
+            initial={{ opacity: 0, letterSpacing: '0.8em' }}
+            animate={{ opacity: 1, letterSpacing: '0.6em' }}
+            transition={{ duration: 1 }}>
+            Krone Langenburg · by Ammesso
+          </motion.p>
+          <motion.h1
+            key={`title-${current}`}
+            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-5 leading-[0.92] max-w-4xl"
+            initial={{ opacity: 0, y: 40, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
+            {slideText.title}
+          </motion.h1>
+          <motion.p
+            key={`sub-${current}`}
+            className="text-white/65 font-body text-sm sm:text-lg max-w-xl leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25, duration: 0.8 }}>
+            {slideText.sub}
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row gap-3 mt-9"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.7 }}>
+            <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
+              <Link to="/booking"
+                className="px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-xs tracking-widest uppercase rounded-full transition-all shadow-[0_8px_30px_rgba(201,169,110,0.35)] flex items-center gap-2">
+                <BedDouble className="w-4 h-4" /> {c.rooms_book}
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
+              <Link to="/reserve"
+                className="px-7 py-3.5 bg-white/10 hover:bg-white/20 border border-white/40 text-white font-body font-semibold text-xs tracking-widest uppercase rounded-full transition-all backdrop-blur-sm flex items-center gap-2">
+                <UtensilsCrossed className="w-4 h-4" /> {c.restaurant_reserve}
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
 
-        {/* Dot nav */}
-        <div className="absolute bottom-40 sm:bottom-32 lg:bottom-28 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {SLIDES.map((_, i) => (
-            <button key={i} onClick={() => goTo(i)}
-              className={`rounded-full transition-all ${i === current ? 'w-6 h-1.5 bg-[#C9A96E]' : 'w-1.5 h-1.5 bg-white/40 hover:bg-white/70'}`} />
-          ))}
+        {/* Arrow controls — premium style */}
+        <motion.button onClick={prev} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
+          className="absolute left-4 sm:left-7 top-1/2 -translate-y-1/2 w-11 h-11 bg-black/25 hover:bg-[#C9A96E]/30 border border-white/20 hover:border-[#C9A96E]/60 rounded-full flex items-center justify-center text-white transition-all backdrop-blur-sm z-10">
+          <ChevronLeft className="w-5 h-5" />
+        </motion.button>
+        <motion.button onClick={next} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
+          className="absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 w-11 h-11 bg-black/25 hover:bg-[#C9A96E]/30 border border-white/20 hover:border-[#C9A96E]/60 rounded-full flex items-center justify-center text-white transition-all backdrop-blur-sm z-10">
+          <ChevronRight className="w-5 h-5" />
+        </motion.button>
+
+        {/* Progress bar + dots */}
+        <div className="absolute bottom-40 sm:bottom-32 lg:bottom-28 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
+          <div className="flex gap-2">
+            {SLIDES.map((_, i) => (
+              <button key={i} onClick={() => goTo(i)} className="relative overflow-hidden rounded-full transition-all">
+                <span className={`block rounded-full transition-all duration-500 ${i === current ? 'w-8 h-1.5 bg-[#C9A96E]' : 'w-1.5 h-1.5 bg-white/35 hover:bg-white/60'}`} />
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Floating booking bar */}
@@ -293,8 +340,9 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((f, i) => (
-              <Link key={i} to={f.to}
-                className="group bg-white border border-[#EDE6D8] rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300">
+              <motion.div key={i} whileHover={{ y: -6, scale: 1.01 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.25 }}>
+              <Link to={f.to}
+                className="group bg-white border border-[#EDE6D8] rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 block">
                 <div className="h-52 overflow-hidden">
                   <img
                     src={f.img}
@@ -318,6 +366,7 @@ export default function Home() {
                   </span>
                 </div>
               </Link>
+              </motion.div>
             ))}
           </div>
         </div>
