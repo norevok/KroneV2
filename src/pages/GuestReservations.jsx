@@ -12,15 +12,15 @@ const STATUS_MAP = {
 };
 
 const STATUS_COLORS = {
-  new: 'text-gold/80 bg-gold/10 border-gold/20',
-  pending: 'text-gold/80 bg-gold/10 border-gold/20',
-  confirmed: 'text-emerald-400 bg-emerald-950/40 border-emerald-800/30',
-  seated: 'text-blue-400 bg-blue-950/40 border-blue-800/30',
-  completed: 'text-ivory/40 bg-ivory/5 border-ivory/10',
-  cancelled_by_guest: 'text-red-400 bg-red-950/40 border-red-800/30',
-  cancelled_by_staff: 'text-red-400 bg-red-950/40 border-red-800/30',
-  no_show: 'text-red-400/60 bg-red-950/20 border-red-900/20',
-  archived: 'text-ivory/20 bg-ivory/5 border-ivory/10',
+  new: 'text-[#A47A12] bg-[#A47A12]/10 border-[#A47A12]/20',
+  pending: 'text-[#A47A12] bg-[#A47A12]/10 border-[#A47A12]/20',
+  confirmed: 'text-[#17352C] bg-[#17352C]/10 border-[#17352C]/20',
+  seated: 'text-blue-700 bg-blue-50 border-blue-200',
+  completed: 'text-[#5F5A52] bg-[#5F5A52]/8 border-[#5F5A52]/15',
+  cancelled_by_guest: 'text-[#B42318] bg-[#B42318]/8 border-[#B42318]/15',
+  cancelled_by_staff: 'text-[#B42318] bg-[#B42318]/8 border-[#B42318]/15',
+  no_show: 'text-[#B42318]/70 bg-[#B42318]/5 border-[#B42318]/10',
+  archived: 'text-[#5F5A52]/50 bg-[#5F5A52]/5 border-[#5F5A52]/10',
 };
 
 const NON_CANCELLABLE = ['cancelled_by_guest', 'cancelled_by_staff', 'no_show', 'archived', 'completed'];
@@ -174,55 +174,55 @@ export default function GuestReservations() {
   };
 
   if (loading) return (
-    <div className="min-h-screen bg-charcoal flex items-center justify-center">
-      <div className="w-7 h-7 border-2 border-gold/20 border-t-gold rounded-full animate-spin" />
+    <div className="min-h-screen bg-[#F7F2EA] flex items-center justify-center">
+      <div className="w-7 h-7 border-2 border-[#A47A12]/20 border-t-[#A47A12] rounded-full animate-spin" />
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-charcoal text-ivory pt-16 sm:pt-20 pb-28 lg:pb-10 px-4 sm:px-5">
+    <div className="min-h-screen bg-[#F7F2EA] text-[#151515] pt-16 sm:pt-20 pb-28 lg:pb-10 px-4 sm:px-5">
       <div className="max-w-2xl mx-auto">
-        <Link to="/account" className="flex items-center gap-2 text-ivory/30 hover:text-ivory text-xs font-body tracking-widest uppercase mb-6 sm:mb-8 transition-colors mt-4">
+        <Link to="/account" className="flex items-center gap-2 text-[#5F5A52] hover:text-[#151515] text-xs font-body tracking-widest uppercase mb-6 sm:mb-8 transition-colors mt-4">
           <ArrowLeft className="w-3.5 h-3.5" /> {c.back}
         </Link>
-        <h1 className="font-display text-3xl sm:text-4xl font-light text-ivory mb-6 sm:mb-8">{c.title}</h1>
+        <h1 className="font-display text-3xl sm:text-4xl font-light text-[#151515] mb-6 sm:mb-8">{c.title}</h1>
 
         {reservations.length === 0 ? (
-          <div className="glass-card border border-[#C9A96E]/08 rounded-2xl p-8 text-center">
-            <p className="text-ivory/30 text-sm font-body mb-4">{c.empty}</p>
-            <Link to="/reserve" className="inline-flex items-center gap-1.5 text-gold/60 hover:text-gold text-xs font-body tracking-wider transition-colors">
+          <div className="bg-white border border-[#E8DED0] rounded-2xl p-8 text-center shadow-sm">
+            <p className="text-[#5F5A52] text-sm font-body mb-4">{c.empty}</p>
+            <Link to="/reserve" className="inline-flex items-center gap-1.5 text-[#A47A12] hover:text-[#8B6914] text-xs font-body tracking-wider transition-colors font-semibold">
               {c.empty_cta} →
             </Link>
           </div>
         ) : (
           <div className="space-y-3">
             {reservations.map(r => (
-              <div key={r.id} className="glass-card border border-[#C9A96E]/08 rounded-xl p-4 sm:p-5 hover:border-[#C9A96E]/20 transition-all">
+              <div key={r.id} className="bg-white border border-[#E8DED0] rounded-xl p-4 sm:p-5 hover:border-[#A47A12]/30 hover:shadow-md transition-all shadow-sm">
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 flex-wrap mb-2">
-                      <p className="font-body text-sm sm:text-base text-ivory font-medium">{r.reservation_ref}</p>
-                      <span className={`text-[10px] font-body font-medium px-2 py-1 rounded-full border ${STATUS_COLORS[r.status] || 'text-ivory/30 bg-ivory/5 border-ivory/10'}`}>
+                      <p className="font-body text-sm sm:text-base text-[#151515] font-semibold">{r.reservation_ref}</p>
+                      <span className={`text-[10px] font-body font-medium px-2 py-1 rounded-full border ${STATUS_COLORS[r.status] || 'text-[#5F5A52] bg-[#5F5A52]/8 border-[#5F5A52]/15'}`}>
                         {statusMap[r.status] || r.status}
                       </span>
                     </div>
-                    <div className="flex items-center gap-4 text-ivory/50 text-xs sm:text-sm font-body flex-wrap">
+                    <div className="flex items-center gap-4 text-[#5F5A52] text-xs sm:text-sm font-body flex-wrap">
                       <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-gold/40" />
+                        <Calendar className="w-3.5 h-3.5 text-[#A47A12]/60" />
                         {format(new Date(r.reservation_date), 'dd.MM.yyyy')}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-gold/40" />
+                        <Clock className="w-3.5 h-3.5 text-[#A47A12]/60" />
                         {r.reservation_time} Uhr
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <Users className="w-3.5 h-3.5 text-gold/40" />
+                        <Users className="w-3.5 h-3.5 text-[#A47A12]/60" />
                         {r.party_size} {lang === 'de' ? 'Gäste' : lang === 'en' ? 'guests' : 'ospiti'}
                       </span>
                     </div>
                     {r.notes && (
-                      <p className="text-ivory/35 text-xs font-body mt-2">
-                        <span className="text-ivory/40 font-medium">{lang === 'de' ? 'Sonderwünsche:' : lang === 'en' ? 'Requests:' : 'Richieste:'}</span> {r.notes}
+                      <p className="text-[#5F5A52] text-xs font-body mt-2">
+                        <span className="text-[#151515] font-semibold">{lang === 'de' ? 'Sonderwünsche:' : lang === 'en' ? 'Requests:' : 'Richieste:'}</span> {r.notes}
                       </p>
                     )}
                   </div>
@@ -230,14 +230,14 @@ export default function GuestReservations() {
 
                 {/* Cancel success */}
                 {cancelSuccess[r.id] && (
-                  <p className="text-emerald-400 text-xs font-body mt-2">
+                  <p className="text-[#17352C] text-xs font-body mt-2 bg-[#17352C]/8 border border-[#17352C]/20 rounded-lg px-3 py-2">
                     ✓ {lang === 'de' ? 'Storniert. Sie erhalten eine Bestätigung per E-Mail.' : lang === 'en' ? 'Cancelled. You will receive a confirmation email.' : 'Annullato. Riceverete una conferma via email.'}
                   </p>
                 )}
 
                 {/* Cancel error */}
                 {cancelError[r.id] && (
-                  <div className="mt-2 flex items-start gap-2 text-xs text-red-400 font-body">
+                  <div className="mt-2 flex items-start gap-2 text-xs text-[#B42318] font-body bg-[#B42318]/5 border border-[#B42318]/15 rounded-lg px-3 py-2">
                     <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
                     <span>{cancelError[r.id]}</span>
                   </div>
@@ -245,35 +245,35 @@ export default function GuestReservations() {
 
                 {/* Confirm cancel dialog */}
                 {confirmCancel === r.id && (
-                  <div className="mt-3 border border-red-900/30 bg-red-950/20 rounded-xl p-4">
-                    <p className="text-ivory/70 text-sm font-body mb-1">{c.cancel_confirm}</p>
-                    <p className="text-ivory/30 text-xs font-body mb-3">{c.cancel_policy}</p>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => handleCancel(r.id)}
-                        disabled={cancellingId === r.id}
-                        className="flex-1 py-2 bg-red-950/60 border border-red-900/40 text-red-400 text-xs font-body rounded-lg hover:bg-red-950/80 transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5"
-                      >
-                        {cancellingId === r.id
-                          ? <div className="w-3.5 h-3.5 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" />
-                          : <><XCircle className="w-3.5 h-3.5" /> {c.cancel_yes}</>
-                        }
-                      </button>
-                      <button
-                        onClick={() => setConfirmCancel(null)}
-                        className="flex-1 py-2 glass-card border border-[#C9A96E]/15 text-ivory/40 text-xs font-body rounded-lg hover:text-ivory transition-colors"
-                      >
-                        {c.cancel_no}
-                      </button>
+                    <div className="mt-3 border border-[#B42318]/20 bg-[#B42318]/5 rounded-xl p-4">
+                      <p className="text-[#151515] text-sm font-body mb-1">{c.cancel_confirm}</p>
+                      <p className="text-[#5F5A52] text-xs font-body mb-3">{c.cancel_policy}</p>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleCancel(r.id)}
+                          disabled={cancellingId === r.id}
+                          className="flex-1 py-2 bg-[#B42318] border border-[#B42318] text-white text-xs font-body rounded-lg hover:bg-[#9A1E14] transition-colors disabled:opacity-50 flex items-center justify-center gap-1.5"
+                        >
+                          {cancellingId === r.id
+                            ? <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            : <><XCircle className="w-3.5 h-3.5" /> {c.cancel_yes}</>
+                          }
+                        </button>
+                        <button
+                          onClick={() => setConfirmCancel(null)}
+                          className="flex-1 py-2 bg-white border border-[#E8DED0] text-[#5F5A52] text-xs font-body rounded-lg hover:text-[#151515] transition-colors"
+                        >
+                          {c.cancel_no}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
                 {/* Cancel button */}
                 {canCancel(r) && confirmCancel !== r.id && !cancelSuccess[r.id] && (
                   <button
                     onClick={() => { setConfirmCancel(r.id); setCancelError(prev => ({ ...prev, [r.id]: null })); }}
-                    className="mt-3 flex items-center gap-1.5 text-red-400/50 hover:text-red-400 text-[10px] font-body uppercase tracking-widest transition-colors"
+                    className="mt-3 flex items-center gap-1.5 text-[#B42318]/60 hover:text-[#B42318] text-[10px] font-body uppercase tracking-widest transition-colors"
                   >
                     <XCircle className="w-3.5 h-3.5" /> {c.cancel_btn}
                   </button>
@@ -287,51 +287,51 @@ export default function GuestReservations() {
         {hotelBookings.length > 0 && (
           <div className="mt-8">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
-                <BedDouble className="w-4 h-4 text-gold/70" />
+              <div className="w-9 h-9 rounded-full bg-[#17352C]/10 flex items-center justify-center flex-shrink-0">
+                <BedDouble className="w-4 h-4 text-[#17352C]" />
               </div>
-              <h2 className="font-display text-2xl font-light text-ivory">
+              <h2 className="font-display text-2xl font-light text-[#151515]">
                 {lang === 'de' ? 'Meine Zimmer-Buchungen' : lang === 'en' ? 'My Room Bookings' : 'Le mie camere'}
               </h2>
             </div>
             <div className="space-y-3">
               {hotelBookings.map(b => (
-                <div key={b.id} className="glass-card border border-[#C9A96E]/12 rounded-xl p-4 sm:p-5">
+                <div key={b.id} className="bg-white border border-[#E8DED0] rounded-xl p-4 sm:p-5 shadow-sm">
                   <div className="flex items-start justify-between gap-3 mb-3">
                     <div>
-                      <p className="text-gold/80 text-[10px] font-body tracking-[0.3em] uppercase mb-0.5">Beds24 · Krone Langenburg</p>
-                      <p className="font-body text-ivory text-sm font-semibold tracking-wider">{b.source_reference}</p>
+                      <p className="text-[#A47A12] text-[10px] font-body tracking-[0.3em] uppercase mb-0.5">Beds24 · Krone Langenburg</p>
+                      <p className="font-body text-[#151515] text-sm font-semibold tracking-wider">{b.source_reference}</p>
                     </div>
-                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-body font-medium border flex-shrink-0 ${
-                      b.booking_status === 'confirmed' ? 'text-emerald-400 bg-emerald-950/40 border-emerald-800/30' :
-                      b.booking_status === 'cancelled' ? 'text-red-400 bg-red-950/40 border-red-800/30' :
-                      'text-ivory/40 bg-ivory/5 border-ivory/10'
+                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-body font-semibold border flex-shrink-0 ${
+                      b.booking_status === 'confirmed' ? 'text-[#17352C] bg-[#17352C]/10 border-[#17352C]/20' :
+                      b.booking_status === 'cancelled' ? 'text-[#B42318] bg-[#B42318]/8 border-[#B42318]/15' :
+                      'text-[#5F5A52] bg-[#5F5A52]/8 border-[#5F5A52]/15'
                     }`}>
                       {b.booking_status === 'confirmed' ? (lang === 'de' ? 'Bestätigt' : 'Confirmed') :
                        b.booking_status === 'cancelled' ? (lang === 'de' ? 'Storniert' : 'Cancelled') : b.booking_status}
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs font-body mb-3">
-                    <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Anreise' : 'Arrival'}</span><br /><span className="text-ivory/70">{b.arrival_date || '—'}</span></div>
-                    <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Abreise' : 'Departure'}</span><br /><span className="text-ivory/70">{b.departure_date || '—'}</span></div>
-                    {b.room_type && <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Zimmer' : 'Room'}</span><br /><span className="text-ivory/70">{b.room_type}</span></div>}
-                    {b.number_of_guests && <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Gäste' : 'Guests'}</span><br /><span className="text-ivory/70">{b.number_of_guests}</span></div>}
+                    <div><span className="text-[#5F5A52] uppercase tracking-wider text-[10px] font-semibold">{lang === 'de' ? 'Anreise' : 'Arrival'}</span><br /><span className="text-[#151515] font-medium">{b.arrival_date || '—'}</span></div>
+                    <div><span className="text-[#5F5A52] uppercase tracking-wider text-[10px] font-semibold">{lang === 'de' ? 'Abreise' : 'Departure'}</span><br /><span className="text-[#151515] font-medium">{b.departure_date || '—'}</span></div>
+                    {b.room_type && <div><span className="text-[#5F5A52] uppercase tracking-wider text-[10px] font-semibold">{lang === 'de' ? 'Zimmer' : 'Room'}</span><br /><span className="text-[#151515]">{b.room_type}</span></div>}
+                    {b.number_of_guests && <div><span className="text-[#5F5A52] uppercase tracking-wider text-[10px] font-semibold">{lang === 'de' ? 'Gäste' : 'Guests'}</span><br /><span className="text-[#151515]">{b.number_of_guests}</span></div>}
                     {b.payment_status && b.payment_status !== 'unknown' && (
-                      <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Zahlung' : 'Payment'}</span><br />
-                      <span className={b.payment_status === 'paid' ? 'text-emerald-400' : 'text-amber-400'}>{b.payment_status}{b.total_price ? ` · €${b.total_price}` : ''}</span></div>
+                      <div><span className="text-[#5F5A52] uppercase tracking-wider text-[10px] font-semibold">{lang === 'de' ? 'Zahlung' : 'Payment'}</span><br />
+                      <span className={b.payment_status === 'paid' ? 'text-[#17352C] font-semibold' : 'text-[#A47A12] font-semibold'}>{b.payment_status}{b.total_price ? ` · €${b.total_price}` : ''}</span></div>
                     )}
                   </div>
                   {!b.verified && (
-                    <p className="text-amber-400/70 text-[10px] font-body mb-3">{lang === 'de' ? '⏳ Wird von unserem Team geprüft' : '⏳ Being reviewed by our team'}</p>
+                    <p className="text-[#A47A12] text-[10px] font-body mb-3 bg-[#A47A12]/8 border border-[#A47A12]/20 rounded-lg px-3 py-2">⏳ {lang === 'de' ? 'Wird von unserem Team geprüft' : 'Being reviewed by our team'}</p>
                   )}
-                  <p className="text-ivory/25 text-[10px] font-body mb-3">
+                  <p className="text-[#5F5A52] text-[10px] font-body mb-3">
                     {lang === 'de' ? 'Änderungen oder Stornierungen sind nur direkt über das Hotel möglich.' : 'Changes or cancellations must be arranged directly with the hotel.'}
                   </p>
                   <div className="flex gap-2">
-                    <Link to="/contact" className="flex-1 py-2.5 text-center text-[10px] font-body tracking-widest uppercase border border-[#C9A96E]/25 text-gold/70 hover:text-gold rounded-lg transition-colors">
+                    <Link to="/contact" className="flex-1 py-2.5 text-center text-[10px] font-body tracking-widest uppercase border-2 border-[#17352C] text-[#17352C] hover:bg-[#17352C] hover:text-white rounded-lg transition-all font-semibold">
                       {lang === 'de' ? 'Hotel kontaktieren' : 'Contact Hotel'}
                     </Link>
-                    <Link to="/account/messages" className="flex-1 py-2.5 text-center text-[10px] font-body tracking-widest uppercase border border-[#C9A96E]/15 text-ivory/40 hover:text-ivory rounded-lg transition-colors">
+                    <Link to="/account/messages" className="flex-1 py-2.5 text-center text-[10px] font-body tracking-widest uppercase bg-[#17352C] text-white hover:bg-[#0F2920] rounded-lg transition-colors font-semibold">
                       {lang === 'de' ? 'Nachricht senden' : 'Send Message'}
                     </Link>
                   </div>
@@ -342,63 +342,63 @@ export default function GuestReservations() {
         )}
 
         {/* Hotel Booking Lookup — Marriott-style "Find My Booking" */}
-        <div className="mt-10 glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-7">
+        <div className="mt-10 bg-white border border-[#E8DED0] rounded-2xl p-5 sm:p-7 shadow-sm">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
-              <BedDouble className="w-4 h-4 text-gold/70" />
+            <div className="w-9 h-9 rounded-full bg-[#17352C]/10 flex items-center justify-center flex-shrink-0">
+              <BedDouble className="w-4 h-4 text-[#17352C]" />
             </div>
             <div>
-              <h2 className="font-display text-xl font-light text-ivory">{c.lookup_title}</h2>
-              <p className="text-ivory/35 text-xs font-body mt-0.5">{c.lookup_sub}</p>
+              <h2 className="font-display text-xl font-light text-[#151515]">{c.lookup_title}</h2>
+              <p className="text-[#5F5A52] text-xs font-body mt-0.5">{c.lookup_sub}</p>
             </div>
           </div>
 
           {lookupDone ? (
-            <div className="bg-emerald-950/30 border border-emerald-800/30 rounded-xl p-4 flex gap-3">
-              <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-              <p className="text-emerald-300 text-sm font-body">{c.lookup_success}</p>
+            <div className="bg-[#17352C]/8 border border-[#17352C]/20 rounded-xl p-4 flex gap-3">
+              <CheckCircle className="w-4 h-4 text-[#17352C] flex-shrink-0 mt-0.5" />
+              <p className="text-[#17352C] text-sm font-body font-medium">{c.lookup_success}</p>
             </div>
           ) : (
             <form onSubmit={handleLookup} className="space-y-3">
               <div>
-                <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_conf}</label>
+                <label className="block text-[#5F5A52] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5 font-semibold">{c.lookup_conf}</label>
                 <input type="text" value={lookupForm.confirmation_number}
                   onChange={e => setLookupForm(f => ({ ...f, confirmation_number: e.target.value }))}
-                  className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body placeholder-ivory/20"
+                  className="w-full bg-white border-2 border-[#E8DED0] rounded-xl px-4 py-3 text-sm text-[#151515] focus:outline-none focus:border-[#A47A12]/50 transition-colors font-body placeholder-[#5F5A52]/40"
                   placeholder="z.B. 123456 oder KRONE-2025-001" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_first}</label>
+                  <label className="block text-[#5F5A52] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5 font-semibold">{c.lookup_first}</label>
                   <input type="text" required value={lookupForm.first_name}
                     onChange={e => setLookupForm(f => ({ ...f, first_name: e.target.value }))}
-                    className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body" />
+                    className="w-full bg-white border-2 border-[#E8DED0] rounded-xl px-4 py-3 text-sm text-[#151515] focus:outline-none focus:border-[#A47A12]/50 transition-colors font-body" />
                 </div>
                 <div>
-                  <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_last}</label>
+                  <label className="block text-[#5F5A52] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5 font-semibold">{c.lookup_last}</label>
                   <input type="text" required value={lookupForm.last_name}
                     onChange={e => setLookupForm(f => ({ ...f, last_name: e.target.value }))}
-                    className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body" />
+                    className="w-full bg-white border-2 border-[#E8DED0] rounded-xl px-4 py-3 text-sm text-[#151515] focus:outline-none focus:border-[#A47A12]/50 transition-colors font-body" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_email}</label>
+                  <label className="block text-[#5F5A52] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5 font-semibold">{c.lookup_email}</label>
                   <input type="email" value={lookupForm.email}
                     onChange={e => setLookupForm(f => ({ ...f, email: e.target.value }))}
-                    className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body" />
+                    className="w-full bg-white border-2 border-[#E8DED0] rounded-xl px-4 py-3 text-sm text-[#151515] focus:outline-none focus:border-[#A47A12]/50 transition-colors font-body" />
                 </div>
                 <div>
-                  <label className="block text-ivory/35 text-[10px] tracking-[0.25em] uppercase font-body mb-1">{c.lookup_checkin}</label>
+                  <label className="block text-[#5F5A52] text-[10px] tracking-[0.25em] uppercase font-body mb-1.5 font-semibold">{c.lookup_checkin}</label>
                   <input type="date" value={lookupForm.check_in}
                     onChange={e => setLookupForm(f => ({ ...f, check_in: e.target.value }))}
-                    className="w-full bg-[#0F0D0B] border border-[#C9A96E]/15 rounded-xl px-4 py-3 text-sm text-ivory focus:outline-none focus:border-gold/40 transition-colors font-body" />
+                    className="w-full bg-white border-2 border-[#E8DED0] rounded-xl px-4 py-3 text-sm text-[#151515] focus:outline-none focus:border-[#A47A12]/50 transition-colors font-body" />
                 </div>
               </div>
               <button type="submit" disabled={lookupSubmitting}
-                className="w-full py-3 btn-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
+                className="w-full py-3.5 bg-[#17352C] hover:bg-[#0F2920] disabled:opacity-50 text-white rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all shadow-md flex items-center justify-center gap-2">
                 {lookupSubmitting
-                  ? <div className="w-4 h-4 border-2 border-charcoal/30 border-t-charcoal rounded-full animate-spin" />
+                  ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   : <><Search className="w-3.5 h-3.5" /> {c.lookup_submit}</>}
               </button>
             </form>
