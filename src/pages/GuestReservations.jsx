@@ -29,6 +29,7 @@ export default function GuestReservations() {
   const { lang } = useLang();
   const [user, setUser] = useState(null);
   const [reservations, setReservations] = useState([]);
+  const [hotelBookings, setHotelBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [cancellingId, setCancellingId] = useState(null);
   const [cancelError, setCancelError] = useState({});
@@ -40,12 +41,12 @@ export default function GuestReservations() {
       if (!auth) { base44.auth.redirectToLogin(window.location.href); return; }
       const u = await base44.auth.me();
       setUser(u);
-      const res = await base44.entities.RestaurantReservation.filter(
-        { guest_email: u.email },
-        '-reservation_date',
-        50
-      ).catch(() => []);
+      const [res, hotel] = await Promise.all([
+        base44.entities.RestaurantReservation.filter({ guest_email: u.email }, '-reservation_date', 50).catch(() => []),
+        base44.entities.GuestReservationLink.filter({ user_email: u.email }, '-created_date', 20).catch(() => []),
+      ]);
       setReservations(res);
+      setHotelBookings(hotel);
       setLoading(false);
     });
   }, []);
@@ -279,6 +280,64 @@ export default function GuestReservations() {
                 )}
               </div>
             ))}
+          </div>
+        )}
+
+        {/* HOTEL BOOKINGS (Beds24 linked) */}
+        {hotelBookings.length > 0 && (
+          <div className="mt-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+                <BedDouble className="w-4 h-4 text-gold/70" />
+              </div>
+              <h2 className="font-display text-2xl font-light text-ivory">
+                {lang === 'de' ? 'Meine Zimmer-Buchungen' : lang === 'en' ? 'My Room Bookings' : 'Le mie camere'}
+              </h2>
+            </div>
+            <div className="space-y-3">
+              {hotelBookings.map(b => (
+                <div key={b.id} className="glass-card border border-[#C9A96E]/12 rounded-xl p-4 sm:p-5">
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div>
+                      <p className="text-gold/80 text-[10px] font-body tracking-[0.3em] uppercase mb-0.5">Beds24 · Krone Langenburg</p>
+                      <p className="font-body text-ivory text-sm font-semibold tracking-wider">{b.source_reference}</p>
+                    </div>
+                    <span className={`px-2.5 py-1 rounded-full text-[10px] font-body font-medium border flex-shrink-0 ${
+                      b.booking_status === 'confirmed' ? 'text-emerald-400 bg-emerald-950/40 border-emerald-800/30' :
+                      b.booking_status === 'cancelled' ? 'text-red-400 bg-red-950/40 border-red-800/30' :
+                      'text-ivory/40 bg-ivory/5 border-ivory/10'
+                    }`}>
+                      {b.booking_status === 'confirmed' ? (lang === 'de' ? 'Bestätigt' : 'Confirmed') :
+                       b.booking_status === 'cancelled' ? (lang === 'de' ? 'Storniert' : 'Cancelled') : b.booking_status}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs font-body mb-3">
+                    <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Anreise' : 'Arrival'}</span><br /><span className="text-ivory/70">{b.arrival_date || '—'}</span></div>
+                    <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Abreise' : 'Departure'}</span><br /><span className="text-ivory/70">{b.departure_date || '—'}</span></div>
+                    {b.room_type && <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Zimmer' : 'Room'}</span><br /><span className="text-ivory/70">{b.room_type}</span></div>}
+                    {b.number_of_guests && <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Gäste' : 'Guests'}</span><br /><span className="text-ivory/70">{b.number_of_guests}</span></div>}
+                    {b.payment_status && b.payment_status !== 'unknown' && (
+                      <div><span className="text-ivory/30 uppercase tracking-wider text-[10px]">{lang === 'de' ? 'Zahlung' : 'Payment'}</span><br />
+                      <span className={b.payment_status === 'paid' ? 'text-emerald-400' : 'text-amber-400'}>{b.payment_status}{b.total_price ? ` · €${b.total_price}` : ''}</span></div>
+                    )}
+                  </div>
+                  {!b.verified && (
+                    <p className="text-amber-400/70 text-[10px] font-body mb-3">{lang === 'de' ? '⏳ Wird von unserem Team geprüft' : '⏳ Being reviewed by our team'}</p>
+                  )}
+                  <p className="text-ivory/25 text-[10px] font-body mb-3">
+                    {lang === 'de' ? 'Änderungen oder Stornierungen sind nur direkt über das Hotel möglich.' : 'Changes or cancellations must be arranged directly with the hotel.'}
+                  </p>
+                  <div className="flex gap-2">
+                    <Link to="/contact" className="flex-1 py-2.5 text-center text-[10px] font-body tracking-widest uppercase border border-[#C9A96E]/25 text-gold/70 hover:text-gold rounded-lg transition-colors">
+                      {lang === 'de' ? 'Hotel kontaktieren' : 'Contact Hotel'}
+                    </Link>
+                    <Link to="/account/messages" className="flex-1 py-2.5 text-center text-[10px] font-body tracking-widest uppercase border border-[#C9A96E]/15 text-ivory/40 hover:text-ivory rounded-lg transition-colors">
+                      {lang === 'de' ? 'Nachricht senden' : 'Send Message'}
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 

@@ -1,0 +1,67 @@
+{
+  "name": "Beds24ReturnLog",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Base44 user ID if logged in"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "raw_query_params": {
+      "type": "string",
+      "description": "JSON-serialized raw URL params from Beds24 return"
+    },
+    "extracted_booking_reference": {
+      "type": "string"
+    },
+    "extracted_email": {
+      "type": "string"
+    },
+    "extracted_arrival": {
+      "type": "string",
+      "format": "date"
+    },
+    "extracted_departure": {
+      "type": "string",
+      "format": "date"
+    },
+    "match_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "matched",
+        "no_match",
+        "api_error",
+        "manual_review",
+        "linked"
+      ],
+      "default": "pending"
+    },
+    "matched_booking_id": {
+      "type": "string"
+    },
+    "api_lookup_attempted": {
+      "type": "boolean",
+      "default": false
+    },
+    "api_response_summary": {
+      "type": "string",
+      "description": "Non-sensitive summary of API response"
+    },
+    "error_message": {
+      "type": "string"
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "created_at"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "BookingLookupRequest",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "booking_reference": {
+      "type": "string"
+    },
+    "guest_email": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "arrival_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "departure_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_review",
+        "linked",
+        "not_found",
+        "rejected"
+      ],
+      "default": "pending"
+    },
+    "admin_notes": {
+      "type": "string"
+    },
+    "linked_reservation_id": {
+      "type": "string",
+      "description": "GuestReservationLink ID once resolved"
+    },
+    "admin_reviewed_by": {
+      "type": "string"
+    },
+    "admin_reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "email_sent_to_guest": {
+      "type": "boolean",
+      "default": false
+    },
+    "admin_notified": {
+      "type": "boolean",
+      "default": false
+    },
+    "return_log_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_email"
+  ]
+}

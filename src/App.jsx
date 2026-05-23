@@ -47,6 +47,8 @@ import AdminCreditDashboard from './pages/AdminCreditDashboard';
 import AdminHeroSlides from './pages/AdminHeroSlides';
 import AdminOffers from './pages/AdminOffers';
 import AdminOpeningHours from './pages/AdminOpeningHours';
+import BookingConfirmed from './pages/BookingConfirmed';
+import AdminBeds24Bookings from './pages/AdminBeds24Bookings';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -117,6 +119,8 @@ const AuthenticatedApp = () => {
         <Route path="/admin/hero" element={<AdminHeroSlides />} />
         <Route path="/admin/offers" element={<AdminOffers />} />
         <Route path="/admin/opening-hours" element={<AdminOpeningHours />} />
+        <Route path="/booking-confirmed" element={<BookingConfirmed />} />
+        <Route path="/admin/beds24-bookings" element={<AdminBeds24Bookings />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

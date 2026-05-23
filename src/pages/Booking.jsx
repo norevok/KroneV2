@@ -8,13 +8,19 @@ import { Link } from 'react-router-dom';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 import { SITE_DEFAULTS } from '@/lib/siteData';
-import { ExternalLink, Phone, ArrowLeft, Shield, Star, Check } from 'lucide-react';
+import { ExternalLink, Phone, ArrowLeft, Shield, Star, Check, LogIn, UserCircle, X } from 'lucide-react';
 
 export default function Booking() {
   const { lang } = useLang();
   const s = SITE_DEFAULTS;
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [iframeError, setIframeError] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [loginBannerDismissed, setLoginBannerDismissed] = useState(false);
+
+  useEffect(() => {
+    base44.auth.isAuthenticated().then(a => setIsLoggedIn(a)).catch(() => setIsLoggedIn(false));
+  }, []);
 
   // Read URL params passed from room search
   const params = new URLSearchParams(window.location.search);
@@ -110,6 +116,43 @@ export default function Booking() {
           </div>
         </div>
       </div>
+
+      {/* Login recommendation banner */}
+      {isLoggedIn === false && !loginBannerDismissed && (
+        <div className="bg-[#F2E8D0] border-b border-[#C9A96E]/30">
+          <div className="max-w-6xl mx-auto px-5 py-4">
+            <div className="flex items-start gap-3">
+              <UserCircle className="w-5 h-5 text-[#8B6914] flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="text-[#5C4010] font-body text-sm font-semibold mb-1">
+                  {lang === 'de' ? 'Mehr Service mit Konto' : lang === 'en' ? 'More with a guest account' : 'Più servizi con un account'}
+                </p>
+                <p className="text-[#8B6914]/70 text-xs font-body leading-relaxed mb-3">
+                  {lang === 'de'
+                    ? 'Melden Sie sich vorher an, damit Ihre Buchung automatisch in Ihrem Gäste-Konto erscheint.'
+                    : lang === 'en'
+                    ? 'Sign in before booking so your reservation appears automatically in your guest account.'
+                    : 'Accedi prima di prenotare per visualizzare la tua prenotazione automaticamente nel tuo account.'}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <button onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                    className="flex items-center gap-1.5 px-4 py-2 bg-[#8B6914] text-white text-xs font-body font-semibold rounded-full tracking-wider uppercase transition-all">
+                    <LogIn className="w-3.5 h-3.5" />
+                    {lang === 'de' ? 'Einloggen' : lang === 'en' ? 'Sign In' : 'Accedi'}
+                  </button>
+                  <button onClick={() => setLoginBannerDismissed(true)}
+                    className="px-4 py-2 border border-[#8B6914]/30 text-[#8B6914]/60 text-xs font-body rounded-full tracking-wider uppercase hover:text-[#8B6914] transition-colors">
+                    {lang === 'de' ? 'Ohne Konto fortfahren' : lang === 'en' ? 'Continue without account' : 'Continua senza account'}
+                  </button>
+                </div>
+              </div>
+              <button onClick={() => setLoginBannerDismissed(true)} className="text-[#8B6914]/40 hover:text-[#8B6914] flex-shrink-0">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Booking widget area */}
       <div className="max-w-6xl mx-auto px-5 py-8">

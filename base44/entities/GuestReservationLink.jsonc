@@ -1,0 +1,114 @@
+{
+  "name": "GuestReservationLink",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Base44 user ID of the guest"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "beds24",
+        "manual"
+      ],
+      "default": "beds24"
+    },
+    "source_reference": {
+      "type": "string",
+      "description": "Beds24 booking reference shown to guest"
+    },
+    "external_booking_id": {
+      "type": "string",
+      "description": "Internal Beds24 booking ID"
+    },
+    "room_type": {
+      "type": "string"
+    },
+    "arrival_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "departure_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "guest_name": {
+      "type": "string"
+    },
+    "guest_email": {
+      "type": "string"
+    },
+    "number_of_guests": {
+      "type": "number"
+    },
+    "booking_status": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "pending",
+        "cancelled",
+        "completed",
+        "unknown"
+      ],
+      "default": "confirmed"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "paid",
+        "unpaid",
+        "partial",
+        "refunded",
+        "unknown"
+      ],
+      "default": "unknown"
+    },
+    "total_price": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "EUR"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verified_by": {
+      "type": "string",
+      "description": "api_auto or admin email"
+    },
+    "linked_by_admin": {
+      "type": "boolean",
+      "default": false
+    },
+    "admin_notes": {
+      "type": "string"
+    },
+    "return_log_id": {
+      "type": "string",
+      "description": "Link to Beds24ReturnLog"
+    },
+    "email_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "slack_notified": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "user_id",
+    "user_email",
+    "source_reference"
+  ]
+}
