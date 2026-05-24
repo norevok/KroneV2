@@ -717,15 +717,15 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
             {[
               {
-                // Schloss Langenburg — real castle on hilltop, Germany
-                img: 'https://images.unsplash.com/photo-1548115184-bc6544d06a58?w=600&q=85',
+                // Schloss Langenburg — medieval hilltop castle Germany, real castle silhouette
+                img: 'https://images.unsplash.com/photo-1564584083593-79f2f3e1e0da?w=600&q=85',
                 alt: 'Schloss Langenburg Hohenlohe Burg',
                 label: c.chip_castle,
                 desc: lang === 'de' ? 'Historisches Schloss mit Blick ins Jagsttal.' : 'Historic castle overlooking the Jagst valley.',
                 dist: '5 Min.',
               },
               {
-                // Jagsttal — green river valley with meadows, no mountains
+                // Jagsttal — gentle German river valley, green meadows, no Alps
                 img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=85',
                 alt: 'Jagsttal Hohenlohe Natur Langenburg',
                 label: c.chip_nature,
@@ -733,17 +733,17 @@ export default function Home() {
                 dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
               },
               {
-                // Classic oldtimer / vintage car — Automuseum
-                img: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=85',
-                alt: 'Automuseum Schloss Langenburg Oldtimer',
+                // Classic vintage car / oldtimer — Automuseum context
+                img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=85',
+                alt: 'Deutsches Automuseum Schloss Langenburg Oldtimer',
                 label: c.chip_museum,
                 desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
                 dist: '5 Min.',
               },
               {
-                // Wine & regional Genuss — vineyard, wine glasses, Hohenlohe
-                img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=85',
-                alt: 'Hohenloher Wein Weinberge Region',
+                // Hohenloher Genuss — wine glasses, warm light, regional atmosphere
+                img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=85',
+                alt: 'Hohenloher Wein Weinberge Region Genuss',
                 label: c.chip_wine,
                 desc: lang === 'de' ? 'Wein, regionale Produkte und echte Hohenloher Gastlichkeit.' : 'Wine, regional produce and true Hohenlohe hospitality.',
                 dist: '15 Min.',

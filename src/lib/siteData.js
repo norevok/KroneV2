@@ -12,7 +12,7 @@ export const SITE_DEFAULTS = {
   address_city: "Langenburg",
   address_zip: "74595",
   address_country: "Deutschland",
-  phone: "+49 7905 41770",
+  phone: "+49 7905 941770",
   email_info: "info@krone-ammesso.de",
   email_reservations: "info@krone-ammesso.de",
   beds24_prop_id: "310599",
