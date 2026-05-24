@@ -1,11 +1,129 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar, Sparkles, Clock } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 import HeroBookingBar from '@/components/home/HeroBookingBar';
 import ChatWidget from '@/components/ChatWidget';
 import { base44 } from '@/api/base44Client';
+
+// ── Inline Restaurant Block with live open/closed status ──
+function RestaurantBlock({ lang }) {
+  // Opening hours: Tue–Sat 12–14 & 18–22, Sun 12–21, Mon closed
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun,1=Mon,...,6=Sat
+  const hour = now.getHours() + now.getMinutes() / 60;
+
+  let isOpen = false;
+  if (day === 0) { // Sunday all day
+    isOpen = hour >= 12 && hour < 21;
+  } else if (day >= 2 && day <= 6) { // Tue–Sat
+    isOpen = (hour >= 12 && hour < 14.5) || (hour >= 18 && hour < 22.5);
+  }
+
+  const hours = {
+    de: ['Di–Sa: 12:00–14:30 & 18:00–22:30', 'So: 12:00–21:00', 'Mo: Ruhetag'],
+    en: ['Tue–Sat: 12:00–14:30 & 18:00–22:30', 'Sun: 12:00–21:00', 'Mon: Closed'],
+    it: ['Mar–Sab: 12:00–14:30 & 18:00–22:30', 'Dom: 12:00–21:00', 'Lun: Chiuso'],
+  };
+  const h = hours[lang] || hours.de;
+
+  return (
+    <motion.div
+      className="bg-white border-b border-[#EDE6D8]"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7 }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10 sm:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+
+          {/* LEFT — identity */}
+          <div>
+            <p className="text-[#8B6914] text-[10px] tracking-[0.5em] uppercase font-body mb-3">
+              {lang === 'de' ? 'Restaurant & Bar' : lang === 'en' ? 'Restaurant & Bar' : 'Ristorante & Bar'}
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-[#1C1714] leading-tight mb-2">
+              Krone Langenburg
+            </h2>
+            <p className="font-display text-xl sm:text-2xl font-light text-[#8B6914] italic mb-5">
+              by Ammesso
+            </p>
+
+            {/* Live status badge */}
+            <div className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full border mb-6 ${
+              isOpen
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                : 'bg-red-50 border-red-200 text-red-600'
+            }`}>
+              <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
+              <span className="text-xs font-body font-semibold tracking-wide">
+                {isOpen
+                  ? (lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora')
+                  : (lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso')}
+              </span>
+            </div>
+
+            <p className="font-body text-[#4A3F35] text-sm leading-relaxed mb-8 max-w-md">
+              {lang === 'de'
+                ? 'Mediterrane Küche mit der Seele Hohenlohes — Omar Ammesso verbindet regionale Zutaten mit italienischer Leidenschaft. Hausgemachte Pasta, Fleisch vom lokalen Metzger, Fisch der Saison.'
+                : lang === 'en'
+                ? 'Mediterranean cuisine with the soul of Hohenlohe — Omar Ammesso combines regional ingredients with Italian passion. Homemade pasta, locally sourced meat, seasonal fish.'
+                : 'Cucina mediterranea con l\'anima di Hohenlohe — Omar Ammesso unisce ingredienti regionali con la passione italiana.'}
+            </p>
+
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-block">
+              <Link to="/reserve"
+                className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-lg">
+                <UtensilsCrossed className="w-4 h-4" />
+                {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota un tavolo'}
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* RIGHT — opening hours */}
+          <div className="bg-[#FAF7F2] rounded-2xl border border-[#EDE6D8] p-6 sm:p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-full bg-[#8B6914]/10 border border-[#8B6914]/20 flex items-center justify-center">
+                <Clock className="w-4.5 h-4.5 text-[#8B6914]" />
+              </div>
+              <h3 className="font-display text-xl font-light text-[#1C1714]">
+                {lang === 'de' ? 'Öffnungszeiten' : lang === 'en' ? 'Opening Hours' : 'Orari di apertura'}
+              </h3>
+            </div>
+            <div className="space-y-3">
+              {h.map((line, i) => {
+                const isClosed = line.includes('Ruhetag') || line.includes('Closed') || line.includes('Chiuso');
+                const isToday = (i === 0 && day >= 2 && day <= 6) || (i === 1 && day === 0) || (i === 2 && day === 1);
+                return (
+                  <div key={i} className={`flex items-center justify-between py-2.5 px-3 rounded-xl transition-colors ${isToday ? 'bg-[#8B6914]/8 border border-[#8B6914]/15' : ''}`}>
+                    <span className={`font-body text-sm ${isClosed ? 'text-[#8A7A6A]/50' : 'text-[#1C1714]'} ${isToday ? 'font-semibold' : ''}`}>
+                      {line}
+                    </span>
+                    {isToday && (
+                      <span className="text-[10px] font-body font-bold text-[#8B6914] tracking-wider uppercase ml-2 flex-shrink-0">
+                        {lang === 'de' ? 'Heute' : lang === 'en' ? 'Today' : 'Oggi'}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-6 pt-5 border-t border-[#EDE6D8]">
+              <p className="text-[#8A7A6A] text-xs font-body">
+                {lang === 'de' ? '📍 Marktplatz 1, 74595 Langenburg · +49 7905 94080' : '📍 Marktplatz 1, 74595 Langenburg · +49 7905 94080'}
+              </p>
+              <Link to="/restaurant" className="inline-flex items-center gap-1.5 text-[#8B6914] hover:text-[#7A5A0F] text-xs font-body font-semibold tracking-wider uppercase mt-3 transition-colors">
+                {lang === 'de' ? 'Restaurant entdecken' : lang === 'en' ? 'Discover restaurant' : 'Scopri il ristorante'} <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 const SLIDES = [
   {
@@ -369,38 +487,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── RESTAURANT QUICK-RESERVE STRIP ── */}
-      <motion.div
-        className="bg-[#FAF7F2] border-b border-[#EDE6D8] py-5 px-4 sm:px-8"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}>
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="w-10 h-10 rounded-full bg-[#8B6914]/10 border border-[#8B6914]/20 flex items-center justify-center flex-shrink-0">
-                <UtensilsCrossed className="w-4.5 h-4.5 text-[#8B6914]" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-[#1C1714] font-body font-semibold text-sm leading-tight">
-                  {lang === 'de' ? 'Kulinarium by Ammesso' : lang === 'en' ? 'Kulinarium by Ammesso' : 'Kulinarium by Ammesso'}
-                </p>
-                <p className="text-[#8A7A6A] font-body text-xs truncate">
-                  {lang === 'de' ? 'Mediterrane Küche · Di–Sa & So ganztags' : lang === 'en' ? 'Mediterranean cuisine · Tue–Sat & Sun all day' : lang === 'it' ? 'Cucina mediterranea · Mar–Sab & Dom tutto il giorno' : 'Cocina mediterránea · Mar–Sáb & Dom todo el día'}
-                </p>
-              </div>
-            </div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto flex-shrink-0">
-              <Link to="/reserve"
-                className="flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-md hover:shadow-lg">
-                <UtensilsCrossed className="w-3.5 h-3.5" />
-                {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : lang === 'it' ? 'Prenota un tavolo' : 'Reservar mesa'}
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
+      {/* ── RESTAURANT FEATURE BLOCK ── */}
+      <RestaurantBlock lang={lang} />
 
       {/* ── BENEFIT STRIP ── */}
       <motion.div 
