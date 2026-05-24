@@ -668,14 +668,18 @@ export default function Home() {
                   ? 'At Kulinarium by Ammesso we combine the warmth of Italian cuisine with the finest regional ingredients. Pasta, meat, fish — all prepared with love, straight from our kitchen to your table.'
                   : 'Al Kulinarium by Ammesso combiniamo il calore della cucina italiana con i migliori ingredienti regionali.'}
               </p>
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
                 <Link to="/reserve"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all">
-                  <UtensilsCrossed className="w-4 h-4" /> {c.restaurant_reserve}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all min-w-0">
+                  <UtensilsCrossed className="w-4 h-4 flex-shrink-0" /> {c.restaurant_reserve}
                 </Link>
-                <Link to="/restaurant"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all">
-                  {lang === 'de' ? 'Zum Restaurant' : lang === 'en' ? 'To the Restaurant' : 'Al ristorante'} <ArrowRight className="w-4 h-4" />
+                <Link to="/menu"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all min-w-0">
+                  {lang === 'de' ? 'Menü ansehen' : lang === 'en' ? 'View Menu' : 'Menù'} <ArrowRight className="w-4 h-4 flex-shrink-0" />
+                </Link>
+                <Link to="/weddings"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 border-2 border-white/15 text-white/50 hover:text-white/80 hover:border-white/30 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all min-w-0">
+                  {lang === 'de' ? 'Event anfragen' : lang === 'en' ? 'Enquire Event' : 'Evento'}
                 </Link>
               </div>
             </div>
@@ -714,7 +718,7 @@ export default function Home() {
           </motion.div>
 
           {/* Premium 3D-style highlight cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
             {[
               {
                 // Schloss Langenburg — medieval hilltop castle Germany, real castle silhouette
@@ -771,16 +775,16 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3 justify-center">
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link to="/discover"
-                className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_8px_30px_rgba(201,169,110,0.3)]">
+                className="flex items-center justify-center px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_8px_30px_rgba(201,169,110,0.3)] w-full sm:w-auto">
                 {c.discover_btn}
               </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link to="/contact"
-                className="px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all">
+                className="flex items-center justify-center px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all w-full sm:w-auto">
                 {c.contact_btn}
               </Link>
             </motion.div>

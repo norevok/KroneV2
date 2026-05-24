@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/lib/useLang';
-import { ArrowRight, MapPin, Camera, Compass, Mountain, Wine, Castle, ChevronDown } from 'lucide-react';
+import { ArrowRight, MapPin, Camera, Compass, Mountain, Wine, Castle, ChevronDown, Car } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
 // All images replaced with real, correctly matching photos
@@ -24,12 +24,20 @@ const ATTRACTIONS = [
     en: { title: 'Jagst Valley & Hiking', desc: 'The Jagst valley is one of the most beautiful river valleys in southern Germany. Scenic hiking trails lead through meadows, forests and historic villages. The Jagst Valley Trail connects over 200 km of nature and culture.', tag: 'Hiking paradise' },
   },
   {
+    id: 'automuseum',
+    icon: Car,
+    // Classic Ferrari / red vintage race car — Deutsches Automuseum Schloss Langenburg context
+    image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200&q=85',
+    de: { title: 'Deutsches Automuseum Schloss Langenburg', desc: 'Das Deutsche Automuseum im Schloss Langenburg zählt zu den faszinierendsten Automobilausstellungen Deutschlands. Über 80 historische Fahrzeuge — von frühen Sportwagen bis zu legendären Rennwagen — erzählen die Geschichte des Automobils in einzigartiger Schlosskulisse.', tag: '5 min zu Fuß' },
+    en: { title: 'German Automotive Museum Langenburg', desc: 'The German Automotive Museum at Langenburg Castle is one of Germany\'s most fascinating car exhibitions. Over 80 historic vehicles — from early sports cars to legendary racing cars — tell the story of the automobile in a unique castle setting.', tag: '5 min walk' },
+  },
+  {
     id: 'altstadt',
-    icon: Camera,
-    // Schloss Langenburg entrance courtyard — correct Langenburg old town feel (Wikimedia CC BY-SA 4.0)
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Schloss-Langenburg-Eingangsbereich-2022.jpg/1280px-Schloss-Langenburg-Eingangsbereich-2022.jpg',
-    de: { title: 'Altstadt & Marktplatz Langenburg', desc: 'Die malerische Altstadt Langenburgs lädt zum Spazieren und Entdecken ein. Historische Fachwerkhäuser, gepflasterte Gassen und eine entspannte Atmosphäre machen Langenburg zu einem der schönsten kleinen Städte Hohenlohes — direkt vor unserer Haustür.', tag: 'Stadtspaziergang' },
-    en: { title: 'Langenburg Old Town', desc: 'The picturesque old town of Langenburg invites you to stroll and discover. Historic half-timbered houses, cobbled alleys and a relaxed atmosphere make Langenburg one of the most beautiful small towns in Hohenlohe — right on our doorstep.', tag: 'Town walk' },
+    icon: Compass,
+    // Rothenburg ob der Tauber — iconic German medieval town for day trips, free Unsplash
+    image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&q=85',
+    de: { title: 'Altstadt & Ausflugsziele', desc: 'Langenburg ist idealer Ausgangspunkt für Tagesausflüge nach Schwäbisch Hall, Bad Mergentheim oder Rothenburg ob der Tauber. Die malerische Altstadt selbst lädt mit Fachwerkhäusern und gepflasterten Gassen zum Spazieren ein.', tag: 'Tagesausflüge' },
+    en: { title: 'Old Town & Day Trips', desc: 'Langenburg is the ideal base for day trips to Schwäbisch Hall, Bad Mergentheim or Rothenburg ob der Tauber. The picturesque old town itself invites you to stroll among half-timbered houses and cobbled alleys.', tag: 'Day trips' },
   },
   {
     id: 'wein',
@@ -38,14 +46,6 @@ const ATTRACTIONS = [
     image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=85',
     de: { title: 'Hohenloher Wein & Genuss', desc: 'Die Region Hohenlohe ist für ihre Weinbaukultur bekannt. Entdecken Sie lokale Weingüter, Straußenwirtschaften und kulinarische Besonderheiten der Region. Paaren Sie den Weingenuss mit einem Abendessen bei uns im Kulinarium.', tag: 'Weinkultur' },
     en: { title: 'Hohenlohe Wine & Pleasure', desc: 'The Hohenlohe region is known for its wine culture. Discover local wineries, seasonal wine taverns and culinary specialities of the region. Pair wine enjoyment with an evening dinner at our Kulinarium.', tag: 'Wine culture' },
-  },
-  {
-    id: 'ausflug',
-    icon: Compass,
-    // Rothenburg ob der Tauber — iconic German medieval town for day trips, free Unsplash
-    image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&q=85',
-    de: { title: 'Ausflugsziele in der Nähe', desc: 'Langenburg ist idealer Ausgangspunkt für Tagesausflüge nach Schwäbisch Hall, Bad Mergentheim, Rothenburg ob der Tauber oder in den Schwarzwald. Alle sind bequem in unter zwei Stunden erreichbar.', tag: 'Tagesausflüge' },
-    en: { title: 'Day Trip Destinations Nearby', desc: 'Langenburg is the ideal base for day trips to Schwäbisch Hall, Bad Mergentheim, Rothenburg ob der Tauber or the Black Forest. All are easily reachable within two hours.', tag: 'Day trips' },
   },
 ];
 

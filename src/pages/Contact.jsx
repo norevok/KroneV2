@@ -3,7 +3,46 @@ import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, CheckCircle, Instagram, Facebook, Clock, Upload, X, FileText, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, CheckCircle, Instagram, Facebook, Clock, Upload, X, FileText, AlertCircle, ChevronDown } from 'lucide-react';
+
+const FAQ_DE = [
+  { q: 'Wann ist Check-in und Check-out?', a: 'Check-in ab 15:00 Uhr, Check-out bis 11:00 Uhr. Früherer Check-in oder späterer Check-out auf Anfrage möglich.' },
+  { q: 'Wie reserviere ich einen Tisch im Restaurant?', a: 'Sie können online über unsere Website reservieren oder uns direkt unter +49 7905 941770 oder info@krone-ammesso.de anschreiben.' },
+  { q: 'Gibt es Parkplätze?', a: 'Kostenlose Parkplätze sind in unmittelbarer Nähe des Hotels in der Altstadt von Langenburg verfügbar.' },
+  { q: 'Sind Haustiere erlaubt?', a: 'Bitte fragen Sie bei uns direkt an — wir prüfen gerne Ausnahmen für wohlerzogene Vierbeiner.' },
+  { q: 'Gibt es Frühstück?', a: 'Frühstück ist optional buchbar für €14 pro Person. Bitte bei der Buchung angeben.' },
+];
+const FAQ_EN = [
+  { q: 'What are check-in and check-out times?', a: 'Check-in from 15:00, check-out by 11:00. Early check-in or late check-out available on request.' },
+  { q: 'How do I reserve a table in the restaurant?', a: 'You can book online via our website or contact us directly at +49 7905 941770 or info@krone-ammesso.de.' },
+  { q: 'Is there parking?', a: 'Free parking is available in the immediate vicinity of the hotel in Langenburg\'s old town.' },
+  { q: 'Are pets allowed?', a: 'Please ask us directly — we are happy to consider exceptions for well-behaved pets.' },
+  { q: 'Is breakfast available?', a: 'Breakfast is optionally bookable at €14 per person. Please indicate this when booking.' },
+];
+
+function FaqItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-b border-[#EDE6D8] last:border-0">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full text-left py-4 flex items-center justify-between gap-3 group">
+        <span className="text-[#1C1714] font-body font-semibold text-sm">{q}</span>
+        <ChevronDown className={`w-4 h-4 text-[#8B6914] flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}
+            className="overflow-hidden">
+            <p className="pb-4 text-[#4A3F35]/70 font-body text-sm leading-relaxed">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
@@ -448,24 +487,38 @@ export default function Contact() {
           </motion.div>
         </div>
 
+        {/* ── FAQ ── */}
+        <motion.div
+          className="mt-14 sm:mt-20"
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <h2 className="font-display text-3xl font-light text-[#1C1714] mb-8 text-center">
+            {lang === 'de' ? 'Häufige Fragen' : lang === 'en' ? 'Frequently Asked Questions' : 'Domande frequenti'}
+          </h2>
+          <div className="max-w-3xl mx-auto bg-white border border-[#EDE6D8] rounded-2xl px-6 py-2 shadow-[0_4px_20px_rgba(28,23,20,0.06)]">
+            {(lang === 'en' ? FAQ_EN : FAQ_DE).map((item, i) => (
+              <FaqItem key={i} q={item.q} a={item.a} />
+            ))}
+          </div>
+        </motion.div>
+
         {/* ── MAP ── */}
         <motion.div
           className="mt-14 sm:mt-20"
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <h2 className="font-display text-3xl font-light text-[#1C1714] mb-6 text-center">{t.find_us}</h2>
-          <div className="rounded-2xl overflow-hidden border border-[#EDE6D8] h-[380px] sm:h-[480px] shadow-[0_8px_32px_rgba(28,23,20,0.1)]">
+          <div className="rounded-2xl overflow-hidden border border-[#EDE6D8] h-[320px] sm:h-[420px] shadow-[0_8px_32px_rgba(28,23,20,0.1)]">
             <iframe
               width="100%" height="100%"
               style={{ border: 0 }}
               loading="lazy"
               allowFullScreen=""
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=9.8390%2C49.2495%2C9.8540%2C49.2585&layer=mapnik&marker=49.2540%2C9.8465"
-              title="Krone Langenburg"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=9.8690%2C49.2455%2C9.8840%2C49.2535&layer=mapnik&marker=49.2495%2C9.8765"
+              title="Krone Langenburg — Hauptstraße 24, 74595 Langenburg"
             />
           </div>
           <div className="text-center mt-4">
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Hauptstra%C3%9Fe+24%2C+74595+Langenburg"
+            <a href="https://www.google.com/maps/search/Hauptstra%C3%9Fe+24,+74595+Langenburg"
               target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[#8B6914] hover:text-[#5C4010] text-xs font-body tracking-wider transition-colors">
               {t.directions} →
