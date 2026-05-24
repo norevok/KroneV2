@@ -54,13 +54,24 @@ export default function HeroBookingBar({ lang = 'de' }) {
     navigate(`/booking?${params.toString()}`);
   }
 
+  // Auto-set checkout to next day when checkin is selected
+  function handleCheckInChange(val) {
+    setCheckIn(val);
+    if (val) {
+      const next = new Date(val);
+      next.setDate(next.getDate() + 1);
+      const nextStr = next.toISOString().split('T')[0];
+      if (!checkOut || checkOut <= val) setCheckOut(nextStr);
+    }
+  }
+
   return (
     <div className="w-full max-w-4xl mx-auto">
       <form onSubmit={handleSearch}>
         {/* Desktop: single-row card */}
         <div className="hidden md:flex bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/50">
           {/* Destination — fixed */}
-          <div className="flex items-center gap-3 px-5 py-4 border-r border-stone-100 min-w-[180px]">
+          <div className="flex items-center gap-3 px-5 py-4 border-r border-stone-100 min-w-[200px]">
             <MapPin className="w-4 h-4 text-[#8B6914] flex-shrink-0" />
             <div>
               <p className="text-[10px] font-body font-semibold text-stone-400 uppercase tracking-widest mb-0.5">{c.destination}</p>
@@ -69,7 +80,7 @@ export default function HeroBookingBar({ lang = 'de' }) {
           </div>
 
           {/* Check-in */}
-          <div className="flex items-center gap-3 px-5 py-4 border-r border-stone-100 flex-1 min-w-[140px]">
+          <div className="flex items-center gap-3 px-5 py-4 border-r border-stone-100 flex-1 min-w-[150px]">
             <Calendar className="w-4 h-4 text-stone-400 flex-shrink-0" />
             <div className="w-full">
               <p className="text-[10px] font-body font-semibold text-stone-400 uppercase tracking-widest mb-0.5">{c.checkin}</p>
@@ -77,28 +88,23 @@ export default function HeroBookingBar({ lang = 'de' }) {
                 type="date"
                 value={checkIn}
                 min={today}
-                onChange={e => {
-                  setCheckIn(e.target.value);
-                  if (checkOut && e.target.value >= checkOut) setCheckOut('');
-                }}
+                onChange={e => handleCheckInChange(e.target.value)}
                 className="w-full text-sm font-body text-stone-800 bg-transparent outline-none cursor-pointer"
-                placeholder={today}
               />
             </div>
           </div>
 
           {/* Check-out */}
-          <div className="flex items-center gap-3 px-5 py-4 border-r border-stone-100 flex-1 min-w-[140px]">
+          <div className="flex items-center gap-3 px-5 py-4 border-r border-stone-100 flex-1 min-w-[150px]">
             <Calendar className="w-4 h-4 text-stone-400 flex-shrink-0" />
             <div className="w-full">
               <p className="text-[10px] font-body font-semibold text-stone-400 uppercase tracking-widest mb-0.5">{c.checkout}</p>
               <input
                 type="date"
                 value={checkOut}
-                min={checkIn || tomorrow}
+                min={checkIn ? (() => { const d = new Date(checkIn); d.setDate(d.getDate()+1); return d.toISOString().split('T')[0]; })() : tomorrow}
                 onChange={e => setCheckOut(e.target.value)}
                 className="w-full text-sm font-body text-stone-800 bg-transparent outline-none cursor-pointer"
-                placeholder={tomorrow}
               />
             </div>
           </div>
@@ -127,19 +133,28 @@ export default function HeroBookingBar({ lang = 'de' }) {
           </button>
         </div>
 
-        {/* Mobile: compact single-row pill */}
+        {/* Mobile: card with destination header */}
         <div className="md:hidden bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/60" style={{ boxShadow: '0 16px 48px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.1)' }}>
+          {/* Destination row */}
+          <div className="flex items-center gap-2.5 px-4 py-3 border-b border-stone-100">
+            <MapPin className="w-4 h-4 text-[#8B6914] flex-shrink-0" />
+            <div>
+              <p className="text-[9px] font-body font-semibold text-stone-400 uppercase tracking-widest leading-none mb-0.5">{c.destination}</p>
+              <p className="text-sm font-body text-stone-800 font-medium leading-none">{c.dest_value}</p>
+            </div>
+          </div>
           {/* Date + guests row */}
           <div className="flex items-stretch divide-x divide-stone-100">
             <div className="flex-1 px-4 py-3">
               <p className="text-[9px] font-body font-semibold text-stone-400 uppercase tracking-widest mb-1">{c.checkin}</p>
               <input type="date" value={checkIn} min={today}
-                onChange={e => { setCheckIn(e.target.value); if (checkOut && e.target.value >= checkOut) setCheckOut(''); }}
+                onChange={e => handleCheckInChange(e.target.value)}
                 className="w-full text-sm font-body text-stone-800 bg-transparent outline-none" />
             </div>
             <div className="flex-1 px-4 py-3">
               <p className="text-[9px] font-body font-semibold text-stone-400 uppercase tracking-widest mb-1">{c.checkout}</p>
-              <input type="date" value={checkOut} min={checkIn || tomorrow}
+              <input type="date" value={checkOut}
+                min={checkIn ? (() => { const d = new Date(checkIn); d.setDate(d.getDate()+1); return d.toISOString().split('T')[0]; })() : tomorrow}
                 onChange={e => setCheckOut(e.target.value)}
                 className="w-full text-sm font-body text-stone-800 bg-transparent outline-none" />
             </div>

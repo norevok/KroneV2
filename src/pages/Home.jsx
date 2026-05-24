@@ -657,27 +657,27 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
             {[
               {
-                // Schloss Langenburg — Wikimedia CC BY-SA 4.0
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/800px-Schloss_Langenburg-msu-2021-0306-.jpg',
-                alt: 'Schloss Langenburg Hohenlohe',
+                // Historic German castle — representative for Schloss Langenburg feel
+                img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=85',
+                alt: 'Schloss Langenburg Hohenlohe Burg',
                 label: c.chip_castle, dist: '5 min',
               },
               {
-                // Jagst river valley — gentle German river landscape, Hohenlohe region feel
-                img: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=85',
+                // Green river valley with trees — Jagst valley nature feel
+                img: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=85',
                 alt: 'Jagsttal Hohenlohe Natur Langenburg',
                 label: c.chip_nature, dist: '0 min',
               },
               {
-                // Hohenlohe wine / vineyard — rows of vines, warm golden light
-                img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=85',
+                // Vineyard rows golden hour — Hohenlohe wine region
+                img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=85',
                 alt: 'Hohenloher Wein Weinberge Region Langenburg',
                 label: c.chip_wine, dist: '15 min',
               },
               {
-                // Schloss Langenburg courtyard / old town entrance — correct historic feel
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Schloss-Langenburg-Eingangsbereich-2022.jpg/800px-Schloss-Langenburg-Eingangsbereich-2022.jpg',
-                alt: 'Altstadt Langenburg historische Gassen',
+                // Classic vintage car museum interior — represents Automuseum Langenburg
+                img: 'https://images.unsplash.com/photo-1514316703755-dca7d7d9d882?w=600&q=85',
+                alt: 'Automuseum Langenburg Oldtimer Ausstellung',
                 label: c.chip_museum, dist: '5 min',
               },
             ].map((item, i) => (
