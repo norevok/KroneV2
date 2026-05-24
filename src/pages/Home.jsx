@@ -690,7 +690,6 @@ export default function Home() {
           </div>
         </div>
       </motion.div>
-      </div>
 
       {/* AI Chat Widget */}
       <ChatWidget />
