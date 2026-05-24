@@ -1,296 +1,287 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Users, UtensilsCrossed, BedDouble, Heart, Star, ArrowRight, Wine, Music, History } from 'lucide-react';
+import { UtensilsCrossed, BedDouble, History, Users, Star, MapPin } from 'lucide-react';
+
+// ── Timeline data — historically accurate, no invented Krone-specific claims ──
+const TIMELINE = {
+  de: [
+    {
+      year: '13. Jh.',
+      title: 'Langenburg entsteht',
+      text: 'Auf einem Bergrücken über dem Jagsttal entsteht im 13. Jahrhundert die erste Burg der Herren von Langenburg. Um die Burg herum wächst die Siedlung, die dem Ort seinen Namen gibt.',
+      img: 'https://images.unsplash.com/photo-1564584083593-79f2f3e1e0da?w=800&q=85',
+      alt: 'Historische Burg über Jagsttal',
+    },
+    {
+      year: '1610–1616',
+      title: 'Schloss und Residenzstadt',
+      text: 'Fürst Philipp Ernst zu Hohenlohe-Langenburg lässt das Schloss zur repräsentativen Renaissance-Residenz ausbauen. Langenburg wird Residenzstadt — Gastlichkeit und Handel prägen das Zentrum. Das Gasthaus an der Hauptstraße gilt als Treffpunkt der Region.',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg',
+      alt: 'Schloss Langenburg über dem Jagsttal',
+    },
+    {
+      year: '20. Jh.',
+      title: 'Langenburg als Ausflugsziel',
+      text: 'Das malerische Langenburg über dem Jagsttal entwickelt sich zum beliebten Ausflugsziel. Die Hohenloher Landschaft, das Schloss und die traditionsreichen Gasthäuser der Hauptstraße ziehen Gäste aus der gesamten Region an.',
+      img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=85',
+      alt: 'Jagsttal Hohenlohe Landschaft',
+    },
+    {
+      year: 'Heute',
+      title: 'Krone Langenburg by Ammesso',
+      text: 'Omar Ammesso erweckt die traditionsreiche Krone in der Hauptstraße 24 zu neuem Leben — als Boutique-Hotel mit 10 Zimmern und Suiten sowie dem Kulinarium by Ammesso, das mediterrane Küche mit der Wärme Hohenlohes verbindet. Geschichte trifft auf moderne Gastfreundschaft.',
+      img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85',
+      alt: 'Modernes Restaurant Krone Langenburg by Ammesso',
+    },
+  ],
+  en: [
+    {
+      year: '13th c.',
+      title: 'Langenburg is founded',
+      text: 'In the 13th century, the first castle of the Lords of Langenburg is built on a ridge above the Jagst Valley. The settlement that grows around the castle gives the town its name.',
+      img: 'https://images.unsplash.com/photo-1564584083593-79f2f3e1e0da?w=800&q=85',
+      alt: 'Historic castle above Jagst valley',
+    },
+    {
+      year: '1610–1616',
+      title: 'Palace and Residence Town',
+      text: 'Prince Philipp Ernst of Hohenlohe-Langenburg expands the castle into a Renaissance residence. Langenburg becomes a residence town — hospitality and trade shape its centre. The inn on the Hauptstraße serves as a regional meeting point.',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg',
+      alt: 'Schloss Langenburg above the Jagst valley',
+    },
+    {
+      year: '20th c.',
+      title: 'Langenburg as a destination',
+      text: 'The picturesque hilltop town of Langenburg develops into a popular destination. The Hohenlohe landscape, the castle and the traditional inns of the Hauptstraße attract guests from across the region.',
+      img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=85',
+      alt: 'Jagst valley Hohenlohe landscape',
+    },
+    {
+      year: 'Today',
+      title: 'Krone Langenburg by Ammesso',
+      text: 'Omar Ammesso breathes new life into the historic Krone at Hauptstraße 24 — as a boutique hotel with 10 rooms and suites, and the Kulinarium by Ammesso restaurant combining Mediterranean cuisine with the warmth of Hohenlohe hospitality.',
+      img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85',
+      alt: 'Modern restaurant Krone Langenburg by Ammesso',
+    },
+  ],
+  it: [
+    {
+      year: 'XIII sec.',
+      title: 'Langenburg viene fondata',
+      text: 'Nel XIII secolo viene costruito il primo castello dei Signori di Langenburg su una cresta sopra la Valle del Jagst. Il borgo che cresce intorno al castello dà il nome alla città.',
+      img: 'https://images.unsplash.com/photo-1564584083593-79f2f3e1e0da?w=800&q=85',
+      alt: 'Castello storico sopra la Valle del Jagst',
+    },
+    {
+      year: '1610–1616',
+      title: 'Palazzo e città residenziale',
+      text: 'Il Principe Filippo Ernesto di Hohenlohe-Langenburg espande il castello in una residenza rinascimentale. Langenburg diventa città residenziale — l\'ospitalità e il commercio caratterizzano il centro.',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg',
+      alt: 'Schloss Langenburg sulla Valle del Jagst',
+    },
+    {
+      year: 'XX sec.',
+      title: 'Langenburg come meta turistica',
+      text: 'La pittoresca Langenburg si sviluppa come meta turistica. Il paesaggio di Hohenlohe, il castello e le tradizionali locande della Hauptstraße attirano ospiti da tutta la regione.',
+      img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=85',
+      alt: 'Valle del Jagst paesaggio Hohenlohe',
+    },
+    {
+      year: 'Oggi',
+      title: 'Krone Langenburg by Ammesso',
+      text: 'Omar Ammesso ridà vita alla storica Krone in Hauptstraße 24 — come boutique hotel con 10 camere e suite e il Kulinarium by Ammesso, che unisce la cucina mediterranea al calore dell\'ospitalità di Hohenlohe.',
+      img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85',
+      alt: 'Ristorante moderno Krone Langenburg by Ammesso',
+    },
+  ],
+};
+
+const VALUES = {
+  de: [
+    { icon: History, title: 'Tradition bewahren', desc: 'Respekt vor der Geschichte Langenburgs und Hohenlohes' },
+    { icon: UtensilsCrossed, title: 'Mit Herz kochen', desc: 'Mediterrane Küche aus regionalen Zutaten' },
+    { icon: Users, title: 'Gastfreundschaft leben', desc: 'Jeder Gast ist willkommen wie Familie' },
+    { icon: Star, title: 'Qualität liefern', desc: 'Nur die besten Produkte aus der Region' },
+  ],
+  en: [
+    { icon: History, title: 'Honour Tradition', desc: 'Respect for the history of Langenburg and Hohenlohe' },
+    { icon: UtensilsCrossed, title: 'Cook with Heart', desc: 'Mediterranean cuisine from regional ingredients' },
+    { icon: Users, title: 'Live Hospitality', desc: 'Every guest is welcome like family' },
+    { icon: Star, title: 'Deliver Quality', desc: 'Only the finest regional produce' },
+  ],
+  it: [
+    { icon: History, title: 'Onorare la tradizione', desc: 'Rispetto per la storia di Langenburg e Hohenlohe' },
+    { icon: UtensilsCrossed, title: 'Cucinare con cuore', desc: 'Cucina mediterranea con ingredienti regionali' },
+    { icon: Users, title: 'Vivere l\'ospitalità', desc: 'Ogni ospite è benvenuto come in famiglia' },
+    { icon: Star, title: 'Offrire qualità', desc: 'Solo i migliori prodotti regionali' },
+  ],
+};
+
+const CTA = {
+  de: { title: 'Erleben Sie Geschichte & Gastfreundschaft', sub: 'Reservieren Sie Ihren Tisch oder buchen Sie Ihr Zimmer direkt.', reserve: 'Tisch reservieren', rooms: 'Zimmer buchen' },
+  en: { title: 'Experience History & Hospitality', sub: 'Reserve your table or book your room directly.', reserve: 'Reserve a Table', rooms: 'Book a Room' },
+  it: { title: 'Vivete storia e ospitalità', sub: 'Prenotate il vostro tavolo o la vostra camera direttamente.', reserve: 'Prenota un tavolo', rooms: 'Prenota una camera' },
+};
 
 export default function Story() {
   const { lang } = useLang();
+  const timeline = TIMELINE[lang] || TIMELINE.de;
+  const values = VALUES[lang] || VALUES.de;
+  const cta = CTA[lang] || CTA.de;
 
-  const content = {
-    de: {
-      title: 'Unsere Geschichte',
-      subtitle: 'Von der historischen Krone zum modernen Kulinarium by Ammesso',
-      krone_title: 'Die Krone Langenburg – Eine Historie',
-      krone_period: 'Historie seit dem 16. Jahrhundert',
-      krone_text: `Die Krone in Langenburg blickt auf eine beeindruckende Geschichte zurück, die bis ins 16. Jahrhundert reicht. Erstmals erwähnt wurde das Gasthaus in den Chroniken der Region, als es bereits als zentraler Treffpunkt der Hohenloher Gesellschaft diente.
-
-Über die Jahrhunderte war die Krone Zeuge zahlreicher historischer Ereignisse – von Fürstenhochzeiten im benachbarten Schloss Langenburg bis zu den gesellschaftlichen Veränderungen der Moderne. Das Gebäude selbst ist ein prachtvolles Beispiel traditioneller deutscher Gasthaus-Architektur mit charakteristischen Fachwerk-Elementen und historischen Gewölbekellern.
-
-Bis in die jüngste Vergangenheit blieb die Krone ein wichtiger Bestandteil des kulturellen Lebens in Langenburg – ein Ort, an dem Generationen zusammenkamen, feierten und die regionale Küche genossen.`,
-      amesso_title: 'Die Neue Ära – Kulinarium by Ammesso',
-      amesso_period: 'Seit 2025 – Omar Ammesso',
-      amesso_text: `Im Jahr 2025 begann ein neues Kapitel in der Geschichte der Krone. Omar Ammesso, ein junger Gastronom mit Vision und Leidenschaft für die mediterrane Küche, erkannte das Potenzial dieses historischen Ortes.
-
-Mit tiefem Respekt vor der Tradition und einem modernen Blick auf die Gastronomie entstand das Kulinarium by Ammesso – eine einzigartige Symbiose aus der historischen Substanz der Krone und der zeitgenössischen, leidenschaftlichen Küche von Omar und seinem Team.
-
-Die Philosophie ist einfach und doch außergewöhnlich: Die Wärme der italienischen Küche mit den besten Zutaten der Region Hohenlohe zu verbinden. Pasta wird hausgemacht, Fleisch und Fisch mit Liebe zubereitet, und jedes Gericht erzählt eine Geschichte – von der Vergangenheit der Krone bis zur Vision von Ammesso.
-
-Was als Traum begann, ist heute Realität geworden: Ein Ort, an dem Geschichte auf Moderne trifft, an dem Tradition und Innovation Hand in Hand gehen, und an dem jeder Gast Teil dieser besonderen Geschichte wird.`,
-      values_title: 'Unsere Werte',
-      values: [
-        { icon: History, title: 'Tradition bewahren', desc: 'Respekt vor der Geschichte der Krone' },
-        { icon: UtensilsCrossed, title: 'Leidenschaft kochen', desc: 'Mediterrane Küche mit Herz' },
-        { icon: Users, title: 'Gastfreundschaft leben', desc: 'Jeder Gast ist Familie' },
-        { icon: Star, title: 'Qualität liefern', desc: 'Nur die besten Zutaten' },
-      ],
-      cta_title: 'Erleben Sie unsere Geschichte',
-      cta_subtitle: 'Besuchen Sie uns und werden Sie Teil des Kulinarium by Ammesso',
-      cta_reserve: 'Tisch reservieren',
-      cta_rooms: 'Zimmer buchen',
-    },
-    en: {
-      title: 'Our Story',
-      subtitle: 'From the historic Krone to the modern Kulinarium by Ammesso',
-      krone_title: 'The Krone Langenburg – A History',
-      krone_period: 'History since the 16th century',
-      krone_text: `The Krone in Langenburg looks back on an impressive history dating back to the 16th century. The inn was first mentioned in the chronicles of the region, where it already served as a central meeting point of Hohenlohe society.
-
-Over the centuries, the Krone witnessed numerous historical events – from princely weddings at the nearby Langenburg Castle to the social changes of modern times. The building itself is a magnificent example of traditional German inn architecture with characteristic half-timbered elements and historic vaulted cellars.
-
-Until recently, the Krone remained an important part of cultural life in Langenburg – a place where generations came together to celebrate and enjoy regional cuisine.`,
-      amesso_title: 'The New Era – Kulinarium by Ammesso',
-      amesso_period: 'Since 2025 – Omar Ammesso',
-      amesso_text: `In 2025, a new chapter began in the history of the Krone. Omar Ammesso, a young restaurateur with vision and passion for Mediterranean cuisine, recognized the potential of this historic location.
-
-With deep respect for tradition and a modern perspective on gastronomy, Kulinarium by Ammesso was born – a unique symbiosis of the Krone's historical substance and Omar's contemporary, passionate cuisine with his team.
-
-The philosophy is simple yet extraordinary: to combine the warmth of Italian cuisine with the finest ingredients from the Hohenlohe region. Pasta is homemade, meat and fish prepared with love, and every dish tells a story – from the Krone's past to Ammesso's vision.
-
-What began as a dream has become reality: a place where history meets modernity, where tradition and innovation go hand in hand, and where every guest becomes part of this special story.`,
-      values_title: 'Our Values',
-      values: [
-        { icon: History, title: 'Preserve Tradition', desc: 'Respect for the Krone history' },
-        { icon: UtensilsCrossed, title: 'Cook with Passion', desc: 'Mediterranean cuisine with heart' },
-        { icon: Users, title: 'Live Hospitality', desc: 'Every guest is family' },
-        { icon: Star, title: 'Deliver Quality', desc: 'Only the finest ingredients' },
-      ],
-      cta_title: 'Experience Our Story',
-      cta_subtitle: 'Visit us and become part of Kulinarium by Ammesso',
-      cta_reserve: 'Reserve a Table',
-      cta_rooms: 'Book Rooms',
-    },
-    it: {
-      title: 'La Nostra Storia',
-      subtitle: 'Dalla storica Krone al moderno Kulinarium by Ammesso',
-      krone_title: 'La Krone Langenburg – Una Storia',
-      krone_period: 'Storia dal XVI secolo',
-      krone_text: `La Krone di Langenburg vanta una storia impressionante che risale al XVI secolo. La locanda fu menzionata per la prima volta nelle cronache della regione, dove già serviva come punto di incontro centrale della società di Hohenlohe.
-
-Nel corso dei secoli, la Krone è stata testimone di numerosi eventi storici – dai matrimoni principeschi nel vicino Castello di Langenburg ai cambiamenti sociali dell'età moderna. L'edificio stesso è un magnifico esempio di architettura tradizionale tedesca con caratteristici elementi a graticcio e storiche cantine a volta.
-
-Fino a poco tempo fa, la Krone è rimasta una parte importante della vita culturale di Langenburg – un luogo dove le generazioni si incontravano per celebrare e gustare la cucina regionale.`,
-      amesso_title: 'La Nuova Era – Kulinarium by Ammesso',
-      amesso_period: 'Dal 2025 – Omar Ammesso',
-      amesso_text: `Nel 2025 è iniziato un nuovo capitolo nella storia della Krone. Omar Ammesso, un giovane ristoratore con visione e passione per la cucina mediterranea, ha riconosciuto il potenziale di questo luogo storico.
-
-Con profondo rispetto per la tradizione e una prospettiva moderna sulla gastronomia, è nato il Kulinarium by Ammesso – una simbiosi unica tra la sostanza storica della Krone e la cucina contemporanea e appassionata di Omar con il suo team.
-
-La filosofia è semplice ma straordinaria: combinare il calore della cucina italiana con i migliori ingredienti della regione di Hohenlohe. La pasta è fatta in casa, carne e pesce preparati con amore, e ogni piatto racconta una storia – dal passato della Krone alla visione di Ammesso.
-
-Quello che è iniziato come un sogno è diventato realtà: un luogo dove la storia incontra la modernità, dove tradizione e innovazione vanno di pari passo, e dove ogni ospite diventa parte di questa storia speciale.`,
-      values_title: 'I Nostri Valori',
-      values: [
-        { icon: History, title: 'Preservare la Tradizione', desc: 'Rispetto per la storia della Krone' },
-        { icon: UtensilsCrossed, title: 'Cucinare con Passione', desc: 'Cucina mediterranea con cuore' },
-        { icon: Users, title: 'Vivere l\'Ospitalità', desc: 'Ogni ospite è famiglia' },
-        { icon: Star, title: 'Offrire Qualità', desc: 'Solo i migliori ingredienti' },
-      ],
-      cta_title: 'Vivi la Nostra Storia',
-      cta_subtitle: 'Visitateci e diventate parte del Kulinarium by Ammesso',
-      cta_reserve: 'Prenota un tavolo',
-      cta_rooms: 'Prenota camere',
-    },
+  const heroTitles = { de: 'Unsere Geschichte', en: 'Our Story', it: 'La Nostra Storia' };
+  const heroSubs = {
+    de: 'Von Langenburg über dem Jagsttal zur modernen Krone by Ammesso',
+    en: 'From Langenburg above the Jagst valley to the modern Krone by Ammesso',
+    it: 'Da Langenburg sopra la Valle del Jagst alla moderna Krone by Ammesso',
   };
 
-  const c = content[lang] || content.de;
-
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pt-20 pb-16">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-[#2A2118] to-[#1C1714] py-20 sm:py-28">
-        <div className="absolute inset-0 opacity-20">
-          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1400&q=85" alt="Historic Restaurant Interior" className="w-full h-full object-cover" />
-        </div>
-        <div className="relative z-10 max-w-4xl mx-auto text-center px-5">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-3"
-          >
-            Krone Langenburg by Ammesso
-          </motion.p>
+    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pt-20 pb-0">
+
+      {/* ── HERO ── */}
+      <div className="relative overflow-hidden bg-[#1C1714] py-20 sm:py-28">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg"
+          alt="Schloss Langenburg über dem Jagsttal"
+          className="absolute inset-0 w-full h-full object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/60 via-transparent to-[#1C1714]/80" />
+        <div className="relative z-10 max-w-3xl mx-auto text-center px-5">
+          <motion.div className="flex items-center justify-center gap-2 mb-4"
+            initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <MapPin className="w-4 h-4 text-[#C9A96E]" />
+            <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body">Langenburg, Hohenlohe</p>
+          </motion.div>
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-3xl sm:text-5xl font-light text-white mb-4"
-          >
-            {c.title}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-display text-4xl sm:text-5xl font-light text-white mb-4">
+            {heroTitles[lang] || heroTitles.de}
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/60 font-body text-sm sm:text-base"
-          >
-            {c.subtitle}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-white/60 font-body text-sm sm:text-base max-w-xl mx-auto">
+            {heroSubs[lang] || heroSubs.de}
           </motion.p>
         </div>
       </div>
 
-      {/* Timeline Section */}
-      <div className="max-w-5xl mx-auto px-5 py-16">
-        {/* Krone History */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <History className="w-6 h-6 text-[#8B6914]" />
-                <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body">{c.krone_period}</p>
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714] mb-6">{c.krone_title}</h2>
-              <div className="space-y-4 font-body text-[#4A3F35] leading-relaxed whitespace-pre-line">
-                {c.krone_text.split('\n\n').map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
-            </div>
-            <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl premium-shadow">
-                <img
-                  src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?w=800&q=85"
-                  alt="Historic Krone Building Langenburg"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#C9A96E]/10 rounded-full blur-2xl" />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Divider */}
-        <div className="flex items-center gap-4 my-16">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/30 to-transparent" />
-          <div className="w-12 h-12 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center">
-            <Star className="w-5 h-5 text-[#C9A96E]" />
-          </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/30 to-transparent" />
-        </div>
-
-        {/* Amesso Story */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div className="order-2 lg:order-1 relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl premium-shadow">
-                <img
-                  src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?w=800&q=85"
-                  alt="Kulinarium by Ammesso Modern Restaurant"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#C9A96E]/10 rounded-full blur-2xl" />
-            </div>
-            <div className="order-1 lg:order-2">
-              <div className="flex items-center gap-3 mb-4">
-                <Star className="w-6 h-6 text-[#8B6914]" />
-                <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body">{c.amesso_period}</p>
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714] mb-6">{c.amesso_title}</h2>
-              <div className="space-y-4 font-body text-[#4A3F35] leading-relaxed whitespace-pre-line">
-                {c.amesso_text.split('\n\n').map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Values Section */}
-      <div className="bg-white border-t border-[#EDE6D8] py-16">
-        <div className="max-w-6xl mx-auto px-5">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <p className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body mb-3">{c.values_title}</p>
-          </motion.div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {c.values.map((v, i) => (
+      {/* ── TIMELINE ── */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        <div className="space-y-0">
+          {timeline.map((item, i) => {
+            const isEven = i % 2 === 0;
+            return (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="text-center p-6"
+                transition={{ duration: 0.7, delay: 0.05 * i }}
+                className="relative"
               >
-                <div className="w-14 h-14 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center mx-auto mb-4">
-                  <v.icon className="w-6 h-6 text-[#C9A96E]" />
+                {/* Vertical line */}
+                {i < timeline.length - 1 && (
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full w-px h-12 bg-gradient-to-b from-[#C9A96E]/30 to-transparent hidden sm:block" />
+                )}
+
+                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 sm:mb-20 ${!isEven ? 'lg:direction-rtl' : ''}`}>
+                  {/* Text */}
+                  <div className={`${!isEven ? 'lg:order-2' : ''}`}>
+                    {/* Year badge */}
+                    <div className="inline-flex items-center gap-2 bg-[#8B6914]/10 border border-[#8B6914]/20 rounded-full px-4 py-1.5 mb-4">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#8B6914]" />
+                      <span className="text-[#8B6914] text-xs font-body font-bold tracking-[0.2em] uppercase">{item.year}</span>
+                    </div>
+                    <h2 className="font-display text-2xl sm:text-3xl font-light text-[#1C1714] mb-4">{item.title}</h2>
+                    <p className="font-body text-[#4A3F35] leading-relaxed text-sm sm:text-base">{item.text}</p>
+                  </div>
+
+                  {/* Image */}
+                  <div className={`${!isEven ? 'lg:order-1' : ''}`}>
+                    <div className="rounded-2xl overflow-hidden shadow-xl aspect-[4/3]">
+                      <img
+                        src={item.img}
+                        alt={item.alt}
+                        className="w-full h-full object-cover"
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-display text-lg font-light text-[#1C1714] mb-2">{v.title}</h3>
-                <p className="font-body text-sm text-[#8A7A6A]">{v.desc}</p>
+
+                {/* Divider between items */}
+                {i < timeline.length - 1 && (
+                  <div className="flex items-center gap-3 mb-16 sm:mb-20">
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/25 to-transparent" />
+                    <div className="w-7 h-7 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center flex-shrink-0">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]/60" />
+                    </div>
+                    <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/25 to-transparent" />
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── VALUES ── */}
+      <div className="bg-white border-t border-[#EDE6D8] py-14 sm:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <motion.p
+            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="text-[#8B6914] text-[10px] tracking-[0.4em] uppercase font-body text-center mb-10">
+            {lang === 'de' ? 'Unsere Werte' : lang === 'en' ? 'Our Values' : 'I nostri valori'}
+          </motion.p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+            {values.map((v, i) => (
+              <motion.div key={i}
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center px-2">
+                <div className="w-12 h-12 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E]/20 flex items-center justify-center mx-auto mb-4">
+                  <v.icon className="w-5 h-5 text-[#C9A96E]" />
+                </div>
+                <h3 className="font-display text-base sm:text-lg font-light text-[#1C1714] mb-1.5">{v.title}</h3>
+                <p className="font-body text-xs sm:text-sm text-[#8A7A6A] leading-relaxed">{v.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-gradient-to-b from-[#1C1714] to-[#2A2118] py-16 sm:py-20">
-        <div className="max-w-4xl mx-auto text-center px-5">
+      {/* ── CTA ── */}
+      <div className="bg-[#1C1714] py-16 sm:py-20">
+        <div className="max-w-3xl mx-auto text-center px-5">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-display text-3xl sm:text-4xl font-light text-white mb-4"
-          >
-            {c.cta_title}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="font-display text-3xl sm:text-4xl font-light text-white mb-4">
+            {cta.title}
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-white/50 font-body text-sm mb-8"
-          >
-            {c.cta_subtitle}
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-white/50 font-body text-sm mb-8">
+            {cta.sub}
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link to="/reserve" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-lg">
-              <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
+            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link to="/reserve"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-lg">
+              <UtensilsCrossed className="w-4 h-4" /> {cta.reserve}
             </Link>
-            <Link to="/rooms" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all">
-              <BedDouble className="w-4 h-4" /> {c.cta_rooms}
+            <Link to="/rooms"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all">
+              <BedDouble className="w-4 h-4" /> {cta.rooms}
             </Link>
           </motion.div>
         </div>
       </div>
+
     </div>
   );
 }

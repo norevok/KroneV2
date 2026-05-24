@@ -33,7 +33,8 @@ export default function Footer() {
       ],
       links2: [
         { to: '/rooms', l: 'Zimmer & Suiten' },
-        { to: '/offers', l: 'Angebote & Pakete' },
+        { to: '/offers', l: 'Angebote' },
+        { to: '/booking', l: 'Zimmer buchen' },
       ],
       links3: [
         { to: '/story', l: 'Unsere Geschichte' },
@@ -61,6 +62,7 @@ export default function Footer() {
       links2: [
         { to: '/rooms', l: 'Rooms & Suites' },
         { to: '/offers', l: 'Offers' },
+        { to: '/booking', l: 'Book a Room' },
       ],
       links3: [
         { to: '/story', l: 'Our Story' },
