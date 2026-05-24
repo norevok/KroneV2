@@ -267,6 +267,26 @@ export default function Home() {
 
         {/* Hero text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-52 sm:pb-40 lg:pb-36 z-10">
+
+          {/* Location pin badge — center of hero */}
+          <motion.div
+            key={`location-${current}`}
+            className="flex flex-col items-center mb-4 sm:mb-6"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.05 }}>
+            <div className="relative">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/15 backdrop-blur-md border-2 border-white/40 flex items-center justify-center shadow-lg">
+                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white/20" />
+              </div>
+              {/* Ping animation */}
+              <span className="absolute inset-0 rounded-full border-2 border-white/30 animate-ping opacity-60" />
+            </div>
+            <div className="mt-2 px-3 py-1 bg-black/30 backdrop-blur-sm rounded-full border border-white/20">
+              <span className="text-white text-[10px] sm:text-xs font-body font-semibold tracking-wider">Langenburg, Deutschland</span>
+            </div>
+          </motion.div>
+
           <motion.div
             key={`badge-${current}`}
             className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4"
@@ -657,26 +677,26 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
             {[
               {
-                // Historic German castle — representative for Schloss Langenburg feel
-                img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=85',
+                // Hohenlohisches castle/fortress — stone walls, turrets
+                img: 'https://images.unsplash.com/photo-1599946347371-68eb71b16afc?w=600&q=85',
                 alt: 'Schloss Langenburg Hohenlohe Burg',
                 label: c.chip_castle, dist: '5 min',
               },
               {
-                // Green river valley with trees — Jagst valley nature feel
-                img: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=85',
+                // Lush green forest river — Jagst valley nature
+                img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=85',
                 alt: 'Jagsttal Hohenlohe Natur Langenburg',
                 label: c.chip_nature, dist: '0 min',
               },
               {
-                // Vineyard rows golden hour — Hohenlohe wine region
-                img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=85',
+                // Wine glasses / vineyard harvest — Hohenlohe wine
+                img: 'https://images.unsplash.com/photo-1474722883778-792e7990302f?w=600&q=85',
                 alt: 'Hohenloher Wein Weinberge Region Langenburg',
                 label: c.chip_wine, dist: '15 min',
               },
               {
-                // Classic vintage car museum interior — represents Automuseum Langenburg
-                img: 'https://images.unsplash.com/photo-1514316703755-dca7d7d9d882?w=600&q=85',
+                // Classic vintage car — Automuseum Langenburg
+                img: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=600&q=85',
                 alt: 'Automuseum Langenburg Oldtimer Ausstellung',
                 label: c.chip_museum, dist: '5 min',
               },
