@@ -5,25 +5,41 @@ import { base44 } from '@/api/base44Client';
 import { SITE_DEFAULTS, ROOMS } from '@/lib/siteData';
 import { Star, Coffee, CheckCircle, AlertCircle, ExternalLink, Wifi, Bath, Wind, MapPin, ArrowRight, BedDouble, Users, CalendarDays, Phone, ChevronRight } from 'lucide-react';
 
+// ── ROOM PHOTO LIBRARY — all Base44 uploaded media, correctly assigned ──
+// Base44 media base: https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/
+// Filename key:
+//   krone-kingsuite-1-* = King Suite 1 (Superior Suite)
+//   krone-kingsuite-2-* = King Suite 2 (Superior Suite 2)
+//   zimmer-bett-tv     = Bed with TV view  → used as Einzelzimmer cover (cleanest single-bed shot)
+//   zimmer-bett-01     = Bed without TV    → used as Doppelzimmer cover (clear double-bed shot)
+//   zimmer-uebersicht  = Full-room overview → Superior Suite 1 cover
+//   zimmer-favorit     = Signature shot     → Superior Suite 2 cover
 const ROOM_PHOTOS = {
+  // Deluxe Einzelzimmer — single-bed focused shots
   deluxe_single: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/fa83a17cd_krone-kingsuite-1-balkon-aussicht-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg',   // cover: bed + TV, clearest single-bed view
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/fa83a17cd_krone-kingsuite-1-balkon-aussicht-01.jpg',  // balcony view from room
   ],
+  // Deluxe Doppelzimmer — double-bed focused shots
   deluxe_double: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg',      // cover: clean double bed, no TV distraction
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c914d145e_krone-kingsuite-1-zimmer-bett-02.jpg',      // alternate bed angle
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg',  // balcony panorama
   ],
+  // Superior Suite (King Suite 1) — full suite experience
   superior_suite: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c914d145e_krone-kingsuite-1-zimmer-bett-02.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d09aea914_krone-kingsuite-1-balkon-aussicht-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg', // cover: full-room overview
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg',    // bed detail
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d09aea914_krone-kingsuite-1-balkon-aussicht-01.jpg',   // balcony view
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg',   // panorama
   ],
+  // Superior Suite 2 (King Suite 2) — premium suite with lounge
   superior_suite_2: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8457db47b_krone-kingsuite-2-zimmer-wohnbereich-02.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0449ddce1_krone-kingsuite-2-zimmer-bett-01.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a0d03ed2c_krone-kingsuite-2-aussicht-landschaft-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',    // cover: signature shot
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8457db47b_krone-kingsuite-2-zimmer-wohnbereich-02.jpg', // living area
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0449ddce1_krone-kingsuite-2-zimmer-bett-01.jpg',        // bed
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a0d03ed2c_krone-kingsuite-2-aussicht-landschaft-01.jpg', // landscape view
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg',   // panorama
   ],
 };
 
@@ -257,7 +273,7 @@ export default function Rooms() {
                   <div className={`flex flex-col ${isReversed ? 'lg:col-start-2' : ''}`}>
                     <div className="relative h-64 sm:h-80 lg:h-full min-h-[280px] overflow-hidden">
                       <img src={photos[activePhoto] || room.image}
-                        alt={lang === 'de' ? room.key_de : room.key_en}
+                        alt={lang === 'de' ? (room.alt_de || room.key_de + ' im Krone Langenburg by Ammesso') : (room.alt_en || room.key_en + ' at Krone Langenburg by Ammesso')}
                         className="w-full h-full object-cover transition-all duration-500" loading="lazy" />
                       {room.price_from && (
                         <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm">

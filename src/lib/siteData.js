@@ -73,7 +73,10 @@ export const ROOMS = [
     description_en: "A quiet, comfortable single room — ideal for business travellers and solo stays.",
     features_de: ['Ruhige Lage', 'Modernes Bad', 'Schreibtisch & Stuhl', 'WLAN', 'Stadtblick', 'Minikühlschrank'],
     features_en: ['Quiet location', 'Modern bathroom', 'Work desk & chair', 'WiFi', 'City view', 'Mini fridge'],
-    image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/fa83a17cd_krone-kingsuite-1-balkon-aussicht-01.jpg",
+    // Bett-TV Aufnahme — das hellste, sauberste Einzelzimmer-Motiv aus der Bibliothek
+    image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg",
+    alt_de: "Deluxe Einzelzimmer im Krone Langenburg by Ammesso",
+    alt_en: "Deluxe Single Room at Krone Langenburg by Ammesso",
   },
   {
     id: "deluxe_double",
@@ -88,7 +91,10 @@ export const ROOMS = [
     description_en: "Spacious double room with tasteful décor and views over Langenburg's old town.",
     features_de: ['Panoramafenster', 'Regendusche', 'Schreibtisch', 'WLAN', 'Stadtblick', 'Minibar'],
     features_en: ['Panoramic window', 'Rain shower', 'Work desk', 'WiFi', 'City view', 'Minibar'],
-    image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg",
+    // Zimmer-Bett-Ansicht ohne TV — klares, sauberes Doppelbett-Motiv
+    image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg",
+    alt_de: "Deluxe Doppelzimmer im Krone Langenburg by Ammesso",
+    alt_en: "Deluxe Double Room at Krone Langenburg by Ammesso",
   },
   {
     id: "superior_suite",
@@ -103,7 +109,10 @@ export const ROOMS = [
     description_en: "Generous suite with separate living area and freestanding bathtub — ideal for romantic stays.",
     features_de: ['Separater Wohnbereich', 'Freistehende Badewanne', 'Premium-Minibar', 'WLAN', 'Exklusiver Blick'],
     features_en: ['Separate living area', 'Freestanding bathtub', 'Premium minibar', 'WiFi', 'Exclusive view'],
+    // Zimmer-Übersicht Suite 1 — das vollständigste Raumgefühl
     image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg",
+    alt_de: "King Suite im Krone Langenburg by Ammesso",
+    alt_en: "King Suite at Krone Langenburg by Ammesso",
   },
   {
     id: "superior_suite_2",
@@ -118,7 +127,10 @@ export const ROOMS = [
     description_en: "Our most exclusive accommodation — spacious with lounge area and the finest view over Langenburg.",
     features_de: ['Großzügiger Loungebereich', 'Freistehende Badewanne & Dusche', 'Premium-Minibar', 'WLAN', 'Langenburg-Panorama'],
     features_en: ['Generous lounge area', 'Freestanding bathtub & shower', 'Premium minibar', 'WiFi', 'Langenburg panorama'],
+    // King Suite 2 — das exklusivste Raumgefühl aus der Bibliothek
     image: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg",
+    alt_de: "King Suite 2 im Krone Langenburg by Ammesso",
+    alt_en: "King Suite 2 at Krone Langenburg by Ammesso",
   },
 ];
 

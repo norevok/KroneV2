@@ -78,7 +78,7 @@ const SLIDES = [
     it: { title: 'La King Suite — Il vostro rifugio.', sub: 'Spaziosa, elegante, indimenticabile — prenota direttamente al miglior prezzo.' },
   },
   {
-    // Deluxe Doppelzimmer — uploaded hotel photo
+    // Superior Suite 1 — Zimmer-Übersicht (bestes Raumgefühl)
     url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
     de: { title: 'Stilvoll schlafen in Langenburg.', sub: 'Zehn Zimmer und Suiten mit historischem Charme und modernem Komfort.' },
     en: { title: 'Sleep in Style in Langenburg.', sub: 'Ten rooms and suites with historic charm and modern comfort.' },
@@ -615,25 +615,25 @@ export default function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {/* King Suite 1 — overview */}
+              {/* Deluxe Doppelzimmer — sauberes Bett-Motiv */}
               <div className="rounded-xl overflow-hidden h-52 sm:h-60 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg"
-                  alt="King Suite Krone Langenburg Hotel" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg"
+                  alt="Deluxe Doppelzimmer im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              {/* King Suite 2 — offset */}
+              {/* Superior Suite — Zimmerübersicht, versetzt */}
               <div className="rounded-xl overflow-hidden h-52 sm:h-60 mt-8 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
-                  alt="King Suite 2 Boutique Hotel Langenburg" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg"
+                  alt="King Suite im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              {/* Balkon Panorama */}
+              {/* Superior Suite 2 — Favorit-Motiv */}
               <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg"
-                  alt="Balkon Panorama Krone Langenburg" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
+                  alt="King Suite 2 im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              {/* Panorama Aussicht */}
+              {/* Panorama-Aussicht */}
               <div className="rounded-xl overflow-hidden h-40 sm:h-44 -mt-8 shadow-md">
                 <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
-                  alt="Panorama Aussicht Langenburg Hohenlohe" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="Zimmer in Langenburg Hotel Krone — Panorama Aussicht" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
             </div>
           </div>
