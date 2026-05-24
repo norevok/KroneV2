@@ -1,127 +1,64 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar, Sparkles, Clock } from 'lucide-react';
+import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 import HeroBookingBar from '@/components/home/HeroBookingBar';
 import ChatWidget from '@/components/ChatWidget';
 import { base44 } from '@/api/base44Client';
 
-// ── Inline Restaurant Block with live open/closed status ──
+// ── Inline Restaurant Banner — schlank mit Hintergrundbild + Live-Status ──
 function RestaurantBlock({ lang }) {
-  // Opening hours: Tue–Sat 12–14 & 18–22, Sun 12–21, Mon closed
   const now = new Date();
-  const day = now.getDay(); // 0=Sun,1=Mon,...,6=Sat
+  const day = now.getDay();
   const hour = now.getHours() + now.getMinutes() / 60;
-
   let isOpen = false;
-  if (day === 0) { // Sunday all day
-    isOpen = hour >= 12 && hour < 21;
-  } else if (day >= 2 && day <= 6) { // Tue–Sat
-    isOpen = (hour >= 12 && hour < 14.5) || (hour >= 18 && hour < 22.5);
-  }
-
-  const hours = {
-    de: ['Di–Sa: 12:00–14:30 & 18:00–22:30', 'So: 12:00–21:00', 'Mo: Ruhetag'],
-    en: ['Tue–Sat: 12:00–14:30 & 18:00–22:30', 'Sun: 12:00–21:00', 'Mon: Closed'],
-    it: ['Mar–Sab: 12:00–14:30 & 18:00–22:30', 'Dom: 12:00–21:00', 'Lun: Chiuso'],
-  };
-  const h = hours[lang] || hours.de;
+  if (day === 0) isOpen = hour >= 12 && hour < 21;
+  else if (day >= 2 && day <= 6) isOpen = (hour >= 12 && hour < 14.5) || (hour >= 18 && hour < 22.5);
 
   return (
-    <motion.div
-      className="bg-white border-b border-[#EDE6D8]"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7 }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 py-10 sm:py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+    <div className="relative overflow-hidden h-28 sm:h-32">
+      {/* Background — restaurant table with view */}
+      <img
+        src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1200&q=80"
+        alt="Restaurant Krone Langenburg"
+        className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+      />
+      <div className="absolute inset-0 bg-[#1C1714]/72" />
 
-          {/* LEFT — identity */}
+      {/* Content */}
+      <div className="relative z-10 h-full flex items-center max-w-6xl mx-auto px-4 sm:px-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4 sm:gap-0">
+
+          {/* Left: name + status */}
           <div>
-            <p className="text-[#8B6914] text-[10px] tracking-[0.5em] uppercase font-body mb-3">
-              {lang === 'de' ? 'Restaurant & Bar' : lang === 'en' ? 'Restaurant & Bar' : 'Ristorante & Bar'}
+            <p className="font-display text-xl sm:text-2xl font-light text-white leading-tight">
+              Krone Langenburg <span className="text-[#C9A96E] italic">by Ammesso</span>
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-light text-[#1C1714] leading-tight mb-2">
-              Krone Langenburg
-            </h2>
-            <p className="font-display text-xl sm:text-2xl font-light text-[#8B6914] italic mb-5">
-              by Ammesso
-            </p>
-
-            {/* Live status badge */}
-            <div className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full border mb-6 ${
-              isOpen
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
-                : 'bg-red-50 border-red-200 text-red-600'
-            }`}>
-              <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
-              <span className="text-xs font-body font-semibold tracking-wide">
+            <div className="flex items-center gap-2 mt-1.5">
+              <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
+              <span className={`text-xs font-body font-semibold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}>
                 {isOpen
                   ? (lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora')
                   : (lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso')}
               </span>
-            </div>
-
-            <p className="font-body text-[#4A3F35] text-sm leading-relaxed mb-8 max-w-md">
-              {lang === 'de'
-                ? 'Mediterrane Küche mit der Seele Hohenlohes — Omar Ammesso verbindet regionale Zutaten mit italienischer Leidenschaft. Hausgemachte Pasta, Fleisch vom lokalen Metzger, Fisch der Saison.'
-                : lang === 'en'
-                ? 'Mediterranean cuisine with the soul of Hohenlohe — Omar Ammesso combines regional ingredients with Italian passion. Homemade pasta, locally sourced meat, seasonal fish.'
-                : 'Cucina mediterranea con l\'anima di Hohenlohe — Omar Ammesso unisce ingredienti regionali con la passione italiana.'}
-            </p>
-
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="inline-block">
-              <Link to="/reserve"
-                className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-lg">
-                <UtensilsCrossed className="w-4 h-4" />
-                {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota un tavolo'}
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* RIGHT — opening hours */}
-          <div className="bg-[#FAF7F2] rounded-2xl border border-[#EDE6D8] p-6 sm:p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-[#8B6914]/10 border border-[#8B6914]/20 flex items-center justify-center">
-                <Clock className="w-4.5 h-4.5 text-[#8B6914]" />
-              </div>
-              <h3 className="font-display text-xl font-light text-[#1C1714]">
-                {lang === 'de' ? 'Öffnungszeiten' : lang === 'en' ? 'Opening Hours' : 'Orari di apertura'}
-              </h3>
-            </div>
-            <div className="space-y-3">
-              {h.map((line, i) => {
-                const isClosed = line.includes('Ruhetag') || line.includes('Closed') || line.includes('Chiuso');
-                const isToday = (i === 0 && day >= 2 && day <= 6) || (i === 1 && day === 0) || (i === 2 && day === 1);
-                return (
-                  <div key={i} className={`flex items-center justify-between py-2.5 px-3 rounded-xl transition-colors ${isToday ? 'bg-[#8B6914]/8 border border-[#8B6914]/15' : ''}`}>
-                    <span className={`font-body text-sm ${isClosed ? 'text-[#8A7A6A]/50' : 'text-[#1C1714]'} ${isToday ? 'font-semibold' : ''}`}>
-                      {line}
-                    </span>
-                    {isToday && (
-                      <span className="text-[10px] font-body font-bold text-[#8B6914] tracking-wider uppercase ml-2 flex-shrink-0">
-                        {lang === 'de' ? 'Heute' : lang === 'en' ? 'Today' : 'Oggi'}
-                      </span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="mt-6 pt-5 border-t border-[#EDE6D8]">
-              <p className="text-[#8A7A6A] text-xs font-body">
-                {lang === 'de' ? '📍 Marktplatz 1, 74595 Langenburg · +49 7905 94080' : '📍 Marktplatz 1, 74595 Langenburg · +49 7905 94080'}
-              </p>
-              <Link to="/restaurant" className="inline-flex items-center gap-1.5 text-[#8B6914] hover:text-[#7A5A0F] text-xs font-body font-semibold tracking-wider uppercase mt-3 transition-colors">
-                {lang === 'de' ? 'Restaurant entdecken' : lang === 'en' ? 'Discover restaurant' : 'Scopri il ristorante'} <ArrowRight className="w-3 h-3" />
-              </Link>
+              <span className="text-white/30 text-xs font-body hidden sm:inline">·</span>
+              <span className="text-white/40 text-xs font-body hidden sm:inline">
+                {lang === 'de' ? 'Di–Sa 12–14:30 & 18–22:30 · So 12–21 Uhr' : 'Tue–Sat 12–14:30 & 18–22:30 · Sun 12–21'}
+              </span>
             </div>
           </div>
+
+          {/* Right: CTA */}
+          <Link to="/reserve"
+            className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg">
+            <UtensilsCrossed className="w-3.5 h-3.5" />
+            {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota'}
+          </Link>
 
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -386,23 +323,31 @@ export default function Home() {
         {/* Hero text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-52 sm:pb-40 lg:pb-36 z-10">
 
-          {/* Location pin badge — center of hero */}
+          {/* Location pin — Stecknadel mit langer Linie darunter */}
           <motion.div
             key={`location-${current}`}
-            className="flex flex-col items-center mb-4 sm:mb-6"
-            initial={{ opacity: 0, y: -10 }}
+            className="flex flex-col items-center mb-5 sm:mb-7"
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.05 }}>
-            <div className="relative">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/15 backdrop-blur-md border-2 border-white/40 flex items-center justify-center shadow-lg">
-                <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white/20" />
-              </div>
-              {/* Ping animation */}
-              <span className="absolute inset-0 rounded-full border-2 border-white/30 animate-ping opacity-60" />
-            </div>
-            <div className="mt-2 px-3 py-1 bg-black/30 backdrop-blur-sm rounded-full border border-white/20">
+            {/* Label oben */}
+            <div className="px-3 py-1 bg-black/35 backdrop-blur-sm rounded-full border border-white/20 mb-2">
               <span className="text-white text-[10px] sm:text-xs font-body font-semibold tracking-wider">Langenburg, Deutschland</span>
             </div>
+            {/* Pin-Kreis */}
+            <div className="relative">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/15 backdrop-blur-md border-2 border-white/50 flex items-center justify-center shadow-lg">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </div>
+              <span className="absolute inset-0 rounded-full border-2 border-white/25 animate-ping opacity-50" />
+            </div>
+            {/* Lange vertikale Linie */}
+            <motion.div
+              className="w-px bg-gradient-to-b from-white/50 to-transparent"
+              initial={{ height: 0 }}
+              animate={{ height: 40 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            />
           </motion.div>
 
           <motion.div
