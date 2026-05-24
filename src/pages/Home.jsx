@@ -64,32 +64,39 @@ function RestaurantBlock({ lang }) {
 
 const SLIDES = [
   {
-    // Doppelzimmer mit Stadtblick — premium room with city view
-    url: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1800&q=85',
-    de: { title: 'Doppelzimmer mit Stadtblick.', sub: 'Historischer Charme trifft modernen Komfort — Blick auf die malerische Altstadt von Langenburg.' },
-    en: { title: 'Double Room with City View.', sub: 'Historic charm meets modern comfort — overlooking the picturesque old town of Langenburg.' },
-    it: { title: 'Camera doppia con vista sulla città.', sub: 'Fascino storico incontra il comfort moderno — vista sulla pittoresca città vecchia di Langenburg.' },
+    // Krone exterior / arrival mood — cobblestone historical German town square
+    url: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1800&q=85',
+    de: { title: 'Willkommen in Langenburg.', sub: 'Boutique-Hotel, Restaurant und echte Gastfreundschaft im Herzen von Hohenlohe.' },
+    en: { title: 'Welcome to Langenburg.', sub: 'Boutique hotel, restaurant and genuine hospitality in the heart of Hohenlohe.' },
+    it: { title: 'Benvenuti a Langenburg.', sub: 'Boutique hotel, ristorante e vera ospitalità nel cuore di Hohenlohe.' },
   },
   {
-    // King Suite — own hotel photo
+    // King Suite — uploaded hotel photo
     url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
     de: { title: 'Die King-Suite — Ihr Rückzugsort.', sub: 'Großzügig, stilvoll, unvergesslich — buchen Sie direkt zum besten Preis.' },
     en: { title: 'The King Suite — Your Retreat.', sub: 'Spacious, stylish, unforgettable — book directly at the best price.' },
     it: { title: 'La King Suite — Il vostro rifugio.', sub: 'Spaziosa, elegante, indimenticabile — prenota direttamente al miglior prezzo.' },
   },
   {
-    // Elegant restaurant table setting — candles, wine, fine dining atmosphere
-    url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85',
-    de: { title: 'Mediterrane Küche mit Herz', sub: 'Regionale Zutaten, italienische Tradition — alles unter einem Dach.' },
-    en: { title: 'Mediterranean Cuisine with Heart', sub: 'Regional ingredients, Italian tradition — all under one roof.' },
-    it: { title: 'Cucina mediterranea con cuore', sub: 'Ingredienti regionali, tradizione italiana — tutto sotto un tetto.' },
+    // Deluxe Doppelzimmer — uploaded hotel photo
+    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
+    de: { title: 'Stilvoll schlafen in Langenburg.', sub: 'Zehn Zimmer und Suiten mit historischem Charme und modernem Komfort.' },
+    en: { title: 'Sleep in Style in Langenburg.', sub: 'Ten rooms and suites with historic charm and modern comfort.' },
+    it: { title: 'Dormire in stile a Langenburg.', sub: 'Dieci camere e suite con fascino storico e comfort moderno.' },
   },
   {
-    // Wedding / elegant celebration dinner setup — white flowers, candlelight
+    // Fine dining restaurant mood — candlelight, elegant table setting
+    url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85',
+    de: { title: 'Mediterrane Küche mit Herz.', sub: 'Regionale Zutaten, italienische Wärme — im Kulinarium by Ammesso.' },
+    en: { title: 'Mediterranean Cuisine with Heart.', sub: 'Regional ingredients, Italian warmth — at Kulinarium by Ammesso.' },
+    it: { title: 'Cucina mediterranea con cuore.', sub: 'Ingredienti regionali, calore italiano — al Kulinarium by Ammesso.' },
+  },
+  {
+    // Elegant wedding / event table — white flowers, candlelight
     url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1800&q=85',
-    de: { title: 'Hochzeiten & Events in Langenburg', sub: 'Hochzeiten, Firmenevents und Familienfeiern — wir gestalten Ihren besonderen Moment.' },
-    en: { title: 'Weddings & Events in Langenburg', sub: 'Weddings, corporate events and family celebrations — we create your special moment.' },
-    it: { title: 'Matrimoni & eventi a Langenburg', sub: 'Matrimoni, eventi aziendali e feste di famiglia — creiamo il vostro momento speciale.' },
+    de: { title: 'Hochzeiten & Events in Langenburg.', sub: 'Unvergessliche Momente — wir gestalten Ihren besonderen Anlass.' },
+    en: { title: 'Weddings & Events in Langenburg.', sub: 'Unforgettable moments — we craft your special occasion.' },
+    it: { title: 'Matrimoni & eventi a Langenburg.', sub: 'Momenti indimenticabili — creiamo la vostra occasione speciale.' },
   },
 ];
 
@@ -608,25 +615,25 @@ export default function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {/* Top-left: King Suite overview — large portrait */}
+              {/* King Suite 1 — overview */}
               <div className="rounded-xl overflow-hidden h-52 sm:h-60 shadow-md">
                 <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg"
-                  alt="King Suite Krone Langenburg Hotel Zimmer Übersicht" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="King Suite Krone Langenburg Hotel" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              {/* Top-right: King Suite 2 — offset down */}
+              {/* King Suite 2 — offset */}
               <div className="rounded-xl overflow-hidden h-52 sm:h-60 mt-8 shadow-md">
                 <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
-                  alt="King Suite 2 Boutique Hotel Langenburg Zimmer buchen" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="King Suite 2 Boutique Hotel Langenburg" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              {/* Bottom-left: Doppelzimmer Stadtblick / Panorama — REPLACED safe image */}
+              {/* Balkon Panorama */}
               <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
                 <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg"
-                  alt="Doppelzimmer Panoramaaussicht Hotel Krone Langenburg Stadtblick" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="Balkon Panorama Krone Langenburg" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              {/* Bottom-right: Panorama view — offset up */}
+              {/* Panorama Aussicht */}
               <div className="rounded-xl overflow-hidden h-40 sm:h-44 -mt-8 shadow-md">
                 <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
-                  alt="Panorama Aussicht Hotel Langenburg Hohenlohe" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="Panorama Aussicht Langenburg Hohenlohe" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
             </div>
           </div>
@@ -710,28 +717,36 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
             {[
               {
-                // Hohenlohisches castle/fortress — stone walls, turrets
-                img: 'https://images.unsplash.com/photo-1599946347371-68eb71b16afc?w=600&q=85',
+                // Schloss Langenburg — real castle on hilltop, Germany
+                img: 'https://images.unsplash.com/photo-1548115184-bc6544d06a58?w=600&q=85',
                 alt: 'Schloss Langenburg Hohenlohe Burg',
-                label: c.chip_castle, dist: '5 min',
+                label: c.chip_castle,
+                desc: lang === 'de' ? 'Historisches Schloss mit Blick ins Jagsttal.' : 'Historic castle overlooking the Jagst valley.',
+                dist: '5 Min.',
               },
               {
-                // Lush green forest river — Jagst valley nature
-                img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=85',
+                // Jagsttal — green river valley with meadows, no mountains
+                img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=85',
                 alt: 'Jagsttal Hohenlohe Natur Langenburg',
-                label: c.chip_nature, dist: '0 min',
+                label: c.chip_nature,
+                desc: lang === 'de' ? 'Natur, Ausblicke und ruhige Wege direkt vor der Tür.' : 'Nature, views and peaceful paths right at your doorstep.',
+                dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
               },
               {
-                // Wine glasses / vineyard harvest — Hohenlohe wine
-                img: 'https://images.unsplash.com/photo-1474722883778-792e7990302f?w=600&q=85',
-                alt: 'Hohenloher Wein Weinberge Region Langenburg',
-                label: c.chip_wine, dist: '15 min',
+                // Classic oldtimer / vintage car — Automuseum
+                img: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=85',
+                alt: 'Automuseum Schloss Langenburg Oldtimer',
+                label: c.chip_museum,
+                desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
+                dist: '5 Min.',
               },
               {
-                // Classic vintage car — Automuseum Langenburg
-                img: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=600&q=85',
-                alt: 'Automuseum Langenburg Oldtimer Ausstellung',
-                label: c.chip_museum, dist: '5 min',
+                // Wine & regional Genuss — vineyard, wine glasses, Hohenlohe
+                img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=85',
+                alt: 'Hohenloher Wein Weinberge Region',
+                label: c.chip_wine,
+                desc: lang === 'de' ? 'Wein, regionale Produkte und echte Hohenloher Gastlichkeit.' : 'Wine, regional produce and true Hohenlohe hospitality.',
+                dist: '15 Min.',
               },
             ].map((item, i) => (
               <motion.div
@@ -749,6 +764,7 @@ export default function Home() {
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#C9A96E]/60 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
                   <p className="text-white font-body text-xs font-semibold leading-tight">{item.label}</p>
+                  {item.desc && <p className="text-white/65 text-[10px] font-body mt-0.5 leading-snug hidden sm:block">{item.desc}</p>}
                   <p className="text-[#C9A96E] text-[10px] font-body mt-0.5 tracking-wider">{item.dist}</p>
                 </div>
               </motion.div>

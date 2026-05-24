@@ -33,7 +33,7 @@ export default function Footer() {
       ],
       links2: [
         { to: '/rooms', l: 'Zimmer & Suiten' },
-        { to: '/offers', l: 'Arrangements' },
+        { to: '/offers', l: 'Angebote & Pakete' },
       ],
       links3: [
         { to: '/story', l: 'Unsere Geschichte' },
