@@ -266,79 +266,74 @@ export default function Home() {
         </div>
 
         {/* Hero text */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pb-44 sm:pb-36 lg:pb-32 z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-52 sm:pb-40 lg:pb-36 z-10">
           <motion.div
             key={`badge-${current}`}
-            className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-4 py-2 mb-4"
+            className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}>
-            <Sparkles className="w-3.5 h-3.5 text-[#C9A96E]" />
-            <span className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.3em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
+            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C9A96E]" />
+            <span className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
           </motion.div>
           <motion.p
             key={`eyebrow-${current}`}
-            className="text-[#C9A96E]/80 text-[9px] sm:text-[10px] tracking-[0.6em] uppercase font-body mb-5"
-            initial={{ opacity: 0, letterSpacing: '0.8em' }}
-            animate={{ opacity: 1, letterSpacing: '0.6em' }}
+            className="text-[#C9A96E]/70 text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] uppercase font-body mb-3 sm:mb-5 hidden sm:block"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.1 }}>
             Krone Langenburg · by Ammesso
           </motion.p>
           <motion.h1
             key={`title-${current}`}
-            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-5 leading-[0.92] max-w-4xl drop-shadow-lg"
-            initial={{ opacity: 0, y: 40, filter: 'blur(4px)' }}
+            className="font-display text-[2rem] leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-3 sm:mb-5 max-w-4xl drop-shadow-xl px-2"
+            initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
             {slideText.title}
           </motion.h1>
           <motion.div
             key={`divider-${current}`}
-            className="w-24 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-5"
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: 96 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-3 sm:mb-5"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
           />
           <motion.p
             key={`sub-${current}`}
-            className="text-white/65 font-body text-sm sm:text-lg max-w-xl leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-white/70 font-body text-xs sm:text-base lg:text-lg max-w-sm sm:max-w-xl leading-relaxed px-2"
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.8 }}>
             {slideText.sub}
           </motion.p>
+          {/* Scroll hint */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-3 mt-9"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.7 }}>
-            <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/booking"
-                className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-[0_8px_30px_rgba(201,169,110,0.35)] flex items-center gap-2 hover:shadow-[0_12px_40px_rgba(201,169,110,0.5)]">
-                <BedDouble className="w-4 h-4" /> {c.rooms_book}
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/reserve"
-                className="px-8 py-4 bg-white/10 hover:bg-white/20 border-2 border-white/50 text-white font-body font-semibold text-sm tracking-widest uppercase rounded-lg transition-all backdrop-blur-sm flex items-center gap-2 hover:border-white/70 hover:shadow-[0_8px_24px_rgba(255,255,255,0.15)]">
-                <UtensilsCrossed className="w-4 h-4" /> {c.restaurant_reserve}
-              </Link>
+            className="mt-8 flex flex-col items-center gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.7 }}>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+              className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center pt-1.5">
+              <div className="w-1 h-2 bg-white/50 rounded-full" />
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Arrow controls — premium style */}
-        <motion.button onClick={prev} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
-          className="absolute left-4 sm:left-7 top-1/2 -translate-y-1/2 w-11 h-11 bg-black/25 hover:bg-[#C9A96E]/30 border border-white/20 hover:border-[#C9A96E]/60 rounded-full flex items-center justify-center text-white transition-all backdrop-blur-sm z-10">
-          <ChevronLeft className="w-5 h-5" />
+        {/* Arrow controls — mobile: edge tap zones, desktop: visible buttons */}
+        <motion.button onClick={prev} whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}
+          className="absolute left-0 sm:left-5 top-1/2 -translate-y-1/2 h-24 w-12 sm:w-11 sm:h-11 bg-transparent sm:bg-black/25 sm:hover:bg-[#C9A96E]/30 sm:border sm:border-white/20 sm:hover:border-[#C9A96E]/60 sm:rounded-full flex items-center justify-center text-white/70 sm:text-white transition-all backdrop-blur-none sm:backdrop-blur-sm z-10">
+          <ChevronLeft className="w-6 h-6 sm:w-5 sm:h-5 drop-shadow-lg" />
         </motion.button>
-        <motion.button onClick={next} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
-          className="absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 w-11 h-11 bg-black/25 hover:bg-[#C9A96E]/30 border border-white/20 hover:border-[#C9A96E]/60 rounded-full flex items-center justify-center text-white transition-all backdrop-blur-sm z-10">
-          <ChevronRight className="w-5 h-5" />
+        <motion.button onClick={next} whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}
+          className="absolute right-0 sm:right-5 top-1/2 -translate-y-1/2 h-24 w-12 sm:w-11 sm:h-11 bg-transparent sm:bg-black/25 sm:hover:bg-[#C9A96E]/30 sm:border sm:border-white/20 sm:hover:border-[#C9A96E]/60 sm:rounded-full flex items-center justify-center text-white/70 sm:text-white transition-all z-10">
+          <ChevronRight className="w-6 h-6 sm:w-5 sm:h-5 drop-shadow-lg" />
         </motion.button>
 
         {/* Progress bar + dots */}
-        <div className="absolute bottom-40 sm:bottom-32 lg:bottom-28 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
+        <div className="absolute bottom-44 sm:bottom-36 lg:bottom-32 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
           <div className="flex gap-2">
             {SLIDES.map((_, i) => (
               <button key={i} onClick={() => goTo(i)} className="relative overflow-hidden rounded-full transition-all">
@@ -353,6 +348,39 @@ export default function Home() {
           <HeroBookingBar lang={lang} />
         </div>
       </div>
+
+      {/* ── RESTAURANT QUICK-RESERVE STRIP ── */}
+      <motion.div
+        className="bg-[#FAF7F2] border-b border-[#EDE6D8] py-5 px-4 sm:px-8"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}>
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-10 h-10 rounded-full bg-[#8B6914]/10 border border-[#8B6914]/20 flex items-center justify-center flex-shrink-0">
+                <UtensilsCrossed className="w-4.5 h-4.5 text-[#8B6914]" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[#1C1714] font-body font-semibold text-sm leading-tight">
+                  {lang === 'de' ? 'Kulinarium by Ammesso' : lang === 'en' ? 'Kulinarium by Ammesso' : 'Kulinarium by Ammesso'}
+                </p>
+                <p className="text-[#8A7A6A] font-body text-xs truncate">
+                  {lang === 'de' ? 'Mediterrane Küche · Di–Sa & So ganztags' : lang === 'en' ? 'Mediterranean cuisine · Tue–Sat & Sun all day' : lang === 'it' ? 'Cucina mediterranea · Mar–Sab & Dom tutto il giorno' : 'Cocina mediterránea · Mar–Sáb & Dom todo el día'}
+                </p>
+              </div>
+            </div>
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto flex-shrink-0">
+              <Link to="/reserve"
+                className="flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-md hover:shadow-lg">
+                <UtensilsCrossed className="w-3.5 h-3.5" />
+                {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : lang === 'it' ? 'Prenota un tavolo' : 'Reservar mesa'}
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
 
       {/* ── BENEFIT STRIP ── */}
       <motion.div 

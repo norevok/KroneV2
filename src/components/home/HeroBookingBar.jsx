@@ -127,39 +127,35 @@ export default function HeroBookingBar({ lang = 'de' }) {
           </button>
         </div>
 
-        {/* Mobile: stacked card */}
-        <div className="md:hidden bg-white rounded-2xl shadow-2xl p-4 space-y-3 border border-white/50">
-          {/* Destination */}
-          <div className="flex items-center gap-2 pb-3 border-b border-stone-100">
-            <MapPin className="w-4 h-4 text-[#8B6914]" />
-            <div>
-              <p className="text-[10px] font-body text-stone-400 uppercase tracking-widest">{c.destination}</p>
-              <p className="text-sm font-body text-stone-800 font-medium">{c.dest_value}</p>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-[10px] font-body text-stone-400 uppercase tracking-widest block mb-1">{c.checkin}</label>
+        {/* Mobile: compact single-row pill */}
+        <div className="md:hidden bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/60" style={{ boxShadow: '0 16px 48px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.1)' }}>
+          {/* Date + guests row */}
+          <div className="flex items-stretch divide-x divide-stone-100">
+            <div className="flex-1 px-4 py-3">
+              <p className="text-[9px] font-body font-semibold text-stone-400 uppercase tracking-widest mb-1">{c.checkin}</p>
               <input type="date" value={checkIn} min={today}
                 onChange={e => { setCheckIn(e.target.value); if (checkOut && e.target.value >= checkOut) setCheckOut(''); }}
-                className="w-full border border-stone-200 rounded-lg px-3 py-2 text-sm font-body text-stone-800 outline-none focus:border-[#8B6914]/50" />
+                className="w-full text-sm font-body text-stone-800 bg-transparent outline-none" />
             </div>
-            <div>
-              <label className="text-[10px] font-body text-stone-400 uppercase tracking-widest block mb-1">{c.checkout}</label>
+            <div className="flex-1 px-4 py-3">
+              <p className="text-[9px] font-body font-semibold text-stone-400 uppercase tracking-widest mb-1">{c.checkout}</p>
               <input type="date" value={checkOut} min={checkIn || tomorrow}
                 onChange={e => setCheckOut(e.target.value)}
-                className="w-full border border-stone-200 rounded-lg px-3 py-2 text-sm font-body text-stone-800 outline-none focus:border-[#8B6914]/50" />
+                className="w-full text-sm font-body text-stone-800 bg-transparent outline-none" />
+            </div>
+            <div className="px-3 py-3 flex items-center">
+              <div>
+                <p className="text-[9px] font-body font-semibold text-stone-400 uppercase tracking-widest mb-1">{c.guests}</p>
+                <select value={adults} onChange={e => setAdults(e.target.value)}
+                  className="text-sm font-body text-stone-800 bg-transparent outline-none w-12">
+                  {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n}</option>)}
+                </select>
+              </div>
             </div>
           </div>
-          <div>
-            <label className="text-[10px] font-body text-stone-400 uppercase tracking-widest block mb-1">{c.guests}</label>
-            <select value={adults} onChange={e => setAdults(e.target.value)}
-              className="w-full border border-stone-200 rounded-lg px-3 py-2 text-sm font-body text-stone-800 outline-none focus:border-[#8B6914]/50">
-              {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n} {c.adults_label}</option>)}
-            </select>
-          </div>
+          {/* Search button */}
           <button type="submit"
-            className="w-full py-3.5 bg-[#1C1714] hover:bg-[#2A2118] text-white font-body font-semibold text-sm tracking-widest uppercase rounded-xl transition-all flex items-center justify-center gap-2">
+            className="w-full py-3.5 bg-[#1C1714] hover:bg-[#2A2118] active:bg-[#0F0D0B] text-white font-body font-bold text-sm tracking-widest uppercase transition-all flex items-center justify-center gap-2">
             <Search className="w-4 h-4" />
             {c.cta}
           </button>
