@@ -303,15 +303,16 @@ export default function Home() {
                 <motion.img
                   src={s.url}
                   alt={s.de.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
+                  style={{ objectPosition: '50% 35%' }}
                   loading={i === 0 ? 'eager' : 'lazy'}
-                  initial={{ scale: 1.08, filter: 'brightness(0.85)' }}
-                  animate={{ scale: 1.0, filter: 'brightness(1)' }}
-                  transition={{ duration: 6, ease: 'easeOut' }}
+                  initial={{ scale: 1.05, filter: 'brightness(0.82)' }}
+                  animate={{ scale: 1.0, filter: 'brightness(0.95)' }}
+                  transition={{ duration: 7, ease: 'easeOut' }}
                 />
                 {/* Multi-layer gradient for depth */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/80" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/20 to-black/85" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-black/25" />
               </motion.div>
             )}
           </AnimatePresence>
@@ -346,7 +347,8 @@ export default function Home() {
           </motion.p>
           <motion.h1
             key={`title-${current}`}
-            className="font-display text-[2rem] leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-3 sm:mb-5 max-w-4xl drop-shadow-xl px-2"
+            className="font-display text-[2rem] leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-3 sm:mb-5 max-w-4xl px-2"
+            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)' }}
             initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
@@ -361,7 +363,8 @@ export default function Home() {
           />
           <motion.p
             key={`sub-${current}`}
-            className="text-white/70 font-body text-xs sm:text-base lg:text-lg max-w-sm sm:max-w-xl leading-relaxed px-2"
+            className="text-white/90 font-body text-xs sm:text-base lg:text-lg max-w-sm sm:max-w-xl leading-relaxed px-2"
+            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25, duration: 0.8 }}>

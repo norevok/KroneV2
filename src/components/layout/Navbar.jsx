@@ -170,10 +170,10 @@ export default function Navbar() {
 
   const linkCls = (to, transparent) => {
     const isActive = location.pathname === to;
-    return `relative font-body text-[10px] xl:text-[11px] tracking-[0.1em] uppercase whitespace-nowrap transition-all duration-200 group pb-0.5 flex-shrink-0 ${
+    return `relative font-body text-[10px] xl:text-[11px] tracking-[0.1em] uppercase whitespace-nowrap transition-all duration-200 group pb-0.5 flex-shrink-0 font-semibold ${
       isActive
-        ? (transparent ? 'text-[#C9A96E]' : 'text-[#8B6914]')
-        : (transparent ? 'text-white/70 hover:text-white' : 'text-[#1C1714]/55 hover:text-[#1C1714]')
+        ? 'text-[#8B6914]'
+        : 'text-[#1C1714]/75 hover:text-[#1C1714]'
     }`;
   };
 
@@ -333,10 +333,10 @@ export default function Navbar() {
             <div className="flex items-center justify-center gap-6 xl:gap-8 h-10">
               {navSecondary.map((l) => (
                 <Link key={`s-${l.to}`} to={l.to}
-                  className={`font-body text-[9px] xl:text-[10px] tracking-[0.12em] uppercase whitespace-nowrap transition-colors pb-0.5 group relative flex-shrink-0 ${
+                  className={`font-body text-[9px] xl:text-[10px] tracking-[0.12em] uppercase whitespace-nowrap transition-colors pb-0.5 group relative flex-shrink-0 font-medium ${
                     location.pathname === l.to
-                      ? (isTransparent ? 'text-[#C9A96E]' : 'text-[#8B6914]')
-                      : (isTransparent ? 'text-white/50 hover:text-white/75' : 'text-[#1C1714]/40 hover:text-[#1C1714]/70')
+                      ? 'text-[#8B6914]'
+                      : 'text-[#1C1714]/55 hover:text-[#1C1714]/85'
                   }`}>
                   {l.label}
                   <span className={`absolute bottom-0 left-0 h-px transition-all duration-300 ${
