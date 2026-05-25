@@ -39,8 +39,8 @@ const ROOM_PHOTOS = {
   ],
   // Superior Suite 2 (King Suite 2)
   superior_suite_2: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/1d910ed64_krone-kingsuite-2-zimmer-balkon-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/9e7befb58_krone-kingsuite-2-zimmer-detail-02.jpg',
     'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2d7d84b34_krone-kingsuite-2-aussicht-landschaft-01.jpg',
     'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6730c558e_krone-kingsuite-2-aussicht-landschaft-02.jpg',
     'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg',
