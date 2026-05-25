@@ -38,7 +38,7 @@ function RestaurantBlock({ lang }) {
             </p>
             <div className="flex items-center gap-2 mt-1.5">
               <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
-              <span className={`text-xs font-body font-semibold ${isOpen ? 'text-emerald-200' : 'text-red-300'}`}>
+              <span className={`text-xs font-body font-semibold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}>
                 {isOpen
                   ? (lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora')
                   : (lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso')}
@@ -414,6 +414,7 @@ export default function Home() {
       {/* EventsBanner is now inside Navbar — removed from here */}
 
       {/* ── RESTAURANT FEATURE BLOCK ── */}
+      {/* Restaurant banner handled inline in RestaurantBlock */}
       <RestaurantBlock lang={lang} />
 
       {/* ── BENEFIT STRIP ── */}

@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '@/lib/useLang';
-import { ArrowRight, Clock, UtensilsCrossed, Star, MapPin, Leaf } from 'lucide-react';
+import { ArrowRight, Clock, UtensilsCrossed, Star, MapPin, Phone } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
-const IMG_RESTAURANT = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=85";
-const IMG_FOOD1 = "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80";
-const IMG_FOOD2 = "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80";
-const IMG_PASTA = "https://images.unsplash.com/photo-1551183053-bf91798d792e?w=800&q=80";
-const IMG_CHEF = "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=85";
+// ── Real Krone media ──
+const IMG_FOOD1 = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg';
+const IMG_FOOD2 = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg';
+const IMG_PANORAMA = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg';
 
 export default function Restaurant() {
   const { lang } = useLang();
@@ -17,12 +16,13 @@ export default function Restaurant() {
     de: {
       label: 'Krone Langenburg by Ammesso',
       title: 'Mediterrane Küche mit Herz',
-      intro: 'Ehrlich gekochte Gerichte, die Geschichten erzählen. Jede Pasta, jedes Stück Fleisch, jeder Nachtisch ist eine persönliche Aussage des Küchenchefs Omar Ammesso.',
+      intro: 'Ehrlich gekochte Gerichte, die Geschichten erzählen. Jede Pasta, jedes Stück Fleisch, jeder Nachtisch ist eine persönliche Aussage des Küchenchefs Omar Ammesso — verfasst mit den besten Zutaten Hohenlohes.',
       hours_title: 'Öffnungszeiten',
       mon: 'Montag',
       mon_hours: 'Ruhetag',
       tue_sat: 'Dienstag – Samstag',
-      tue_sat_hours: '12:00 – 14:30 · 18:00 – 22:30',
+      tue_sat_lunch: '12:00 – 14:30',
+      tue_sat_dinner: '18:00 – 22:30',
       sun: 'Sonntag',
       sun_hours: '12:00 – 21:00',
       cta_reserve: 'Tisch reservieren',
@@ -33,18 +33,24 @@ export default function Restaurant() {
       booking_note: 'Gruppen ab 10 Personen bitte direkt per E-Mail anfragen.',
       chef_label: 'Chefkoch & Gründer',
       chef_bio: 'Seine Leidenschaft fürs Kochen entdeckte er früh — inspiriert von den Aromen seiner Kindheit und einer tiefen Liebe zur mediterranen Küche. Für Ammesso ist Kochen kein Beruf — es ist Sprache, Identität und eine tägliche Liebeserklärung.',
-      story_link: 'Unsere Geschichte',
-      trust_title: 'Reservieren Sie Ihren Tisch',
+      story_link: 'Unsere Geschichte lesen',
+      open_now: 'Jetzt geöffnet',
+      closed_now: 'Aktuell geschlossen',
+      timing_title: 'Timing',
+      timing_body: 'Lunchs sind intim und schnell. Abendessen: Take-your-time Erlebnisse. Sonntags öffnen wir früh und servieren bis spät — vollkommen entspannt.',
+      diets_title: 'Diäten & Wünsche',
+      diets_body: 'Vegetarisch? Vegan? Allergien? Sagen Sie uns Bescheid — wir passen an und zaubern Ihnen etwas Wunderschönes.',
     },
     en: {
       label: 'Krone Langenburg by Ammesso',
       title: 'Mediterranean Cuisine with Heart',
-      intro: 'Honestly cooked dishes that tell stories. Every pasta, every piece of meat, every dessert is a personal statement from head chef Omar Ammesso.',
+      intro: 'Honestly cooked dishes that tell stories. Every pasta, every piece of meat, every dessert is a personal statement from head chef Omar Ammesso — crafted with the finest ingredients of Hohenlohe.',
       hours_title: 'Opening Hours',
       mon: 'Monday',
       mon_hours: 'Closed',
       tue_sat: 'Tuesday – Saturday',
-      tue_sat_hours: '12:00 – 14:30 · 18:00 – 22:30',
+      tue_sat_lunch: '12:00 – 14:30',
+      tue_sat_dinner: '18:00 – 22:30',
       sun: 'Sunday',
       sun_hours: '12:00 – 21:00',
       cta_reserve: 'Reserve a Table',
@@ -55,18 +61,24 @@ export default function Restaurant() {
       booking_note: 'Groups of 10+ please enquire directly by email.',
       chef_label: 'Head Chef & Founder',
       chef_bio: 'His passion for cooking emerged early — inspired by the aromas of his childhood and a deep love for Mediterranean cuisine. For Ammesso, cooking is not a profession — it is language, identity and a daily declaration of love.',
-      story_link: 'Our Story',
-      trust_title: 'Reserve your table',
+      story_link: 'Read our story',
+      open_now: 'Open now',
+      closed_now: 'Currently closed',
+      timing_title: 'Timing',
+      timing_body: 'Lunches are intimate and quick. Dinners are take-your-time experiences. Sundays we open early and serve late — completely relaxed.',
+      diets_title: 'Diets & Wishes',
+      diets_body: 'Vegetarian? Vegan? Allergies? Let us know — we adapt and create something beautiful for you.',
     },
     it: {
       label: 'Krone Langenburg by Ammesso',
       title: 'Cucina Mediterranea con Cuore',
-      intro: 'Piatti cucinati con onestà che raccontano storie. Ogni pasta, ogni carne, ogni dolce è una dichiarazione personale dello chef Omar Ammesso.',
+      intro: 'Piatti cucinati con onestà che raccontano storie. Ogni pasta, ogni carne, ogni dolce è una dichiarazione personale dello chef Omar Ammesso — realizzata con i migliori ingredienti di Hohenlohe.',
       hours_title: 'Orari di apertura',
       mon: 'Lunedì',
       mon_hours: 'Chiuso',
       tue_sat: 'Martedì – Sabato',
-      tue_sat_hours: '12:00 – 14:30 · 18:00 – 22:30',
+      tue_sat_lunch: '12:00 – 14:30',
+      tue_sat_dinner: '18:00 – 22:30',
       sun: 'Domenica',
       sun_hours: '12:00 – 21:00',
       cta_reserve: 'Prenota un tavolo',
@@ -77,189 +89,243 @@ export default function Restaurant() {
       booking_note: 'Gruppi di 10+ persone: scrivere direttamente per email.',
       chef_label: 'Chef & Fondatore',
       chef_bio: 'La sua passione per la cucina è nata presto — ispirata dagli aromi della sua infanzia e da un profondo amore per la cucina mediterranea. Per Ammesso, cucinare non è un mestiere — è linguaggio, identità e una quotidiana dichiarazione d\'amore.',
-      story_link: 'La nostra storia',
-      trust_title: 'Prenota il tuo tavolo',
+      story_link: 'Leggi la nostra storia',
+      open_now: 'Aperto ora',
+      closed_now: 'Attualmente chiuso',
+      timing_title: 'Orari',
+      timing_body: 'I pranzi sono intimi e veloci. Le cene sono esperienze senza fretta. La domenica apriamo presto e serviamo fino a tardi — completamente rilassati.',
+      diets_title: 'Diete & Preferenze',
+      diets_body: 'Vegetariano? Vegano? Allergie? Facci sapere — ci adattiamo e creiamo qualcosa di bello per te.',
     },
   };
 
   const c = copy[lang] || copy.de;
 
-  return (
-    <div className="min-h-screen bg-charcoal text-ivory pb-24 lg:pb-0">
+  // Live open/closed status
+  const now = new Date();
+  const day = now.getDay();
+  const hour = now.getHours() + now.getMinutes() / 60;
+  let isOpen = false;
+  if (day === 0) isOpen = hour >= 12 && hour < 21;
+  else if (day >= 2 && day <= 6) isOpen = (hour >= 12 && hour < 14.5) || (hour >= 18 && hour < 22.5);
 
-      {/* ── HERO ─────────────────────────────────────────────── */}
-      <div className="relative pt-[126px] lg:pt-[166px] overflow-hidden" style={{ minHeight: 'calc(65vh + 126px)' }}>
-        <img src={IMG_RESTAURANT} alt="Krone Langenburg by Ammesso — Restaurant, mediterrane Küche Hohenlohe" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/20 to-charcoal" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-transparent to-charcoal/40" />
-        <div className="relative z-10 flex items-end pb-12 px-5 min-h-[300px]">
-          <div className="max-w-4xl mx-auto w-full">
-            <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-3">{c.label}</p>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl font-light text-ivory mb-4 sm:mb-6 leading-tight">{c.title}</h1>
-            <p className="text-white/75 font-body leading-relaxed max-w-xl mb-5 sm:mb-7 text-sm sm:text-base">{c.intro}</p>
+  return (
+    <div className="min-h-screen bg-[#171311] text-[#FAF8F5] pb-24 lg:pb-0">
+
+      {/* ── HERO ── */}
+      <div className="relative pt-[126px] lg:pt-[166px] overflow-hidden" style={{ minHeight: 'calc(70vh + 126px)' }}>
+        {/* Warm atmospheric dining image */}
+        <img
+          src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1600&q=90"
+          alt="Krone Langenburg by Ammesso — Restaurant, mediterrane Küche Hohenlohe"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/55 via-[#171311]/20 to-[#171311]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#171311]/35 via-transparent to-[#171311]/35" />
+
+        {/* Hero content */}
+        <div className="relative z-10 flex items-end pb-14 px-5 min-h-[360px]">
+          <div className="max-w-5xl mx-auto w-full">
+            <div className="flex items-center gap-3 mb-4">
+              <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
+              <span className={`text-sm font-body font-semibold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}>
+                {isOpen ? c.open_now : c.closed_now}
+              </span>
+              <span className="text-white/30 text-sm">·</span>
+              <span className="text-white/50 text-sm font-body hidden sm:inline">Di–Sa 12–14:30 & 18–22:30 · So 12–21</span>
+            </div>
+            <p className="text-[#B08A42] text-[10px] tracking-[0.4em] uppercase font-body mb-4">{c.label}</p>
+            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-light text-white mb-5 leading-tight">{c.title}</h1>
+            <p className="text-white/75 font-body leading-relaxed max-w-2xl mb-8 text-sm sm:text-base">{c.intro}</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/reserve"
-                className="flex items-center justify-center gap-2 px-6 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg w-full sm:w-auto hover:-translate-y-px">
-                <UtensilsCrossed className="w-3.5 h-3.5" /> {c.cta_reserve}
+                className="flex items-center justify-center gap-2 px-7 py-4 bg-[#B08A42] hover:bg-[#9E7A38] text-white rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px w-full sm:w-auto">
+                <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
               </Link>
               <Link to="/menu"
-                className="flex items-center justify-center gap-2 px-6 py-3.5 border-2 border-white/35 text-white hover:border-white/65 hover:bg-white/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all w-full sm:w-auto">
-                {c.cta_menu} <ArrowRight className="w-3.5 h-3.5" />
+                className="flex items-center justify-center gap-2 px-7 py-4 border-2 border-white/30 text-white hover:border-white/60 hover:bg-white/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all w-full sm:w-auto">
+                {c.cta_menu} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── PHILOSOPHY ───────────────────────────────────────── */}
-      <section className="bg-espresso py-14 px-5 border-y border-[#C9A96E]/10">
+      {/* ── PHILOSOPHY ── */}
+      <section className="bg-[#241A16] py-14 sm:py-16 px-5 border-y border-[#B08A42]/15">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-4">{c.philosophy_title}</p>
-          <div className="section-divider mb-7" />
-          <p className="font-display text-2xl md:text-3xl font-light text-ivory/80 leading-relaxed italic">{c.philosophy}</p>
-          <div className="section-divider mt-7" />
+          <p className="text-[#B08A42] text-[10px] tracking-[0.4em] uppercase font-body mb-5">{c.philosophy_title}</p>
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#B08A42]/50 to-transparent mx-auto mb-7" />
+          <p className="font-display text-2xl md:text-3xl font-light text-[#FAF8F5]/85 leading-relaxed italic">{c.philosophy}</p>
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#B08A42]/50 to-transparent mx-auto mt-7" />
         </div>
       </section>
 
-      {/* ── HOURS + CTA ──────────────────────────────────────── */}
-      <section className="py-16 px-5">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div className="bg-[#2A2118] rounded-2xl p-8 border border-[#C9A96E]/20">
-            <div className="flex items-center gap-2 mb-6">
-              <Clock className="w-4 h-4 text-[#C9A96E]/70" />
-              <span className="text-[#C9A96E]/70 text-[10px] tracking-[0.35em] uppercase font-body">{c.hours_title}</span>
+      {/* ── HOURS + CTA ── */}
+      <section className="py-16 sm:py-20 px-5 bg-[#171311]">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+
+          {/* Opening hours card */}
+          <div className="bg-[#241A16] rounded-2xl p-8 sm:p-10 border border-[#B08A42]/20 shadow-xl">
+            <div className="flex items-center gap-2.5 mb-7">
+              <div className="w-8 h-8 rounded-lg bg-[#B08A42]/15 flex items-center justify-center">
+                <Clock className="w-4 h-4 text-[#B08A42]" />
+              </div>
+              <span className="text-[#B08A42] text-[10px] tracking-[0.35em] uppercase font-body font-semibold">{c.hours_title}</span>
             </div>
-            <ul className="space-y-4 text-sm font-body">
-              <li className="flex justify-between items-center">
-                <span className="text-white/40">{c.mon}</span>
-                <span className="text-white/35 text-xs">{c.mon_hours}</span>
+            <ul className="space-y-5 font-body text-sm">
+              <li className="flex justify-between items-center py-3 border-b border-white/8">
+                <span className="text-[#D7D0C5]/50">{c.mon}</span>
+                <span className="text-[#D7D0C5]/35 text-xs italic">{c.mon_hours}</span>
               </li>
-              <li className="border-t border-white/10 pt-4">
-                <div className="flex justify-between items-start">
-                  <span className="text-white/85 font-medium">{c.tue_sat}</span>
+              <li className="py-3 border-b border-white/8">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-[#FAF8F5] font-semibold">{c.tue_sat}</span>
                 </div>
-                <div className="text-[#C9A96E]/80 text-xs mt-1 font-semibold">{c.tue_sat_hours}</div>
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#B08A42]/60" />
+                    <span className="text-[#B08A42] text-xs font-semibold">{c.tue_sat_lunch}</span>
+                    <span className="text-[#D7D0C5]/40 text-xs">
+                      {lang === 'de' ? 'Mittagessen' : lang === 'en' ? 'Lunch' : 'Pranzo'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#B08A42]/60" />
+                    <span className="text-[#B08A42] text-xs font-semibold">{c.tue_sat_dinner}</span>
+                    <span className="text-[#D7D0C5]/40 text-xs">
+                      {lang === 'de' ? 'Abendessen' : lang === 'en' ? 'Dinner' : 'Cena'}
+                    </span>
+                  </div>
+                </div>
               </li>
-              <li className="border-t border-white/10 pt-4">
-                <div className="flex justify-between items-start">
-                  <span className="text-white/85 font-medium">{c.sun}</span>
+              <li className="py-3">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-[#FAF8F5] font-semibold">{c.sun}</span>
                 </div>
-                <div className="text-[#C9A96E]/80 text-xs mt-1 font-semibold">{c.sun_hours}</div>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#B08A42]/60" />
+                  <span className="text-[#B08A42] text-xs font-semibold">{c.sun_hours}</span>
+                  <span className="text-[#D7D0C5]/40 text-xs">
+                    {lang === 'de' ? 'Durchgehend' : lang === 'en' ? 'All day' : 'Tutto il giorno'}
+                  </span>
+                </div>
               </li>
             </ul>
-            <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs text-white/45 font-body">
-              <MapPin className="w-3.5 h-3.5 text-[#C9A96E]/50" />
-              <span>{c.capacity}</span>
+            <div className="mt-7 pt-5 border-t border-white/8 flex items-center gap-2.5">
+              <MapPin className="w-3.5 h-3.5 text-[#B08A42]/60 flex-shrink-0" />
+              <span className="text-[#D7D0C5]/50 text-xs font-body">{c.capacity}</span>
             </div>
           </div>
 
-          <div className="space-y-3">
+          {/* Booking CTAs */}
+          <div className="space-y-4">
             <Link to="/reserve"
-              className="flex items-center justify-center gap-2 w-full py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px">
+              className="flex items-center justify-center gap-2.5 w-full py-4 bg-[#B08A42] hover:bg-[#9E7A38] text-white rounded-xl text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px">
               <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
             </Link>
             <Link to="/menu"
-              className="flex items-center justify-center gap-2 w-full py-4 border-2 border-[#C9A96E]/40 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all">
+              className="flex items-center justify-center gap-2.5 w-full py-4 border-2 border-[#B08A42]/40 text-[#B08A42] hover:border-[#B08A42] hover:bg-[#B08A42]/10 rounded-xl text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all">
               {c.cta_menu}
             </Link>
-            <p className="text-white/45 text-xs text-center font-body pt-1">{c.booking_note}</p>
+            <a href={`tel:${s.phone}`}
+              className="flex items-center justify-center gap-2.5 w-full py-4 border border-white/15 text-[#D7D0C5]/60 hover:text-white hover:border-white/30 rounded-xl text-xs tracking-[0.15em] uppercase font-body font-medium transition-all">
+              <Phone className="w-3.5 h-3.5" /> {s.phone}
+            </a>
+            <p className="text-[#D7D0C5]/40 text-xs text-center font-body pt-1 leading-relaxed">{c.booking_note}</p>
             <a href={`mailto:${s.email_info}`}
-              className="block text-center text-gold/60 hover:text-gold text-xs font-body tracking-wider transition-colors">
+              className="block text-center text-[#B08A42]/60 hover:text-[#B08A42] text-xs font-body tracking-wider transition-colors">
               {s.email_info}
             </a>
           </div>
         </div>
       </section>
 
-      {/* ── FOOD GALLERY ─────────────────────────────────────── */}
-      <section className="py-6 px-4 sm:px-5 bg-espresso">
-        <div className="max-w-5xl mx-auto grid grid-cols-3 gap-2 sm:gap-4">
-          <div className="relative rounded-xl sm:rounded-2xl overflow-hidden aspect-square col-span-2 group">
-            <img src={IMG_FOOD1} alt="Pasta fresca Krone Langenburg by Ammesso — Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent" />
+      {/* ── FOOD GALLERY — real room/view images as atmosphere ── */}
+      <section className="py-4 px-4 sm:px-5 bg-[#241A16]">
+        <div className="max-w-5xl mx-auto grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="relative rounded-2xl overflow-hidden aspect-square col-span-2 group">
+            <img src={IMG_FOOD1} alt="Krone Langenburg by Ammesso — Interieur King Suite" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/60 to-transparent" />
           </div>
-          <div className="flex flex-col gap-2 sm:gap-4">
-            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_FOOD2} alt="Mediterrane Hauptspeise Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
+          <div className="flex flex-col gap-2 sm:gap-3">
+            <div className="relative rounded-2xl overflow-hidden flex-1 group">
+              <img src={IMG_FOOD2} alt="Krone Langenburg by Ammesso — Wohnbereich" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/40 to-transparent" />
             </div>
-            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_PASTA} alt="Handgemachte Pasta Krone Langenburg by Ammesso — Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
+            <div className="relative rounded-2xl overflow-hidden flex-1 group">
+              <img src={IMG_PANORAMA} alt="Panorama Hohenlohe — Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/40 to-transparent" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── CHEF ─────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 px-4 sm:px-5">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <div className="relative rounded-2xl overflow-hidden h-72 sm:h-[420px] shadow-premium">
-            <img src={IMG_CHEF} alt="Chef Omar Ammesso" className="w-full h-full object-cover object-top" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent" />
+      {/* ── CHEF ── */}
+      <section className="py-14 sm:py-20 px-4 sm:px-5 bg-[#171311]">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 items-center">
+          <div className="relative rounded-2xl overflow-hidden h-72 sm:h-[440px] shadow-2xl ring-1 ring-[#B08A42]/20">
+            <img
+              src="https://static.wixstatic.com/media/e6b39b_b2703a4b8aa7481b9e9ec3a3a9eb6892~mv2.webp/v1/fill/w_324,h_434,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ammesso-6512-1bfcdeba.webp"
+              alt="Chef Omar Ammesso — Krone Langenburg by Ammesso"
+              className="w-full h-full object-cover object-top"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/80 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
-              <p className="font-display text-2xl text-ivory font-light">Omar Ammesso</p>
-              <p className="text-gold text-xs tracking-widest font-body mt-0.5">{c.chef_label}</p>
+              <p className="font-display text-2xl text-white font-light">Omar Ammesso</p>
+              <p className="text-[#B08A42] text-xs tracking-widest font-body mt-1">{c.chef_label}</p>
             </div>
           </div>
           <div>
-            <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-4">{c.chef_label}</p>
-            <h2 className="font-display text-3xl md:text-4xl font-light text-ivory mb-2">Omar Ammesso</h2>
-            <p className="text-ivory/30 text-sm italic font-body mb-5">Omar Ouardaoui</p>
-            <blockquote className="border-l-2 border-gold/40 pl-5 mb-6 italic font-display text-xl text-ivory/60">
+            <p className="text-[#B08A42] text-[10px] tracking-[0.4em] uppercase font-body mb-4">{c.chef_label}</p>
+            <h2 className="font-display text-3xl md:text-4xl font-light text-[#FAF8F5] mb-2">Omar Ammesso</h2>
+            <p className="text-[#D7D0C5]/40 text-sm italic font-body mb-6">Omar Ouardaoui</p>
+            <blockquote className="border-l-2 border-[#B08A42]/50 pl-5 mb-7 italic font-display text-xl text-[#FAF8F5]/70">
               {lang === 'de' && '"Kochen ist keine Arbeit — es ist Sprache."'}
               {lang === 'en' && '"Cooking is not work — it is language."'}
               {lang === 'it' && '"Cucinare non è lavoro — è linguaggio."'}
             </blockquote>
-            <p className="text-ivory/50 font-body text-sm leading-relaxed mb-6">{c.chef_bio}</p>
+            <p className="text-[#D7D0C5]/65 font-body text-sm leading-relaxed mb-8">{c.chef_bio}</p>
             <Link to="/story"
-              className="inline-flex items-center gap-2 text-gold text-xs tracking-[0.2em] uppercase font-body hover:gap-3 transition-all">
-              {c.story_link} <ArrowRight className="w-3.5 h-3.5" />
+              className="inline-flex items-center gap-2 text-[#B08A42] hover:text-[#9E7A38] text-xs tracking-[0.2em] uppercase font-body font-semibold transition-all group">
+              {c.story_link} <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── EXPERIENCE NOTES ─────────────────────────────────── */}
-      <section className="py-12 sm:py-16 px-4 sm:px-5">
-        <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="bg-[#2A2118] rounded-2xl p-6 border border-[#C9A96E]/15">
-            <h3 className="text-[#C9A96E] text-[10px] tracking-[0.3em] uppercase font-body font-semibold mb-3">
-              {lang === 'de' ? '⏰ Timing' : lang === 'en' ? '⏰ Timing' : '⏰ Orari'}
-            </h3>
-            <p className="text-white/70 text-sm font-body leading-relaxed">
-              {lang === 'de'
-                ? 'Lunchs sind intim und schnell. Abendessen: Take-your-time Erlebnisse. Sonntags öffnen wir früh und servieren bis spät — vollkommen entspannt.'
-                : lang === 'en'
-                ? 'Lunches are intimate and quick. Dinners are take-your-time experiences. Sundays we open early and serve late — completely relaxed.'
-                : 'I pranzi sono intimi e veloci. Le cene sono esperienze senza fretta. La domenica apriamo presto e serviamo fino a tardi — completamente rilassati.'}
-            </p>
+      {/* ── EXPERIENCE NOTES ── */}
+      <section className="py-12 sm:py-16 px-4 sm:px-5 bg-[#241A16]">
+        <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="bg-[#171311] rounded-2xl p-7 sm:p-8 border border-[#B08A42]/20 shadow-lg">
+            <div className="w-10 h-10 rounded-xl bg-[#B08A42]/15 flex items-center justify-center mb-4">
+              <Clock className="w-4.5 h-4.5 text-[#B08A42]" />
+            </div>
+            <h3 className="text-[#FAF8F5] text-base font-body font-semibold mb-3">{c.timing_title}</h3>
+            <p className="text-[#D7D0C5]/65 text-sm font-body leading-relaxed">{c.timing_body}</p>
           </div>
-          <div className="bg-[#2A2118] rounded-2xl p-6 border border-[#C9A96E]/15">
-            <h3 className="text-[#C9A96E] text-[10px] tracking-[0.3em] uppercase font-body font-semibold mb-3">
-              {lang === 'de' ? '🥗 Diäten & Wünsche' : lang === 'en' ? '🥗 Diets & Wishes' : '🥗 Diete & Preferenze'}
-            </h3>
-            <p className="text-white/70 text-sm font-body leading-relaxed">
-              {lang === 'de'
-                ? 'Vegetarisch? Vegan? Allergien? Sagen Sie uns Bescheid — wir passen an und zaubern dir etwas Wunderschönes.'
-                : lang === 'en'
-                ? 'Vegetarian? Vegan? Allergies? Let us know — we adapt and create something beautiful for you.'
-                : 'Vegetariano? Vegano? Allergie? Facci sapere — ci adattiamo e creiamo qualcosa di bello per te.'}
-            </p>
+          <div className="bg-[#171311] rounded-2xl p-7 sm:p-8 border border-[#B08A42]/20 shadow-lg">
+            <div className="w-10 h-10 rounded-xl bg-[#B08A42]/15 flex items-center justify-center mb-4">
+              <span className="text-lg">🥗</span>
+            </div>
+            <h3 className="text-[#FAF8F5] text-base font-body font-semibold mb-3">{c.diets_title}</h3>
+            <p className="text-[#D7D0C5]/65 text-sm font-body leading-relaxed">{c.diets_body}</p>
           </div>
         </div>
       </section>
 
-      {/* ── TRUST / FINAL CTA ────────────────────────────────── */}
-      <section className="bg-espresso py-12 sm:py-16 px-4 sm:px-5 text-center border-t border-[#C9A96E]/10">
+      {/* ── TRUST / FINAL CTA ── */}
+      <section className="bg-[#171311] py-14 sm:py-18 px-4 sm:px-5 text-center border-t border-[#B08A42]/10">
         <div className="flex justify-center gap-1 mb-6">
-          {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 sm:w-4 h-3.5 sm:h-4 fill-gold text-gold" />)}
+          {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-[#B08A42] text-[#B08A42]" />)}
         </div>
-        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-light text-ivory mb-3 leading-tight">
+        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-light text-[#FAF8F5] mb-4 leading-tight">
           {lang === 'de' ? 'Wir freuen uns auf Sie.' : lang === 'en' ? 'We look forward to seeing you.' : 'Non vediamo l\'ora di vedervi.'}
         </h2>
-        <p className="text-white/65 text-sm font-body mb-8">
-          {lang === 'de' 
+        <p className="text-[#D7D0C5]/60 text-sm font-body mb-10 max-w-sm mx-auto leading-relaxed">
+          {lang === 'de'
             ? 'Buchen Sie Ihren Tisch oder rufen Sie an — wir sind für Sie da.'
             : lang === 'en'
             ? 'Book your table or call us — we\'re here for you.'
@@ -267,13 +333,13 @@ export default function Restaurant() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-sm sm:max-w-none mx-auto">
           <Link to="/reserve"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px">
-            <UtensilsCrossed className="w-3.5 h-3.5" />
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 bg-[#B08A42] hover:bg-[#9E7A38] text-white rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px">
+            <UtensilsCrossed className="w-4 h-4" />
             {c.cta_reserve}
           </Link>
           <a href={`tel:${s.phone}`}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#C9A96E]/50 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all">
-            {s.phone}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 border-2 border-[#B08A42]/40 text-[#B08A42] hover:border-[#B08A42] hover:bg-[#B08A42]/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all">
+            <Phone className="w-4 h-4" /> {s.phone}
           </a>
         </div>
       </section>
