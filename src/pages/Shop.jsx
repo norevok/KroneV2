@@ -40,7 +40,7 @@ const PRODUCTS = [
     en_desc: 'Two nights in the historic heart of Langenburg — with breakfast, multi-course dinner and a welcome glass of sparkling wine.',
     de_for: '🏨 2 Nächte Hotel + Restaurant · Gültig 2 Jahre',
     en_for: '🏨 2 Nights Hotel + Restaurant · Valid 2 Years',
-    image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80',
+    image: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d998a99a1_IMG_1644.jpg',
     popular: false,
   },
   {
@@ -53,7 +53,7 @@ const PRODUCTS = [
     en_desc: 'Overnight in our exclusive King Suite, private tasting menu dinner, champagne & Langenburg panorama.',
     de_for: '👑 King Suite + Privat-Dinner · Gültig 2 Jahre',
     en_for: '👑 King Suite + Private Dinner · Valid 2 Years',
-    image: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
+    image: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
     popular: false,
   },
 ];

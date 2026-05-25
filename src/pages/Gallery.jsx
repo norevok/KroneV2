@@ -8,22 +8,23 @@ const VIDEO_URL = 'https://media.base44.com/videos/public/69e1fb8a73bbccc7f63ef7
 const VIDEO_POSTER = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg';
 
 const GALLERY = [
-  // ── Hotel / Property ──
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg', cat: 'rooms', de: 'King Suite 1 — Zimmerübersicht', en: 'King Suite 1 — Room Overview' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg', cat: 'rooms', de: 'King Suite 1 — Wohnbereich', en: 'King Suite 1 — Living Area' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/463dc9086_krone-kingsuite-1-zimmer-bett-tv-01.jpg', cat: 'rooms', de: 'King Suite 1 — Schlafbereich', en: 'King Suite 1 — Bedroom' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d9bcf521_krone-kingsuite-1-zimmer-detail-01.jpg', cat: 'rooms', de: 'King Suite 1 — Detail', en: 'King Suite 1 — Detail' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/737cda4af_krone-kingsuite-1-aussicht-panorama-01.jpg', cat: 'rooms', de: 'King Suite 1 — Panorama Aussicht', en: 'King Suite 1 — Panoramic View' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg', cat: 'rooms', de: 'King Suite 2 — Signatur', en: 'King Suite 2 — Signature' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2d7d84b34_krone-kingsuite-2-aussicht-landschaft-01.jpg', cat: 'rooms', de: 'King Suite 2 — Landschaftsblick', en: 'King Suite 2 — Landscape View' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6730c558e_krone-kingsuite-2-aussicht-landschaft-02.jpg', cat: 'rooms', de: 'King Suite 2 — Talblick', en: 'King Suite 2 — Valley View' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg', cat: 'rooms', de: 'Panorama Hohenlohe', en: 'Panorama Hohenlohe' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg', cat: 'rooms', de: 'Deluxe Doppelzimmer — Balkon', en: 'Deluxe Double — Balcony' },
+  // ── Zimmer ──
+  // Einzelzimmer
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d998a99a1_IMG_1644.jpg', cat: 'rooms', de: 'Einzelzimmer', en: 'Single Room' },
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/7f4a28fae_IMG_1646.jpg', cat: 'rooms', de: 'Einzelzimmer — Blick auf die Altstadt', en: 'Single Room — Old Town View' },
+  // Doppelzimmer
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg', cat: 'rooms', de: 'Deluxe Doppelzimmer', en: 'Deluxe Double Room' },
   { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/7063cdda7_krone-dz-doppelbett-balkon-03.jpg', cat: 'rooms', de: 'Deluxe Doppelzimmer — Bett', en: 'Deluxe Double — Bed' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/3a179ef1d_krone-dz-zimmer-tv-fenster-02.jpg', cat: 'rooms', de: 'Deluxe Zimmer — TV & Fenster', en: 'Deluxe Room — TV & Window' },
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/3a179ef1d_krone-dz-zimmer-tv-fenster-02.jpg', cat: 'rooms', de: 'Deluxe Zimmer — Fensterblick', en: 'Deluxe Room — Window View' },
   { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg', cat: 'rooms', de: 'Talblick aus dem Zimmer', en: 'Valley View from Room' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/975fb81f7_krone-dz-dusche-regendusche-03.jpg', cat: 'rooms', de: 'Deluxe — Regendusche', en: 'Deluxe — Rain Shower' },
-  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/90854213e_krone-dz-badezimmer-waschbecken-01.jpg', cat: 'rooms', de: 'Deluxe — Badezimmer', en: 'Deluxe — Bathroom' },
+  // King Suite 1
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg', cat: 'rooms', de: 'King Suite 1 — Übersicht', en: 'King Suite 1 — Overview' },
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg', cat: 'rooms', de: 'King Suite 1 — Wohnbereich', en: 'King Suite 1 — Living Area' },
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/737cda4af_krone-kingsuite-1-aussicht-panorama-01.jpg', cat: 'rooms', de: 'King Suite 1 — Panorama', en: 'King Suite 1 — Panorama' },
+  // King Suite 2
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg', cat: 'rooms', de: 'King Suite 2 — Signature', en: 'King Suite 2 — Signature' },
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2d7d84b34_krone-kingsuite-2-aussicht-landschaft-01.jpg', cat: 'rooms', de: 'King Suite 2 — Landschaft', en: 'King Suite 2 — Landscape' },
+  { src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg', cat: 'rooms', de: 'Panorama Hohenlohe', en: 'Panorama Hohenlohe' },
   // ── Restaurant ──
   { src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=90', cat: 'dining', de: 'Kulinarium — Abendstimmung', en: 'Kulinarium — Evening atmosphere' },
   { src: 'https://images.unsplash.com/photo-1551183053-bf91798d792e?w=1200&q=90', cat: 'dining', de: 'Handgemachte Pasta', en: 'Handmade Pasta' },

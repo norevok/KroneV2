@@ -15,13 +15,10 @@ import { Star, Coffee, CheckCircle, AlertCircle, ExternalLink, Wifi, Bath, Wind,
 //   zimmer-uebersicht  = Full-room overview → Superior Suite 1 cover
 //   zimmer-favorit     = Signature shot     → Superior Suite 2 cover
 const ROOM_PHOTOS = {
-  // Deluxe Einzelzimmer
+  // Deluxe Einzelzimmer — echte Zimmerfotos
   deluxe_single: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/463dc9086_krone-kingsuite-1-zimmer-bett-tv-01.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/3a179ef1d_krone-dz-zimmer-tv-fenster-02.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/975fb81f7_krone-dz-dusche-regendusche-03.jpg',
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/90854213e_krone-dz-badezimmer-waschbecken-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d998a99a1_IMG_1644.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/7f4a28fae_IMG_1646.jpg',
   ],
   // Deluxe Doppelzimmer
   deluxe_double: [
