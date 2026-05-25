@@ -11,13 +11,13 @@ export default function Footer() {
   const HOURS = {
     de: [
       { day: 'Montag', h: 'Ruhetag', dim: true },
-      { day: 'Di – Sa', h: '12:00 – 14:30 & 17:30 – 22:00' },
-      { day: 'Sonntag', h: '12:00 – 20:00' },
+      { day: 'Di – Sa', h: '12:00 – 14:30 & 18:00 – 22:30' },
+      { day: 'Sonntag', h: '12:00 – 21:00' },
     ],
     en: [
       { day: 'Monday', h: 'Closed', dim: true },
-      { day: 'Tue – Sat', h: '12:00 – 14:30 & 17:30 – 22:00' },
-      { day: 'Sunday', h: '12:00 – 20:00' },
+      { day: 'Tue – Sat', h: '12:00 – 14:30 & 18:00 – 22:30' },
+      { day: 'Sunday', h: '12:00 – 21:00' },
     ],
   };
   const hours = HOURS[lang] || HOURS.de;

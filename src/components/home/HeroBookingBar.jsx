@@ -10,8 +10,8 @@ export default function HeroBookingBar({ lang = 'de' }) {
   const navigate = useNavigate();
   const today = new Date().toISOString().split('T')[0];
   const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
+  const [checkIn, setCheckIn] = useState(today);
+  const [checkOut, setCheckOut] = useState(tomorrow);
   const [adults, setAdults] = useState('2');
 
   const t = {
