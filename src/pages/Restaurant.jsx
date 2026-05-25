@@ -3,9 +3,9 @@ import { useLang } from '@/lib/useLang';
 import { ArrowRight, Clock, UtensilsCrossed, Star, MapPin, Phone } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
-// ── Real Krone media ──
-const IMG_FOOD1 = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg';
-const IMG_FOOD2 = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg';
+// ── Atmospheric dining/restaurant images ──
+const IMG_FOOD1 = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85';
+const IMG_FOOD2 = 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=85';
 const IMG_PANORAMA = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg';
 
 export default function Restaurant() {
@@ -175,11 +175,11 @@ export default function Restaurant() {
               <span className="text-[#B08A42] text-[10px] tracking-[0.35em] uppercase font-body font-semibold">{c.hours_title}</span>
             </div>
             <ul className="space-y-5 font-body text-sm">
-              <li className="flex justify-between items-center py-3 border-b border-white/8">
+              <li className="flex justify-between items-center py-3 border-b border-white/10">
                 <span className="text-[#D7D0C5]/50">{c.mon}</span>
                 <span className="text-[#D7D0C5]/35 text-xs italic">{c.mon_hours}</span>
               </li>
-              <li className="py-3 border-b border-white/8">
+              <li className="py-3 border-b border-white/10">
                 <div className="flex justify-between items-start mb-2">
                   <span className="text-[#FAF8F5] font-semibold">{c.tue_sat}</span>
                 </div>
@@ -213,7 +213,7 @@ export default function Restaurant() {
                 </div>
               </li>
             </ul>
-            <div className="mt-7 pt-5 border-t border-white/8 flex items-center gap-2.5">
+            <div className="mt-7 pt-5 border-t border-white/10 flex items-center gap-2.5">
               <MapPin className="w-3.5 h-3.5 text-[#B08A42]/60 flex-shrink-0" />
               <span className="text-[#D7D0C5]/50 text-xs font-body">{c.capacity}</span>
             </div>
@@ -246,12 +246,12 @@ export default function Restaurant() {
       <section className="py-4 px-4 sm:px-5 bg-[#241A16]">
         <div className="max-w-5xl mx-auto grid grid-cols-3 gap-2 sm:gap-3">
           <div className="relative rounded-2xl overflow-hidden aspect-square col-span-2 group">
-            <img src={IMG_FOOD1} alt="Krone Langenburg by Ammesso — Interieur King Suite" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <img src={IMG_FOOD1} alt="Krone Langenburg by Ammesso — Restaurant Atmosphäre" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/60 to-transparent" />
           </div>
           <div className="flex flex-col gap-2 sm:gap-3">
             <div className="relative rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_FOOD2} alt="Krone Langenburg by Ammesso — Wohnbereich" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src={IMG_FOOD2} alt="Krone Langenburg by Ammesso — Gastraum" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/40 to-transparent" />
             </div>
             <div className="relative rounded-2xl overflow-hidden flex-1 group">

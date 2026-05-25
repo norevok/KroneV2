@@ -44,8 +44,8 @@ const ATTRACTIONS = [
     icon: Wine,
     // Hohenlohe vineyard — warm golden-hour vines, Unsplash
     image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=85',
-    de: { title: 'Hohenloher Wein & Genuss', desc: 'Die Region Hohenlohe ist für ihre Weinbaukultur bekannt. Entdecken Sie lokale Weingüter, Straußenwirtschaften und kulinarische Besonderheiten der Region. Paaren Sie den Weingenuss mit einem Abendessen bei uns im Kulinarium.', tag: 'Weinkultur' },
-    en: { title: 'Hohenlohe Wine & Pleasure', desc: 'The Hohenlohe region is known for its wine culture. Discover local wineries, seasonal wine taverns and culinary specialities of the region. Pair wine enjoyment with an evening dinner at our Kulinarium.', tag: 'Wine culture' },
+    de: { title: 'Hohenloher Wein & Genuss', desc: 'Die Region Hohenlohe ist für ihre Weinbaukultur bekannt. Entdecken Sie lokale Weingüter, Straußenwirtschaften und kulinarische Besonderheiten der Region. Paaren Sie den Weingenuss mit einem Abendessen bei uns in der Krone Langenburg.', tag: 'Weinkultur' },
+    en: { title: 'Hohenlohe Wine & Pleasure', desc: 'The Hohenlohe region is known for its wine culture. Discover local wineries, seasonal wine taverns and culinary specialities of the region. Pair wine enjoyment with an evening dinner at Krone Langenburg by Ammesso.', tag: 'Wine culture' },
   },
 ];
 
