@@ -82,6 +82,9 @@ const PREVIOUSLY_REMOVED = [
   'Contact page logActivity after submit — redundant, entity create + sendContactEmail is sufficient',
   'validateReservation entity creation removed (Phase 16 audit) — was silently creating orphaned reservation records on every validation call without sending emails, leading to DB bloat and potential duplicate submissions',
   'stripeVoucherWebhook idempotency added (Phase 16 audit) — now checks voucher.status === active && stripe_session_id matches before processing; prevents duplicate emails on Stripe webhook retries',
+  'Rooms page notifySlack on booking-intent click removed (Phase 17 audit) — was firing a Slack webhook credit on every "Jetzt buchen" click, even if guest never completed checkout. Real Slack alert remains in beds24BookingWebhook on confirmed booking only.',
+  'Dashboard DB fetch limits reduced (Phase 17) — RestaurantReservation 500→200, HotelBookingIntent 200→100, Messages/Vouchers/Docs 100→50. Dashboards load faster and read less data.',
+  'AdminCreditDashboard DB fetch limits reduced (Phase 17) — HotelBookingIntent 300→100, RestaurantReservation 300→100.',
 ];
 
 function Badge({ verdict }) {
