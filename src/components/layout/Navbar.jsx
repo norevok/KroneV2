@@ -163,7 +163,7 @@ export default function Navbar() {
   }, [open]);
 
   const isHome = location.pathname === '/';
-  const isTransparent = isHome && !scrolled;
+  const isTransparent = false;
   const navPrimary = NAV_PRIMARY[lang] || NAV_PRIMARY.de;
   const navSecondary = NAV_SECONDARY[lang] || NAV_SECONDARY.de;
   const navMobile = NAV_MOBILE[lang] || NAV_MOBILE.de;
