@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 import HeroBookingBar from '@/components/home/HeroBookingBar';
+import EventsBanner from '@/components/home/EventsBanner';
 import ChatWidget from '@/components/ChatWidget';
 import { base44 } from '@/api/base44Client';
 
@@ -330,33 +331,6 @@ export default function Home() {
         {/* Hero text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-52 sm:pb-40 lg:pb-36 z-10">
 
-          {/* Location pin — Stecknadel mit langer Linie darunter */}
-          <motion.div
-            key={`location-${current}`}
-            className="flex flex-col items-center mb-5 sm:mb-7"
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05 }}>
-            {/* Label oben */}
-            <div className="px-3 py-1 bg-black/35 backdrop-blur-sm rounded-full border border-white/20 mb-2">
-              <span className="text-white text-[10px] sm:text-xs font-body font-semibold tracking-wider">Langenburg, Deutschland</span>
-            </div>
-            {/* Pin-Kreis */}
-            <div className="relative">
-              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/15 backdrop-blur-md border-2 border-white/50 flex items-center justify-center shadow-lg">
-                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-              </div>
-              <span className="absolute inset-0 rounded-full border-2 border-white/25 animate-ping opacity-50" />
-            </div>
-            {/* Lange vertikale Linie */}
-            <motion.div
-              className="w-px bg-gradient-to-b from-white/50 to-transparent"
-              initial={{ height: 0 }}
-              animate={{ height: 40 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            />
-          </motion.div>
-
           <motion.div
             key={`badge-${current}`}
             className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4"
@@ -438,6 +412,9 @@ export default function Home() {
           <HeroBookingBar lang={lang} />
         </div>
       </div>
+
+      {/* ── EVENTS BANNER ── */}
+      <EventsBanner lang={lang} />
 
       {/* ── RESTAURANT FEATURE BLOCK ── */}
       <RestaurantBlock lang={lang} />

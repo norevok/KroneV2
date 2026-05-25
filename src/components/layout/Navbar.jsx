@@ -188,25 +188,27 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop center nav */}
-            <div className="hidden lg:flex items-center gap-5 xl:gap-7 overflow-x-auto no-scrollbar flex-1 justify-center px-4">
-              {navLinks.map((l, i) => {
-                const isActive = location.pathname === l.to && i > 0;
-                return (
-                  <Link key={`${l.to}-${i}`} to={l.to}
-                    className={`relative font-body text-[10px] xl:text-[11px] tracking-[0.12em] uppercase whitespace-nowrap transition-all duration-200 group pb-1 flex-shrink-0 ${
-                      isActive
-                        ? (isTransparent ? 'text-[#C9A96E]' : 'text-[#8B6914]')
-                        : (isTransparent ? 'text-white/75 hover:text-white' : 'text-[#1C1714]/55 hover:text-[#1C1714]')
-                    }`}>
-                    {l.label}
-                    <span className={`absolute bottom-0 left-0 h-px transition-all duration-300 ${
-                      isActive
-                        ? `right-0 ${isTransparent ? 'bg-[#C9A96E]' : 'bg-[#8B6914]'}`
-                        : `right-full group-hover:right-0 ${isTransparent ? 'bg-[#C9A96E]/60' : 'bg-[#8B6914]/50'}`
-                    }`} />
-                  </Link>
-                );
-              })}
+            <div className="hidden lg:flex items-center justify-center flex-1 px-2">
+              <div className="flex items-center gap-3 xl:gap-5 flex-wrap justify-center">
+                {navLinks.map((l, i) => {
+                  const isActive = location.pathname === l.to && i > 0;
+                  return (
+                    <Link key={`${l.to}-${i}`} to={l.to}
+                      className={`relative font-body text-[9px] xl:text-[10px] tracking-[0.1em] uppercase whitespace-nowrap transition-all duration-200 group pb-1 flex-shrink-0 ${
+                        isActive
+                          ? (isTransparent ? 'text-[#C9A96E]' : 'text-[#8B6914]')
+                          : (isTransparent ? 'text-white/75 hover:text-white' : 'text-[#1C1714]/55 hover:text-[#1C1714]')
+                      }`}>
+                      {l.label}
+                      <span className={`absolute bottom-0 left-0 h-px transition-all duration-300 ${
+                        isActive
+                          ? `right-0 ${isTransparent ? 'bg-[#C9A96E]' : 'bg-[#8B6914]'}`
+                          : `right-full group-hover:right-0 ${isTransparent ? 'bg-[#C9A96E]/60' : 'bg-[#8B6914]/50'}`
+                      }`} />
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Right: Book Now CTA + mobile toggle */}
