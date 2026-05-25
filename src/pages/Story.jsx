@@ -31,8 +31,8 @@ const TIMELINE = {
       year: 'Heute',
       title: 'Krone Langenburg by Ammesso',
       text: 'Omar Ammesso erweckt die traditionsreiche Krone in der Hauptstraße 24 zu neuem Leben — als Boutique-Hotel mit 10 Zimmern und Suiten sowie dem Kulinarium by Ammesso, das mediterrane Küche mit der Wärme Hohenlohes verbindet. Geschichte trifft auf moderne Gastfreundschaft.',
-      img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85',
-      alt: 'Modernes Restaurant Krone Langenburg by Ammesso',
+      img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
+      alt: 'Krone Langenburg by Ammesso — King Suite',
     },
   ],
   en: [
@@ -61,8 +61,8 @@ const TIMELINE = {
       year: 'Today',
       title: 'Krone Langenburg by Ammesso',
       text: 'Omar Ammesso breathes new life into the historic Krone at Hauptstraße 24 — as a boutique hotel with 10 rooms and suites, and the Kulinarium by Ammesso restaurant combining Mediterranean cuisine with the warmth of Hohenlohe hospitality.',
-      img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85',
-      alt: 'Modern restaurant Krone Langenburg by Ammesso',
+      img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
+      alt: 'Krone Langenburg by Ammesso — King Suite',
     },
   ],
   it: [
@@ -91,8 +91,8 @@ const TIMELINE = {
       year: 'Oggi',
       title: 'Krone Langenburg by Ammesso',
       text: 'Omar Ammesso ridà vita alla storica Krone in Hauptstraße 24 — come boutique hotel con 10 camere e suite e il Kulinarium by Ammesso, che unisce la cucina mediterranea al calore dell\'ospitalità di Hohenlohe.',
-      img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85',
-      alt: 'Ristorante moderno Krone Langenburg by Ammesso',
+      img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
+      alt: 'Krone Langenburg by Ammesso — King Suite',
     },
   ],
 };
@@ -138,10 +138,10 @@ export default function Story() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pt-20 pb-0">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-0">
 
       {/* ── HERO ── */}
-      <div className="relative overflow-hidden bg-[#1C1714] py-20 sm:py-28">
+      <div className="relative overflow-hidden bg-[#1C1714] pt-[126px] lg:pt-[166px] pb-16 sm:pb-24">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg"
           alt="Schloss Langenburg über dem Jagsttal"
