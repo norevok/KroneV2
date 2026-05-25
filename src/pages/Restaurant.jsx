@@ -7,7 +7,7 @@ const IMG_RESTAURANT = "https://images.unsplash.com/photo-1414235077428-338989a2
 const IMG_FOOD1 = "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80";
 const IMG_FOOD2 = "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80";
 const IMG_PASTA = "https://images.unsplash.com/photo-1551183053-bf91798d792e?w=800&q=80";
-const IMG_CHEF = "https://static.wixstatic.com/media/e6b39b_b2703a4b8aa7481b9e9ec3a3a9eb6892~mv2.webp/v1/fill/w_324,h_434,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ammesso-6512-1bfcdeba.webp";
+const IMG_CHEF = "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=85";
 
 export default function Restaurant() {
   const { lang } = useLang();
@@ -22,9 +22,9 @@ export default function Restaurant() {
       mon: 'Montag',
       mon_hours: 'Ruhetag',
       tue_sat: 'Dienstag – Samstag',
-      tue_sat_hours: '12:00 – 14:30 · 17:30 – 22:00',
+      tue_sat_hours: '12:00 – 14:30 · 18:00 – 22:30',
       sun: 'Sonntag',
-      sun_hours: '12:00 – 20:00',
+      sun_hours: '12:00 – 21:00',
       cta_reserve: 'Tisch reservieren',
       cta_menu: 'Speisekarte ansehen',
       philosophy_title: 'Unsere Philosophie',
@@ -44,9 +44,9 @@ export default function Restaurant() {
       mon: 'Monday',
       mon_hours: 'Closed',
       tue_sat: 'Tuesday – Saturday',
-      tue_sat_hours: '12:00 – 14:30 · 17:30 – 22:00',
+      tue_sat_hours: '12:00 – 14:30 · 18:00 – 22:30',
       sun: 'Sunday',
-      sun_hours: '12:00 – 20:00',
+      sun_hours: '12:00 – 21:00',
       cta_reserve: 'Reserve a Table',
       cta_menu: 'View Menu',
       philosophy_title: 'Our Philosophy',
@@ -66,9 +66,9 @@ export default function Restaurant() {
       mon: 'Lunedì',
       mon_hours: 'Chiuso',
       tue_sat: 'Martedì – Sabato',
-      tue_sat_hours: '12:00 – 14:30 · 17:30 – 22:00',
+      tue_sat_hours: '12:00 – 14:30 · 18:00 – 22:30',
       sun: 'Domenica',
-      sun_hours: '12:00 – 20:00',
+      sun_hours: '12:00 – 21:00',
       cta_reserve: 'Prenota un tavolo',
       cta_menu: 'Vedi il menu',
       philosophy_title: 'La nostra filosofia',
@@ -88,11 +88,11 @@ export default function Restaurant() {
     <div className="min-h-screen bg-charcoal text-ivory pb-20 lg:pb-0">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <div className="relative h-[65vh] sm:h-[70vh] min-h-[400px] sm:min-h-[480px] overflow-hidden">
-        <img src={IMG_RESTAURANT} alt="Kulinarium by Ammesso — Restaurant Krone Langenburg, mediterrane Küche Hohenlohe" className="w-full h-full object-cover" loading="eager" />
+      <div className="relative h-[calc(65vh+126px)] lg:h-[calc(65vh+166px)] min-h-[520px] overflow-hidden">
+        <img src={IMG_RESTAURANT} alt="Kulinarium by Ammesso — Restaurant Krone Langenburg, mediterrane Küche Hohenlohe" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/20 to-charcoal" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-transparent to-charcoal/40" />
-        <div className="absolute inset-0 flex items-end pb-12 px-5">
+        <div className="absolute inset-0 flex items-end pb-12 px-5 pt-[126px] lg:pt-[166px]">
           <div className="max-w-4xl mx-auto w-full">
             <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-3">{c.label}</p>
             <h1 className="font-display text-3xl sm:text-4xl md:text-6xl font-light text-ivory mb-4 sm:mb-6 leading-tight">{c.title}</h1>
