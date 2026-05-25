@@ -156,6 +156,10 @@ export default function FAQ() {
               <a href={`tel:${s.phone}`} className="flex items-center justify-center gap-2 px-6 py-3.5 btn-ghost-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold">
                 <Phone className="w-3.5 h-3.5" /> {s.phone}
               </a>
+              <a href="https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5" target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 btn-ghost-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold">
+                📍 {lang === 'de' ? 'Route starten' : lang === 'en' ? 'Get Directions' : 'Navigazione'}
+              </a>
             </div>
             <div className="mt-6 grid grid-cols-2 gap-3">
               <Link to="/reserve" className="flex items-center justify-center gap-2 py-3 glass-card border border-[#C9A96E]/10 rounded-xl text-xs text-ivory/40 hover:text-gold hover:border-gold/20 transition-all font-body tracking-widest uppercase">

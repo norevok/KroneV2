@@ -422,6 +422,12 @@ export default function Navbar() {
                   )}
                 </div>
               </div>
+              <div className="px-5 pb-3">
+                <a href="https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5" target="_blank" rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full py-3 border border-[#8B6914]/30 text-[#8B6914] bg-[#F2E8D0] hover:bg-[#EDE6D8] rounded-xl text-xs tracking-[0.15em] uppercase font-body font-bold transition-all">
+                  📍 {lang === 'de' ? 'Route starten' : lang === 'en' ? 'Get Directions' : 'Navigazione'}
+                </a>
+              </div>
               <div className="border-t border-[#EDE6D8] bg-white px-5 py-4 space-y-3">
                 {isLoggedIn ? (
                   <Link to="/account" className="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-[#F7F3EC] hover:bg-[#EDE6D8] transition-colors">

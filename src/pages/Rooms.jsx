@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 import { SITE_DEFAULTS, ROOMS } from '@/lib/siteData';
-import { Star, Coffee, CheckCircle, AlertCircle, ExternalLink, Wifi, Bath, Wind, MapPin, ArrowRight, BedDouble, Users, CalendarDays, Phone, ChevronRight } from 'lucide-react';
+import { Star, Coffee, CheckCircle, AlertCircle, ExternalLink, Wifi, Bath, Wind, MapPin, ArrowRight, BedDouble, Users, CalendarDays, Phone, ChevronRight, Navigation } from 'lucide-react';
+import KroneLocationSection from '@/components/KroneLocationSection';
 
 // ── ROOM PHOTO LIBRARY — all Base44 uploaded media, correctly assigned ──
 // Base44 media base: https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/
@@ -395,11 +396,7 @@ export default function Rooms() {
         {/* Map */}
         <div className="mb-10">
           <h3 className="font-display text-2xl sm:text-3xl font-light text-[#1C1714] mb-5 text-center">{t.location_title}</h3>
-          <div className="rounded-2xl overflow-hidden border border-[#EDE6D8] h-[380px] sm:h-[480px] shadow-sm">
-            <iframe width="100%" height="100%" style={{ border: 0 }} loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=9.855%2C49.241%2C9.900%2C49.258&layer=mapnik&marker=49.2489%2C9.8753"
-              title="Krone Langenburg Standort" />
-          </div>
+          <KroneLocationSection />
         </div>
 
         {/* Region */}
