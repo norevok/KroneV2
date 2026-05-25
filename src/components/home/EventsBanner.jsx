@@ -7,14 +7,14 @@ import { Sparkles, Star, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ITEMS = [
-  { icon: Sparkles, de: 'Special Events kommen bald', en: 'Special Events Coming Soon', it: 'Presto nuovi eventi speciali' },
-  { icon: Star,     de: 'Unvergessliche Abende im Krone Langenburg', en: 'Unforgettable Evenings at Krone Langenburg', it: 'Serate indimenticabili al Krone Langenburg' },
-  { icon: Calendar, de: 'Jetzt vormerken — exklusive Veranstaltungen', en: 'Mark Your Calendar — Exclusive Events', it: 'Segna in calendario — eventi esclusivi' },
-  { icon: Sparkles, de: 'Special Events kommen bald', en: 'Special Events Coming Soon', it: 'Presto nuovi eventi speciali' },
-  { icon: Star,     de: 'Unvergessliche Abende im Krone Langenburg', en: 'Unforgettable Evenings at Krone Langenburg', it: 'Serate indimenticabili al Krone Langenburg' },
-  { icon: Calendar, de: 'Jetzt vormerken — exklusive Veranstaltungen', en: 'Mark Your Calendar — Exclusive Events', it: 'Segna in calendario — eventi esclusivi' },
-  { icon: Sparkles, de: 'Special Events kommen bald', en: 'Special Events Coming Soon', it: 'Presto nuovi eventi speciali' },
-  { icon: Star,     de: 'Unvergessliche Abende im Krone Langenburg', en: 'Unforgettable Evenings at Krone Langenburg', it: 'Serate indimenticabili al Krone Langenburg' },
+  { icon: Calendar, de: '🎶 6. Juni · Live-Band & Gala-Dinner · Krone Langenburg', en: '🎶 June 6th · Live Band & Gala Dinner · Krone Langenburg', it: '🎶 6 Giugno · Live Band & Gala Dinner · Krone Langenburg' },
+  { icon: Sparkles, de: '🍽 I Genio per 2 · Live-Musik ab 18:00 Uhr · Ab 21:00 tanzen', en: '🍽 I Genio per 2 · Live Music from 6pm · Dancing from 9pm', it: '🍽 I Genio per 2 · Musica dal vivo dalle 18:00' },
+  { icon: Star,     de: '✨ 5-Gang-Menü · Fisch · Fleisch · Vegetarisch · Überraschungsmenü', en: '✨ 5-Course Menu · Fish · Meat · Vegetarian · Chef\'s Surprise', it: '✨ Menù 5 portate · Pesce · Carne · Vegetariano · Sorpresa' },
+  { icon: Calendar, de: '🎶 6. Juni · Live-Band & Gala-Dinner · Krone Langenburg', en: '🎶 June 6th · Live Band & Gala Dinner · Krone Langenburg', it: '🎶 6 Giugno · Live Band & Gala Dinner · Krone Langenburg' },
+  { icon: Sparkles, de: '🍽 I Genio per 2 · Live-Musik ab 18:00 Uhr · Ab 21:00 tanzen', en: '🍽 I Genio per 2 · Live Music from 6pm · Dancing from 9pm', it: '🍽 I Genio per 2 · Musica dal vivo dalle 18:00' },
+  { icon: Star,     de: '✨ 5-Gang-Menü · Fisch · Fleisch · Vegetarisch · Überraschungsmenü', en: '✨ 5-Course Menu · Fish · Meat · Vegetarian · Chef\'s Surprise', it: '✨ Menù 5 portate · Pesce · Carne · Vegetariano · Sorpresa' },
+  { icon: Calendar, de: '🎶 6. Juni · Live-Band & Gala-Dinner · Krone Langenburg', en: '🎶 June 6th · Live Band & Gala Dinner · Krone Langenburg', it: '🎶 6 Giugno · Live Band & Gala Dinner · Krone Langenburg' },
+  { icon: Sparkles, de: '🍽 I Genio per 2 · Live-Musik ab 18:00 Uhr · Ab 21:00 tanzen', en: '🍽 I Genio per 2 · Live Music from 6pm · Dancing from 9pm', it: '🍽 I Genio per 2 · Musica dal vivo dalle 18:00' },
 ];
 
 export default function EventsBanner({ lang = 'de' }) {

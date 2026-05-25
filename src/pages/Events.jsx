@@ -162,7 +162,7 @@ export default function Events() {
     <div className="min-h-screen bg-white text-[#1C1714] pb-20 lg:pb-0">
 
       {/* Hero */}
-      <div className="relative h-[65vh] min-h-[420px] overflow-hidden">
+      <div className="relative h-[65vh] min-h-[520px] overflow-hidden pt-[126px] lg:pt-[166px]" style={{minHeight: 'calc(55vh + 166px)'}}>
         <img src={IMAGES.hero} alt="Events & Feiern — Krone Langenburg" className="w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/70 via-[#1C1714]/40 to-[#1C1714]/90" />
         <div className="absolute inset-0 flex items-end pb-16 px-5">
@@ -173,6 +173,63 @@ export default function Events() {
           </div>
         </div>
       </div>
+
+      {/* ── SPECIAL EVENT: 6. Juni ── */}
+      <section className="bg-[#1C1714] py-12 sm:py-16 px-5 border-b border-[#C9A96E]/20">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-[#C9A96E]/15 border border-[#C9A96E]/30 rounded-full px-4 py-2 mb-5">
+                <span className="text-[#C9A96E] text-[10px] tracking-[0.3em] uppercase font-body font-semibold">🎶 Special Event · 6. Juni 2026</span>
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl font-light text-white mb-4 leading-tight">
+                Ein Abend voller Genuss,<br /><span className="text-[#C9A96E] italic">Musik & italienischer Leidenschaft</span>
+              </h2>
+              <p className="text-white/60 font-body text-sm leading-relaxed mb-6">
+                Am <strong className="text-white">6. Juni ab 18:00 Uhr</strong> erwartet euch im Krone Langenburg by Ammesso eine Nacht voller Geschmack, Emotionen und besonderer Atmosphäre. Live-Band <strong className="text-[#C9A96E]">„I Genio per 2"</strong> begleitet euch durch den Abend — ab 21:00 Uhr wird getanzt. 🕺💃
+              </p>
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {['🐟 Fisch-Menü', '🥬 Vegetarisches Menü', '🍖 Fleisch-Menü', '✨ Überraschungsmenü des Küchenchefs'].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 bg-white/5 border border-[#C9A96E]/15 rounded-xl px-3 py-2.5">
+                    <span className="text-white/80 text-xs font-body">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-white/40 text-xs font-body mb-5 italic">
+                ✨ „Manchmal braucht Liebe keine Worte. Gutes Essen und Musik reichen aus, damit Menschen sich verstehen." ✨
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Link to="/reserve"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg">
+                  🌐 Tisch reservieren
+                </Link>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <div className="bg-white/5 border border-[#C9A96E]/20 rounded-2xl p-5">
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: '📅', label: 'Datum', value: '6. Juni 2026' },
+                    { icon: '⏰', label: 'Beginn', value: 'Ab 18:00 Uhr' },
+                    { icon: '🎤', label: 'Live-Band', value: 'I Genio per 2' },
+                    { icon: '💃', label: 'Tanzen ab', value: '21:00 Uhr' },
+                    { icon: '🍽', label: 'Menüs', value: 'Jeweils min. 5 Gänge' },
+                    { icon: '📍', label: 'Ort', value: 'Krone Langenburg' },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <span className="text-lg flex-shrink-0">{item.icon}</span>
+                      <div>
+                        <p className="text-[#C9A96E]/60 text-[10px] uppercase tracking-widest font-body">{item.label}</p>
+                        <p className="text-white text-sm font-body font-semibold">{item.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Stats strip */}
       <div className="bg-[#F7F3EC] border-y border-[#EDE6D8]">

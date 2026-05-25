@@ -155,11 +155,11 @@ export default function Gallery() {
     <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-10">
 
       {/* Hero header */}
-      <div className="relative overflow-hidden bg-[#1C1714] pt-20 sm:pt-24 pb-16 sm:pb-20 px-5">
+      <div className="relative overflow-hidden bg-[#1C1714] pt-[126px] lg:pt-[166px] pb-16 sm:pb-20 px-5">
         <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
           alt="" className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none select-none" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/70 to-[#1C1714]/90" />
-        <div className="relative max-w-4xl mx-auto text-center">
+        <div className="relative max-w-4xl mx-auto text-center pt-10">
           <div className="flex items-center justify-center gap-3 mb-5">
             <div className="h-px w-8 bg-[#C9A96E]/40" />
             <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body">Krone Langenburg by Ammesso</p>

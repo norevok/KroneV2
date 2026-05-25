@@ -318,14 +318,14 @@ export default function Home() {
         ))}
 
         {/* Slide counter top-right */}
-        <div className="absolute top-28 right-6 z-10 hidden sm:flex items-center gap-2">
+        <div className="absolute top-[176px] right-6 z-10 hidden sm:flex items-center gap-2">
           <span className="font-display text-2xl font-light text-white/60">{String(current + 1).padStart(2, '0')}</span>
           <div className="w-px h-6 bg-white/20 mx-1" />
           <span className="font-display text-sm font-light text-white/30">{String(SLIDES.length).padStart(2, '0')}</span>
         </div>
 
         {/* Hero text */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-52 sm:pb-40 lg:pb-36 z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-52 sm:pb-40 lg:pb-36 pt-[126px] lg:pt-[166px] z-10">
 
           <motion.div
             key={`badge-${current}`}

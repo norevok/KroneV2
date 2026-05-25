@@ -184,7 +184,7 @@ export default function Rooms() {
       )}
 
       {/* Hero */}
-      <div className={`relative bg-[#1C1714] ${returnState ? 'pt-8' : 'pt-24 sm:pt-32'} pb-16 sm:pb-20 overflow-hidden`}>
+      <div className={`relative bg-[#1C1714] ${returnState ? 'pt-8' : 'pt-[126px] lg:pt-[166px]'} pb-16 sm:pb-20 overflow-hidden`}>
         <img
           src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
           alt="Krone Langenburg Zimmer Panorama"
