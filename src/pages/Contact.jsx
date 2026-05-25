@@ -321,11 +321,11 @@ export default function Contact() {
                 </li>
                 <li className="border-t border-[#EDE6D8] pt-3">
                   <div className="text-[#4A3F35]">{t.tue_sat}</div>
-                  <div className="text-xs text-[#8A7A6A] mt-0.5">12:00 – 14:30 · 17:30 – 22:00</div>
+                  <div className="text-xs text-[#8A7A6A] mt-0.5">12:00 – 14:30 · 18:00 – 22:30</div>
                 </li>
                 <li className="border-t border-[#EDE6D8] pt-3">
                   <div className="text-[#4A3F35]">{t.sun}</div>
-                  <div className="text-xs text-[#8A7A6A] mt-0.5">12:00 – 20:00</div>
+                  <div className="text-xs text-[#8A7A6A] mt-0.5">12:00 – 21:00</div>
                 </li>
               </ul>
             </motion.div>
