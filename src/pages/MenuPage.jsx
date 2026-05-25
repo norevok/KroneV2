@@ -138,14 +138,14 @@ export default function MenuPage() {
     <div className="min-h-screen bg-[#F7F3EC] text-[#1C1714]">
 
       {/* Hero */}
-      <div className="relative bg-[#1C1714] pt-24 sm:pt-32 pb-16 overflow-hidden">
+      <div className="relative bg-[#1C1714] pt-[126px] lg:pt-[166px] pb-16 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=70"
-          alt="Kulinarium by Ammesso Restaurant" className="absolute inset-0 w-full h-full object-cover opacity-25" />
+          alt="Krone Langenburg by Ammesso Restaurant" className="absolute inset-0 w-full h-full object-cover opacity-25" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/50 to-[#1C1714]/90" />
         <div className="relative text-center px-5 max-w-3xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-5">
             <div className="h-px w-8 bg-[#C9A96E]/50" />
-            <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body">Kulinarium by Ammesso</p>
+            <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body">Krone Langenburg by Ammesso</p>
             <div className="h-px w-8 bg-[#C9A96E]/50" />
           </div>
           <h1 className="font-display text-4xl sm:text-6xl font-light text-white mb-4 leading-tight">
@@ -158,7 +158,7 @@ export default function MenuPage() {
       </div>
 
       {/* Sticky tab bar */}
-      <div className="sticky top-16 md:top-20 z-30 bg-white border-b border-[#EDE6D8] shadow-sm">
+      <div className="sticky top-[126px] lg:top-[166px] z-30 bg-white border-b border-[#EDE6D8] shadow-sm">
         <div className="max-w-4xl mx-auto px-5">
           <div className="flex gap-1 py-2">
             {TABS.map(tab => (
@@ -215,12 +215,12 @@ export default function MenuPage() {
 
         {/* Reserve CTA */}
         <div className="mt-12 bg-[#1C1714] rounded-3xl p-8 sm:p-10 text-center">
-          <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body mb-3">Kulinarium by Ammesso</p>
+          <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body mb-3">Krone Langenburg by Ammesso</p>
           <h2 className="font-display text-3xl sm:text-4xl font-light text-white mb-3">
             {lang === 'de' ? 'Tisch reservieren' : 'Reserve a Table'}
           </h2>
           <p className="text-white/50 font-body text-base mb-7">
-            {lang === 'de' ? 'Di–Sa: 12–14:30 & 17:30–22 Uhr · So: 12–20 Uhr · Mo: Ruhetag' : 'Tue–Sat: 12–14:30 & 17:30–22 · Sun: 12–20 · Mon: Closed'}
+            {lang === 'de' ? 'Di–Sa: 12–14:30 & 18–22:30 Uhr · So: 12–21 Uhr · Mo: Ruhetag' : 'Tue–Sat: 12–14:30 & 18:00–22:30 · Sun: 12–21 · Mon: Closed'}
           </p>
           <Link to="/reserve" className="inline-flex items-center gap-2.5 px-9 py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-full text-sm font-body font-semibold tracking-widest uppercase transition-all shadow-lg">
             <UtensilsCrossed className="w-4 h-4" />

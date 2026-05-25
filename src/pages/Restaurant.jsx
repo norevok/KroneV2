@@ -15,7 +15,7 @@ export default function Restaurant() {
 
   const copy = {
     de: {
-      label: 'Kulinarium by Ammesso',
+      label: 'Krone Langenburg by Ammesso',
       title: 'Mediterrane Küche mit Herz',
       intro: 'Ehrlich gekochte Gerichte, die Geschichten erzählen. Jede Pasta, jedes Stück Fleisch, jeder Nachtisch ist eine persönliche Aussage des Küchenchefs Omar Ammesso.',
       hours_title: 'Öffnungszeiten',
@@ -28,7 +28,7 @@ export default function Restaurant() {
       cta_reserve: 'Tisch reservieren',
       cta_menu: 'Speisekarte ansehen',
       philosophy_title: 'Unsere Philosophie',
-      philosophy: 'Kulinarium by Ammesso steht für mediterrane Leichtigkeit gepaart mit echter Gastfreundschaft. Frische Zutaten, handgemachte Pasta und Gerichte, die Wärme geben — das ist, was wir täglich auftischen.',
+      philosophy: 'Krone Langenburg by Ammesso steht für mediterrane Leichtigkeit gepaart mit echter Gastfreundschaft. Frische Zutaten, handgemachte Pasta und Gerichte, die Wärme geben — das ist, was wir täglich auftischen.',
       capacity: '120 Sitzplätze · Außenterrasse im Sommer',
       booking_note: 'Gruppen ab 10 Personen bitte direkt per E-Mail anfragen.',
       chef_label: 'Chefkoch & Gründer',
@@ -37,7 +37,7 @@ export default function Restaurant() {
       trust_title: 'Reservieren Sie Ihren Tisch',
     },
     en: {
-      label: 'Kulinarium by Ammesso',
+      label: 'Krone Langenburg by Ammesso',
       title: 'Mediterranean Cuisine with Heart',
       intro: 'Honestly cooked dishes that tell stories. Every pasta, every piece of meat, every dessert is a personal statement from head chef Omar Ammesso.',
       hours_title: 'Opening Hours',
@@ -50,7 +50,7 @@ export default function Restaurant() {
       cta_reserve: 'Reserve a Table',
       cta_menu: 'View Menu',
       philosophy_title: 'Our Philosophy',
-      philosophy: 'Kulinarium by Ammesso stands for Mediterranean lightness paired with genuine hospitality. Fresh ingredients, handmade pasta and dishes that give warmth — that is what we serve every day.',
+      philosophy: 'Krone Langenburg by Ammesso stands for Mediterranean lightness paired with genuine hospitality. Fresh ingredients, handmade pasta and dishes that give warmth — that is what we serve every day.',
       capacity: '120 seats · Terrace in summer',
       booking_note: 'Groups of 10+ please enquire directly by email.',
       chef_label: 'Head Chef & Founder',
@@ -59,7 +59,7 @@ export default function Restaurant() {
       trust_title: 'Reserve your table',
     },
     it: {
-      label: 'Kulinarium by Ammesso',
+      label: 'Krone Langenburg by Ammesso',
       title: 'Cucina Mediterranea con Cuore',
       intro: 'Piatti cucinati con onestà che raccontano storie. Ogni pasta, ogni carne, ogni dolce è una dichiarazione personale dello chef Omar Ammesso.',
       hours_title: 'Orari di apertura',
@@ -72,7 +72,7 @@ export default function Restaurant() {
       cta_reserve: 'Prenota un tavolo',
       cta_menu: 'Vedi il menu',
       philosophy_title: 'La nostra filosofia',
-      philosophy: 'Kulinarium by Ammesso rappresenta la leggerezza mediterranea abbinata a una vera ospitalità. Ingredienti freschi, pasta fatta a mano e piatti che scaldano il cuore.',
+      philosophy: 'Krone Langenburg by Ammesso rappresenta la leggerezza mediterranea abbinata a una vera ospitalità. Ingredienti freschi, pasta fatta a mano e piatti che scaldano il cuore.',
       capacity: '120 posti · Terrazza in estate',
       booking_note: 'Gruppi di 10+ persone: scrivere direttamente per email.',
       chef_label: 'Chef & Fondatore',
@@ -89,7 +89,7 @@ export default function Restaurant() {
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <div className="relative h-[calc(65vh+126px)] lg:h-[calc(65vh+166px)] min-h-[520px] overflow-hidden">
-        <img src={IMG_RESTAURANT} alt="Kulinarium by Ammesso — Restaurant Krone Langenburg, mediterrane Küche Hohenlohe" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
+        <img src={IMG_RESTAURANT} alt="Krone Langenburg by Ammesso — Restaurant, mediterrane Küche Hohenlohe" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/20 to-charcoal" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-transparent to-charcoal/40" />
         <div className="absolute inset-0 flex items-end pb-12 px-5 pt-[126px] lg:pt-[166px]">
@@ -175,7 +175,7 @@ export default function Restaurant() {
       <section className="py-6 px-4 sm:px-5 bg-espresso">
         <div className="max-w-5xl mx-auto grid grid-cols-3 gap-2 sm:gap-4">
           <div className="relative rounded-xl sm:rounded-2xl overflow-hidden aspect-square col-span-2 group">
-            <img src={IMG_FOOD1} alt="Pasta fresca Kulinarium by Ammesso — Krone Langenburg Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <img src={IMG_FOOD1} alt="Pasta fresca Krone Langenburg by Ammesso — Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent" />
           </div>
           <div className="flex flex-col gap-2 sm:gap-4">
@@ -184,7 +184,7 @@ export default function Restaurant() {
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
             </div>
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_PASTA} alt="Handgemachte Pasta Kulinarium by Ammesso — Restaurant Krone Langenburg" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src={IMG_PASTA} alt="Handgemachte Pasta Krone Langenburg by Ammesso — Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
             </div>
           </div>

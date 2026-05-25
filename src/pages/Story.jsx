@@ -30,7 +30,7 @@ const TIMELINE = {
     {
       year: 'Heute',
       title: 'Krone Langenburg by Ammesso',
-      text: 'Omar Ammesso erweckt die traditionsreiche Krone in der Hauptstraße 24 zu neuem Leben — als Boutique-Hotel mit 10 Zimmern und Suiten sowie dem Kulinarium by Ammesso, das mediterrane Küche mit der Wärme Hohenlohes verbindet. Geschichte trifft auf moderne Gastfreundschaft.',
+      text: 'Omar Ammesso erweckt die traditionsreiche Krone in der Hauptstraße 24 zu neuem Leben — als Boutique-Hotel mit 10 Zimmern und Suiten. Mediterrane Küche, Wärme und echte Hohenloher Gastfreundschaft vereinen sich unter dem Namen Krone Langenburg by Ammesso.',
       img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
       alt: 'Krone Langenburg by Ammesso — King Suite',
     },
@@ -60,7 +60,7 @@ const TIMELINE = {
     {
       year: 'Today',
       title: 'Krone Langenburg by Ammesso',
-      text: 'Omar Ammesso breathes new life into the historic Krone at Hauptstraße 24 — as a boutique hotel with 10 rooms and suites, and the Kulinarium by Ammesso restaurant combining Mediterranean cuisine with the warmth of Hohenlohe hospitality.',
+      text: 'Omar Ammesso breathes new life into the historic Krone at Hauptstraße 24 — as a boutique hotel with 10 rooms and suites under the name Krone Langenburg by Ammesso. Mediterranean cuisine, warmth and genuine Hohenlohe hospitality.',
       img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
       alt: 'Krone Langenburg by Ammesso — King Suite',
     },
@@ -90,7 +90,7 @@ const TIMELINE = {
     {
       year: 'Oggi',
       title: 'Krone Langenburg by Ammesso',
-      text: 'Omar Ammesso ridà vita alla storica Krone in Hauptstraße 24 — come boutique hotel con 10 camere e suite e il Kulinarium by Ammesso, che unisce la cucina mediterranea al calore dell\'ospitalità di Hohenlohe.',
+      text: 'Omar Ammesso ridà vita alla storica Krone in Hauptstraße 24 — come boutique hotel con 10 camere e suite con il nome Krone Langenburg by Ammesso, unendo cucina mediterranea e il calore dell\'ospitalità di Hohenlohe.',
       img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
       alt: 'Krone Langenburg by Ammesso — King Suite',
     },

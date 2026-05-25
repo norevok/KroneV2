@@ -85,9 +85,9 @@ const SLIDES = [
   },
   {
     url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85',
-    de: { title: 'Mediterrane Küche mit Herz.', sub: 'Regionale Zutaten, italienische Wärme — im Kulinarium by Ammesso.' },
-    en: { title: 'Mediterranean Cuisine with Heart.', sub: 'Regional ingredients, Italian warmth — at Kulinarium by Ammesso.' },
-    it: { title: 'Cucina mediterranea con cuore.', sub: 'Ingredienti regionali, calore italiano — al Kulinarium by Ammesso.' },
+    de: { title: 'Mediterrane Küche mit Herz.', sub: 'Regionale Zutaten, italienische Wärme — Krone Langenburg by Ammesso.' },
+    en: { title: 'Mediterranean Cuisine with Heart.', sub: 'Regional ingredients, Italian warmth — Krone Langenburg by Ammesso.' },
+    it: { title: 'Cucina mediterranea con cuore.', sub: 'Ingredienti regionali, calore italiano — Krone Langenburg by Ammesso.' },
   },
   {
     url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1800&q=85',
@@ -159,9 +159,8 @@ export default function Home() {
       desc_en: 'Mediterranean cuisine with regional ingredients — Tue–Sat lunch & dinner, Sun all day',
       desc_it: 'Cucina mediterranea con ingredienti regionali — Mar–Sab pranzo & cena, Dom tutto il giorno',
       desc_es: 'Cocina mediterránea con ingredientes regionales — Mar–Sáb almuerzo & cena, Dom todo el día',
-      // Elegant restaurant wine & table setting — fine dining mood
       img: 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=85',
-      alt: 'Restaurant Krone Langenburg mediterrane Küche Tischreservierung',
+      alt: 'Krone Langenburg by Ammesso — Restaurant mediterrane Küche Tischreservierung',
     },
     {
       icon: Star,
@@ -638,10 +637,10 @@ export default function Home() {
               </h2>
               <p className="font-body text-white/60 leading-relaxed mb-8">
                 {lang === 'de'
-                  ? 'Im Kulinarium by Ammesso verbinden wir die Wärme der italienischen Küche mit den besten Zutaten der Region. Pasta, Fleisch, Fisch — alles mit Liebe zubereitet, direkt aus unserer Küche auf Ihren Tisch.'
+                  ? 'Krone Langenburg by Ammesso verbindet die Wärme der italienischen Küche mit den besten Zutaten der Region. Pasta, Fleisch, Fisch — alles mit Liebe zubereitet, direkt aus unserer Küche auf Ihren Tisch.'
                   : lang === 'en'
-                  ? 'At Kulinarium by Ammesso we combine the warmth of Italian cuisine with the finest regional ingredients. Pasta, meat, fish — all prepared with love, straight from our kitchen to your table.'
-                  : 'Al Kulinarium by Ammesso combiniamo il calore della cucina italiana con i migliori ingredienti regionali.'}
+                  ? 'Krone Langenburg by Ammesso combines the warmth of Italian cuisine with the finest regional ingredients. Pasta, meat, fish — all prepared with love, straight from our kitchen to your table.'
+                  : 'Krone Langenburg by Ammesso combina il calore della cucina italiana con i migliori ingredienti regionali.'}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
                 <Link to="/reserve"
