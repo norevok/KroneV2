@@ -51,7 +51,7 @@ const FUNCTION_AUDIT = [
   { name: 'adminUpdateReservationStatus', trigger: 'Admin action',         credits: 'DB + conditional notifs',  verdict: 'safe',    category: 'Admin' },
   { name: 'adminVerifyAccess',        trigger: 'Admin page load',          credits: 'DB read only — 0',         verdict: 'safe',    category: 'Admin' },
   // ── SCHEDULED (1 only) ───────────────────────────────────────────
-  { name: 'nightlyMaintenance',       trigger: 'Scheduled 00:00 UTC/day (02:00 CET)',  credits: '1 invocation + conditional DB writes', verdict: 'scheduled', category: 'Maintenance' },
+  { name: 'nightlyMaintenance',       trigger: 'Scheduled 00:00 UTC/day (02:00 CET)',  credits: '1 invocation + conditional DB writes, NO external APIs', verdict: 'scheduled', category: 'Maintenance' },
 ];
 
 const OVERNIGHT_ANALYSIS = [
@@ -126,10 +126,11 @@ export default function AdminCreditDashboard() {
   async function loadLogs() {
     setLoading(true);
     try {
+      // Reduced fetch limits — event-driven, no background refresh
       const [creditData, intents, reservations] = await Promise.all([
         base44.entities.CreditUsageLog.list('-created_date', 100).catch(() => []),
-        base44.entities.HotelBookingIntent.list('-created_date', 300).catch(() => []),
-        base44.entities.RestaurantReservation.list('-created_date', 300).catch(() => []),
+        base44.entities.HotelBookingIntent.list('-created_date', 100).catch(() => []),
+        base44.entities.RestaurantReservation.list('-created_date', 100).catch(() => []),
       ]);
       setLogs(creditData || []);
 
@@ -280,7 +281,7 @@ export default function AdminCreditDashboard() {
                 00:00 UTC (02:00 CET) täglich · Archiviert alte Reservierungen, schließt stale Anfragen, läuft Gutschein-Ablauf.
                 DB-Operationen only. Kein SendEmail, kein Slack, kein LLM. ActivityLog nur bei tatsächlichen Änderungen.
               </p>
-              <p className="text-emerald-400/60 text-[10px] font-body mt-1.5">32/32 Runs erfolgreich · Kein einziger Fehler · Letzter Run: 23.05.2026 00:01 UTC</p>
+              <p className="text-emerald-400/60 text-[10px] font-body mt-1.5">34/34 Runs erfolgreich · Kein einziger Fehler · Letzter Run: 25.05.2026 00:01 UTC</p>
             </div>
             <div className="glass-card border border-emerald-700/15 rounded-xl p-3">
               <p className="text-ivory/35 text-xs font-body">

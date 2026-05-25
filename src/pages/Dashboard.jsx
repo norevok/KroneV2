@@ -49,12 +49,13 @@ export default function Dashboard() {
   async function loadData() {
     setLoading(true);
     const today = new Date().toISOString().split('T')[0];
+    // Paginated limits — minimal fetch, no background refresh, no polling
     const [reservations, intents, messages, vouchers, docs] = await Promise.all([
-      base44.entities.RestaurantReservation.list('-created_date', 500).catch(() => []),
-      base44.entities.HotelBookingIntent.list('-created_date', 200).catch(() => []),
-      base44.entities.GuestMessage.list('-created_date', 100).catch(() => []),
-      base44.entities.GiftVoucher.list('-created_date', 100).catch(() => []),
-      base44.entities.GuestDocument.list('-created_date', 100).catch(() => []),
+      base44.entities.RestaurantReservation.list('-created_date', 200).catch(() => []),
+      base44.entities.HotelBookingIntent.list('-created_date', 100).catch(() => []),
+      base44.entities.GuestMessage.list('-created_date', 50).catch(() => []),
+      base44.entities.GiftVoucher.list('-created_date', 50).catch(() => []),
+      base44.entities.GuestDocument.list('-created_date', 50).catch(() => []),
     ]);
 
     const confirmed = reservations.filter(r => r.status === 'confirmed').length;
@@ -142,6 +143,9 @@ export default function Dashboard() {
             </h1>
             <p className="text-ivory/35 text-sm font-body">
               {format(new Date(), 'EEEE, d. MMMM yyyy')} · {user?.email}
+            </p>
+            <p className="text-ivory/20 text-[10px] font-body mt-0.5">
+              {lang === 'de' ? 'Daten werden nur bei manuellem Refresh aktualisiert' : 'Data updates on manual refresh only'}
             </p>
           </div>
           <div className="flex items-center gap-2 flex-wrap">

@@ -85,7 +85,8 @@ export default function Rooms() {
       beds24_booking_url_used: beds24Url, redirected_at: new Date().toISOString(),
     }).catch(() => {});
 
-    base44.functions.invoke('notifySlack', { type: 'booking_intent', ref, name: '', check_in: checkIn, check_out: checkOut, guests: String(adults) }).catch(() => {});
+    // CREDIT OPTIMIZATION: Slack notification removed from booking intent click.
+    // Real Slack alert fires via beds24BookingWebhook only on confirmed booking.
     setSavingIntent(false);
     setShowBooking(true);
   }

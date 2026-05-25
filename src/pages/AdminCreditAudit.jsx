@@ -220,7 +220,7 @@ export default function AdminCreditAudit() {
           </Link>
           <p className="text-gold text-[10px] tracking-[0.45em] uppercase font-body mb-2">Krone Langenburg · Intern</p>
           <h1 className="font-display text-3xl sm:text-4xl font-light text-ivory mb-2">Credit-Architektur</h1>
-          <p className="text-ivory/40 text-sm font-body">Vollständiger Audit nach Optimierung · Stand: Mai 2026</p>
+          <p className="text-ivory/40 text-sm font-body">Vollständiger Audit nach Optimierung · Stand: Mai 2026 · Kein Auto-Refresh</p>
         </div>
 
         {/* Summary strip */}

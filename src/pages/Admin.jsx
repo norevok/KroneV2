@@ -67,6 +67,7 @@ export default function Admin() {
   const [expandedDocId, setExpandedDocId] = useState(null);
   const [docNotes, setDocNotes] = useState({});
   const [stats, setStats] = useState({ today: 0, pending: 0, confirmed: 0, contacts: 0, intents: 0, docs: 0, msgs: 0, vouchers: 0 });
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   useEffect(() => {
     base44.auth.me().then(u => {
@@ -107,6 +108,7 @@ export default function Admin() {
       msgs: msgs.filter(m => m.status === 'new').length,
       vouchers: voucs.filter(v => v.status === 'active').length,
     });
+    setLastUpdated(new Date());
     setLoading(false);
   }
 
@@ -184,6 +186,7 @@ export default function Admin() {
             <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-1">Admin</p>
             <h1 className="font-display text-3xl sm:text-4xl font-light text-ivory">Dashboard</h1>
             <p className="text-ivory/30 text-xs font-body mt-1 truncate max-w-[140px] sm:max-w-xs">{user?.email}</p>
+            {lastUpdated && <p className="text-ivory/15 text-[10px] font-body mt-0.5">Stand: {lastUpdated.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })} · Kein Auto-Refresh</p>}
           </div>
           <div className="flex items-center gap-2 flex-shrink-0 flex-wrap justify-end">
             <Link to="/admin/calendar" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
