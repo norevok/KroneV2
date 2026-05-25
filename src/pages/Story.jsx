@@ -244,7 +244,7 @@ export default function Story() {
                       <span className="text-[#B08A42] text-xs font-body font-bold tracking-[0.2em] uppercase">{item.year}</span>
                     </div>
                     <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-light text-[#1A1A1A] mb-5 leading-tight">{item.title}</h2>
-                    <p className="font-body text-[#4A4A4A] leading-relaxed text-sm sm:text-base">{item.text}</p>
+                    <p className="font-body text-[#2A2A2A] leading-relaxed text-sm sm:text-base">{item.text}</p>
                   </div>
 
                   {/* Image */}
@@ -319,13 +319,13 @@ export default function Story() {
               className="flex flex-col justify-center">
               {/* Pull quote */}
               <blockquote className="border-l-4 border-[#B08A42] pl-6 mb-8">
-                <p className="font-display text-xl sm:text-2xl text-white/90 font-light leading-relaxed italic">{omar.quote}</p>
+                <p className="font-display text-xl sm:text-2xl text-white font-light leading-relaxed italic">{omar.quote}</p>
               </blockquote>
 
               {/* Body paragraphs */}
               <div className="space-y-5">
                 {omar.body.map((para, i) => (
-                  <p key={i} className="font-body text-white/65 text-sm sm:text-base leading-relaxed">{para}</p>
+                  <p key={i} className="font-body text-white/80 text-sm sm:text-base leading-relaxed">{para}</p>
                 ))}
               </div>
 
@@ -369,7 +369,7 @@ export default function Story() {
                   <v.icon className="w-6 h-6 text-[#B08A42]" />
                 </div>
                 <h3 className="font-display text-base sm:text-lg font-medium text-[#1A1A1A] mb-2">{v.title}</h3>
-                <p className="font-body text-xs sm:text-sm text-[#4A4A4A] leading-relaxed">{v.desc}</p>
+                <p className="font-body text-xs sm:text-sm text-[#2A2A2A] leading-relaxed">{v.desc}</p>
               </motion.div>
             ))}
           </div>

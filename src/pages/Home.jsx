@@ -21,8 +21,8 @@ function RestaurantBlock({ lang }) {
     <div className="relative overflow-hidden h-28 sm:h-32">
       {/* Background — restaurant table with view */}
       <img
-        src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1200&q=80"
-        alt="Restaurant Krone Langenburg"
+        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85"
+        alt="Restaurant Krone Langenburg by Ammesso — Atmosphäre"
         className="absolute inset-0 w-full h-full object-cover object-center scale-105"
       />
       <div className="absolute inset-0 bg-[#1C1714]/72" />
@@ -625,7 +625,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden h-72 sm:h-96">
-              <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=900&q=85"
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85"
                 alt="Restaurant Krone Langenburg by Ammesso — mediterrane Küche Langenburg"
                 className="w-full h-full object-cover" loading="lazy" />
             </div>

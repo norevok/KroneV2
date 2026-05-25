@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/lib/useLang';
-import { ArrowRight, MapPin, Camera, Compass, Mountain, Wine, Castle, ChevronDown, Car } from 'lucide-react';
+import { ArrowRight, MapPin, Compass, Mountain, Castle, ChevronDown, Car } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
 // All images replaced with real, correctly matching photos
@@ -18,16 +18,16 @@ const ATTRACTIONS = [
   {
     id: 'jagsttal',
     icon: Mountain,
-    // Gentle rolling German countryside / river valley — meadows, forests, typical Hohenlohe feel
-    image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=85',
+    // Cinematic river valley panorama — warm light, lush green, emotional travel atmosphere
+    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=90',
     de: { title: 'Jagsttal & Wanderungen', desc: 'Das Jagsttal gehört zu den schönsten Flusstälern Süddeutschlands. Malerische Wanderwege führen durch Wiesen, Wälder und historische Dörfer. Der Jagsttalweg verbindet auf über 200 km Kilometer Natur und Kultur.', tag: 'Wanderparadies' },
     en: { title: 'Jagst Valley & Hiking', desc: 'The Jagst valley is one of the most beautiful river valleys in southern Germany. Scenic hiking trails lead through meadows, forests and historic villages. The Jagst Valley Trail connects over 200 km of nature and culture.', tag: 'Hiking paradise' },
   },
   {
     id: 'automuseum',
     icon: Car,
-    // Classic Ferrari / red vintage race car — Deutsches Automuseum Schloss Langenburg context
-    image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=1200&q=85',
+    // Vintage classic cars collection — museum hall with many historic vehicles, cinematic
+    image: 'https://images.unsplash.com/photo-1566024287286-457247b70310?w=1400&q=90',
     de: { title: 'Deutsches Automuseum Schloss Langenburg', desc: 'Das Deutsche Automuseum im Schloss Langenburg zählt zu den faszinierendsten Automobilausstellungen Deutschlands. Über 80 historische Fahrzeuge — von frühen Sportwagen bis zu legendären Rennwagen — erzählen die Geschichte des Automobils in einzigartiger Schlosskulisse.', tag: '5 min zu Fuß' },
     en: { title: 'German Automotive Museum Langenburg', desc: 'The German Automotive Museum at Langenburg Castle is one of Germany\'s most fascinating car exhibitions. Over 80 historic vehicles — from early sports cars to legendary racing cars — tell the story of the automobile in a unique castle setting.', tag: '5 min walk' },
   },
@@ -38,14 +38,6 @@ const ATTRACTIONS = [
     image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&q=85',
     de: { title: 'Altstadt & Ausflugsziele', desc: 'Langenburg ist idealer Ausgangspunkt für Tagesausflüge nach Schwäbisch Hall, Bad Mergentheim oder Rothenburg ob der Tauber. Die malerische Altstadt selbst lädt mit Fachwerkhäusern und gepflasterten Gassen zum Spazieren ein.', tag: 'Tagesausflüge' },
     en: { title: 'Old Town & Day Trips', desc: 'Langenburg is the ideal base for day trips to Schwäbisch Hall, Bad Mergentheim or Rothenburg ob der Tauber. The picturesque old town itself invites you to stroll among half-timbered houses and cobbled alleys.', tag: 'Day trips' },
-  },
-  {
-    id: 'wein',
-    icon: Wine,
-    // Hohenlohe vineyard — warm golden-hour vines, Unsplash
-    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=85',
-    de: { title: 'Hohenloher Wein & Genuss', desc: 'Die Region Hohenlohe ist für ihre Weinbaukultur bekannt. Entdecken Sie lokale Weingüter, Straußenwirtschaften und kulinarische Besonderheiten der Region. Paaren Sie den Weingenuss mit einem Abendessen bei uns in der Krone Langenburg.', tag: 'Weinkultur' },
-    en: { title: 'Hohenlohe Wine & Pleasure', desc: 'The Hohenlohe region is known for its wine culture. Discover local wineries, seasonal wine taverns and culinary specialities of the region. Pair wine enjoyment with an evening dinner at Krone Langenburg by Ammesso.', tag: 'Wine culture' },
   },
 ];
 
@@ -115,7 +107,8 @@ export default function DiscoverLangenburg() {
           transition={{ duration: 2.5, ease: 'easeOut' }}
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-[#FAF7F2]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#FAF7F2]" />
+        <div className="absolute inset-0 bg-black/20" />
 
         {/* Gold accent lines */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent opacity-60" />
@@ -128,11 +121,13 @@ export default function DiscoverLangenburg() {
           </motion.p>
           <motion.h1
             className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-white mb-6 leading-[0.9] max-w-4xl"
+            style={{ textShadow: '0 2px 24px rgba(0,0,0,0.9), 0 4px 48px rgba(0,0,0,0.6)' }}
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
             {t.title}
           </motion.h1>
           <motion.p
-            className="text-white/65 font-body text-sm sm:text-lg leading-relaxed max-w-2xl"
+            className="text-white/90 font-body text-sm sm:text-lg leading-relaxed max-w-2xl"
+            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.8)' }}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.8 }}>
             {t.sub}
           </motion.p>
@@ -209,7 +204,7 @@ export default function DiscoverLangenburg() {
                       <att.icon className="w-4.5 h-4.5 text-[#8B6914]" />
                     </div>
                     <h2 className="font-display text-2xl sm:text-3xl font-light text-[#1C1714] mb-3 leading-tight">{content.title}</h2>
-                    <p className="text-[#4A3F35]/70 text-sm font-body leading-relaxed">{content.desc}</p>
+                    <p className="text-[#4A3F35] text-sm font-body leading-relaxed">{content.desc}</p>
                     <AnimatePresence>
                       {isActive && (
                         <motion.div

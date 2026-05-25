@@ -3,10 +3,10 @@ import { useLang } from '@/lib/useLang';
 import { ArrowRight, Clock, UtensilsCrossed, Star, MapPin, Phone } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
-// ── Atmospheric dining/restaurant images ──
-const IMG_FOOD1 = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85';
-const IMG_FOOD2 = 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=85';
-const IMG_PANORAMA = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg';
+// ── Authentic Krone Langenburg hotel images ──
+const IMG_FOOD1 = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg';
+const IMG_FOOD2 = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg';
+const IMG_PANORAMA = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/737cda4af_krone-kingsuite-1-aussicht-panorama-01.jpg';
 
 export default function Restaurant() {
   const { lang } = useLang();
@@ -116,13 +116,13 @@ export default function Restaurant() {
       <div className="relative pt-[126px] lg:pt-[166px] overflow-hidden" style={{ minHeight: 'calc(70vh + 126px)' }}>
         {/* Warm atmospheric dining image */}
         <img
-          src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1600&q=90"
+          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=90"
           alt="Krone Langenburg by Ammesso — Restaurant, mediterrane Küche Hohenlohe"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/55 via-[#171311]/20 to-[#171311]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#171311]/35 via-transparent to-[#171311]/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/65 via-[#171311]/30 to-[#171311]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#171311]/40 via-transparent to-[#171311]/40" />
 
         {/* Hero content */}
         <div className="relative z-10 flex items-end pb-14 px-5 min-h-[360px]">
@@ -136,8 +136,8 @@ export default function Restaurant() {
               <span className="text-white/50 text-sm font-body hidden sm:inline">Di–Sa 12–14:30 & 18–22:30 · So 12–21</span>
             </div>
             <p className="text-[#B08A42] text-[10px] tracking-[0.4em] uppercase font-body mb-4">{c.label}</p>
-            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-light text-white mb-5 leading-tight">{c.title}</h1>
-            <p className="text-white/75 font-body leading-relaxed max-w-2xl mb-8 text-sm sm:text-base">{c.intro}</p>
+            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-light text-white mb-5 leading-tight" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8)' }}>{c.title}</h1>
+            <p className="text-white/90 font-body leading-relaxed max-w-2xl mb-8 text-sm sm:text-base" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>{c.intro}</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/reserve"
                 className="flex items-center justify-center gap-2 px-7 py-4 bg-[#B08A42] hover:bg-[#9E7A38] text-white rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px w-full sm:w-auto">
@@ -242,21 +242,46 @@ export default function Restaurant() {
         </div>
       </section>
 
-      {/* ── FOOD GALLERY — real room/view images as atmosphere ── */}
-      <section className="py-4 px-4 sm:px-5 bg-[#241A16]">
-        <div className="max-w-5xl mx-auto grid grid-cols-3 gap-2 sm:gap-3">
-          <div className="relative rounded-2xl overflow-hidden aspect-square col-span-2 group">
-            <img src={IMG_FOOD1} alt="Krone Langenburg by Ammesso — Restaurant Atmosphäre" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/60 to-transparent" />
+      {/* ── IMAGE GALLERY — authentic Krone Langenburg visuals ── */}
+      <section className="py-10 px-4 sm:px-5 bg-[#241A16]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-[#B08A42] text-[10px] tracking-[0.4em] uppercase font-body">Krone Langenburg by Ammesso</p>
           </div>
-          <div className="flex flex-col gap-2 sm:gap-3">
-            <div className="relative rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_FOOD2} alt="Krone Langenburg by Ammesso — Gastraum" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/40 to-transparent" />
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] col-span-2 md:col-span-2 row-span-1 group">
+              <img src={IMG_FOOD1} alt="Panorama Hohenlohe — Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/50 to-transparent" />
+              <div className="absolute bottom-4 left-5">
+                <p className="text-white/70 text-xs font-body tracking-wider">
+                  {lang === 'de' ? 'Panorama Hohenlohe' : lang === 'en' ? 'Panoramic Hohenlohe' : 'Panorama Hohenlohe'}
+                </p>
+              </div>
             </div>
-            <div className="relative rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_PANORAMA} alt="Panorama Hohenlohe — Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/40 to-transparent" />
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] group">
+              <img src={IMG_FOOD2} alt="King Suite — Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/50 to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <p className="text-white/70 text-xs font-body tracking-wider">King Suite</p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] group">
+              <img src={IMG_PANORAMA} alt="Aussicht Krone Langenburg — Hohenlohe" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/50 to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <p className="text-white/70 text-xs font-body tracking-wider">
+                  {lang === 'de' ? 'Ausblick' : lang === 'en' ? 'View' : 'Vista'}
+                </p>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] col-span-1 md:col-span-2 group">
+              <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg" alt="Suite Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/50 to-transparent" />
+              <div className="absolute bottom-4 left-5">
+                <p className="text-white/70 text-xs font-body tracking-wider">
+                  {lang === 'de' ? 'Suite Übersicht' : lang === 'en' ? 'Suite Overview' : 'Vista Suite'}
+                </p>
+              </div>
             </div>
           </div>
         </div>
