@@ -138,7 +138,7 @@ export default function Story() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-0">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-0">
 
       {/* ── HERO ── */}
       <div className="relative overflow-hidden bg-[#1C1714] pt-[126px] lg:pt-[166px] pb-16 sm:pb-24">

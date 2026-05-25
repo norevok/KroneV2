@@ -350,7 +350,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Events Banner — below nav rows, only shown when NOT on home (home has its own hero) */}
+        {/* Events Banner — below nav rows, always shown */}
         <EventsBanner lang={lang} />
       </nav>
 

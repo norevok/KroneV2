@@ -29,6 +29,7 @@ export const SITE_DEFAULTS = {
   social_instagram: "https://www.instagram.com/kulinarium.ammesso/",
   social_facebook: "https://www.facebook.com/pages/H%C3%A4llisches%20Kulinarium%20by%20Ammesso",
   social_tripadvisor: "https://www.tripadvisor.de/Restaurant_Review-g198538-d26012517-Reviews-Hallisches_Kulinarium_by_Ammesso-Schwabisch_Hall_Baden_Wurttemberg.html",
+  // NOTE: Social URLs above still point to old Schwäbisch Hall profiles — update once new Langenburg profiles are created
   breakfast_price: 14,
 };
 

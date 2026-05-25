@@ -240,7 +240,7 @@ export default function Reserve() {
 
   if (authState === 'loading') {
     return (
-      <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center pt-[166px]">
+      <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center pt-[126px] lg:pt-[166px]">
         <div className="w-8 h-8 border-2 border-[#C9A96E]/20 border-t-[#C9A96E] rounded-full animate-spin" />
       </div>
     );
@@ -252,7 +252,7 @@ export default function Reserve() {
         <div className="relative overflow-hidden w-full">
           <div className="absolute inset-0 bg-gradient-to-b from-[#2A2118] to-[#1C1714]" />
           <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80" alt="Restaurant" className="absolute inset-0 w-full h-full object-cover opacity-30" />
-          <div className="relative z-10 text-center pt-[126px] lg:pt-[166px] pb-8 lg:pb-14 px-5">
+          <div className="relative z-10 text-center pt-[126px] lg:pt-[166px] pb-10 lg:pb-14 px-5">
             <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-2">Krone Langenburg by Ammesso</p>
             <h1 className="font-display text-3xl md:text-5xl font-light text-white mb-2">{c.title}</h1>
             <p className="text-white/50 font-body text-sm">{c.sub}</p>
@@ -315,7 +315,7 @@ export default function Reserve() {
       <div className="relative overflow-hidden w-full">
         <div className="absolute inset-0 bg-gradient-to-b from-[#2A2118] to-[#1C1714]" />
         <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80" alt="Restaurant" className="absolute inset-0 w-full h-full object-cover opacity-30" />
-        <div className="relative z-10 text-center pt-[126px] lg:pt-[166px] pb-8 lg:pb-14 px-5">
+        <div className="relative z-10 text-center pt-[126px] lg:pt-[166px] pb-10 lg:pb-14 px-5">
           <p className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.5em] uppercase font-body mb-2 lg:mb-3">Krone Langenburg by Ammesso</p>
           <h1 className="font-display text-2xl sm:text-3xl md:text-6xl font-light text-white mb-2 lg:mb-3">{c.title}</h1>
           <p className="text-white/50 font-body text-xs sm:text-sm tracking-wider">{c.sub}</p>

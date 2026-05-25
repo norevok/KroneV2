@@ -38,7 +38,7 @@ function RestaurantBlock({ lang }) {
             </p>
             <div className="flex items-center gap-2 mt-1.5">
               <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
-              <span className={`text-xs font-body font-semibold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}>
+              <span className={`text-xs font-body font-semibold ${isOpen ? 'text-emerald-200' : 'text-red-300'}`}>
                 {isOpen
                   ? (lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora')
                   : (lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso')}
@@ -317,8 +317,8 @@ export default function Home() {
           </AnimatePresence>
         ))}
 
-        {/* Slide counter top-right */}
-        <div className="absolute top-[176px] right-6 z-10 hidden sm:flex items-center gap-2">
+        {/* Slide counter top-right — offset below desktop navbar */}
+        <div className="absolute top-[176px] lg:top-[182px] right-6 z-10 hidden lg:flex items-center gap-2">
           <span className="font-display text-2xl font-light text-white/60">{String(current + 1).padStart(2, '0')}</span>
           <div className="w-px h-6 bg-white/20 mx-1" />
           <span className="font-display text-sm font-light text-white/30">{String(SLIDES.length).padStart(2, '0')}</span>
@@ -436,7 +436,7 @@ export default function Home() {
             <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body mb-2">{c.benefits_eyebrow}</p>
             <h2 className="font-display text-2xl sm:text-3xl font-light text-white">{c.benefits_title}</h2>
           </motion.div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 justify-items-center">
             {BENEFITS.map((b, i) => (
               <motion.div 
                 key={i} 
@@ -458,7 +458,7 @@ export default function Home() {
                   <p className="text-white font-body text-sm font-semibold mb-0.5">
                     {lang === 'de' ? b.de : lang === 'en' ? b.en : b.it}
                   </p>
-                  <p className="text-white/40 font-body text-xs leading-tight">
+                  <p className="text-white/55 font-body text-xs leading-tight">
                     {lang === 'de' ? b.desc_de : lang === 'en' ? b.desc_en : b.desc_it}
                   </p>
                 </div>

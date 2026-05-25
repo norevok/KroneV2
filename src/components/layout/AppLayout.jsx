@@ -19,7 +19,7 @@ export default function AppLayout() {
       {/* Navbar: utility (36px) + row1 (56px) + row2 (40px) + banner (34px) = ~166px desktop, ~100px mobile */}
       <ScrollToTop />
       <Navbar />
-      <main className="flex-1 pb-[56px] lg:pb-0 pt-0">
+      <main className="flex-1 pb-[80px] lg:pb-0">
         <Outlet />
       </main>
       <Footer />

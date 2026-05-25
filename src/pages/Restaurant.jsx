@@ -85,25 +85,25 @@ export default function Restaurant() {
   const c = copy[lang] || copy.de;
 
   return (
-    <div className="min-h-screen bg-charcoal text-ivory pb-20 lg:pb-0">
+    <div className="min-h-screen bg-charcoal text-ivory pb-24 lg:pb-0">
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <div className="relative h-[calc(65vh+126px)] lg:h-[calc(65vh+166px)] min-h-[520px] overflow-hidden">
+      <div className="relative pt-[126px] lg:pt-[166px] overflow-hidden" style={{ minHeight: 'calc(65vh + 126px)' }}>
         <img src={IMG_RESTAURANT} alt="Krone Langenburg by Ammesso — Restaurant, mediterrane Küche Hohenlohe" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/20 to-charcoal" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-transparent to-charcoal/40" />
-        <div className="absolute inset-0 flex items-end pb-12 px-5 pt-[126px] lg:pt-[166px]">
+        <div className="relative z-10 flex items-end pb-12 px-5 min-h-[300px]">
           <div className="max-w-4xl mx-auto w-full">
             <p className="text-gold text-[10px] tracking-[0.4em] uppercase font-body mb-3">{c.label}</p>
             <h1 className="font-display text-3xl sm:text-4xl md:text-6xl font-light text-ivory mb-4 sm:mb-6 leading-tight">{c.title}</h1>
-            <p className="text-ivory/60 font-body leading-relaxed max-w-xl mb-5 sm:mb-7 text-sm sm:text-base">{c.intro}</p>
+            <p className="text-white/75 font-body leading-relaxed max-w-xl mb-5 sm:mb-7 text-sm sm:text-base">{c.intro}</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/reserve"
-                className="flex items-center justify-center gap-2 px-6 py-3.5 btn-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold shadow-gold-glow w-full sm:w-auto">
+                className="flex items-center justify-center gap-2 px-6 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg w-full sm:w-auto hover:-translate-y-px">
                 <UtensilsCrossed className="w-3.5 h-3.5" /> {c.cta_reserve}
               </Link>
               <Link to="/menu"
-                className="flex items-center justify-center gap-2 px-6 py-3.5 btn-ghost-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold w-full sm:w-auto">
+                className="flex items-center justify-center gap-2 px-6 py-3.5 border-2 border-white/35 text-white hover:border-white/65 hover:bg-white/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all w-full sm:w-auto">
                 {c.cta_menu} <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -124,45 +124,45 @@ export default function Restaurant() {
       {/* ── HOURS + CTA ──────────────────────────────────────── */}
       <section className="py-16 px-5">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div className="glass-card rounded-2xl p-8 border border-[#C9A96E]/10">
+          <div className="bg-[#2A2118] rounded-2xl p-8 border border-[#C9A96E]/20">
             <div className="flex items-center gap-2 mb-6">
-              <Clock className="w-4 h-4 text-gold/60" />
-              <span className="text-ivory/30 text-[10px] tracking-[0.35em] uppercase font-body">{c.hours_title}</span>
+              <Clock className="w-4 h-4 text-[#C9A96E]/70" />
+              <span className="text-[#C9A96E]/70 text-[10px] tracking-[0.35em] uppercase font-body">{c.hours_title}</span>
             </div>
             <ul className="space-y-4 text-sm font-body">
-              <li className="flex justify-between items-center opacity-40">
-                <span className="text-ivory">{c.mon}</span>
-                <span className="text-ivory/60 text-xs">{c.mon_hours}</span>
+              <li className="flex justify-between items-center">
+                <span className="text-white/40">{c.mon}</span>
+                <span className="text-white/35 text-xs">{c.mon_hours}</span>
               </li>
-              <li className="border-t border-[#C9A96E]/08 pt-4">
+              <li className="border-t border-white/10 pt-4">
                 <div className="flex justify-between items-start">
-                  <span className="text-ivory font-medium">{c.tue_sat}</span>
+                  <span className="text-white/85 font-medium">{c.tue_sat}</span>
                 </div>
-                <div className="text-ivory/40 text-xs mt-1">{c.tue_sat_hours}</div>
+                <div className="text-[#C9A96E]/80 text-xs mt-1 font-semibold">{c.tue_sat_hours}</div>
               </li>
-              <li className="border-t border-[#C9A96E]/08 pt-4">
+              <li className="border-t border-white/10 pt-4">
                 <div className="flex justify-between items-start">
-                  <span className="text-ivory font-medium">{c.sun}</span>
+                  <span className="text-white/85 font-medium">{c.sun}</span>
                 </div>
-                <div className="text-ivory/40 text-xs mt-1">{c.sun_hours}</div>
+                <div className="text-[#C9A96E]/80 text-xs mt-1 font-semibold">{c.sun_hours}</div>
               </li>
             </ul>
-            <div className="mt-6 pt-4 border-t border-[#C9A96E]/08 flex items-center gap-2 text-xs text-ivory/30 font-body">
-              <MapPin className="w-3.5 h-3.5 text-gold/40" />
+            <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs text-white/45 font-body">
+              <MapPin className="w-3.5 h-3.5 text-[#C9A96E]/50" />
               <span>{c.capacity}</span>
             </div>
           </div>
 
           <div className="space-y-3">
             <Link to="/reserve"
-              className="flex items-center justify-center gap-2 w-full py-4 btn-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold shadow-gold-glow">
+              className="flex items-center justify-center gap-2 w-full py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px">
               <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
             </Link>
             <Link to="/menu"
-              className="flex items-center justify-center gap-2 w-full py-4 btn-ghost-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold">
+              className="flex items-center justify-center gap-2 w-full py-4 border-2 border-[#C9A96E]/40 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all">
               {c.cta_menu}
             </Link>
-            <p className="text-ivory/30 text-xs text-center font-body pt-1">{c.booking_note}</p>
+            <p className="text-white/45 text-xs text-center font-body pt-1">{c.booking_note}</p>
             <a href={`mailto:${s.email_info}`}
               className="block text-center text-gold/60 hover:text-gold text-xs font-body tracking-wider transition-colors">
               {s.email_info}
@@ -180,7 +180,7 @@ export default function Restaurant() {
           </div>
           <div className="flex flex-col gap-2 sm:gap-4">
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden flex-1 group">
-              <img src={IMG_FOOD2} alt="Mediterrane Hauptspeise Kulinarium Ammesso Langenburg" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src={IMG_FOOD2} alt="Mediterrane Hauptspeise Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 to-transparent" />
             </div>
             <div className="relative rounded-xl sm:rounded-2xl overflow-hidden flex-1 group">
@@ -223,11 +223,11 @@ export default function Restaurant() {
       {/* ── EXPERIENCE NOTES ─────────────────────────────────── */}
       <section className="py-12 sm:py-16 px-4 sm:px-5">
         <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="glass-card rounded-2xl p-6 border border-[#C9A96E]/10">
-            <h3 className="text-gold text-[10px] tracking-[0.3em] uppercase font-body font-semibold mb-3">
+          <div className="bg-[#2A2118] rounded-2xl p-6 border border-[#C9A96E]/15">
+            <h3 className="text-[#C9A96E] text-[10px] tracking-[0.3em] uppercase font-body font-semibold mb-3">
               {lang === 'de' ? '⏰ Timing' : lang === 'en' ? '⏰ Timing' : '⏰ Orari'}
             </h3>
-            <p className="text-ivory/60 text-sm font-body leading-relaxed">
+            <p className="text-white/70 text-sm font-body leading-relaxed">
               {lang === 'de'
                 ? 'Lunchs sind intim und schnell. Abendessen: Take-your-time Erlebnisse. Sonntags öffnen wir früh und servieren bis spät — vollkommen entspannt.'
                 : lang === 'en'
@@ -235,11 +235,11 @@ export default function Restaurant() {
                 : 'I pranzi sono intimi e veloci. Le cene sono esperienze senza fretta. La domenica apriamo presto e serviamo fino a tardi — completamente rilassati.'}
             </p>
           </div>
-          <div className="glass-card rounded-2xl p-6 border border-[#C9A96E]/10">
-            <h3 className="text-gold text-[10px] tracking-[0.3em] uppercase font-body font-semibold mb-3">
+          <div className="bg-[#2A2118] rounded-2xl p-6 border border-[#C9A96E]/15">
+            <h3 className="text-[#C9A96E] text-[10px] tracking-[0.3em] uppercase font-body font-semibold mb-3">
               {lang === 'de' ? '🥗 Diäten & Wünsche' : lang === 'en' ? '🥗 Diets & Wishes' : '🥗 Diete & Preferenze'}
             </h3>
-            <p className="text-ivory/60 text-sm font-body leading-relaxed">
+            <p className="text-white/70 text-sm font-body leading-relaxed">
               {lang === 'de'
                 ? 'Vegetarisch? Vegan? Allergien? Sagen Sie uns Bescheid — wir passen an und zaubern dir etwas Wunderschönes.'
                 : lang === 'en'
@@ -258,7 +258,7 @@ export default function Restaurant() {
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-light text-ivory mb-3 leading-tight">
           {lang === 'de' ? 'Wir freuen uns auf Sie.' : lang === 'en' ? 'We look forward to seeing you.' : 'Non vediamo l\'ora di vedervi.'}
         </h2>
-        <p className="text-ivory/40 text-sm font-body mb-8">
+        <p className="text-white/65 text-sm font-body mb-8">
           {lang === 'de' 
             ? 'Buchen Sie Ihren Tisch oder rufen Sie an — wir sind für Sie da.'
             : lang === 'en'
@@ -267,12 +267,12 @@ export default function Restaurant() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-sm sm:max-w-none mx-auto">
           <Link to="/reserve"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 btn-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold shadow-gold-glow">
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px">
             <UtensilsCrossed className="w-3.5 h-3.5" />
             {c.cta_reserve}
           </Link>
           <a href={`tel:${s.phone}`}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 btn-ghost-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold">
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#C9A96E]/50 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all">
             {s.phone}
           </a>
         </div>

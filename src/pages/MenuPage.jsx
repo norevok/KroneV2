@@ -138,7 +138,7 @@ export default function MenuPage() {
     <div className="min-h-screen bg-[#F7F3EC] text-[#1C1714]">
 
       {/* Hero */}
-      <div className="relative bg-[#1C1714] pt-[126px] lg:pt-[166px] pb-16 overflow-hidden">
+      <div className="relative bg-[#1C1714] pt-[126px] lg:pt-[166px] pb-12 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=70"
           alt="Krone Langenburg by Ammesso Restaurant" className="absolute inset-0 w-full h-full object-cover opacity-25" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/50 to-[#1C1714]/90" />
