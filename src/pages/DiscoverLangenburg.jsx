@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/lib/useLang';
 import { ArrowRight, MapPin, Compass, Mountain, Castle, ChevronDown, Car } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
+import KroneLocationSection from '@/components/KroneLocationSection';
 
 // All images replaced with real, correctly matching photos
 const ATTRACTIONS = [
@@ -241,25 +242,7 @@ export default function DiscoverLangenburg() {
                 <h2 className="font-display text-2xl font-light text-[#1C1714]">{t.how_label}</h2>
               </div>
               <p className="text-[#4A3F35]/60 text-sm font-body mb-5">{t.address_note}</p>
-              <div className="rounded-2xl overflow-hidden border border-[#EDE6D8] h-[300px] sm:h-[380px] shadow-md">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  allowFullScreen=""
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=9.8390%2C49.2495%2C9.8540%2C49.2585&layer=mapnik&marker=49.2540%2C9.8465"
-                  title="Krone Langenburg Lage"
-                />
-              </div>
-              <a
-                href="https://www.google.com/maps/dir/?api=1&destination=Hauptstra%C3%9Fe+24%2C+74595+Langenburg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 text-[#8B6914] hover:text-[#5C4010] text-xs font-body tracking-wider transition-colors">
-                {t.directions_label} <ArrowRight className="w-3 h-3" />
-              </a>
+              <KroneLocationSection compact />
             </div>
 
             {/* Distances */}

@@ -3,7 +3,8 @@ import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, CheckCircle, Instagram, Facebook, Clock, Upload, X, FileText, AlertCircle, ChevronDown } from 'lucide-react';
+import { MapPin, Phone, Mail, CheckCircle, Instagram, Facebook, Clock, Upload, X, FileText, AlertCircle, ChevronDown, Navigation } from 'lucide-react';
+import KroneLocationSection from '@/components/KroneLocationSection';
 
 const FAQ_DE = [
   { q: 'Wann ist Check-in und Check-out?', a: 'Check-in ab 15:00 Uhr, Check-out bis 11:00 Uhr. Früherer Check-in oder späterer Check-out auf Anfrage möglich.' },
@@ -300,10 +301,10 @@ export default function Contact() {
                   <a href={`mailto:${s.email_info}`} className="text-[#4A3F35] hover:text-[#8B6914] transition-colors">{s.email_info}</a>
                 </li>
               </ul>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=Hauptstra%C3%9Fe+24%2C+74595+Langenburg"
+              <a href="https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5"
                 target="_blank" rel="noopener noreferrer"
-                className="mt-5 block text-center py-3 border border-[#C9A96E]/30 text-[#8B6914] text-xs tracking-[0.2em] uppercase font-body rounded-xl hover:bg-[#8B6914]/5 transition-colors">
-                {t.directions}
+                className="mt-5 flex items-center justify-center gap-2 py-3 border border-[#C9A96E]/30 text-[#8B6914] text-xs tracking-[0.2em] uppercase font-body rounded-xl hover:bg-[#8B6914]/5 transition-colors">
+                <Navigation className="w-3.5 h-3.5" /> {t.directions}
               </a>
             </motion.div>
 
@@ -506,24 +507,7 @@ export default function Contact() {
           className="mt-14 sm:mt-20"
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <h2 className="font-display text-3xl font-light text-[#1C1714] mb-6 text-center">{t.find_us}</h2>
-          <div className="rounded-2xl overflow-hidden border border-[#EDE6D8] h-[320px] sm:h-[420px] shadow-[0_8px_32px_rgba(28,23,20,0.1)]">
-            <iframe
-              width="100%" height="100%"
-              style={{ border: 0 }}
-              loading="lazy"
-              allowFullScreen=""
-              referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=9.8690%2C49.2455%2C9.8840%2C49.2535&layer=mapnik&marker=49.2495%2C9.8765"
-              title="Krone Langenburg — Hauptstraße 24, 74595 Langenburg"
-            />
-          </div>
-          <div className="text-center mt-4">
-            <a href="https://www.google.com/maps/search/Hauptstra%C3%9Fe+24,+74595+Langenburg"
-              target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[#8B6914] hover:text-[#5C4010] text-xs font-body tracking-wider transition-colors">
-              {t.directions} →
-            </a>
-          </div>
+          <KroneLocationSection />
         </motion.div>
       </div>
     </div>

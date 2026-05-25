@@ -6,6 +6,7 @@ import { useLang } from '@/lib/useLang';
 import HeroBookingBar from '@/components/home/HeroBookingBar';
 import EventsBanner from '@/components/home/EventsBanner';
 import ChatWidget from '@/components/ChatWidget';
+import KroneLocationSection from '@/components/KroneLocationSection';
 import { base44 } from '@/api/base44Client';
 
 // ── Inline Restaurant Banner — schlank mit Hintergrundbild + Live-Status ──
@@ -692,6 +693,11 @@ export default function Home() {
             <p className="font-body text-white/55 text-sm sm:text-base max-w-2xl mx-auto mb-12 leading-relaxed">{c.location_text}</p>
           </motion.div>
 
+          {/* Compact map */}
+          <div className="max-w-lg mx-auto w-full mb-12">
+            <KroneLocationSection compact darkBg />
+          </div>
+
           {/* Premium 3D-style highlight cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
             {[
@@ -758,10 +764,10 @@ export default function Home() {
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
-              <Link to="/contact"
-                className="flex items-center justify-center px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all w-full sm:w-auto">
-                {c.contact_btn}
-              </Link>
+              <a href="https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5" target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#C9A96E]/50 text-[#C9A96E] hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all w-full sm:w-auto">
+                🗺️ {lang === 'de' ? 'Route starten' : lang === 'en' ? 'Get Directions' : 'Navigazione'}
+              </a>
             </motion.div>
           </div>
         </div>

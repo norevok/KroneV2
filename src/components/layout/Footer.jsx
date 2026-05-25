@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '@/lib/useLang';
 import { SITE_DEFAULTS } from '@/lib/siteData';
-import { MapPin, Phone, Mail, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Facebook, Navigation } from 'lucide-react';
+
+const MAPS_URL = 'https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5';
 
 export default function Footer() {
   const { lang } = useLang();
@@ -136,10 +138,23 @@ export default function Footer() {
             <h3 className="text-white/30 text-[10px] tracking-[0.35em] uppercase font-body mb-3">
               {lang === 'de' ? 'Adresse' : 'Address'}
             </h3>
-            <div className="flex gap-2 text-white/55 text-sm font-body">
+            <div className="flex gap-2 text-white/55 text-sm font-body mb-3">
               <MapPin className="w-3.5 h-3.5 text-[#C9A96E]/50 flex-shrink-0 mt-0.5" />
-              <span>{s.address_street}<br />{s.address_zip} {s.address_city}<br />{s.address_country}</span>
+              <address className="not-italic">
+                <strong className="text-white/70">Krone Langenburg by Ammesso</strong><br />
+                {s.address_street}<br />
+                {s.address_zip} {s.address_city}<br />
+                {s.address_country}
+              </address>
             </div>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[#C9A96E]/70 hover:text-[#C9A96E] text-xs font-body tracking-wider transition-colors">
+              <Navigation className="w-3 h-3" />
+              {lang === 'de' ? 'Route starten' : 'Get Directions'}
+            </a>
           </div>
           {/* Contact */}
           <div>
