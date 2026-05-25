@@ -15,31 +15,38 @@ import { Star, Coffee, CheckCircle, AlertCircle, ExternalLink, Wifi, Bath, Wind,
 //   zimmer-uebersicht  = Full-room overview → Superior Suite 1 cover
 //   zimmer-favorit     = Signature shot     → Superior Suite 2 cover
 const ROOM_PHOTOS = {
-  // Deluxe Einzelzimmer — single-bed focused shots
+  // Deluxe Einzelzimmer
   deluxe_single: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg',   // cover: bed + TV, clearest single-bed view
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/fa83a17cd_krone-kingsuite-1-balkon-aussicht-01.jpg',  // balcony view from room
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/463dc9086_krone-kingsuite-1-zimmer-bett-tv-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/3a179ef1d_krone-dz-zimmer-tv-fenster-02.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/975fb81f7_krone-dz-dusche-regendusche-03.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/90854213e_krone-dz-badezimmer-waschbecken-01.jpg',
   ],
-  // Deluxe Doppelzimmer — double-bed focused shots
+  // Deluxe Doppelzimmer
   deluxe_double: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg',      // cover: clean double bed, no TV distraction
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c914d145e_krone-kingsuite-1-zimmer-bett-02.jpg',      // alternate bed angle
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg',  // balcony panorama
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/7063cdda7_krone-dz-doppelbett-balkon-03.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/3a179ef1d_krone-dz-zimmer-tv-fenster-02.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/975fb81f7_krone-dz-dusche-regendusche-03.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/90854213e_krone-dz-badezimmer-waschbecken-01.jpg',
   ],
-  // Superior Suite (King Suite 1) — full suite experience
+  // Superior Suite (King Suite 1)
   superior_suite: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg', // cover: full-room overview
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/930ad0179_krone-kingsuite-1-zimmer-bett-tv-01.jpg',    // bed detail
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d09aea914_krone-kingsuite-1-balkon-aussicht-01.jpg',   // balcony view
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0f40c4112_krone-kingsuite-1-balkon-panorama-01.jpg',   // panorama
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8e0419119_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/463dc9086_krone-kingsuite-1-zimmer-bett-tv-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d9bcf521_krone-kingsuite-1-zimmer-detail-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/737cda4af_krone-kingsuite-1-aussicht-panorama-01.jpg',
   ],
-  // Superior Suite 2 (King Suite 2) — premium suite with lounge
+  // Superior Suite 2 (King Suite 2)
   superior_suite_2: [
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',    // cover: signature shot
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8457db47b_krone-kingsuite-2-zimmer-wohnbereich-02.jpg', // living area
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0449ddce1_krone-kingsuite-2-zimmer-bett-01.jpg',        // bed
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a0d03ed2c_krone-kingsuite-2-aussicht-landschaft-01.jpg', // landscape view
-    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg',   // panorama
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2d7d84b34_krone-kingsuite-2-aussicht-landschaft-01.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6730c558e_krone-kingsuite-2-aussicht-landschaft-02.jpg',
+    'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg',
   ],
 };
 

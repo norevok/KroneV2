@@ -65,35 +65,31 @@ function RestaurantBlock({ lang }) {
 
 const SLIDES = [
   {
-    // Krone exterior / arrival mood — cobblestone historical German town square
     url: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1800&q=85',
     de: { title: 'Willkommen in Langenburg.', sub: 'Boutique-Hotel, Restaurant und echte Gastfreundschaft im Herzen von Hohenlohe.' },
     en: { title: 'Welcome to Langenburg.', sub: 'Boutique hotel, restaurant and genuine hospitality in the heart of Hohenlohe.' },
     it: { title: 'Benvenuti a Langenburg.', sub: 'Boutique hotel, ristorante e vera ospitalità nel cuore di Hohenlohe.' },
   },
   {
-    // King Suite — uploaded hotel photo
     url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
     de: { title: 'Die King-Suite — Ihr Rückzugsort.', sub: 'Großzügig, stilvoll, unvergesslich — buchen Sie direkt zum besten Preis.' },
     en: { title: 'The King Suite — Your Retreat.', sub: 'Spacious, stylish, unforgettable — book directly at the best price.' },
     it: { title: 'La King Suite — Il vostro rifugio.', sub: 'Spaziosa, elegante, indimenticabile — prenota direttamente al miglior prezzo.' },
   },
   {
-    // Superior Suite 1 — Zimmer-Übersicht (bestes Raumgefühl)
-    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg',
-    de: { title: 'Stilvoll schlafen in Langenburg.', sub: 'Zehn Zimmer und Suiten mit historischem Charme und modernem Komfort.' },
-    en: { title: 'Sleep in Style in Langenburg.', sub: 'Ten rooms and suites with historic charm and modern comfort.' },
-    it: { title: 'Dormire in stile a Langenburg.', sub: 'Dieci camere e suite con fascino storico e comfort moderno.' },
+    // Wohnbereich King Suite 1 — neu hinzugefügt
+    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg',
+    de: { title: 'Stilvoll wohnen in Langenburg.', sub: 'Zehn Zimmer und Suiten mit historischem Charme und modernem Komfort.' },
+    en: { title: 'Live in Style in Langenburg.', sub: 'Ten rooms and suites with historic charm and modern comfort.' },
+    it: { title: 'Vivere in stile a Langenburg.', sub: 'Dieci camere e suite con fascino storico e comfort moderno.' },
   },
   {
-    // Fine dining restaurant mood — candlelight, elegant table setting
     url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85',
     de: { title: 'Mediterrane Küche mit Herz.', sub: 'Regionale Zutaten, italienische Wärme — im Kulinarium by Ammesso.' },
     en: { title: 'Mediterranean Cuisine with Heart.', sub: 'Regional ingredients, Italian warmth — at Kulinarium by Ammesso.' },
     it: { title: 'Cucina mediterranea con cuore.', sub: 'Ingredienti regionali, calore italiano — al Kulinarium by Ammesso.' },
   },
   {
-    // Elegant wedding / event table — white flowers, candlelight
     url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1800&q=85',
     de: { title: 'Hochzeiten & Events in Langenburg.', sub: 'Unvergessliche Momente — wir gestalten Ihren besonderen Anlass.' },
     en: { title: 'Weddings & Events in Langenburg.', sub: 'Unforgettable moments — we craft your special occasion.' },
@@ -413,8 +409,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── EVENTS BANNER ── */}
-      <EventsBanner lang={lang} />
+      {/* EventsBanner is now inside Navbar — removed from here */}
 
       {/* ── RESTAURANT FEATURE BLOCK ── */}
       <RestaurantBlock lang={lang} />
