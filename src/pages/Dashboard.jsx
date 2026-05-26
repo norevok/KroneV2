@@ -10,14 +10,14 @@ const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok
 
 function MetricCard({ icon: Icon, label, value, color, sub }) {
   return (
-    <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 flex items-start gap-4 hover:border-[#C9A96E]/20 transition-all">
-      <div className={`w-10 h-10 rounded-full bg-[#1A1410] border border-[#C9A96E]/10 flex items-center justify-center flex-shrink-0`}>
+    <div className="bg-white border border-[#EDE6D8] rounded-2xl p-5 flex items-start gap-4 hover:border-[#C9A96E]/40 hover:shadow-md transition-all shadow-sm">
+      <div className="w-10 h-10 rounded-full bg-[#F7F2EA] border border-[#EDE6D8] flex items-center justify-center flex-shrink-0">
         <Icon className={`w-5 h-5 ${color}`} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-ivory/40 text-[10px] font-body uppercase tracking-wider mb-1">{label}</p>
+        <p className="text-[#8A7A6A] text-[10px] font-body uppercase tracking-wider mb-1">{label}</p>
         <p className={`font-display text-3xl font-light ${color}`}>{value}</p>
-        {sub && <p className="text-ivory/25 text-[10px] font-body mt-0.5">{sub}</p>}
+        {sub && <p className="text-[#8A7A6A] text-[10px] font-body mt-0.5">{sub}</p>}
       </div>
     </div>
   );
@@ -132,35 +132,35 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal text-ivory pt-16 sm:pt-20 pb-20 px-4 sm:px-5">
+    <div className="min-h-screen bg-[#F7F2EA] text-[#1C1714] pt-16 sm:pt-20 pb-20 px-4 sm:px-5">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <div className="flex items-start justify-between gap-4 py-7 sm:py-10 flex-wrap">
           <div>
-            <p className="text-gold text-[10px] tracking-[0.45em] uppercase font-body mb-2">Krone Langenburg</p>
-            <h1 className="font-display text-3xl sm:text-4xl font-light text-ivory mb-1">
+            <p className="text-[#8B6914] text-[10px] tracking-[0.45em] uppercase font-body mb-2">Krone Langenburg</p>
+            <h1 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714] mb-1">
               {lang === 'de' ? 'Übersicht' : 'Overview'}
             </h1>
-            <p className="text-ivory/35 text-sm font-body">
+            <p className="text-[#4A3F35]/60 text-sm font-body">
               {format(new Date(), 'EEEE, d. MMMM yyyy')} · {user?.email}
             </p>
-            <p className="text-ivory/20 text-[10px] font-body mt-0.5">
+            <p className="text-[#8A7A6A] text-[10px] font-body mt-0.5">
               {lang === 'de' ? 'Daten werden nur bei manuellem Refresh aktualisiert' : 'Data updates on manual refresh only'}
             </p>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             {isAdmin && (
               <>
-                <Link to="/admin" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
+                <Link to="/admin" className="flex items-center gap-1.5 px-3 py-2 bg-white border border-[#EDE6D8] rounded-xl text-[#4A3F35]/50 hover:text-[#8B6914] text-xs font-body transition-colors shadow-sm">
                   <LayoutDashboard className="w-3.5 h-3.5" /> Admin
                 </Link>
-                <Link to="/activity-log" className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-gold text-xs font-body transition-colors">
+                <Link to="/activity-log" className="flex items-center gap-1.5 px-3 py-2 bg-white border border-[#EDE6D8] rounded-xl text-[#4A3F35]/50 hover:text-[#8B6914] text-xs font-body transition-colors shadow-sm">
                   <Activity className="w-3.5 h-3.5" /> Log
                 </Link>
               </>
             )}
-            <button onClick={loadData} className="flex items-center gap-1.5 px-3 py-2 glass-card border border-[#C9A96E]/10 rounded-xl text-ivory/40 hover:text-ivory text-xs font-body transition-colors">
+            <button onClick={loadData} className="flex items-center gap-1.5 px-3 py-2 bg-white border border-[#EDE6D8] rounded-xl text-[#4A3F35]/50 hover:text-[#1C1714] text-xs font-body transition-colors shadow-sm">
               <RefreshCw className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -170,10 +170,10 @@ export default function Dashboard() {
         {pendingAlerts.length > 0 && (
           <div className="space-y-2 mb-8">
             {pendingAlerts.map((a, i) => (
-              <Link key={i} to={a.link} className="flex items-center gap-3 border border-gold/20 bg-gold/6 rounded-xl px-4 py-3 hover:bg-gold/10 transition-colors">
-                <AlertTriangle className="w-4 h-4 text-gold flex-shrink-0" />
-                <p className="text-ivory/70 text-sm font-body flex-1">{a.msg}</p>
-                <ChevronRight className="w-4 h-4 text-gold/40 flex-shrink-0" />
+              <Link key={i} to={a.link} className="flex items-center gap-3 border border-[#8B6914]/20 bg-[#8B6914]/6 rounded-xl px-4 py-3 hover:bg-[#8B6914]/10 transition-colors">
+                <AlertTriangle className="w-4 h-4 text-[#8B6914] flex-shrink-0" />
+                <p className="text-[#1C1714]/70 text-sm font-body flex-1">{a.msg}</p>
+                <ChevronRight className="w-4 h-4 text-[#8B6914]/40 flex-shrink-0" />
               </Link>
             ))}
           </div>
@@ -195,8 +195,8 @@ export default function Dashboard() {
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-8">
           {/* Trend - 2/3 width */}
-          <div className="lg:col-span-2 glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6">
-            <h2 className="font-display text-xl font-light text-ivory mb-5">{lang === 'de' ? 'Aktivität (14 Tage)' : 'Activity (14 Days)'}</h2>
+          <div className="lg:col-span-2 bg-white border border-[#EDE6D8] rounded-2xl p-5 sm:p-6 shadow-sm">
+            <h2 className="font-display text-xl font-light text-[#1C1714] mb-5">{lang === 'de' ? 'Aktivität (14 Tage)' : 'Activity (14 Days)'}</h2>
             <div className="overflow-x-auto">
               <ResponsiveContainer width="100%" height={240} minWidth={400}>
                 <LineChart data={chartData.activityByDay}>
@@ -213,31 +213,31 @@ export default function Dashboard() {
           </div>
 
           {/* Status breakdown - 1/3 width */}
-          <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6">
-            <h2 className="font-display text-xl font-light text-ivory mb-5">{lang === 'de' ? 'Reservierungsstatus' : 'Reservation Status'}</h2>
+          <div className="bg-white border border-[#EDE6D8] rounded-2xl p-5 sm:p-6 shadow-sm">
+            <h2 className="font-display text-xl font-light text-[#1C1714] mb-5">{lang === 'de' ? 'Reservierungsstatus' : 'Reservation Status'}</h2>
             <div className="space-y-3">
               {chartData.statusBreakdown.filter(s => s.value > 0).map((s, i) => (
                 <div key={i}>
                   <div className="flex justify-between text-xs font-body mb-1">
                     <span style={{ color: s.color }}>{s.name}</span>
-                    <span className="text-ivory/50">{s.value}</span>
+                    <span className="text-[#4A3F35]/50">{s.value}</span>
                   </div>
-                  <div className="h-1.5 bg-ivory/5 rounded-full overflow-hidden">
+                  <div className="h-1.5 bg-[#EDE6D8] rounded-full overflow-hidden">
                     <div className="h-full rounded-full transition-all duration-700"
                       style={{ width: `${metrics.totalReservations ? Math.round(s.value / metrics.totalReservations * 100) : 0}%`, backgroundColor: s.color }} />
                   </div>
                 </div>
               ))}
               {metrics.totalReservations === 0 && (
-                <p className="text-ivory/20 text-xs font-body text-center py-4">{lang === 'de' ? 'Keine Daten' : 'No data'}</p>
+                <p className="text-[#8A7A6A]/40 text-xs font-body text-center py-4">{lang === 'de' ? 'Keine Daten' : 'No data'}</p>
               )}
             </div>
           </div>
         </div>
 
         {/* Booking Summary Chart */}
-        <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6 mb-8">
-          <h2 className="font-display text-xl font-light text-ivory mb-5">
+        <div className="bg-white border border-[#EDE6D8] rounded-2xl p-5 sm:p-6 mb-8 shadow-sm">
+          <h2 className="font-display text-xl font-light text-[#1C1714] mb-5">
             {lang === 'de' ? 'Buchungsübersicht (6 Monate)' : 'Booking Summary (6 Months)'}
           </h2>
           <div className="overflow-x-auto">
@@ -260,32 +260,32 @@ export default function Dashboard() {
 
         {/* Recent Reservations */}
         {recentReservations.length > 0 && (
-          <div className="glass-card border border-[#C9A96E]/10 rounded-2xl p-5 sm:p-6">
+          <div className="bg-white border border-[#EDE6D8] rounded-2xl p-5 sm:p-6 shadow-sm">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="font-display text-xl font-light text-ivory">{lang === 'de' ? 'Letzte Reservierungen' : 'Recent Reservations'}</h2>
-              <Link to="/admin" className="text-gold/60 hover:text-gold text-xs font-body tracking-wider transition-colors">
+              <h2 className="font-display text-xl font-light text-[#1C1714]">{lang === 'de' ? 'Letzte Reservierungen' : 'Recent Reservations'}</h2>
+              <Link to="/admin" className="text-[#8B6914]/60 hover:text-[#8B6914] text-xs font-body tracking-wider transition-colors">
                 {lang === 'de' ? 'Alle anzeigen →' : 'View all →'}
               </Link>
             </div>
             <div className="space-y-2 overflow-x-auto">
               <table className="w-full min-w-[500px]">
                 <thead>
-                  <tr className="border-b border-[#C9A96E]/08">
+                  <tr className="border-b border-[#EDE6D8]">
                     {['Gast', 'Datum', 'Zeit', 'Pers.', 'Status'].map(h => (
-                      <th key={h} className="text-left text-[10px] tracking-widest uppercase font-body text-ivory/25 pb-3 pr-4">{h}</th>
+                      <th key={h} className="text-left text-[10px] tracking-widest uppercase font-body text-[#8A7A6A] pb-3 pr-4">{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {recentReservations.map(r => (
-                    <tr key={r.id} className="border-b border-[#C9A96E]/05 hover:bg-white/2 transition-colors">
+                    <tr key={r.id} className="border-b border-[#EDE6D8]/50 hover:bg-[#F7F2EA]/50 transition-colors">
                       <td className="py-2.5 pr-4">
-                        <p className="text-ivory/75 text-sm font-body">{r.guest_first_name} {r.guest_last_name}</p>
-                        <p className="text-ivory/25 text-[10px] font-body truncate max-w-[140px]">{r.guest_email}</p>
+                        <p className="text-[#1C1714]/75 text-sm font-body">{r.guest_first_name} {r.guest_last_name}</p>
+                        <p className="text-[#8A7A6A]/50 text-[10px] font-body truncate max-w-[140px]">{r.guest_email}</p>
                       </td>
-                      <td className="py-2.5 pr-4 text-ivory/50 text-sm font-body">{r.reservation_date}</td>
-                      <td className="py-2.5 pr-4 text-ivory/50 text-sm font-body">{r.reservation_time}</td>
-                      <td className="py-2.5 pr-4 text-ivory/50 text-sm font-body">{r.party_size}</td>
+                      <td className="py-2.5 pr-4 text-[#4A3F35]/60 text-sm font-body">{r.reservation_date}</td>
+                      <td className="py-2.5 pr-4 text-[#4A3F35]/60 text-sm font-body">{r.reservation_time}</td>
+                      <td className="py-2.5 pr-4 text-[#4A3F35]/60 text-sm font-body">{r.party_size}</td>
                       <td className="py-2.5">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-body border uppercase tracking-wider ${STATUS_BADGE[r.status] || 'text-ivory/30 bg-ivory/5 border-ivory/10'}`}>
                           {r.status}
