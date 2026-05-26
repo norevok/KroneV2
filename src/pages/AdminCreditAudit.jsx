@@ -4,8 +4,8 @@
  * Route: /admin/credits
  */
 
-import { Link } from 'react-router-dom';
-import { CheckCircle, XCircle, Zap, ArrowLeft, Info, AlertTriangle, GitMerge } from 'lucide-react';
+import { CheckCircle, XCircle, Zap, Info } from 'lucide-react';
+import AdminShell from '@/components/admin/AdminShell';
 
 // ── AUDIT DATA ────────────────────────────────────────────────────────────────
 
@@ -196,12 +196,12 @@ const ARCHITECTURE = [
 
 // ── COMPONENT ─────────────────────────────────────────────────────────────────
 
-function Section({ icon: Icon, color, title, children }) {
+function Section({ icon: IconComp, color, title, children }) {
   return (
     <div className="mb-10">
       <div className="flex items-center gap-3 mb-4">
-        <Icon className={`w-5 h-5 ${color} flex-shrink-0`} />
-        <h2 className="font-display text-2xl font-light text-ivory">{title}</h2>
+        <IconComp className={`w-5 h-5 ${color} flex-shrink-0`} />
+        <h2 className="font-display text-2xl font-light text-white/90">{title}</h2>
       </div>
       {children}
     </div>
@@ -210,32 +210,23 @@ function Section({ icon: Icon, color, title, children }) {
 
 export default function AdminCreditAudit() {
   return (
-    <div className="min-h-screen bg-charcoal text-ivory pt-16 sm:pt-20 pb-20 px-4 sm:px-5">
+    <AdminShell title="Credit-Architektur" subtitle="Vollständiger Audit · Mai 2026 · Kein Auto-Refresh">
       <div className="max-w-4xl mx-auto">
-
-        {/* Header */}
-        <div className="py-8">
-          <Link to="/admin" className="flex items-center gap-2 text-gold/60 hover:text-gold text-xs font-body tracking-wider mb-6 transition-colors">
-            <ArrowLeft className="w-3.5 h-3.5" /> Admin Dashboard
-          </Link>
-          <p className="text-gold text-[10px] tracking-[0.45em] uppercase font-body mb-2">Krone Langenburg · Intern</p>
-          <h1 className="font-display text-3xl sm:text-4xl font-light text-ivory mb-2">Credit-Architektur</h1>
-          <p className="text-ivory/40 text-sm font-body">Vollständiger Audit nach Optimierung · Stand: Mai 2026 · Kein Auto-Refresh</p>
-        </div>
+        <div className="py-2"></div>
 
         {/* Summary strip */}
         <div className="grid grid-cols-3 gap-3 mb-10">
-          <div className="glass-card border border-red-900/30 rounded-2xl p-5 text-center">
+          <div className="bg-white/4 border border-red-900/30 rounded-2xl p-5 text-center">
             <p className="font-display text-3xl font-light text-red-400 mb-1">{REMOVED.length}</p>
             <p className="text-red-400/60 text-[10px] font-body uppercase tracking-wider">Entfernt / Deaktiviert</p>
           </div>
-          <div className="glass-card border border-emerald-800/30 rounded-2xl p-5 text-center">
+          <div className="bg-white/4 border border-emerald-800/30 rounded-2xl p-5 text-center">
             <p className="font-display text-3xl font-light text-emerald-400 mb-1">{RETAINED.length}</p>
             <p className="text-emerald-400/60 text-[10px] font-body uppercase tracking-wider">Verbleibend (event-driven)</p>
           </div>
-          <div className="glass-card border border-gold/20 rounded-2xl p-5 text-center">
-            <p className="font-display text-3xl font-light text-gold mb-1">1</p>
-            <p className="text-gold/60 text-[10px] font-body uppercase tracking-wider">Geplante Automation</p>
+          <div className="bg-white/4 border border-[#C9A96E]/20 rounded-2xl p-5 text-center">
+            <p className="font-display text-3xl font-light text-[#C9A96E] mb-1">1</p>
+            <p className="text-[#C9A96E]/60 text-[10px] font-body uppercase tracking-wider">Geplante Automation</p>
           </div>
         </div>
 
@@ -243,12 +234,12 @@ export default function AdminCreditAudit() {
         <Section icon={XCircle} color="text-red-400" title="Entfernt & Deaktiviert">
           <div className="space-y-2">
             {REMOVED.map((item, i) => (
-              <div key={i} className="glass-card border border-red-900/20 rounded-xl p-4">
+              <div key={i} className="bg-white/4 border border-red-900/20 rounded-xl p-4">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <p className="text-red-300/90 text-sm font-body font-semibold">{item.name}</p>
                   <span className="text-[9px] px-2 py-0.5 rounded-full border border-red-900/30 bg-red-950/30 text-red-400/70 font-body uppercase tracking-wider">{item.category}</span>
                 </div>
-                <p className="text-ivory/40 text-xs font-body leading-relaxed">{item.reason}</p>
+                <p className="text-white/40 text-xs font-body leading-relaxed">{item.reason}</p>
               </div>
             ))}
           </div>
@@ -258,17 +249,17 @@ export default function AdminCreditAudit() {
         <Section icon={CheckCircle} color="text-emerald-400" title="Verbleibende Credit-Konsumenten">
           <div className="space-y-2">
             {RETAINED.map((item, i) => (
-              <div key={i} className="glass-card border border-[#C9A96E]/08 rounded-xl p-4">
+              <div key={i} className="bg-white/4 border border-white/8 rounded-xl p-4">
                 <div className="flex items-start justify-between gap-3 mb-1">
-                  <p className="text-ivory/80 text-sm font-body font-semibold">{item.name}</p>
+                  <p className="text-white/80 text-sm font-body font-semibold">{item.name}</p>
                 </div>
-                <p className="text-ivory/35 text-xs font-body mb-1.5">
-                  <span className="text-gold/50">Trigger:</span> {item.trigger}
+                <p className="text-white/35 text-xs font-body mb-1.5">
+                  <span className="text-[#C9A96E]/60">Trigger:</span> {item.trigger}
                 </p>
-                <p className="text-ivory/35 text-xs font-body mb-1.5">
-                  <span className="text-gold/50">Kosten:</span> {item.cost}
+                <p className="text-white/35 text-xs font-body mb-1.5">
+                  <span className="text-[#C9A96E]/60">Kosten:</span> {item.cost}
                 </p>
-                <p className="text-ivory/50 text-xs font-body leading-relaxed">{item.why}</p>
+                <p className="text-white/50 text-xs font-body leading-relaxed">{item.why}</p>
               </div>
             ))}
           </div>
@@ -276,16 +267,16 @@ export default function AdminCreditAudit() {
 
         {/* Final architecture */}
         <Section icon={Zap} color="text-gold" title="Ziel-Architektur">
-          <div className="glass-card border border-[#C9A96E]/15 rounded-2xl p-6 sm:p-8">
+          <div className="bg-white/4 border border-[#C9A96E]/15 rounded-2xl p-6 sm:p-8">
             <ul className="space-y-3">
               {ARCHITECTURE.map((line, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm font-body text-ivory/60">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gold/50 flex-shrink-0 mt-1.5" />
+                <li key={i} className="flex items-start gap-3 text-sm font-body text-white/60">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]/50 flex-shrink-0 mt-1.5" />
                   {line}
                 </li>
               ))}
             </ul>
-            <div className="mt-6 pt-5 border-t border-[#C9A96E]/10 flex items-start gap-2 text-xs font-body text-ivory/25">
+            <div className="mt-6 pt-5 border-t border-[#C9A96E]/10 flex items-start gap-2 text-xs font-body text-white/25">
               <Info className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
               <span>Credits werden ausschließlich für echte Geschäftsereignisse mit einem menschlichen Akteur verbraucht. Keine Hintergrundprozesse, kein Polling, kein KI-Assistent im Live-Betrieb.</span>
             </div>
@@ -293,6 +284,6 @@ export default function AdminCreditAudit() {
         </Section>
 
       </div>
-    </div>
+    </AdminShell>
   );
 }

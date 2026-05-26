@@ -33,6 +33,7 @@ export default function Dashboard() {
     cancelledReservations: 0, totalBookingIntents: 0, guestMessages: 0,
     activeVouchers: 0, pendingDocs: 0, todayReservations: 0,
   });
+  // No polling, no auto-refresh — manual only
   const [chartData, setChartData] = useState({ activityByDay: [], statusBreakdown: [], bookingSummary: [] });
   const [recentReservations, setRecentReservations] = useState([]);
   const [pendingAlerts, setPendingAlerts] = useState([]);
