@@ -210,7 +210,7 @@ export default function GuestAccount() {
 
         {/* Location teaser */}
         <div className="bg-white border border-[#E8DED0] rounded-2xl overflow-hidden shadow-sm mb-6">
-          <div className="relative h-64 overflow-hidden">
+          <div className="relative h-80 overflow-hidden">
             <img
               src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
               alt="Panorama Aussicht — Krone Langenburg by Ammesso"
