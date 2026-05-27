@@ -305,8 +305,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
 
-      {/* ── HERO — Full cinematic 88–100vh ── */}
-      <div className="relative overflow-hidden" style={{ height: '100vh', minHeight: '680px' }}>
+      {/* ── HERO — balanced 78–82vh, never clips content ── */}
+      <div className="relative overflow-hidden" style={{ height: 'clamp(680px, 80vh, 880px)' }}>
         {/* Slides with Ken Burns zoom effect */}
         {SLIDES.map((s, i) => (
           <AnimatePresence key={i}>
@@ -343,7 +343,7 @@ export default function Home() {
         </div>
 
         {/* Hero text */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-56 sm:pb-44 lg:pb-40 pt-[126px] lg:pt-[166px] z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-48 sm:pb-40 lg:pb-36 pt-[120px] lg:pt-[160px] z-10">
 
           <motion.div
             key={`badge-${current}`}
@@ -364,8 +364,12 @@ export default function Home() {
           </motion.p>
           <motion.h1
             key={`title-${current}`}
-            className="font-display text-[2.25rem] leading-tight sm:text-5xl md:text-[5.5rem] lg:text-[6.5rem] font-light text-white mb-3 sm:mb-5 max-w-5xl px-2"
-            style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)' }}
+            className="font-display font-light text-white mb-3 sm:mb-5 max-w-4xl px-2"
+            style={{
+              fontSize: 'clamp(2rem, 5.5vw, 4.5rem)',
+              lineHeight: '1.02',
+              textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)',
+            }}
             initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
@@ -380,7 +384,7 @@ export default function Home() {
           />
           <motion.p
             key={`sub-${current}`}
-            className="text-white/90 font-body text-xs sm:text-base lg:text-lg max-w-sm sm:max-w-xl leading-relaxed px-2"
+            className="text-white/90 font-body text-sm sm:text-base lg:text-[1.1rem] max-w-sm sm:max-w-lg leading-relaxed px-2"
             style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -413,7 +417,7 @@ export default function Home() {
         </motion.button>
 
         {/* Progress bar + dots */}
-        <div className="absolute bottom-44 sm:bottom-36 lg:bottom-32 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
+        <div className="absolute bottom-40 sm:bottom-32 lg:bottom-28 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
           <div className="flex gap-2">
             {SLIDES.map((_, i) => (
               <button key={i} onClick={() => goTo(i)} className="relative overflow-hidden rounded-full transition-all">
