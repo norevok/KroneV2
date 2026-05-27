@@ -128,12 +128,13 @@ export default function AdminCreditDashboard() {
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
+      // CREDIT OPTIMIZED: Reduced limits — credit dashboard must not itself waste credits
       const [creditLogs, reservations, intents, slackLogs, emailLogs] = await Promise.all([
-        base44.entities.CreditUsageLog.list('-created_date', 100).catch(() => []),
-        base44.entities.RestaurantReservation.list('-created_date', 50).catch(() => []),
-        base44.entities.HotelBookingIntent.list('-created_date', 50).catch(() => []),
-        base44.entities.SlackLog.list('-created_date', 30).catch(() => []),
-        base44.entities.EmailLog.list('-created_date', 30).catch(() => []),
+        base44.entities.CreditUsageLog.list('-created_date', 30).catch(() => []),
+        base44.entities.RestaurantReservation.list('-created_date', 20).catch(() => []),
+        base44.entities.HotelBookingIntent.list('-created_date', 20).catch(() => []),
+        base44.entities.SlackLog.list('-created_date', 20).catch(() => []),
+        base44.entities.EmailLog.list('-created_date', 20).catch(() => []),
       ]);
 
       setLogs(creditLogs);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { useLang } from '@/lib/useLang';
@@ -37,6 +37,7 @@ export default function Dashboard() {
   const [chartData, setChartData] = useState({ activityByDay: [], statusBreakdown: [], bookingSummary: [] });
   const [recentReservations, setRecentReservations] = useState([]);
   const [pendingAlerts, setPendingAlerts] = useState([]);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   useEffect(() => {
     base44.auth.me().then(u => {
@@ -50,13 +51,13 @@ export default function Dashboard() {
   async function loadData() {
     setLoading(true);
     const today = new Date().toISOString().split('T')[0];
-    // Paginated limits — minimal fetch, no background refresh, no polling
+    // CREDIT OPTIMIZED: Minimal limits — dashboard shows overview only, not full history
     const [reservations, intents, messages, vouchers, docs] = await Promise.all([
-      base44.entities.RestaurantReservation.list('-created_date', 200).catch(() => []),
-      base44.entities.HotelBookingIntent.list('-created_date', 100).catch(() => []),
-      base44.entities.GuestMessage.list('-created_date', 50).catch(() => []),
-      base44.entities.GiftVoucher.list('-created_date', 50).catch(() => []),
-      base44.entities.GuestDocument.list('-created_date', 50).catch(() => []),
+      base44.entities.RestaurantReservation.list('-created_date', 30).catch(() => []),
+      base44.entities.HotelBookingIntent.list('-created_date', 20).catch(() => []),
+      base44.entities.GuestMessage.list('-created_date', 20).catch(() => []),
+      base44.entities.GiftVoucher.list('-created_date', 20).catch(() => []),
+      base44.entities.GuestDocument.list('-created_date', 20).catch(() => []),
     ]);
 
     const confirmed = reservations.filter(r => r.status === 'confirmed').length;
@@ -109,6 +110,7 @@ export default function Dashboard() {
     });
 
     setChartData({ activityByDay, statusBreakdown, bookingSummary });
+    setLastUpdated(new Date());
     setLoading(false);
   }
 
@@ -146,7 +148,8 @@ export default function Dashboard() {
               {format(new Date(), 'EEEE, d. MMMM yyyy')} · {user?.email}
             </p>
             <p className="text-[#8A7A6A] text-[10px] font-body mt-0.5">
-              {lang === 'de' ? 'Daten werden nur bei manuellem Refresh aktualisiert' : 'Data updates on manual refresh only'}
+              {lang === 'de' ? 'Manueller Refresh · Letzte 30 Reservierungen' : 'Manual refresh · Last 30 reservations'}
+              {lastUpdated && <span className="ml-2 text-[#8A7A6A]/60">· {lang === 'de' ? 'Aktualisiert' : 'Updated'}: {format(lastUpdated, 'HH:mm')}</span>}
             </p>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
