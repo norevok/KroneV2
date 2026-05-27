@@ -305,8 +305,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
 
-      {/* ── HERO — Premium 3D Ken Burns Slider ── */}
-      <div className="relative h-screen min-h-[600px] max-h-[900px] overflow-hidden">
+      {/* ── HERO — Full cinematic 88–100vh ── */}
+      <div className="relative overflow-hidden" style={{ height: '100vh', minHeight: '680px' }}>
         {/* Slides with Ken Burns zoom effect */}
         {SLIDES.map((s, i) => (
           <AnimatePresence key={i}>
@@ -343,7 +343,7 @@ export default function Home() {
         </div>
 
         {/* Hero text */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-52 sm:pb-40 lg:pb-36 pt-[126px] lg:pt-[166px] z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-56 sm:pb-44 lg:pb-40 pt-[126px] lg:pt-[166px] z-10">
 
           <motion.div
             key={`badge-${current}`}
@@ -364,7 +364,7 @@ export default function Home() {
           </motion.p>
           <motion.h1
             key={`title-${current}`}
-            className="font-display text-[2rem] leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-3 sm:mb-5 max-w-4xl px-2"
+            className="font-display text-[2.25rem] leading-tight sm:text-5xl md:text-[5.5rem] lg:text-[6.5rem] font-light text-white mb-3 sm:mb-5 max-w-5xl px-2"
             style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)' }}
             initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -424,7 +424,7 @@ export default function Home() {
         </div>
 
         {/* Floating booking bar */}
-        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-8 pb-6 sm:pb-8 z-10">
+        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-8 pb-6 sm:pb-8 lg:pb-10 z-10">
           <HeroBookingBar lang={lang} />
         </div>
       </div>
@@ -496,7 +496,7 @@ export default function Home() {
                   onClick={() => base44.auth.redirectToLogin(window.location.href)}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg ring-2 ring-[#C9A96E]/40"
+                  className="px-8 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white font-body font-bold text-sm tracking-widest uppercase rounded-full transition-all shadow-[0_6px_24px_rgba(139,105,20,0.35)] hover:shadow-[0_10px_32px_rgba(139,105,20,0.5)] hover:-translate-y-0.5"
                 >
                   {c.register}
                 </motion.button>
@@ -504,7 +504,7 @@ export default function Home() {
                   onClick={() => base44.auth.redirectToLogin(window.location.href)}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-4 bg-[#17352C] hover:bg-[#0F2920] text-white font-body text-sm font-bold tracking-widest uppercase rounded-lg transition-all shadow-lg ring-2 ring-[#17352C]/60"
+                  className="px-8 py-4 border border-white/25 text-white/80 hover:text-white hover:border-white/50 font-body text-sm font-semibold tracking-widest uppercase rounded-full transition-all hover:-translate-y-0.5"
                 >
                   {lang === 'de' ? 'Anmelden' : lang === 'en' ? 'Sign In' : 'Accedi'}
                 </motion.button>
@@ -512,7 +512,7 @@ export default function Home() {
             ) : (
               <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link to="/account"
-                  className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg inline-flex items-center gap-2">
+                  className="px-8 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white font-body font-bold text-sm tracking-widest uppercase rounded-full transition-all shadow-[0_6px_24px_rgba(139,105,20,0.35)] hover:-translate-y-0.5 inline-flex items-center gap-2">
                   {c.account_cta} <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
@@ -603,7 +603,7 @@ export default function Home() {
                 ))}
               </div>
               <Link to="/rooms"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-lg">
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white rounded-full text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(139,105,20,0.35)] hover:shadow-[0_10px_32px_rgba(139,105,20,0.45)] hover:-translate-y-0.5">
                 {c.rooms_cta} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -663,15 +663,15 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
                 <Link to="/reserve"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all min-w-0">
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white rounded-full text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_20px_rgba(139,105,20,0.3)] hover:-translate-y-0.5 min-w-0">
                   <UtensilsCrossed className="w-4 h-4 flex-shrink-0" /> {c.restaurant_reserve}
                 </Link>
                 <Link to="/menu"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all min-w-0">
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 border border-white/25 text-white/70 hover:text-white hover:border-[#C9A96E]/60 rounded-full text-sm tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5 min-w-0">
                   {lang === 'de' ? 'Menü ansehen' : lang === 'en' ? 'View Menu' : 'Menù'} <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </Link>
                 <Link to="/weddings"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 border-2 border-white/15 text-white/50 hover:text-white/80 hover:border-white/30 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all min-w-0">
+                  className="inline-flex items-center justify-center gap-2 px-6 py-4 border border-white/15 text-white/50 hover:text-white/80 hover:border-white/30 rounded-full text-sm tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5 min-w-0">
                   {lang === 'de' ? 'Event anfragen' : lang === 'en' ? 'Enquire Event' : 'Evento'}
                 </Link>
               </div>

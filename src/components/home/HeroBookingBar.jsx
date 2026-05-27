@@ -115,102 +115,83 @@ export default function HeroBookingBar({ lang = 'de' }) {
       <form onSubmit={handleSearch}>
 
         {/* ── DESKTOP ── */}
-        <div className="hidden md:block bg-white rounded-2xl overflow-hidden"
-          style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.18)' }}>
+        <div className="hidden md:flex flex-col bg-[#0F0E0B]/85 backdrop-blur-xl rounded-2xl overflow-hidden border border-[#C9A96E]/20"
+          style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,110,0.1)' }}>
 
-          {/* Top label bar — like Marriott "Find your destination" */}
-          <div className="px-5 pt-3 pb-0 border-b border-stone-100">
-            <p className="text-[9px] font-body font-bold text-[#8B6914] uppercase tracking-[0.3em]">{c.eyebrow}</p>
+          {/* Top — centered location header like Marriott */}
+          <div className="px-6 pt-5 pb-4 border-b border-white/8 text-center">
+            <div className="flex items-center justify-center gap-2">
+              <MapPin className="w-3.5 h-3.5 text-[#C9A96E]" />
+              <p className="text-white font-body font-semibold text-sm tracking-wide">{c.dest_value} <span className="text-[#C9A96E]">by Ammesso</span></p>
+            </div>
+            <p className="text-white/35 text-[10px] font-body mt-0.5 tracking-widest">{c.dest_sub}</p>
           </div>
 
           <div className="flex items-stretch">
-            {/* Destination — selected/highlighted like Marriott */}
-            <div className="flex items-center gap-3 px-5 py-4 border-r border-stone-100 min-w-[200px] bg-[#F2E8D0]">
-              <div className="w-9 h-9 rounded-full bg-[#8B6914] flex items-center justify-center flex-shrink-0 shadow-sm">
-                <MapPin className="w-4 h-4 text-white" />
-              </div>
-              <div>
-                <p className="text-[11px] font-body font-bold text-[#1C1714] leading-tight">{c.dest_value}</p>
-                <p className="text-[10px] font-body text-[#8B6914]/70 leading-tight mt-0.5">{c.dest_sub}</p>
-              </div>
-              {/* "Selected" checkmark */}
-              <div className="ml-auto w-5 h-5 rounded-full bg-[#8B6914] flex items-center justify-center flex-shrink-0">
-                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12">
-                  <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </div>
-
             {/* Check-in */}
-            <div className="relative flex items-center gap-3 px-5 py-4 border-r border-stone-100 flex-1 min-w-[150px] hover:bg-stone-50 transition-colors cursor-pointer group">
-              <div className="w-8 h-8 rounded-lg bg-stone-100 group-hover:bg-[#8B6914]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                <Calendar className="w-3.5 h-3.5 text-stone-500 group-hover:text-[#8B6914] transition-colors" />
+            <div className="relative flex items-center gap-3 px-6 py-4 border-r border-white/8 flex-1 hover:bg-white/4 transition-colors cursor-pointer group">
+              <div className="w-8 h-8 rounded-lg bg-[#C9A96E]/10 group-hover:bg-[#C9A96E]/20 flex items-center justify-center flex-shrink-0 transition-colors">
+                <Calendar className="w-3.5 h-3.5 text-[#C9A96E]" />
               </div>
               <div className="w-full">
-                <p className="text-[9px] font-body font-bold text-stone-400 uppercase tracking-widest mb-0.5">{c.checkin}</p>
-                <p className={`text-[14px] font-body font-semibold leading-tight ${checkIn ? 'text-[#1C1714]' : 'text-stone-300'}`}>
+                <p className="text-[9px] font-body font-bold text-white/30 uppercase tracking-widest mb-0.5">{c.checkin}</p>
+                <p className={`text-sm font-body font-semibold leading-tight ${checkIn ? 'text-white' : 'text-white/25'}`}>
                   {fmtDate(checkIn) || c.select_date}
                 </p>
               </div>
-              <input
-                type="date" value={checkIn} min={today}
+              <input type="date" value={checkIn} min={today}
                 onChange={e => handleCheckInChange(e.target.value)}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-              />
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
             </div>
 
             {/* Nights badge */}
             {nights > 0 && (
-              <div className="flex items-center justify-center px-3 border-r border-stone-100 bg-[#8B6914]/6 flex-shrink-0 min-w-[56px]">
+              <div className="flex items-center justify-center px-4 border-r border-white/8 bg-[#C9A96E]/8 flex-shrink-0 min-w-[60px]">
                 <div className="flex flex-col items-center">
-                  <Moon className="w-3 h-3 text-[#8B6914] mb-0.5" />
-                  <span className="text-[12px] font-body font-bold text-[#8B6914] leading-none">{nights}</span>
-                  <span className="text-[8px] font-body text-stone-400 leading-none">{nights === 1 ? c.night : c.nights}</span>
+                  <Moon className="w-3 h-3 text-[#C9A96E] mb-0.5" />
+                  <span className="text-sm font-body font-bold text-[#C9A96E] leading-none">{nights}</span>
+                  <span className="text-[8px] font-body text-white/30 leading-none">{nights === 1 ? c.night : c.nights}</span>
                 </div>
               </div>
             )}
 
             {/* Check-out */}
-            <div className="relative flex items-center gap-3 px-5 py-4 border-r border-stone-100 flex-1 min-w-[150px] hover:bg-stone-50 transition-colors cursor-pointer group">
-              <div className="w-8 h-8 rounded-lg bg-stone-100 group-hover:bg-[#8B6914]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                <Calendar className="w-3.5 h-3.5 text-stone-500 group-hover:text-[#8B6914] transition-colors" />
+            <div className="relative flex items-center gap-3 px-6 py-4 border-r border-white/8 flex-1 hover:bg-white/4 transition-colors cursor-pointer group">
+              <div className="w-8 h-8 rounded-lg bg-[#C9A96E]/10 group-hover:bg-[#C9A96E]/20 flex items-center justify-center flex-shrink-0 transition-colors">
+                <Calendar className="w-3.5 h-3.5 text-[#C9A96E]" />
               </div>
               <div className="w-full">
-                <p className="text-[9px] font-body font-bold text-stone-400 uppercase tracking-widest mb-0.5">{c.checkout}</p>
-                <p className={`text-[14px] font-body font-semibold leading-tight ${checkOut ? 'text-[#1C1714]' : 'text-stone-300'}`}>
+                <p className="text-[9px] font-body font-bold text-white/30 uppercase tracking-widest mb-0.5">{c.checkout}</p>
+                <p className={`text-sm font-body font-semibold leading-tight ${checkOut ? 'text-white' : 'text-white/25'}`}>
                   {fmtDate(checkOut) || c.select_date}
                 </p>
               </div>
-              <input
-                type="date" value={checkOut} min={checkoutMin}
+              <input type="date" value={checkOut} min={checkoutMin}
                 onChange={e => setCheckOut(e.target.value)}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-              />
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
             </div>
 
             {/* Guests */}
-            <div className="relative flex items-center gap-3 px-5 py-4 border-r border-stone-100 min-w-[140px] hover:bg-stone-50 transition-colors group">
-              <div className="w-8 h-8 rounded-lg bg-stone-100 group-hover:bg-[#8B6914]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                <Users className="w-3.5 h-3.5 text-stone-500 group-hover:text-[#8B6914] transition-colors" />
+            <div className="relative flex items-center gap-3 px-6 py-4 border-r border-white/8 min-w-[150px] hover:bg-white/4 transition-colors group">
+              <div className="w-8 h-8 rounded-lg bg-[#C9A96E]/10 group-hover:bg-[#C9A96E]/20 flex items-center justify-center flex-shrink-0 transition-colors">
+                <Users className="w-3.5 h-3.5 text-[#C9A96E]" />
               </div>
               <div className="w-full">
-                <p className="text-[9px] font-body font-bold text-stone-400 uppercase tracking-widest mb-0.5">{c.guests}</p>
+                <p className="text-[9px] font-body font-bold text-white/30 uppercase tracking-widest mb-0.5">{c.guests}</p>
                 <div className="flex items-center gap-1">
-                  <span className="text-[14px] font-body font-semibold text-[#1C1714] leading-tight">{adults} {c.adults_label}</span>
-                  <ChevronDown className="w-3.5 h-3.5 text-stone-400" />
+                  <span className="text-sm font-body font-semibold text-white leading-tight">{adults} {c.adults_label}</span>
+                  <ChevronDown className="w-3 h-3 text-white/30" />
                 </div>
                 <select value={adults} onChange={e => setAdults(e.target.value)}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                  {[1,2,3,4,5,6].map(n => (
-                    <option key={n} value={n}>{n} {c.adults_full}</option>
-                  ))}
+                  {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n} {c.adults_full}</option>)}
                 </select>
               </div>
             </div>
 
             {/* CTA */}
             <button type="submit"
-              className="px-7 bg-[#8B6914] hover:bg-[#7A5A0F] text-white font-body font-bold text-[11px] tracking-[0.15em] uppercase transition-all flex items-center gap-2 flex-shrink-0 min-w-[170px] justify-center hover:shadow-lg">
+              className="px-8 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white font-body font-bold text-[11px] tracking-[0.18em] uppercase transition-all flex items-center gap-2 flex-shrink-0 min-w-[180px] justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] hover:shadow-[0_0_24px_rgba(201,169,110,0.3)]">
               <Search className="w-4 h-4" />
               {c.cta}
             </button>
@@ -218,43 +199,36 @@ export default function HeroBookingBar({ lang = 'de' }) {
         </div>
 
         {/* ── MOBILE ── */}
-        <div className="md:hidden bg-white rounded-2xl overflow-hidden border border-white/20"
-          style={{ boxShadow: '0 20px 50px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.15)' }}>
+        <div className="md:hidden bg-[#0F0E0B]/90 backdrop-blur-xl rounded-2xl overflow-hidden border border-[#C9A96E]/20"
+          style={{ boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}>
 
-          {/* Destination pill */}
-          <div className="flex items-center gap-3 px-4 py-3 bg-[#F2E8D0] border-b border-[#C9A96E]/20">
-            <div className="w-7 h-7 rounded-full bg-[#8B6914] flex items-center justify-center flex-shrink-0">
-              <MapPin className="w-3.5 h-3.5 text-white" />
-            </div>
-            <div className="flex-1">
-              <p className="text-[10px] font-body font-bold text-[#1C1714] leading-tight">{c.dest_value}</p>
-              <p className="text-[9px] font-body text-[#8B6914]/70">{c.dest_sub}</p>
-            </div>
-            <div className="w-4 h-4 rounded-full bg-[#8B6914] flex items-center justify-center">
-              <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 12 12">
-                <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+          {/* Destination header */}
+          <div className="flex items-center justify-center gap-2 px-4 py-3 bg-[#C9A96E]/8 border-b border-[#C9A96E]/15">
+            <MapPin className="w-3.5 h-3.5 text-[#C9A96E] flex-shrink-0" />
+            <div className="text-center">
+              <p className="text-white text-xs font-body font-semibold leading-tight">{c.dest_value} <span className="text-[#C9A96E]">by Ammesso</span></p>
+              <p className="text-white/35 text-[9px] font-body">{c.dest_sub}</p>
             </div>
           </div>
 
           {/* Date row */}
-          <div className="grid grid-cols-2 divide-x divide-stone-100">
-            <div className="relative px-4 py-4 bg-white min-h-[68px] hover:bg-stone-50 transition-colors">
-              <p className="text-[9px] font-body font-bold text-stone-400 uppercase tracking-widest mb-1">{c.checkin}</p>
-              <p className={`text-base font-body font-bold leading-tight ${checkIn ? 'text-[#1C1714]' : 'text-stone-300'}`}>
+          <div className="grid grid-cols-2 divide-x divide-white/8">
+            <div className="relative px-4 py-4 min-h-[68px] hover:bg-white/4 transition-colors">
+              <p className="text-[9px] font-body font-bold text-white/30 uppercase tracking-widest mb-1">{c.checkin}</p>
+              <p className={`text-base font-body font-bold leading-tight ${checkIn ? 'text-white' : 'text-white/25'}`}>
                 {fmtDate(checkIn) || '——'}
               </p>
               <input type="date" value={checkIn} min={today}
                 onChange={e => handleCheckInChange(e.target.value)}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
             </div>
-            <div className="relative px-4 py-4 bg-white min-h-[68px] hover:bg-stone-50 transition-colors">
-              <p className="text-[9px] font-body font-bold text-stone-400 uppercase tracking-widest mb-1">{c.checkout}</p>
-              <p className={`text-base font-body font-bold leading-tight ${checkOut ? 'text-[#1C1714]' : 'text-stone-300'}`}>
+            <div className="relative px-4 py-4 min-h-[68px] hover:bg-white/4 transition-colors">
+              <p className="text-[9px] font-body font-bold text-white/30 uppercase tracking-widest mb-1">{c.checkout}</p>
+              <p className={`text-base font-body font-bold leading-tight ${checkOut ? 'text-white' : 'text-white/25'}`}>
                 {fmtDate(checkOut) || '——'}
               </p>
               {nights > 0 && (
-                <span className="absolute top-2 right-3 text-[9px] font-body font-bold text-[#8B6914] bg-[#8B6914]/10 rounded-full px-1.5 py-0.5">
+                <span className="absolute top-2 right-3 text-[9px] font-body font-bold text-[#C9A96E] bg-[#C9A96E]/12 rounded-full px-1.5 py-0.5">
                   {nights} {nights === 1 ? c.night : c.nights}
                 </span>
               )}
@@ -265,12 +239,12 @@ export default function HeroBookingBar({ lang = 'de' }) {
           </div>
 
           {/* Guests row */}
-          <div className="relative flex items-center gap-3 px-4 py-3 border-t border-stone-100 bg-white">
-            <Users className="w-4 h-4 text-stone-400 flex-shrink-0" />
-            <p className="text-[9px] font-body font-bold text-stone-400 uppercase tracking-widest flex-shrink-0">{c.guests}:</p>
+          <div className="relative flex items-center gap-3 px-4 py-3 border-t border-white/8">
+            <Users className="w-4 h-4 text-[#C9A96E]/60 flex-shrink-0" />
+            <p className="text-[9px] font-body font-bold text-white/30 uppercase tracking-widest flex-shrink-0">{c.guests}:</p>
             <div className="flex items-center gap-1 flex-1">
-              <span className="text-sm font-body font-semibold text-[#1C1714]">{adults} {c.adults_full}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-stone-400" />
+              <span className="text-sm font-body font-semibold text-white">{adults} {c.adults_full}</span>
+              <ChevronDown className="w-3.5 h-3.5 text-white/30" />
             </div>
             <select value={adults} onChange={e => setAdults(e.target.value)}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10 min-h-[44px]">
@@ -280,7 +254,7 @@ export default function HeroBookingBar({ lang = 'de' }) {
 
           {/* Search button */}
           <button type="submit"
-            className="w-full py-4 bg-[#8B6914] hover:bg-[#7A5A0F] active:bg-[#6A4A0A] text-white font-body font-bold text-sm tracking-widest uppercase transition-all flex items-center justify-center gap-2 min-h-[52px]">
+            className="w-full py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white font-body font-bold text-sm tracking-widest uppercase transition-all flex items-center justify-center gap-2 min-h-[52px]">
             <Search className="w-4 h-4" />
             {c.cta}
           </button>

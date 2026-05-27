@@ -1,7 +1,8 @@
 import { MapPin, Navigation } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 
-const MAPS_URL = 'https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5';
+const MAPS_URL = 'https://maps.app.goo.gl/GF5S8i2vASmpA7jUA';
+const MAPS_EMBED = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2604.2316221936717!2d9.8452029!3d49.2530556!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47985de90735ea63%3A0x86445a21b13205c1!2sKrone%20Langenburg%20by%20Ammesso!5e0!3m2!1sde!2sth!4v1779880134107!5m2!1sde!2sth';
 
 const COPY = {
   de: {
@@ -42,7 +43,7 @@ export default function KroneLocationSection({ compact = false, darkBg = false }
       <div className="relative w-full" style={{ paddingBottom: compact ? '45%' : '56%', minHeight: compact ? 200 : 280 }}>
         <iframe
           title="Google Maps Karte – Krone Langenburg by Ammesso"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.0!2d9.8592!3d49.2505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479823c9b8bfcd47%3A0x5dfcdf6e39bc5a5!2sKrone%20Langenburg%20by%20Ammesso!5e0!3m2!1sde!2sde!4v1716000000000!5m2!1sde!2sde"
+          src={MAPS_EMBED}
           width="100%"
           height="100%"
           style={{ border: 0, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
