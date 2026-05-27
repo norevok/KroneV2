@@ -301,11 +301,18 @@ export default function Contact() {
                   <a href={`mailto:${s.email_info}`} className="text-[#4A3F35] hover:text-[#8B6914] transition-colors">{s.email_info}</a>
                 </li>
               </ul>
-              <a href="https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5"
-                target="_blank" rel="noopener noreferrer"
-                className="mt-5 flex items-center justify-center gap-2 py-3 border border-[#C9A96E]/30 text-[#8B6914] text-xs tracking-[0.2em] uppercase font-body rounded-xl hover:bg-[#8B6914]/5 transition-colors">
-                <Navigation className="w-3.5 h-3.5" /> {t.directions}
-              </a>
+              <div className="mt-5 flex gap-2">
+                <a href="https://maps.app.goo.gl/GF5S8i2vASmpA7jUA"
+                  target="_blank" rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] text-white text-xs tracking-[0.2em] uppercase font-body font-bold rounded-xl hover:from-[#9A7520] hover:to-[#D4B87C] transition-all shadow-md hover:-translate-y-0.5">
+                  <Navigation className="w-3.5 h-3.5" /> {t.directions}
+                </a>
+                <a href="https://maps.app.goo.gl/GF5S8i2vASmpA7jUA"
+                  target="_blank" rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 border border-[#C9A96E]/30 text-[#8B6914] text-xs tracking-[0.2em] uppercase font-body rounded-xl hover:bg-[#8B6914]/5 transition-colors">
+                  <MapPin className="w-3.5 h-3.5" /> {lang === 'de' ? 'In Maps öffnen' : lang === 'en' ? 'Open in Maps' : 'Apri Maps'}
+                </a>
+              </div>
             </motion.div>
 
             {/* Hours */}
