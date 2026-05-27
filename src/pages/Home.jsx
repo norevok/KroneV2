@@ -15,8 +15,9 @@ function RestaurantBlock({ lang }) {
   const day = now.getDay();
   const hour = now.getHours() + now.getMinutes() / 60;
   let isOpen = false;
-  if (day === 0) isOpen = hour >= 12 && hour < 21;
-  else if (day >= 2 && day <= 6) isOpen = (hour >= 12 && hour < 14.5) || (hour >= 18 && hour < 22.5);
+  // Mo (1) = Ruhetag, Di–Sa (2–6): 12–14:30 & 17:30–22:00, So (0): 12–20:00
+  if (day === 0) isOpen = hour >= 12 && hour < 20;
+  else if (day >= 2 && day <= 6) isOpen = (hour >= 12 && hour < 14.5) || (hour >= 17.5 && hour < 22);
 
   return (
     <div className="relative overflow-hidden h-auto">
@@ -48,27 +49,27 @@ function RestaurantBlock({ lang }) {
                   ? (lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora')
                   : (lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso')}
               </span>
-              <span className="text-white/80 text-sm font-body font-medium hidden sm:inline"
+              <span className="text-white/90 text-sm font-body font-medium hidden sm:inline"
                     style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
-                · {lang === 'de' ? 'Di–Sa 12–14:30 & 18–22:30 · So 12–21 Uhr' : 'Tue–Sat 12–14:30 & 18–22:30 · Sun 12–21'}
+                · {lang === 'de' ? 'Di–Sa 12–14:30 & 17:30–22:00 · So 12–20:00 · Mo Ruhetag' : 'Tue–Sat 12–14:30 & 17:30–22:00 · Sun 12–20:00 · Mon closed'}
               </span>
             </div>
             {/* Mobile hours */}
-            <p className="text-white/80 text-xs font-body font-medium mt-1 sm:hidden"
+            <p className="text-white/90 text-xs font-body font-medium mt-1 sm:hidden"
                style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
-              {lang === 'de' ? 'Di–Sa 12–14:30 & 18–22:30 · So 12–21 Uhr' : 'Tue–Sat 12–14:30 & 18–22:30 · Sun 12–21'}
+              {lang === 'de' ? 'Di–Sa 12–14:30 & 17:30–22:00 · So 12–20:00 · Mo Ruhetag' : 'Tue–Sat 12–14:30 & 17:30–22:00 · Sun 12–20:00 · Mon closed'}
             </p>
           </div>
 
           {/* Right: CTAs */}
           <div className="flex items-center gap-3 flex-shrink-0 flex-wrap">
             <Link to="/menu"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-white hover:bg-[#F5F0E8] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg border border-white/80">
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg ring-2 ring-[#C9A96E]/50 hover:ring-[#B8924A]/70">
               <BookOpen className="w-3.5 h-3.5" />
               {lang === 'de' ? 'Speisekarte' : lang === 'en' ? 'Menu' : 'Menù'}
             </Link>
             <Link to="/reserve"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg ring-2 ring-[#C9A96E]/60">
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#17352C] hover:bg-[#0F2920] text-white rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg ring-2 ring-[#17352C]/60 hover:ring-[#17352C]/80">
               <UtensilsCrossed className="w-3.5 h-3.5" />
               {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota'}
             </Link>
@@ -495,7 +496,7 @@ export default function Home() {
                   onClick={() => base44.auth.redirectToLogin(window.location.href)}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg"
+                  className="px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] font-body font-bold text-sm tracking-widest uppercase rounded-lg transition-all shadow-lg ring-2 ring-[#C9A96E]/40"
                 >
                   {c.register}
                 </motion.button>
@@ -503,9 +504,9 @@ export default function Home() {
                   onClick={() => base44.auth.redirectToLogin(window.location.href)}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-4 border-2 border-white/25 text-white/70 hover:text-white hover:border-white/50 font-body text-sm font-semibold tracking-wider uppercase rounded-lg transition-all"
+                  className="px-8 py-4 bg-[#17352C] hover:bg-[#0F2920] text-white font-body text-sm font-bold tracking-widest uppercase rounded-lg transition-all shadow-lg ring-2 ring-[#17352C]/60"
                 >
-                  {c.already}
+                  {lang === 'de' ? 'Anmelden' : lang === 'en' ? 'Sign In' : 'Accedi'}
                 </motion.button>
               </>
             ) : (
@@ -642,9 +643,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden h-72 sm:h-96">
-              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85"
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=95"
                 alt="Restaurant Krone Langenburg by Ammesso — mediterrane Küche Langenburg"
-                className="w-full h-full object-cover" loading="lazy" />
+                className="w-full h-full object-cover object-center" loading="lazy" />
             </div>
             <div className="order-1 lg:order-2">
               <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body mb-3">
