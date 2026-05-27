@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, UtensilsCrossed, BedDouble, Star, MapPin, Gift, Users, Wifi, Coffee, Check, ArrowRight, Calendar, Sparkles, BookOpen } from 'lucide-react';
 import { useLang } from '@/lib/useLang';
 import HeroBookingBar from '@/components/home/HeroBookingBar';
 import EventsBanner from '@/components/home/EventsBanner';
@@ -30,33 +30,40 @@ function RestaurantBlock({ lang }) {
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center max-w-6xl mx-auto px-4 sm:px-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4 sm:gap-0">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4 sm:gap-3">
 
           {/* Left: name + status */}
           <div>
-            <p className="font-display text-xl sm:text-2xl font-light text-white leading-tight">
+            <p className="font-display text-xl sm:text-2xl font-light text-white leading-tight drop-shadow-md">
               Krone Langenburg <span className="text-[#C9A96E] italic">by Ammesso</span>
             </p>
-            <div className="flex items-center gap-2 mt-1.5">
+            <div className="flex items-center gap-2 mt-1.5 flex-wrap">
               <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
-              <span className={`text-xs font-body font-semibold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}>
+              <span className={`text-xs font-body font-bold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}>
                 {isOpen
                   ? (lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora')
                   : (lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso')}
               </span>
-              <span className="text-white/30 text-xs font-body hidden sm:inline">·</span>
-              <span className="text-white/40 text-xs font-body hidden sm:inline">
+              <span className="text-white/60 text-xs font-body hidden sm:inline">·</span>
+              <span className="text-white/90 text-xs font-body font-medium hidden sm:inline">
                 {lang === 'de' ? 'Di–Sa 12–14:30 & 18–22:30 · So 12–21 Uhr' : 'Tue–Sat 12–14:30 & 18–22:30 · Sun 12–21'}
               </span>
             </div>
           </div>
 
-          {/* Right: CTA */}
-          <Link to="/reserve"
-            className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg">
-            <UtensilsCrossed className="w-3.5 h-3.5" />
-            {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota'}
-          </Link>
+          {/* Right: CTAs */}
+          <div className="flex items-center gap-2 flex-shrink-0 flex-wrap">
+            <Link to="/menu"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/15 hover:bg-white/25 border border-white/40 hover:border-white/70 text-white rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-md backdrop-blur-sm">
+              <BookOpen className="w-3.5 h-3.5" />
+              {lang === 'de' ? 'Speisekarte' : lang === 'en' ? 'Menu' : 'Menù'}
+            </Link>
+            <Link to="/reserve"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg ring-2 ring-[#C9A96E]/50 hover:ring-[#B8924A]/70">
+              <UtensilsCrossed className="w-3.5 h-3.5" />
+              {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota'}
+            </Link>
+          </div>
 
         </div>
       </div>
