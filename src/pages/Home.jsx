@@ -19,47 +19,56 @@ function RestaurantBlock({ lang }) {
   else if (day >= 2 && day <= 6) isOpen = (hour >= 12 && hour < 14.5) || (hour >= 18 && hour < 22.5);
 
   return (
-    <div className="relative overflow-hidden h-28 sm:h-32">
-      {/* Background — restaurant table with view */}
+    <div className="relative overflow-hidden h-auto">
+      {/* Background — high quality, sharp, minimal overlay */}
       <img
-        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85"
+        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=95"
         alt="Restaurant Krone Langenburg by Ammesso — Atmosphäre"
-        className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ filter: 'brightness(0.45) contrast(1.1)' }}
       />
-      <div className="absolute inset-0 bg-[#1C1714]/72" />
+      {/* Subtle gradient only at bottom for readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10" />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center max-w-6xl mx-auto px-4 sm:px-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4 sm:gap-3">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-5">
 
           {/* Left: name + status */}
           <div>
-            <p className="font-display text-xl sm:text-2xl font-light text-white leading-tight drop-shadow-md">
-              Krone Langenburg <span className="text-[#C9A96E] italic">by Ammesso</span>
+            <p className="font-display text-2xl sm:text-3xl font-semibold text-white leading-tight"
+               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.6)' }}>
+              Krone Langenburg <span className="text-[#F0C96E] italic">by Ammesso</span>
             </p>
-            <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-              <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
-              <span className={`text-xs font-body font-bold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}>
+            <div className="flex items-center gap-2 mt-2 flex-wrap">
+              <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
+              <span className={`text-sm font-body font-bold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}
+                    style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
                 {isOpen
                   ? (lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora')
                   : (lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso')}
               </span>
-              <span className="text-white/60 text-xs font-body hidden sm:inline">·</span>
-              <span className="text-white/90 text-xs font-body font-medium hidden sm:inline">
-                {lang === 'de' ? 'Di–Sa 12–14:30 & 18–22:30 · So 12–21 Uhr' : 'Tue–Sat 12–14:30 & 18–22:30 · Sun 12–21'}
+              <span className="text-white/80 text-sm font-body font-medium hidden sm:inline"
+                    style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+                · {lang === 'de' ? 'Di–Sa 12–14:30 & 18–22:30 · So 12–21 Uhr' : 'Tue–Sat 12–14:30 & 18–22:30 · Sun 12–21'}
               </span>
             </div>
+            {/* Mobile hours */}
+            <p className="text-white/80 text-xs font-body font-medium mt-1 sm:hidden"
+               style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+              {lang === 'de' ? 'Di–Sa 12–14:30 & 18–22:30 · So 12–21 Uhr' : 'Tue–Sat 12–14:30 & 18–22:30 · Sun 12–21'}
+            </p>
           </div>
 
           {/* Right: CTAs */}
-          <div className="flex items-center gap-2 flex-shrink-0 flex-wrap">
+          <div className="flex items-center gap-3 flex-shrink-0 flex-wrap">
             <Link to="/menu"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/15 hover:bg-white/25 border border-white/40 hover:border-white/70 text-white rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-md backdrop-blur-sm">
+              className="inline-flex items-center gap-2 px-5 py-3 bg-white hover:bg-[#F5F0E8] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg border border-white/80">
               <BookOpen className="w-3.5 h-3.5" />
               {lang === 'de' ? 'Speisekarte' : lang === 'en' ? 'Menu' : 'Menù'}
             </Link>
             <Link to="/reserve"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg ring-2 ring-[#C9A96E]/50 hover:ring-[#B8924A]/70">
+              className="inline-flex items-center gap-2 px-5 py-3 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg ring-2 ring-[#C9A96E]/60">
               <UtensilsCrossed className="w-3.5 h-3.5" />
               {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota'}
             </Link>
