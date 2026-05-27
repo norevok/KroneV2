@@ -608,25 +608,27 @@ export default function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {/* Doppelzimmer — Balkontür */}
-              <div className="rounded-xl overflow-hidden h-52 sm:h-60 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg"
-                  alt="Doppelzimmer mit Balkontür im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+              {/* Linke Spalte — zwei Bilder untereinander */}
+              <div className="flex flex-col gap-3">
+                <div className="rounded-xl overflow-hidden h-56 sm:h-64 shadow-md">
+                  <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg"
+                    alt="Doppelzimmer mit Balkontür im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
+                  <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
+                    alt="King Suite 2 im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
               </div>
-              {/* Doppelzimmer — Stadtblick / Talblick */}
-              <div className="rounded-xl overflow-hidden h-52 sm:h-60 mt-8 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg"
-                  alt="Doppelzimmer mit Stadtblick im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
-              </div>
-              {/* Superior Suite 2 — Favorit-Motiv */}
-              <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
-                  alt="King Suite 2 im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
-              </div>
-              {/* Panorama-Aussicht */}
-              <div className="rounded-xl overflow-hidden h-40 sm:h-44 -mt-8 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
-                  alt="Zimmer in Langenburg Hotel Krone — Panorama Aussicht" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+              {/* Rechte Spalte — zwei Bilder untereinander, versetzt */}
+              <div className="flex flex-col gap-3 mt-8">
+                <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
+                  <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg"
+                    alt="Doppelzimmer mit Stadtblick im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
+                <div className="rounded-xl overflow-hidden h-56 sm:h-64 shadow-md">
+                  <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
+                    alt="Zimmer in Langenburg Hotel Krone — Panorama Aussicht" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                </div>
               </div>
             </div>
           </div>
