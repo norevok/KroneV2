@@ -214,7 +214,7 @@ export default function GuestAccount() {
             <img
               src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
               alt="Panorama Aussicht — Krone Langenburg by Ammesso"
-              className="w-full h-full object-cover object-[center_60%]"
+              className="w-full h-full object-cover object-[center_20%]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#17352C]/80 to-transparent" />
             <div className="absolute bottom-3 left-4 flex items-center gap-2">
