@@ -212,8 +212,8 @@ export default function GuestAccount() {
         <div className="bg-white border border-[#E8DED0] rounded-2xl overflow-hidden shadow-sm mb-6">
           <div className="relative h-32 overflow-hidden">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg"
-              alt="Schloss Langenburg"
+              src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/737cda4af_krone-kingsuite-1-aussicht-panorama-01.jpg"
+              alt="Krone Langenburg by Ammesso"
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#17352C]/80 to-transparent" />
