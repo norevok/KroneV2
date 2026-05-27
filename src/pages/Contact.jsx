@@ -261,7 +261,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pt-16 sm:pt-20 pb-24">
+  <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pt-[128px] lg:pt-[170px] pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-5">
 
         {/* ── HEADER ── */}
@@ -322,11 +322,11 @@ export default function Contact() {
                 </li>
                 <li className="border-t border-[#EDE6D8] pt-3">
                   <div className="text-[#4A3F35]">{t.tue_sat}</div>
-                  <div className="text-xs text-[#8A7A6A] mt-0.5">12:00 – 14:30 · 18:00 – 22:30</div>
+                  <div className="text-xs text-[#8A7A6A] mt-0.5">12:00 – 14:30 · 17:30 – 22:00</div>
                 </li>
                 <li className="border-t border-[#EDE6D8] pt-3">
                   <div className="text-[#4A3F35]">{t.sun}</div>
-                  <div className="text-xs text-[#8A7A6A] mt-0.5">12:00 – 21:00</div>
+                  <div className="text-xs text-[#8A7A6A] mt-0.5">12:00 – 20:00</div>
                 </li>
               </ul>
             </motion.div>
@@ -476,7 +476,7 @@ export default function Contact() {
 
                     {/* Submit */}
                     <button type="submit" disabled={submitting}
-                      className="w-full py-4 bg-[#1C1714] hover:bg-[#2A2118] disabled:opacity-50 text-white rounded-full text-xs tracking-[0.2em] uppercase font-body font-semibold transition-all shadow-lg flex items-center justify-center gap-2">
+                      className="w-full py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] disabled:opacity-50 text-white rounded-full text-xs tracking-[0.2em] uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(139,105,20,0.3)] hover:shadow-[0_10px_32px_rgba(139,105,20,0.45)] hover:-translate-y-0.5 flex items-center justify-center gap-2">
                       {submitting
                         ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t.sending}</>
                         : t.send}

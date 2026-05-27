@@ -112,8 +112,8 @@ export default function Restaurant() {
   return (
     <div className="min-h-screen bg-[#171311] text-[#FAF8F5] pb-24 lg:pb-0">
 
-      {/* ── HERO ── */}
-      <div className="relative pt-[126px] lg:pt-[166px] overflow-hidden" style={{ minHeight: 'calc(70vh + 126px)' }}>
+      {/* ── HERO ── pt accounts for: mobile = utility(36)+nav(56)+banner(36)=128px | desktop = utility(36)+nav(56)+secondary(40)+banner(36)=168px */}
+      <div className="relative pt-[128px] lg:pt-[170px] overflow-hidden" style={{ minHeight: 'calc(88vh)' }}>
         {/* Warm atmospheric dining image */}
         <img
           src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=90"
@@ -140,11 +140,11 @@ export default function Restaurant() {
             <p className="text-white/90 font-body leading-relaxed max-w-2xl mb-8 text-sm sm:text-base" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>{c.intro}</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/reserve"
-                className="flex items-center justify-center gap-2 px-7 py-4 bg-[#B08A42] hover:bg-[#9E7A38] text-white rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px w-full sm:w-auto">
+                className="group inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(201,169,110,0.3)] hover:shadow-[0_10px_32px_rgba(201,169,110,0.45)] hover:-translate-y-0.5 w-full sm:w-auto">
                 <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
               </Link>
               <Link to="/menu"
-                className="flex items-center justify-center gap-2 px-7 py-4 border-2 border-white/30 text-white hover:border-white/60 hover:bg-white/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all w-full sm:w-auto">
+                className="inline-flex items-center justify-center gap-2 px-7 py-4 border-2 border-white/30 text-white hover:border-[#C9A96E]/60 hover:text-[#C9A96E] rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5 w-full sm:w-auto">
                 {c.cta_menu} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -222,15 +222,15 @@ export default function Restaurant() {
           {/* Booking CTAs */}
           <div className="space-y-4">
             <Link to="/reserve"
-              className="flex items-center justify-center gap-2.5 w-full py-4 bg-[#B08A42] hover:bg-[#9E7A38] text-white rounded-xl text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px">
+              className="flex items-center justify-center gap-2.5 w-full py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(201,169,110,0.25)] hover:shadow-[0_10px_32px_rgba(201,169,110,0.4)] hover:-translate-y-0.5">
               <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
             </Link>
             <Link to="/menu"
-              className="flex items-center justify-center gap-2.5 w-full py-4 border-2 border-[#B08A42]/40 text-[#B08A42] hover:border-[#B08A42] hover:bg-[#B08A42]/10 rounded-xl text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all">
+              className="flex items-center justify-center gap-2.5 w-full py-4 border border-[#C9A96E]/40 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5">
               {c.cta_menu}
             </Link>
             <a href={`tel:${s.phone}`}
-              className="flex items-center justify-center gap-2.5 w-full py-4 border border-white/15 text-[#D7D0C5]/60 hover:text-white hover:border-white/30 rounded-xl text-xs tracking-[0.15em] uppercase font-body font-medium transition-all">
+              className="flex items-center justify-center gap-2.5 w-full py-4 border border-white/12 text-[#D7D0C5]/55 hover:text-white hover:border-white/25 rounded-full text-xs tracking-widest uppercase font-body font-medium transition-all">
               <Phone className="w-3.5 h-3.5" /> {s.phone}
             </a>
             <p className="text-[#D7D0C5]/40 text-xs text-center font-body pt-1 leading-relaxed">{c.booking_note}</p>
@@ -358,12 +358,12 @@ export default function Restaurant() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-sm sm:max-w-none mx-auto">
           <Link to="/reserve"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 bg-[#B08A42] hover:bg-[#9E7A38] text-white rounded-lg text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-lg hover:-translate-y-px">
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_8px_28px_rgba(201,169,110,0.3)] hover:shadow-[0_12px_36px_rgba(201,169,110,0.45)] hover:-translate-y-0.5">
             <UtensilsCrossed className="w-4 h-4" />
             {c.cta_reserve}
           </Link>
           <a href={`tel:${s.phone}`}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 border-2 border-[#B08A42]/40 text-[#B08A42] hover:border-[#B08A42] hover:bg-[#B08A42]/10 rounded-lg text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all">
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 border border-[#C9A96E]/35 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5">
             <Phone className="w-4 h-4" /> {s.phone}
           </a>
         </div>

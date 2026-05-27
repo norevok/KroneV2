@@ -85,8 +85,30 @@ export default function Footer() {
   const nav = NAV[lang] || NAV.de;
 
   return (
-    <footer className="bg-[#1C1714] text-[#FAF7F2] pt-14 sm:pt-16 pb-8 border-t border-black/20">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+    <footer className="bg-[#1C1714] text-[#FAF7F2] pt-0 pb-8 border-t border-black/20">
+      {/* Premium CTA strip */}
+      <div className="border-b border-[#C9A96E]/10 py-10 sm:py-12 px-5 sm:px-8 bg-[#171411]">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div>
+            <p className="font-display text-xl sm:text-2xl font-light text-white leading-tight">
+              {lang === 'de' ? 'Bereit für Ihren Aufenthalt?' : lang === 'en' ? 'Ready for your stay?' : 'Pronti per il vostro soggiorno?'}
+            </p>
+            <p className="text-white/40 text-sm font-body mt-1">Krone Langenburg by Ammesso · Hohenlohe</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto flex-shrink-0">
+            <Link to="/booking"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_20px_rgba(201,169,110,0.3)] hover:shadow-[0_10px_28px_rgba(201,169,110,0.45)] hover:-translate-y-0.5 w-full sm:w-auto">
+              {lang === 'de' ? 'Zimmer buchen' : lang === 'en' ? 'Book a Room' : 'Prenota'}
+            </Link>
+            <Link to="/reserve"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#C9A96E]/30 text-[#C9A96E] hover:border-[#C9A96E]/60 hover:bg-[#C9A96E]/8 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5 w-full sm:w-auto">
+              {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve Table' : 'Prenota tavolo'}
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 pt-14 sm:pt-16">
 
         {/* Top grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-10 mb-12 sm:mb-14">
