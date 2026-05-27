@@ -21,15 +21,15 @@ import { useLang } from '@/lib/useLang';
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
 
 const STATUS_COLORS = {
-  new: 'bg-blue-50 border-blue-200 text-blue-700',
-  pending: 'bg-amber-50 border-amber-200 text-amber-700',
-  confirmed: 'bg-emerald-50 border-emerald-200 text-emerald-700',
-  seated: 'bg-purple-50 border-purple-200 text-purple-700',
-  completed: 'bg-gray-50 border-gray-200 text-gray-600',
-  cancelled_by_guest: 'bg-red-50 border-red-200 text-red-700',
-  cancelled_by_staff: 'bg-red-50 border-red-200 text-red-700',
-  no_show: 'bg-gray-100 border-gray-200 text-gray-500',
-  archived: 'bg-gray-50 border-gray-200 text-gray-400',
+  new: 'bg-[#1a2a3a] border-blue-700/40 text-blue-300',
+  pending: 'bg-amber-950/40 border-amber-700/40 text-amber-300',
+  confirmed: 'bg-emerald-950/40 border-emerald-700/30 text-emerald-300',
+  seated: 'bg-purple-950/40 border-purple-700/30 text-purple-300',
+  completed: 'bg-white/5 border-white/10 text-white/40',
+  cancelled_by_guest: 'bg-red-950/40 border-red-800/30 text-red-300',
+  cancelled_by_staff: 'bg-red-950/40 border-red-800/30 text-red-300',
+  no_show: 'bg-white/5 border-white/8 text-white/30',
+  archived: 'bg-white/3 border-white/6 text-white/20',
 };
 
 const STATUS_LABELS = {
