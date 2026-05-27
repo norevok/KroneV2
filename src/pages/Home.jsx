@@ -608,15 +608,15 @@ export default function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {/* Deluxe Doppelzimmer — sauberes Bett-Motiv */}
+              {/* Doppelzimmer — Balkontür */}
               <div className="rounded-xl overflow-hidden h-52 sm:h-60 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg"
-                  alt="Deluxe Doppelzimmer im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg"
+                  alt="Doppelzimmer mit Balkontür im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
-              {/* Superior Suite — Zimmerübersicht, versetzt */}
+              {/* Doppelzimmer — Stadtblick / Talblick */}
               <div className="rounded-xl overflow-hidden h-52 sm:h-60 mt-8 shadow-md">
-                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg"
-                  alt="King Suite im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg"
+                  alt="Doppelzimmer mit Stadtblick im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
               </div>
               {/* Superior Suite 2 — Favorit-Motiv */}
               <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
