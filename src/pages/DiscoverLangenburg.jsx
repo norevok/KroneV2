@@ -19,16 +19,14 @@ const ATTRACTIONS = [
   {
     id: 'jagsttal',
     icon: Mountain,
-    // Cinematic river valley panorama — warm light, lush green, emotional travel atmosphere
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=90',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Jagst_bei_Langenburg.jpg/1280px-Jagst_bei_Langenburg.jpg',
     de: { title: 'Jagsttal & Wanderungen', desc: 'Das Jagsttal gehört zu den schönsten Flusstälern Süddeutschlands. Malerische Wanderwege führen durch Wiesen, Wälder und historische Dörfer. Der Jagsttalweg verbindet auf über 200 km Kilometer Natur und Kultur.', tag: 'Wanderparadies' },
     en: { title: 'Jagst Valley & Hiking', desc: 'The Jagst valley is one of the most beautiful river valleys in southern Germany. Scenic hiking trails lead through meadows, forests and historic villages. The Jagst Valley Trail connects over 200 km of nature and culture.', tag: 'Hiking paradise' },
   },
   {
     id: 'automuseum',
     icon: Car,
-    // Vintage classic cars collection — museum hall with many historic vehicles, cinematic
-    image: 'https://images.unsplash.com/photo-1566024287286-457247b70310?w=1400&q=90',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Deutsches_Automuseum_beim_Schloss_Langenburg_-_panoramio.jpg/1280px-Deutsches_Automuseum_beim_Schloss_Langenburg_-_panoramio.jpg',
     de: { title: 'Deutsches Automuseum Schloss Langenburg', desc: 'Das Deutsche Automuseum im Schloss Langenburg zählt zu den faszinierendsten Automobilausstellungen Deutschlands. Über 80 historische Fahrzeuge — von frühen Sportwagen bis zu legendären Rennwagen — erzählen die Geschichte des Automobils in einzigartiger Schlosskulisse.', tag: '5 min zu Fuß' },
     en: { title: 'German Automotive Museum Langenburg', desc: 'The German Automotive Museum at Langenburg Castle is one of Germany\'s most fascinating car exhibitions. Over 80 historic vehicles — from early sports cars to legendary racing cars — tell the story of the automobile in a unique castle setting.', tag: '5 min walk' },
   },

@@ -725,25 +725,22 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
             {[
               {
-                // Schloss Langenburg — medieval hilltop castle Germany, real castle silhouette
-                img: 'https://images.unsplash.com/photo-1564584083593-79f2f3e1e0da?w=600&q=85',
-                alt: 'Schloss Langenburg Hohenlohe Burg',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg',
+                alt: 'Schloss Langenburg im Morgennebel — Hohenlohe',
                 label: c.chip_castle,
                 desc: lang === 'de' ? 'Historisches Schloss mit Blick ins Jagsttal.' : 'Historic castle overlooking the Jagst valley.',
                 dist: '5 Min.',
               },
               {
-                // Jagsttal — gentle German river valley, green meadows, no Alps
-                img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=85',
-                alt: 'Jagsttal Hohenlohe Natur Langenburg',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Jagst_bei_Langenburg.jpg/1280px-Jagst_bei_Langenburg.jpg',
+                alt: 'Jagsttal bei Langenburg — grüne Wiesen und Fluss',
                 label: c.chip_nature,
                 desc: lang === 'de' ? 'Natur, Ausblicke und ruhige Wege direkt vor der Tür.' : 'Nature, views and peaceful paths right at your doorstep.',
                 dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
               },
               {
-                // Classic vintage car / oldtimer — Automuseum context
-                img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=85',
-                alt: 'Deutsches Automuseum Schloss Langenburg Oldtimer',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Deutsches_Automuseum_beim_Schloss_Langenburg_-_panoramio.jpg/1280px-Deutsches_Automuseum_beim_Schloss_Langenburg_-_panoramio.jpg',
+                alt: 'Deutsches Automuseum Schloss Langenburg — Außenansicht',
                 label: c.chip_museum,
                 desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
                 dist: '5 Min.',
