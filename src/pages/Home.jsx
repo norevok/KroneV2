@@ -776,13 +776,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link to="/discover"
-                className="flex items-center justify-center px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_8px_30px_rgba(201,169,110,0.3)] w-full sm:w-auto">
+                className="flex items-center justify-center px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_8px_30px_rgba(201,169,110,0.3)] hover:shadow-[0_12px_36px_rgba(201,169,110,0.45)] hover:-translate-y-0.5 w-full sm:w-auto">
                 {c.discover_btn}
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
-              <a href="https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5" target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#C9A96E]/50 text-[#C9A96E] hover:text-white hover:border-white/50 rounded-lg text-sm tracking-widest uppercase font-body font-semibold transition-all w-full sm:w-auto">
+              <a href="https://maps.app.goo.gl/GF5S8i2vASmpA7jUA" target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#C9A96E]/50 text-[#C9A96E] hover:text-white hover:border-white/50 rounded-full text-sm tracking-widest uppercase font-body font-semibold transition-all w-full sm:w-auto hover:shadow-[0_8px_28px_rgba(201,169,110,0.2)] hover:-translate-y-0.5">
                 🗺️ {lang === 'de' ? 'Route starten' : lang === 'en' ? 'Get Directions' : 'Navigazione'}
               </a>
             </motion.div>
