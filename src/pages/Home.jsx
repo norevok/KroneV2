@@ -696,7 +696,7 @@ export default function Home() {
         {/* Background parallax image */}
         <div className="absolute inset-0">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg"
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85"
             alt="Langenburg"
             className="w-full h-full object-cover opacity-20"
             loading="lazy"
@@ -725,29 +725,28 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
             {[
               {
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg',
-                alt: 'Schloss Langenburg im Morgennebel — Hohenlohe',
+                img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=90',
+                alt: 'Schloss Langenburg — Barockschloss Hohenlohe',
                 label: c.chip_castle,
                 desc: lang === 'de' ? 'Historisches Schloss mit Blick ins Jagsttal.' : 'Historic castle overlooking the Jagst valley.',
                 dist: '5 Min.',
               },
               {
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Jagst_bei_Langenburg.jpg/1280px-Jagst_bei_Langenburg.jpg',
+                img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=90',
                 alt: 'Jagsttal bei Langenburg — grüne Wiesen und Fluss',
                 label: c.chip_nature,
                 desc: lang === 'de' ? 'Natur, Ausblicke und ruhige Wege direkt vor der Tür.' : 'Nature, views and peaceful paths right at your doorstep.',
                 dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
               },
               {
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Deutsches_Automuseum_beim_Schloss_Langenburg_-_panoramio.jpg/1280px-Deutsches_Automuseum_beim_Schloss_Langenburg_-_panoramio.jpg',
-                alt: 'Deutsches Automuseum Schloss Langenburg — Außenansicht',
+                img: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=90',
+                alt: 'Klassisches Automobil — Deutsches Automuseum Langenburg',
                 label: c.chip_museum,
                 desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
                 dist: '5 Min.',
               },
               {
-                // Hohenloher Genuss — wine glasses, warm light, regional atmosphere
-                img: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=85',
+                img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=90',
                 alt: 'Hohenloher Wein Weinberge Region Genuss',
                 label: c.chip_wine,
                 desc: lang === 'de' ? 'Wein, regionale Produkte und echte Hohenloher Gastlichkeit.' : 'Wine, regional produce and true Hohenlohe hospitality.',
