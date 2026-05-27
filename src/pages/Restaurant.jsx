@@ -22,9 +22,9 @@ export default function Restaurant() {
       mon_hours: 'Ruhetag',
       tue_sat: 'Dienstag – Samstag',
       tue_sat_lunch: '12:00 – 14:30',
-      tue_sat_dinner: '18:00 – 22:30',
+      tue_sat_dinner: '17:30 – 22:00',
       sun: 'Sonntag',
-      sun_hours: '12:00 – 21:00',
+      sun_hours: '12:00 – 20:00',
       cta_reserve: 'Tisch reservieren',
       cta_menu: 'Speisekarte ansehen',
       philosophy_title: 'Unsere Philosophie',
@@ -50,9 +50,9 @@ export default function Restaurant() {
       mon_hours: 'Closed',
       tue_sat: 'Tuesday – Saturday',
       tue_sat_lunch: '12:00 – 14:30',
-      tue_sat_dinner: '18:00 – 22:30',
+      tue_sat_dinner: '17:30 – 22:00',
       sun: 'Sunday',
-      sun_hours: '12:00 – 21:00',
+      sun_hours: '12:00 – 20:00',
       cta_reserve: 'Reserve a Table',
       cta_menu: 'View Menu',
       philosophy_title: 'Our Philosophy',
@@ -78,9 +78,9 @@ export default function Restaurant() {
       mon_hours: 'Chiuso',
       tue_sat: 'Martedì – Sabato',
       tue_sat_lunch: '12:00 – 14:30',
-      tue_sat_dinner: '18:00 – 22:30',
+      tue_sat_dinner: '17:30 – 22:00',
       sun: 'Domenica',
-      sun_hours: '12:00 – 21:00',
+      sun_hours: '12:00 – 20:00',
       cta_reserve: 'Prenota un tavolo',
       cta_menu: 'Vedi il menu',
       philosophy_title: 'La nostra filosofia',
@@ -106,8 +106,8 @@ export default function Restaurant() {
   const day = now.getDay();
   const hour = now.getHours() + now.getMinutes() / 60;
   let isOpen = false;
-  if (day === 0) isOpen = hour >= 12 && hour < 21;
-  else if (day >= 2 && day <= 6) isOpen = (hour >= 12 && hour < 14.5) || (hour >= 18 && hour < 22.5);
+  if (day === 0) isOpen = hour >= 12 && hour < 20;
+  else if (day >= 2 && day <= 6) isOpen = (hour >= 12 && hour < 14.5) || (hour >= 17.5 && hour < 22);
 
   return (
     <div className="min-h-screen bg-[#171311] text-[#FAF8F5] pb-24 lg:pb-0">
@@ -133,7 +133,7 @@ export default function Restaurant() {
                 {isOpen ? c.open_now : c.closed_now}
               </span>
               <span className="text-white/30 text-sm">·</span>
-              <span className="text-white/50 text-sm font-body hidden sm:inline">Di–Sa 12–14:30 & 18–22:30 · So 12–21</span>
+              <span className="text-white/50 text-sm font-body hidden sm:inline">Di–Sa 12–14:30 & 17:30–22:00 · So 12–20:00 · Mo Ruhetag</span>
             </div>
             <p className="text-[#B08A42] text-[10px] tracking-[0.4em] uppercase font-body mb-4">{c.label}</p>
             <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-light text-white mb-5 leading-tight" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8)' }}>{c.title}</h1>

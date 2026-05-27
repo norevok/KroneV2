@@ -112,13 +112,13 @@ function TimeGrid({ slots, usedCapacity, guests, selected, onSelect, lang }) {
       )}
       {dinnerSlots.length > 0 && (
         <div>
-          <p className="text-[10px] font-body font-semibold tracking-[0.25em] uppercase text-stone-400 mb-3">{lang === 'de' ? '🌙 Abendessen · 18:00–22:30' : lang === 'en' ? '🌙 Dinner · 18:00–22:30' : '🌙 Cena · 18:00–22:30'}</p>
+          <p className="text-[10px] font-body font-semibold tracking-[0.25em] uppercase text-stone-400 mb-3">{lang === 'de' ? '🌙 Abendessen · 17:30–22:00' : lang === 'en' ? '🌙 Dinner · 17:30–22:00' : '🌙 Cena · 17:30–22:00'}</p>
           <div className="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2">{dinnerSlots.map(s => <SlotBtn key={s} slot={s} />)}</div>
         </div>
       )}
       {sundaySlots.length > 0 && (
         <div>
-          <p className="text-[10px] font-body font-semibold tracking-[0.25em] uppercase text-stone-400 mb-3">{lang === 'de' ? '☀️ Sonntag · 12:00–21:00' : lang === 'en' ? '☀️ Sunday · 12:00–21:00' : '☀️ Domenica · 12:00–21:00'}</p>
+          <p className="text-[10px] font-body font-semibold tracking-[0.25em] uppercase text-stone-400 mb-3">{lang === 'de' ? '☀️ Sonntag · 12:00–20:00' : lang === 'en' ? '☀️ Sunday · 12:00–20:00' : '☀️ Domenica · 12:00–20:00'}</p>
           <div className="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2">{sundaySlots.map(s => <SlotBtn key={s} slot={s} />)}</div>
         </div>
       )}

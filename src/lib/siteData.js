@@ -22,10 +22,10 @@ export const SITE_DEFAULTS = {
   restaurant_closed_days: [1], // Monday closed
   restaurant_lunch_start: "12:00",
   restaurant_lunch_end: "14:30",
-  restaurant_dinner_start: "18:00",
-  restaurant_dinner_end: "22:30",
+  restaurant_dinner_start: "17:30",
+  restaurant_dinner_end: "22:00",
   restaurant_sunday_start: "12:00",
-  restaurant_sunday_end: "21:00",
+  restaurant_sunday_end: "20:00",
   social_instagram: "https://www.instagram.com/kulinarium.ammesso/",
   social_facebook: "https://www.facebook.com/pages/H%C3%A4llisches%20Kulinarium%20by%20Ammesso",
   social_tripadvisor: "https://www.tripadvisor.de/Restaurant_Review-g198538-d26012517-Reviews-Hallisches_Kulinarium_by_Ammesso-Schwabisch_Hall_Baden_Wurttemberg.html",
@@ -166,5 +166,5 @@ export const MENU_DATA = {
 };
 
 export const TIME_SLOTS_LUNCH = ["12:00","12:15","12:30","12:45","13:00","13:15","13:30","13:45","14:00","14:15"];
-export const TIME_SLOTS_DINNER = ["18:00","18:15","18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45","21:00","21:15","21:30","21:45","22:00"];
-export const TIME_SLOTS_SUNDAY = ["12:00","12:15","12:30","12:45","13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45","15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45","17:00","17:15","17:30","17:45","18:00","18:15","18:30","19:00","19:15","19:30","19:45","20:00","20:15","20:30"];
+export const TIME_SLOTS_DINNER = ["17:30","17:45","18:00","18:15","18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45","21:00","21:15","21:30","21:45","22:00"];
+export const TIME_SLOTS_SUNDAY = ["12:00","12:15","12:30","12:45","13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45","15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45","17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45","19:00","19:15","19:30","19:45","20:00"];
