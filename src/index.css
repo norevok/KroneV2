@@ -49,6 +49,35 @@
 
 @layer base {
   * { @apply border-border outline-ring/50; }
+
+  /* ── NAV HEIGHT TOKENS ──────────────────────────────────────────────
+     Utility(36) + Row1(56) + EventsBanner(34) = 126px  → mobile
+     Utility(36) + Row1(56) + Row2(40) + EventsBanner(34) = 166px → desktop lg+
+     Pages use: pt-[var(--nav-h)] — applied via .page-top class
+  ──────────────────────────────────────────────────────────────────── */
+  :root {
+    --nav-h-mobile: 126px;
+    --nav-h-desktop: 166px;
+  }
+
+  .page-top {
+    padding-top: var(--nav-h-mobile);
+  }
+  @media (min-width: 1024px) {
+    .page-top {
+      padding-top: var(--nav-h-desktop);
+    }
+  }
+
+  /* Hero variant: used for full-bleed heroes where the page controls its own top padding */
+  .hero-top {
+    padding-top: var(--nav-h-mobile);
+  }
+  @media (min-width: 1024px) {
+    .hero-top {
+      padding-top: var(--nav-h-desktop);
+    }
+  }
   
   html {
     scroll-behavior: smooth;

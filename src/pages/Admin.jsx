@@ -13,7 +13,7 @@ import { useLang } from '@/lib/useLang';
 import {
   CheckCircle, Clock, XCircle, AlertTriangle, UtensilsCrossed, Mail,
   MessageSquare, BedDouble, Heart, FileText, Download, Gift,
-  Users, Briefcase, ChevronDown, ChevronUp
+  Users, Briefcase, ChevronDown, ChevronUp, Image, BookOpen, Shield, BarChart, Calendar
 } from 'lucide-react';
 import AdminMessageCenter from '@/components/admin/AdminMessageCenter';
 import AdminShell from '@/components/admin/AdminShell';
@@ -224,6 +224,35 @@ export default function Admin() {
           <StatCard icon={Briefcase} label="Bewerbungen" value={stats.careers} color="text-cyan-400" urgent={stats.careers > 0} />
         </div>
 
+        {/* ── QUICK NAV LINKS ── */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+          {[
+            { to: '/admin/reservations', icon: UtensilsCrossed, label: 'Reservierungen', sub: 'Detail-Ansicht' },
+            { to: '/admin/guests', icon: Users, label: 'Gäste', sub: 'Profile & Buchungen' },
+            { to: '/admin/beds24-bookings', icon: BedDouble, label: 'Beds24 Buchungen', sub: 'Hotel-Buchungen' },
+            { to: '/admin/calendar', icon: Calendar, label: 'Kalender', sub: 'Tagesansicht' },
+            { to: '/admin/hero', icon: Image, label: 'Hero-Slides', sub: 'Startseite bearbeiten' },
+            { to: '/admin/opening-hours', icon: Clock, label: 'Öffnungszeiten', sub: 'Sonderregelungen' },
+            { to: '/admin/menu', icon: BookOpen, label: 'Speisekarte', sub: 'Gerichte verwalten' },
+            { to: '/admin/events', icon: Calendar, label: 'Events', sub: 'Veranstaltungen' },
+            { to: '/admin/offers', icon: Gift, label: 'Angebote', sub: 'Sonderangebote' },
+            { to: '/admin/beds24', icon: Shield, label: 'Beds24 Konfig', sub: 'API-Einstellungen' },
+            { to: '/dashboard', icon: BarChart, label: 'Dashboard', sub: 'Statistiken & Charts' },
+            { to: '/admin/audit', icon: FileText, label: 'Audit-Log', sub: 'Änderungsprotokoll' },
+          ].map((item, i) => (
+            <Link key={i} to={item.to}
+              className="bg-white/4 border border-white/8 rounded-xl p-3 flex items-center gap-3 hover:border-[#C9A96E]/25 hover:bg-[#C9A96E]/5 transition-all group">
+              <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/8 flex items-center justify-center flex-shrink-0 group-hover:bg-[#C9A96E]/15 group-hover:border-[#C9A96E]/25 transition-all">
+                <item.icon className="w-3.5 h-3.5 text-[#C9A96E]/60 group-hover:text-[#C9A96E] transition-colors" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-white/70 text-xs font-body font-semibold truncate group-hover:text-white transition-colors">{item.label}</p>
+                <p className="text-white/25 text-[10px] font-body truncate">{item.sub}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+
         {/* ── TAB STRIP ── */}
         <div className="flex gap-1 bg-black/30 rounded-2xl p-1.5 border border-white/8 overflow-x-auto no-scrollbar">
           {TABS.map(t => {
@@ -267,9 +296,9 @@ export default function Admin() {
         {!loading && tab === 'reservations' && (
           <div className="space-y-2">
             {reservations.length === 0 ? (
-              <div className="text-center py-16 bg-white/3 border border-white/8 rounded-2xl">
-                <UtensilsCrossed className="w-8 h-8 text-white/15 mx-auto mb-3" />
-                <p className="text-white/30 font-body text-sm">Keine Reservierungen</p>
+              <div className="text-center py-16 bg-[#171411] border border-white/10 rounded-2xl">
+                <UtensilsCrossed className="w-8 h-8 text-white/25 mx-auto mb-3" />
+                <p className="text-white/50 font-body text-sm">Keine Reservierungen vorhanden</p>
               </div>
             ) : reservations.map(r => (
               <div key={r.id} className={`bg-white/4 border rounded-2xl p-4 transition-all ${
@@ -357,9 +386,9 @@ export default function Admin() {
         {!loading && tab === 'contacts' && (
           <div className="space-y-2">
             {inquiries.length === 0 ? (
-              <div className="text-center py-16 bg-white/3 border border-white/8 rounded-2xl">
-                <MessageSquare className="w-8 h-8 text-white/15 mx-auto mb-3" />
-                <p className="text-white/30 font-body text-sm">Keine Kontaktanfragen</p>
+              <div className="text-center py-16 bg-[#171411] border border-white/10 rounded-2xl">
+                <MessageSquare className="w-8 h-8 text-white/25 mx-auto mb-3" />
+                <p className="text-white/50 font-body text-sm">Keine Kontaktanfragen vorhanden</p>
               </div>
             ) : inquiries.map(inq => (
               <div key={inq.id} className="bg-white/4 border border-white/8 rounded-2xl p-4 hover:border-white/15 transition-all">
@@ -395,9 +424,9 @@ export default function Admin() {
         {!loading && tab === 'bookings' && (
           <div className="space-y-2">
             {intents.length === 0 ? (
-              <div className="text-center py-16 bg-white/3 border border-white/8 rounded-2xl">
-                <BedDouble className="w-8 h-8 text-white/15 mx-auto mb-3" />
-                <p className="text-white/30 font-body text-sm">Keine Buchungs-Intents</p>
+              <div className="text-center py-16 bg-[#171411] border border-white/10 rounded-2xl">
+                <BedDouble className="w-8 h-8 text-white/25 mx-auto mb-3" />
+                <p className="text-white/50 font-body text-sm">Keine Buchungs-Intents vorhanden</p>
               </div>
             ) : intents.map(int => (
               <div key={int.id} className="bg-white/4 border border-white/8 rounded-2xl p-4 hover:border-white/15 transition-all">
@@ -427,9 +456,9 @@ export default function Admin() {
         {!loading && tab === 'documents' && (
           <div className="space-y-2">
             {guestDocs.length === 0 ? (
-              <div className="text-center py-16 bg-white/3 border border-white/8 rounded-2xl">
-                <FileText className="w-8 h-8 text-white/15 mx-auto mb-3" />
-                <p className="text-white/30 font-body text-sm">Keine Dokumente</p>
+              <div className="text-center py-16 bg-[#171411] border border-white/10 rounded-2xl">
+                <FileText className="w-8 h-8 text-white/25 mx-auto mb-3" />
+                <p className="text-white/50 font-body text-sm">Keine Dokumente vorhanden</p>
               </div>
             ) : guestDocs.map(doc => {
               const expanded = expandedDocId === doc.id;
@@ -504,9 +533,9 @@ export default function Admin() {
         {!loading && tab === 'careers' && (
           <div className="space-y-2">
             {careerApps.length === 0 ? (
-              <div className="text-center py-16 bg-white/3 border border-white/8 rounded-2xl">
-                <Briefcase className="w-8 h-8 text-white/15 mx-auto mb-3" />
-                <p className="text-white/30 font-body text-sm">Keine Bewerbungen</p>
+              <div className="text-center py-16 bg-[#171411] border border-white/10 rounded-2xl">
+                <Briefcase className="w-8 h-8 text-white/25 mx-auto mb-3" />
+                <p className="text-white/50 font-body text-sm">Keine Bewerbungen vorhanden</p>
               </div>
             ) : careerApps.map(app => (
               <div key={app.id} className="bg-white/4 border border-white/8 rounded-2xl p-4 hover:border-white/15 transition-all">
@@ -543,9 +572,9 @@ export default function Admin() {
         {!loading && tab === 'vouchers' && (
           <div className="space-y-2">
             {vouchers.length === 0 ? (
-              <div className="text-center py-16 bg-white/3 border border-white/8 rounded-2xl">
-                <Gift className="w-8 h-8 text-white/15 mx-auto mb-3" />
-                <p className="text-white/30 font-body text-sm">Keine Gutscheine</p>
+              <div className="text-center py-16 bg-[#171411] border border-white/10 rounded-2xl">
+                <Gift className="w-8 h-8 text-white/25 mx-auto mb-3" />
+                <p className="text-white/50 font-body text-sm">Keine Gutscheine vorhanden</p>
               </div>
             ) : vouchers.map(v => (
               <div key={v.id} className="bg-white/4 border border-white/8 rounded-2xl p-4 hover:border-white/15 transition-all">

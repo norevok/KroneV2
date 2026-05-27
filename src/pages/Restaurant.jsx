@@ -113,7 +113,7 @@ export default function Restaurant() {
     <div className="min-h-screen bg-[#171311] text-[#FAF8F5] pb-24 lg:pb-0">
 
       {/* ── HERO ── pt accounts for: mobile = utility(36)+nav(56)+banner(36)=128px | desktop = utility(36)+nav(56)+secondary(40)+banner(36)=168px */}
-      <div className="relative pt-[128px] lg:pt-[170px] overflow-hidden" style={{ minHeight: 'calc(88vh)' }}>
+      <div className="relative pt-[126px] lg:pt-[166px] overflow-hidden" style={{ minHeight: 'calc(88vh)' }}>
         {/* Warm atmospheric dining image */}
         <img
           src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=90"

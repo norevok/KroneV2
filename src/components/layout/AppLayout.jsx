@@ -16,7 +16,12 @@ function ScrollToTop() {
 export default function AppLayout() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar: utility (36px) + row1 (56px) + row2 (40px) + banner (34px) = ~166px desktop, ~100px mobile */}
+      {/*
+        Navbar total height (fixed):
+        Mobile:  utility(0,hidden) + row1(56px) + banner(34px) = ~90px  → use pt-[126px] (with 36px utility on mobile too = 126px)
+        Desktop: utility(36px) + row1(56px) + row2(40px) + banner(34px) = 166px → use pt-[172px]
+        CSS variable --nav-h exposed so all pages can use it uniformly.
+      */}
       <ScrollToTop />
       <Navbar />
       <main className="flex-1 pb-[80px] lg:pb-0">

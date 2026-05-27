@@ -224,7 +224,7 @@ export default function Weddings() {
 
         {/* Hero Content — bottom aligned, generous padding */}
         {/* pt accounts for: mobile = utility(36) + nav(56) + banner(36) = 128px | desktop = utility(36) + nav(56) + secondary(40) + banner(36) = 168px */}
-        <div className="absolute inset-0 flex flex-col justify-end px-5 sm:px-10 pb-16 sm:pb-20 pt-[128px] lg:pt-[170px]">
+        <div className="absolute inset-0 flex flex-col justify-end px-5 sm:px-10 pb-16 sm:pb-20 pt-[126px] lg:pt-[166px]">
           <div className="max-w-4xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

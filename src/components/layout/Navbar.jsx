@@ -423,7 +423,7 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="px-5 pb-3">
-                <a href="https://maps.app.goo.gl/iXUqvUm7BRTBvvYy5" target="_blank" rel="noopener noreferrer"
+                <a href="https://maps.app.goo.gl/GF5S8i2vASmpA7jUA" target="_blank" rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full py-3 border border-[#8B6914]/30 text-[#8B6914] bg-[#F2E8D0] hover:bg-[#EDE6D8] rounded-xl text-xs tracking-[0.15em] uppercase font-body font-bold transition-all">
                   📍 {lang === 'de' ? 'Route starten' : lang === 'en' ? 'Get Directions' : 'Navigazione'}
                 </a>
