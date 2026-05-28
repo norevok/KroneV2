@@ -63,13 +63,11 @@ function RestaurantBlock({ lang }) {
 
           {/* Right: CTAs */}
           <div className="flex items-center gap-3 flex-shrink-0 flex-wrap">
-            <Link to="/menu"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg ring-2 ring-[#C9A96E]/50 hover:ring-[#B8924A]/70">
+            <Link to="/menu" className="btn-ghost-gold px-5 text-xs">
               <BookOpen className="w-3.5 h-3.5" />
               {lang === 'de' ? 'Speisekarte' : lang === 'en' ? 'Menu' : 'Menù'}
             </Link>
-            <Link to="/reserve"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-[#17352C] hover:bg-[#0F2920] text-white rounded-lg text-xs tracking-widest uppercase font-body font-bold transition-all shadow-lg ring-2 ring-[#17352C]/60 hover:ring-[#17352C]/80">
+            <Link to="/reserve" className="btn-gold px-5 text-xs">
               <UtensilsCrossed className="w-3.5 h-3.5" />
               {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota'}
             </Link>
@@ -500,7 +498,7 @@ export default function Home() {
                   onClick={() => base44.auth.redirectToLogin(window.location.href)}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white font-body font-bold text-sm tracking-widest uppercase rounded-full transition-all shadow-[0_6px_24px_rgba(139,105,20,0.35)] hover:shadow-[0_10px_32px_rgba(139,105,20,0.5)] hover:-translate-y-0.5"
+                  className="btn-gold px-8 text-sm"
                 >
                   {c.register}
                 </motion.button>
@@ -508,7 +506,7 @@ export default function Home() {
                   onClick={() => base44.auth.redirectToLogin(window.location.href)}
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-4 border border-white/25 text-white/80 hover:text-white hover:border-white/50 font-body text-sm font-semibold tracking-widest uppercase rounded-full transition-all hover:-translate-y-0.5"
+                  className="btn-outline-dark px-8"
                 >
                   {lang === 'de' ? 'Anmelden' : lang === 'en' ? 'Sign In' : 'Accedi'}
                 </motion.button>
@@ -516,7 +514,7 @@ export default function Home() {
             ) : (
               <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link to="/account"
-                  className="px-8 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white font-body font-bold text-sm tracking-widest uppercase rounded-full transition-all shadow-[0_6px_24px_rgba(139,105,20,0.35)] hover:-translate-y-0.5 inline-flex items-center gap-2">
+                  className="btn-gold px-8 text-sm">
                   {c.account_cta} <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
@@ -607,7 +605,7 @@ export default function Home() {
                 ))}
               </div>
               <Link to="/rooms"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white rounded-full text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(139,105,20,0.35)] hover:shadow-[0_10px_32px_rgba(139,105,20,0.45)] hover:-translate-y-0.5">
+                className="btn-gold px-8 text-sm">
                 {c.rooms_cta} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -669,15 +667,15 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
                 <Link to="/reserve"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white rounded-full text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_20px_rgba(139,105,20,0.3)] hover:-translate-y-0.5 min-w-0">
+                  className="btn-gold px-6 text-sm">
                   <UtensilsCrossed className="w-4 h-4 flex-shrink-0" /> {c.restaurant_reserve}
                 </Link>
                 <Link to="/menu"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 border border-white/25 text-white/70 hover:text-white hover:border-[#C9A96E]/60 rounded-full text-sm tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5 min-w-0">
+                  className="btn-outline-dark px-6">
                   {lang === 'de' ? 'Menü ansehen' : lang === 'en' ? 'View Menu' : 'Menù'} <ArrowRight className="w-4 h-4 flex-shrink-0" />
                 </Link>
                 <Link to="/weddings"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 border border-white/15 text-white/50 hover:text-white/80 hover:border-white/30 rounded-full text-sm tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5 min-w-0">
+                  className="btn-outline-dark px-6 opacity-75">
                   {lang === 'de' ? 'Event anfragen' : lang === 'en' ? 'Enquire Event' : 'Evento'}
                 </Link>
               </div>
@@ -778,7 +776,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link to="/discover"
-                className="flex items-center justify-center px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-sm tracking-widest uppercase font-body font-bold transition-all shadow-[0_8px_30px_rgba(201,169,110,0.3)] hover:shadow-[0_12px_36px_rgba(201,169,110,0.45)] hover:-translate-y-0.5 w-full sm:w-auto">
+                className="btn-gold px-8 text-sm w-full sm:w-auto justify-center">
                 {c.discover_btn}
               </Link>
             </motion.div>

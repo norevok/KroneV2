@@ -79,7 +79,7 @@ export default function KroneLocationSection({ compact = false, darkBg = false }
             href={MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-xl text-xs tracking-[0.15em] uppercase font-body font-bold transition-all shadow-md hover:-translate-y-px">
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full text-xs tracking-[0.15em] uppercase font-body font-bold transition-all btn-gold" style={{minHeight:'44px'}}>
             <Navigation className="w-3.5 h-3.5" />
             {t.route}
           </a>
@@ -87,11 +87,7 @@ export default function KroneLocationSection({ compact = false, darkBg = false }
             href={MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 border-2 rounded-xl text-xs tracking-[0.15em] uppercase font-body font-semibold transition-all hover:-translate-y-px ${
-              darkBg
-                ? 'border-[#C9A96E]/40 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10'
-                : 'border-[#8B6914]/30 text-[#8B6914] hover:border-[#8B6914] hover:bg-[#8B6914]/5'
-            }`}>
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 btn-ghost-gold rounded-full text-xs" style={{minHeight:'44px'}}>
             <MapPin className="w-3.5 h-3.5" />
             {t.open}
           </a>

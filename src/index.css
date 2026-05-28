@@ -188,32 +188,44 @@
   .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
   .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(28,23,20,0.12), 0 4px 8px rgba(28,23,20,0.06); }
 
-  /* ── BUTTONS — eckig-premium, gut lesbar ── */
+  /* ── BUTTONS — Luxury Pill System (global) ── */
+
+  /* Shimmer keyframe for button hover */
+  @keyframes btnShimmer {
+    0%   { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+
+  /* PRIMARY — gold gradient pill */
   .btn-gold {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: var(--gold);
+    background: linear-gradient(90deg, #A47A12 0%, #C59A3A 50%, #D8B66A 100%);
+    background-size: 200% auto;
     color: #FFFFFF;
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.875rem 2rem;
-    border-radius: 0.5rem;
-    border: 2px solid transparent;
-    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
-    box-shadow: 0 4px 14px rgba(139,105,20,0.25);
+    padding: 0.875rem 2.125rem;
+    min-height: 52px;
+    border-radius: 999px;
+    border: none;
+    transition: transform 260ms ease, box-shadow 260ms ease, background-position 400ms ease;
+    box-shadow: 0 4px 20px rgba(181,138,43,0.28), 0 1px 4px rgba(0,0,0,0.08);
+    white-space: nowrap;
   }
   .btn-gold:hover {
-    background: #7A5A0F;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(139,105,20,0.35);
+    background-position: right center;
+    box-shadow: 0 10px 32px rgba(181,138,43,0.42), 0 2px 8px rgba(0,0,0,0.10);
   }
-  .btn-gold:active { transform: translateY(0); box-shadow: none; }
+  .btn-gold:active { transform: translateY(0); }
 
+  /* DARK (secondary action on light bg) */
   .btn-dark {
     display: inline-flex;
     align-items: center;
@@ -222,68 +234,90 @@
     background: #17352C;
     color: #FFFFFF;
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.875rem 2rem;
-    border-radius: 0.5rem;
-    border: 2px solid transparent;
-    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
-    box-shadow: 0 4px 14px rgba(23,53,44,0.2);
+    padding: 0.875rem 2.125rem;
+    min-height: 52px;
+    border-radius: 999px;
+    border: none;
+    transition: transform 260ms ease, box-shadow 260ms ease, background 260ms ease;
+    box-shadow: 0 4px 16px rgba(23,53,44,0.22);
+    white-space: nowrap;
   }
   .btn-dark:hover {
     background: #0F2920;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(23,53,44,0.3);
+    box-shadow: 0 10px 28px rgba(23,53,44,0.32);
   }
-  .btn-dark:active { transform: translateY(0); box-shadow: none; }
+  .btn-dark:active { transform: translateY(0); }
 
+  /* GHOST GOLD — outline pill, fills on hover */
   .btn-ghost-gold {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border: 2px solid var(--gold);
-    color: var(--gold);
+    border: 2px solid #C59A3A;
+    color: #A47A12;
     background: transparent;
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.875rem 2rem;
-    border-radius: 0.5rem;
-    transition: all 0.25s ease;
+    padding: 0.8125rem 2rem;
+    min-height: 52px;
+    border-radius: 999px;
+    transition: all 260ms ease;
+    white-space: nowrap;
   }
   .btn-ghost-gold:hover {
-    background: var(--gold-pale);
-    border-color: #7A5A0F;
-    color: #5C4010;
-    transform: translateY(-1px);
+    background: linear-gradient(90deg, #A47A12 0%, #C59A3A 50%, #D8B66A 100%);
+    border-color: transparent;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(181,138,43,0.32);
   }
+  .btn-ghost-gold:active { transform: translateY(0); }
 
+  /* OUTLINE DARK — on dark backgrounds */
   .btn-outline-dark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border: 2px solid var(--charcoal);
-    color: var(--charcoal);
+    border: 2px solid rgba(201,169,110,0.5);
+    color: #C9A96E;
     background: transparent;
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.875rem 2rem;
-    border-radius: 0.5rem;
-    transition: all 0.25s ease;
+    padding: 0.8125rem 2rem;
+    min-height: 52px;
+    border-radius: 999px;
+    transition: all 260ms ease;
+    white-space: nowrap;
   }
   .btn-outline-dark:hover {
-    background: var(--charcoal);
-    color: #FAF7F2;
-    transform: translateY(-1px);
+    background: linear-gradient(90deg, #A47A12 0%, #C59A3A 50%, #D8B66A 100%);
+    border-color: transparent;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(181,138,43,0.32);
+  }
+  .btn-outline-dark:active { transform: translateY(0); }
+
+  /* Mobile adjustments */
+  @media (max-width: 640px) {
+    .btn-gold, .btn-dark, .btn-ghost-gold, .btn-outline-dark {
+      min-height: 48px;
+      padding: 0.8125rem 1.5rem;
+      font-size: 0.7rem;
+    }
   }
 
   /* Hero dark overlay utilities — for dark hero sections */

@@ -38,7 +38,8 @@ module.exports = {
         ivory: '#FAF7F2',
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(135deg, #8B6914 0%, #C9A96E 50%, #8B6914 100%)',
+        'gold-gradient': 'linear-gradient(90deg, #A47A12 0%, #C59A3A 50%, #D8B66A 100%)',
+        'gold-gradient-hover': 'linear-gradient(90deg, #B68A1A 0%, #D2A842 50%, #E2C077 100%)',
         'stone-gradient': 'linear-gradient(180deg, #FAF7F2 0%, #F0EBE2 100%)',
         'dark-gradient': 'linear-gradient(180deg, #1C1714 0%, #2A2118 100%)',
       },
