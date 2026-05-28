@@ -439,7 +439,7 @@ export default function Home() {
 
       {/* ── BENEFIT STRIP ── */}
       <motion.div 
-        className="bg-[#1C1714] py-10 sm:py-12 px-4 sm:px-8 relative overflow-hidden"
+        className="bg-[#1C1714] py-14 sm:py-16 px-4 sm:px-8 relative overflow-hidden"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -666,17 +666,11 @@ export default function Home() {
                   : 'Krone Langenburg by Ammesso combina il calore della cucina italiana con i migliori ingredienti regionali.'}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
-                <Link to="/reserve"
-                  className="btn-gold px-6 text-sm">
+                <Link to="/reserve" className="btn-gold px-6">
                   <UtensilsCrossed className="w-4 h-4 flex-shrink-0" /> {c.restaurant_reserve}
                 </Link>
-                <Link to="/menu"
-                  className="btn-outline-dark px-6">
+                <Link to="/menu" className="btn-outline-dark px-6">
                   {lang === 'de' ? 'Menü ansehen' : lang === 'en' ? 'View Menu' : 'Menù'} <ArrowRight className="w-4 h-4 flex-shrink-0" />
-                </Link>
-                <Link to="/weddings"
-                  className="btn-outline-dark px-6 opacity-75">
-                  {lang === 'de' ? 'Event anfragen' : lang === 'en' ? 'Enquire Event' : 'Evento'}
                 </Link>
               </div>
             </div>
@@ -782,7 +776,7 @@ export default function Home() {
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <a href="https://maps.app.goo.gl/GF5S8i2vASmpA7jUA" target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#C9A96E]/50 text-[#C9A96E] hover:text-white hover:border-white/50 rounded-full text-sm tracking-widest uppercase font-body font-semibold transition-all w-full sm:w-auto hover:shadow-[0_8px_28px_rgba(201,169,110,0.2)] hover:-translate-y-0.5">
+                className="btn-outline-dark w-full sm:w-auto justify-center">
                 🗺️ {lang === 'de' ? 'Route starten' : lang === 'en' ? 'Get Directions' : 'Navigazione'}
               </a>
             </motion.div>
