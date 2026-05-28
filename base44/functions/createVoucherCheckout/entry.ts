@@ -1,8 +1,7 @@
 /**
  * createVoucherCheckout — Krone Langenburg Gift Shop
  * Creates a Stripe Checkout session for gift voucher purchase.
- * On success, Stripe redirects to /shop?payment=success&session_id=...
- * On cancel, Stripe redirects to /shop?payment=cancelled
+ * Supports flexible amounts and all 4 voucher product types.
  */
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 import Stripe from 'npm:stripe@14.21.0';
@@ -13,33 +12,44 @@ Deno.serve(async (req) => {
     const body = await req.json();
 
     const {
-      product_id, product_name, amount,
-      purchaser_name, purchaser_email,
-      recipient_name = '', recipient_email = '',
-      personal_message = '', language = 'de',
+      product_id,
+      product_name,
+      amount,
+      purchaser_name,
+      purchaser_email,
+      recipient_name = '',
+      recipient_email = '',
+      personal_message = '',
+      language = 'de',
+      delivery_mode = 'buyer',
     } = body;
 
     if (!product_name || !amount || !purchaser_email) {
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
-    if (amount < 10 || amount > 1000) {
-      return Response.json({ error: 'Invalid amount' }, { status: 400 });
+
+    const amountNum = parseFloat(amount);
+    if (isNaN(amountNum) || amountNum < 10 || amountNum > 2000) {
+      return Response.json({ error: 'Invalid amount (must be 10–2000)' }, { status: 400 });
     }
 
+    // Generate a unique voucher code
+    const code = `KRONE-${Math.random().toString(36).substring(2, 5).toUpperCase()}${Math.random().toString(36).substring(2, 5).toUpperCase()}`;
+    const expiresAt = new Date(Date.now() + 2 * 365 * 24 * 60 * 60 * 1000).toISOString();
+
     const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+
     if (!stripeKey) {
-      // Dev fallback: create voucher directly without payment
-      const code = `KRONE-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
-      const expiresAt = new Date(Date.now() + 2 * 365 * 24 * 60 * 60 * 1000).toISOString();
+      // Dev fallback: create active voucher without payment
       await base44.asServiceRole.entities.GiftVoucher.create({
         code,
-        product_id,
+        product_id: product_id || 'value_voucher',
         product_name,
-        amount_eur: amount,
-        purchaser_email,
+        amount_eur: amountNum,
+        purchaser_email: purchaser_email.toLowerCase(),
         purchaser_name,
         recipient_name,
-        recipient_email,
+        recipient_email: recipient_email.toLowerCase(),
         personal_message,
         status: 'active',
         language,
@@ -52,15 +62,12 @@ Deno.serve(async (req) => {
 
     const stripe = new Stripe(stripeKey);
 
-    // Generate a pre-voucher record in pending state
-    const code = `KRONE-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
-    const expiresAt = new Date(Date.now() + 2 * 365 * 24 * 60 * 60 * 1000).toISOString();
-
+    // Create pending voucher in DB first
     const pendingVoucher = await base44.asServiceRole.entities.GiftVoucher.create({
       code,
-      product_id,
+      product_id: product_id || 'value_voucher',
       product_name,
-      amount_eur: amount,
+      amount_eur: amountNum,
       purchaser_email: purchaser_email.toLowerCase(),
       purchaser_name,
       recipient_name,
@@ -74,6 +81,9 @@ Deno.serve(async (req) => {
 
     const origin = req.headers.get('origin') || 'https://krone.base44.app';
 
+    const descriptionDe = `Krone Langenburg Gutschein · Gültig 2 Jahre · Code: ${code}`;
+    const descriptionEn = `Krone Langenburg Voucher · Valid 2 years · Code: ${code}`;
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
@@ -81,13 +91,11 @@ Deno.serve(async (req) => {
       line_items: [{
         price_data: {
           currency: 'eur',
-          unit_amount: Math.round(amount * 100),
+          unit_amount: Math.round(amountNum * 100),
           product_data: {
-            name: product_name,
-            description: language === 'de'
-              ? `Krone Langenburg Gutschein · Gültig 2 Jahre · Code: ${code}`
-              : `Krone Langenburg Voucher · Valid 2 years · Code: ${code}`,
-            images: ['https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&q=80'],
+            name: `${product_name} — Krone Langenburg by Ammesso`,
+            description: language === 'en' ? descriptionEn : descriptionDe,
+            images: ['https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&q=80'],
           },
         },
         quantity: 1,
@@ -95,15 +103,19 @@ Deno.serve(async (req) => {
       metadata: {
         voucher_id: pendingVoucher.id,
         voucher_code: code,
-        purchaser_name,
-        recipient_name,
+        purchaser_name: purchaser_name || '',
+        recipient_name: recipient_name || '',
+        recipient_email: recipient_email || '',
+        personal_message: (personal_message || '').substring(0, 500),
+        delivery_mode,
         language,
+        product_name,
       },
-      success_url: `${origin}/shop?payment=success&session_id={CHECKOUT_SESSION_ID}&code=${code}`,
-      cancel_url: `${origin}/shop?payment=cancelled`,
+      success_url: `${origin}/gutscheine?payment=success&session_id={CHECKOUT_SESSION_ID}&code=${code}`,
+      cancel_url: `${origin}/gutscheine?payment=cancelled`,
     });
 
-    // Store session ID on the voucher
+    // Save Stripe session ID
     await base44.asServiceRole.entities.GiftVoucher.update(pendingVoucher.id, {
       stripe_session_id: session.id,
     });

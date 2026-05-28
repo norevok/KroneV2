@@ -51,6 +51,7 @@ import BookingConfirmed from './pages/BookingConfirmed';
 import AdminBeds24Bookings from './pages/AdminBeds24Bookings';
 import AdminReservations from './pages/AdminReservations';
 import AdminGuests from './pages/AdminGuests';
+import AdminVouchers from './pages/AdminVouchers';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -125,6 +126,7 @@ const AuthenticatedApp = () => {
         <Route path="/admin/beds24-bookings" element={<AdminBeds24Bookings />} />
         <Route path="/admin/reservations" element={<AdminReservations />} />
         <Route path="/admin/guests" element={<AdminGuests />} />
+        <Route path="/admin/vouchers" element={<AdminVouchers />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

@@ -1,11 +1,39 @@
 /**
  * stripeVoucherWebhook — Krone Langenburg
- * Handles Stripe webhook events to activate gift vouchers after successful payment.
- * Configure in Stripe dashboard: endpoint = /functions/stripeVoucherWebhook
- * Events: checkout.session.completed, payment_intent.payment_failed
+ * Handles checkout.session.completed to activate vouchers and send emails.
  */
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 import Stripe from 'npm:stripe@14.21.0';
+
+function emailHeader() {
+  return `<div style="text-align:center;padding:24px 0 20px;border-bottom:2px solid #C9A96E;margin-bottom:28px;">
+    <h1 style="font-family:Georgia,serif;color:#1C1714;font-weight:300;font-size:22px;margin:0;letter-spacing:2px;">KRONE LANGENBURG</h1>
+    <p style="color:#C9A96E;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin:5px 0 0;">by Ammesso</p>
+  </div>`;
+}
+
+function emailFooter() {
+  return `<div style="text-align:center;padding-top:24px;border-top:1px solid #eee;margin-top:28px;color:#aaa;font-size:11px;letter-spacing:1px;">
+    Hauptstraße 24 · 74595 Langenburg · <a href="mailto:info@krone-ammesso.de" style="color:#C9A96E;text-decoration:none;">info@krone-ammesso.de</a>
+  </div>`;
+}
+
+function voucherBox(code, amount, lang) {
+  return `<div style="background:#f9f6f0;border:2px solid #C9A96E;padding:28px;margin:24px 0;border-radius:14px;text-align:center;">
+    <p style="color:#8A7A6A;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;">${lang === 'en' ? 'Your Voucher Code' : 'Ihr Gutscheincode'}</p>
+    <p style="font-family:Georgia,serif;font-size:32px;font-weight:300;color:#8B6914;letter-spacing:6px;margin:0;">${code}</p>
+    <p style="color:#8A7A6A;font-size:13px;margin-top:10px;">${lang === 'en' ? `Value: €${amount} · Valid 2 Years` : `Wert: €${amount} · Gültig 2 Jahre`}</p>
+  </div>`;
+}
+
+function redeemNote(lang) {
+  return `<div style="background:#fafafa;border:1px solid #eee;border-radius:10px;padding:16px 20px;margin:20px 0;">
+    <p style="margin:0;color:#666;font-size:13px;line-height:1.6;">${lang === 'en'
+      ? '💡 Please present your voucher code when making a reservation or at check-in. Our team will verify and apply the amount.'
+      : '💡 Bitte geben Sie Ihren Gutscheincode bei der Reservierung an oder zeigen Sie ihn bei Ihrem Besuch vor. Unser Team prüft und verrechnet den Betrag.'}
+    </p>
+  </div>`;
+}
 
 Deno.serve(async (req) => {
   const base44 = createClientFromRequest(req);
@@ -35,18 +63,28 @@ Deno.serve(async (req) => {
   try {
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
-      const { voucher_id, voucher_code, purchaser_name, recipient_name, language } = session.metadata || {};
+      const {
+        voucher_id,
+        voucher_code,
+        purchaser_name,
+        recipient_name,
+        recipient_email,
+        personal_message,
+        delivery_mode,
+        language,
+        product_name,
+      } = session.metadata || {};
 
       if (!voucher_id) {
         console.warn('No voucher_id in session metadata');
         return Response.json({ received: true });
       }
 
-      // Idempotency: check if this session was already processed
-      const existingVouchers = await base44.asServiceRole.entities.GiftVoucher.filter({ id: voucher_id }, undefined, 1).catch(() => []);
-      const existingVoucher = existingVouchers[0];
-      if (existingVoucher?.status === 'active' && existingVoucher?.stripe_session_id === session.id) {
-        console.log(`Voucher ${voucher_id} already activated for session ${session.id} — skipping duplicate`);
+      // Idempotency check
+      const existingList = await base44.asServiceRole.entities.GiftVoucher.filter({ id: voucher_id }, undefined, 1).catch(() => []);
+      const existing = existingList[0];
+      if (existing?.status === 'active' && existing?.stripe_session_id === session.id) {
+        console.log(`Voucher ${voucher_id} already processed — skipping`);
         return Response.json({ received: true, skipped: 'already_processed' });
       }
 
@@ -58,104 +96,137 @@ Deno.serve(async (req) => {
         paid_at: new Date().toISOString(),
       });
 
-      // Send email confirmation to purchaser
       const lang = language || 'de';
       const purchaserEmail = session.customer_email || session.customer_details?.email;
       const amount = (session.amount_total / 100).toFixed(2);
+      const recipientEmailAddr = recipient_email || existing?.recipient_email || '';
 
-      const subjects = {
-        de: `Ihr Krone Langenburg Gutschein — ${voucher_code}`,
-        en: `Your Krone Langenburg Voucher — ${voucher_code}`,
-      };
-      const bodies = {
-        de: `<html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#333;">
-          <div style="text-align:center;padding:20px 0;border-bottom:2px solid #C9A96E;margin-bottom:24px;">
-            <h1 style="font-family:Georgia,serif;color:#0F0D0B;font-weight:300;margin:0;">Krone Langenburg</h1>
-            <p style="color:#C9A96E;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin:4px 0 0;">by Ammesso</p>
-          </div>
-          <h2 style="font-family:Georgia,serif;font-weight:300;">Ihr Geschenkgutschein ist bereit! 🎁</h2>
-          <p>Liebe/r ${purchaser_name || 'Gast'},</p>
-          <p>vielen Dank für Ihren Kauf. Ihr Gutschein ist nun aktiv.</p>
-          <div style="background:#f9f6f0;border:2px solid #C9A96E;padding:24px;margin:20px 0;border-radius:12px;text-align:center;">
-            <p style="color:#8A7A6A;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Ihr Gutscheincode</p>
-            <p style="font-family:Georgia,serif;font-size:28px;font-weight:300;color:#8B6914;letter-spacing:4px;margin:0;">${voucher_code}</p>
-            <p style="color:#8A7A6A;font-size:12px;margin-top:8px;">Wert: €${amount} · Gültig 2 Jahre</p>
-          </div>
-          ${recipient_name ? `<p>Dieser Gutschein ist für <strong>${recipient_name}</strong>.</p>` : ''}
-          <p style="color:#666;font-size:14px;">Einlösbar für alle Leistungen im Restaurant und Hotel der Krone Langenburg.</p>
-          <p>Mit herzlichen Grüßen,<br/><strong>Team Krone Langenburg by Ammesso</strong></p>
-          <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:24px;color:#999;font-size:12px;">
-            Hauptstraße 24 · 74595 Langenburg · info@krone-ammesso.de
-          </div>
-        </body></html>`,
-        en: `<html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#333;">
-          <div style="text-align:center;padding:20px 0;border-bottom:2px solid #C9A96E;margin-bottom:24px;">
-            <h1 style="font-family:Georgia,serif;color:#0F0D0B;font-weight:300;margin:0;">Krone Langenburg</h1>
-            <p style="color:#C9A96E;font-size:12px;letter-spacing:3px;text-transform:uppercase;margin:4px 0 0;">by Ammesso</p>
-          </div>
-          <h2 style="font-family:Georgia,serif;font-weight:300;">Your Gift Voucher is Ready! 🎁</h2>
-          <p>Dear ${purchaser_name || 'Guest'},</p>
-          <p>Thank you for your purchase. Your voucher is now active.</p>
-          <div style="background:#f9f6f0;border:2px solid #C9A96E;padding:24px;margin:20px 0;border-radius:12px;text-align:center;">
-            <p style="color:#8A7A6A;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Your Voucher Code</p>
-            <p style="font-family:Georgia,serif;font-size:28px;font-weight:300;color:#8B6914;letter-spacing:4px;margin:0;">${voucher_code}</p>
-            <p style="color:#8A7A6A;font-size:12px;margin-top:8px;">Value: €${amount} · Valid 2 Years</p>
-          </div>
-          ${recipient_name ? `<p>This voucher is for <strong>${recipient_name}</strong>.</p>` : ''}
-          <p style="color:#666;font-size:14px;">Redeemable for all services at the Krone Langenburg restaurant and hotel.</p>
-          <p>Kind regards,<br/><strong>Team Krone Langenburg by Ammesso</strong></p>
-          <div style="text-align:center;padding-top:20px;border-top:1px solid #eee;margin-top:24px;color:#999;font-size:12px;">
-            Hauptstraße 24 · 74595 Langenburg · info@krone-ammesso.de
-          </div>
-        </body></html>`,
-      };
+      // ── EMAIL TO BUYER ──
+      if (purchaserEmail && !existing?.email_sent) {
+        const buyerSubject = lang === 'en'
+          ? `Your Krone Langenburg Voucher — ${voucher_code}`
+          : `Ihr Krone Langenburg Gutschein — ${voucher_code}`;
 
-      if (purchaserEmail && !existingVoucher?.email_sent) {
+        const buyerBody = `<html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#333;background:#fff;">
+          ${emailHeader()}
+          <h2 style="font-family:Georgia,serif;font-weight:300;color:#1C1714;font-size:22px;">
+            ${lang === 'en' ? 'Your Gift Voucher is Ready! 🎁' : 'Ihr Geschenkgutschein ist bereit! 🎁'}
+          </h2>
+          <p style="font-size:14px;line-height:1.7;">
+            ${lang === 'en' ? `Dear ${purchaser_name || 'Guest'},` : `Liebe/r ${purchaser_name || 'Gast'},`}
+          </p>
+          <p style="font-size:14px;line-height:1.7;color:#555;">
+            ${lang === 'en'
+              ? `Thank you for your purchase of <strong>${product_name}</strong> at Krone Langenburg by Ammesso. Your voucher is now active and ready to use.`
+              : `Vielen Dank für Ihren Kauf von <strong>${product_name}</strong> bei Krone Langenburg by Ammesso. Ihr Gutschein ist nun aktiv und kann sofort eingelöst werden.`}
+          </p>
+          ${voucherBox(voucher_code, amount, lang)}
+          ${recipient_name ? `<p style="font-size:14px;color:#555;">${lang === 'en' ? `This voucher is for <strong>${recipient_name}</strong>.` : `Dieser Gutschein ist für <strong>${recipient_name}</strong>.`}</p>` : ''}
+          ${redeemNote(lang)}
+          <p style="font-size:14px;line-height:1.7;color:#555;">
+            ${lang === 'en'
+              ? 'Redeemable for all services at the Krone Langenburg restaurant and hotel.'
+              : 'Einlösbar für alle Leistungen im Restaurant und Hotel der Krone Langenburg by Ammesso.'}
+          </p>
+          <p style="font-size:14px;line-height:1.7;">
+            ${lang === 'en'
+              ? 'Kind regards,<br/><strong>Team Krone Langenburg by Ammesso</strong>'
+              : 'Mit herzlichen Grüßen,<br/><strong>Team Krone Langenburg by Ammesso</strong>'}
+          </p>
+          ${emailFooter()}
+        </body></html>`;
+
         try {
           await base44.asServiceRole.integrations.Core.SendEmail({
             to: purchaserEmail,
             from_name: 'Krone Langenburg by Ammesso',
-            subject: subjects[lang] || subjects.de,
-            body: bodies[lang] || bodies.de,
+            subject: buyerSubject,
+            body: buyerBody,
           });
           await base44.asServiceRole.entities.GiftVoucher.update(voucher_id, { email_sent: true });
-        } catch (emailErr) {
-          console.warn('Voucher email failed:', emailErr.message);
+        } catch (e) {
+          console.warn('Buyer email failed:', e.message);
         }
       }
 
-      console.log(`Voucher ${voucher_code} activated for ${purchaserEmail}`);
+      // ── EMAIL TO RECIPIENT (if delivery_mode = recipient and email provided) ──
+      if (recipientEmailAddr && delivery_mode === 'recipient') {
+        const recipSubject = lang === 'en'
+          ? `You have received a gift voucher — Krone Langenburg`
+          : `Sie haben einen Gutschein erhalten — Krone Langenburg`;
 
-      // Notify admin about voucher purchase
+        const recipBody = `<html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#333;background:#fff;">
+          ${emailHeader()}
+          <h2 style="font-family:Georgia,serif;font-weight:300;color:#1C1714;font-size:22px;">
+            ${lang === 'en'
+              ? `${recipient_name ? `Dear ${recipient_name},` : 'Hello,'} You have received a special gift! 🎁`
+              : `Herzlichen Glückwunsch${recipient_name ? `, ${recipient_name}` : ''} — Sie haben einen besonderen Gutschein erhalten! 🎁`}
+          </h2>
+          <p style="font-size:14px;line-height:1.7;color:#555;">
+            ${lang === 'en'
+              ? `<strong>${purchaser_name || 'Someone special'}</strong> has sent you a gift voucher from Krone Langenburg by Ammesso — a boutique hotel and restaurant in the heart of Langenburg, Hohenlohe.`
+              : `<strong>${purchaser_name || 'Jemand Besonderes'}</strong> hat Ihnen einen Geschenkgutschein der Krone Langenburg by Ammesso geschickt — einem Boutique-Hotel und Restaurant im Herzen von Langenburg, Hohenlohe.`}
+          </p>
+          ${personal_message ? `<div style="background:#f9f6f0;border-left:3px solid #C9A96E;padding:16px 20px;margin:20px 0;border-radius:0 10px 10px 0;font-size:14px;color:#555;font-style:italic;">"${personal_message}"</div>` : ''}
+          ${voucherBox(voucher_code, amount, lang)}
+          <p style="font-size:14px;line-height:1.7;color:#555;">
+            ${lang === 'en'
+              ? `<strong>What's included:</strong> ${product_name}`
+              : `<strong>Ihre Leistung:</strong> ${product_name}`}
+          </p>
+          ${redeemNote(lang)}
+          <p style="font-size:14px;line-height:1.7;">
+            ${lang === 'en'
+              ? 'We look forward to welcoming you soon.<br/><strong>Team Krone Langenburg by Ammesso</strong>'
+              : 'Wir freuen uns, Sie bald bei uns begrüßen zu dürfen.<br/><strong>Team Krone Langenburg by Ammesso</strong>'}
+          </p>
+          ${emailFooter()}
+        </body></html>`;
+
+        try {
+          await base44.asServiceRole.integrations.Core.SendEmail({
+            to: recipientEmailAddr,
+            from_name: 'Krone Langenburg by Ammesso',
+            subject: recipSubject,
+            body: recipBody,
+          });
+        } catch (e) {
+          console.warn('Recipient email failed:', e.message);
+        }
+      }
+
+      // ── ADMIN NOTIFICATION ──
       try {
         await base44.asServiceRole.integrations.Core.SendEmail({
           to: 'info@krone-ammesso.de',
           from_name: 'Krone Shop',
           subject: `[Gutschein] ${purchaser_name || purchaserEmail} — ${voucher_code} — €${amount}`,
-          body: `<html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;color:#333;">
+          body: `<html><body style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#333;">
             <h2 style="font-family:Georgia,serif;font-weight:300;">Neuer Gutschein-Kauf ✓</h2>
-            <table style="width:100%;border-collapse:collapse;font-size:14px;">
-              <tr><td style="padding:6px 0;color:#666;">Code</td><td style="padding:6px 0;font-weight:bold;letter-spacing:2px;">${voucher_code}</td></tr>
-              <tr><td style="padding:6px 0;color:#666;">Wert</td><td style="padding:6px 0;font-weight:bold;">€${amount}</td></tr>
-              <tr><td style="padding:6px 0;color:#666;">Produkt</td><td style="padding:6px 0;">${session.metadata?.product_name || '—'}</td></tr>
-              <tr><td style="padding:6px 0;color:#666;">Käufer</td><td style="padding:6px 0;">${purchaser_name || '—'}</td></tr>
-              <tr><td style="padding:6px 0;color:#666;">Käufer E-Mail</td><td style="padding:6px 0;">${purchaserEmail}</td></tr>
-              ${recipient_name ? `<tr><td style="padding:6px 0;color:#666;">Empfänger</td><td style="padding:6px 0;">${recipient_name}</td></tr>` : ''}
-              <tr><td style="padding:6px 0;color:#666;">Stripe Session</td><td style="padding:6px 0;font-size:11px;">${session.id}</td></tr>
+            <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:2;">
+              <tr><td style="color:#666;width:35%;">Code</td><td style="font-weight:bold;letter-spacing:2px;">${voucher_code}</td></tr>
+              <tr><td style="color:#666;">Wert</td><td style="font-weight:bold;">€${amount}</td></tr>
+              <tr><td style="color:#666;">Produkt</td><td>${product_name || '—'}</td></tr>
+              <tr><td style="color:#666;">Käufer</td><td>${purchaser_name || '—'}</td></tr>
+              <tr><td style="color:#666;">Käufer E-Mail</td><td>${purchaserEmail}</td></tr>
+              ${recipient_name ? `<tr><td style="color:#666;">Empfänger</td><td>${recipient_name}</td></tr>` : ''}
+              ${recipientEmailAddr ? `<tr><td style="color:#666;">Empfänger E-Mail</td><td>${recipientEmailAddr}</td></tr>` : ''}
+              ${personal_message ? `<tr><td style="color:#666;">Nachricht</td><td style="font-style:italic;">"${personal_message}"</td></tr>` : ''}
+              <tr><td style="color:#666;">Lieferung</td><td>${delivery_mode || 'buyer'}</td></tr>
+              <tr><td style="color:#666;">Stripe Session</td><td style="font-size:11px;word-break:break-all;">${session.id}</td></tr>
             </table>
-            <p style="margin-top:20px;color:#666;font-size:13px;">Der Gutschein ist nun aktiv und wurde an den Käufer gesendet.</p>
+            <p style="margin-top:20px;color:#666;font-size:13px;">Der Gutschein ist nun aktiv und die Bestätigung wurde versendet.</p>
           </body></html>`,
         });
-      } catch (adminEmailErr) {
-        console.warn('Admin voucher notification failed:', adminEmailErr.message);
+      } catch (e) {
+        console.warn('Admin notification failed:', e.message);
       }
+
+      console.log(`Voucher ${voucher_code} activated for ${purchaserEmail}`);
     }
 
     if (event.type === 'payment_intent.payment_failed') {
-      // Mark related vouchers as failed — they remain pending_payment (expired by nightly job)
-      const paymentIntentId = event.data.object.id;
-      console.log(`Payment failed for intent ${paymentIntentId}`);
-      // Note: pending_payment vouchers are cleaned up by nightlyMaintenance after 24h
+      console.log(`Payment failed for intent ${event.data.object.id} — pending_payment voucher will be cleaned up by nightly job`);
     }
 
     return Response.json({ received: true });

@@ -41,6 +41,7 @@ const NAV_GROUPS = [
       { to: '/admin/hero', label: 'Hero-Slides', icon: Image },
       { to: '/admin/offers', label: 'Angebote', icon: Tag },
       { to: '/admin/opening-hours', label: 'Öffnungszeiten', icon: Clock },
+      { to: '/admin/vouchers', label: 'Gutscheine', icon: Gift },
     ],
   },
   {
