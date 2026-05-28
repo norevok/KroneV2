@@ -266,7 +266,7 @@ export default function Reserve() {
             <h2 className="font-display text-2xl font-light text-stone-800 mb-2">{c.login_title}</h2>
             <p className="text-stone-500 font-body text-sm mb-8 leading-relaxed">{c.login_sub}</p>
             <button onClick={() => base44.auth.redirectToLogin(window.location.href)}
-              className="w-full py-4 bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-2xl text-sm font-body font-semibold tracking-wider transition-all shadow-lg flex items-center justify-center gap-2">
+              className="btn-gold w-full justify-center">
               <LogIn className="w-4 h-4" />
               {c.login_btn}
             </button>
@@ -299,7 +299,7 @@ export default function Reserve() {
             <a href="/account/reservations" className="flex-1 inline-flex items-center justify-center px-5 py-3.5 border-2 border-[#C9A96E] text-[#8B6914] rounded-full text-xs tracking-wider uppercase font-body font-semibold hover:bg-[#C9A96E]/5 transition-colors">
               {lang === 'de' ? 'Meine Reservierungen' : lang === 'en' ? 'My Reservations' : 'Le mie prenotazioni'}
             </a>
-            <a href="/" className="flex-1 inline-flex items-center justify-center px-5 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-white rounded-full text-xs tracking-wider uppercase font-body font-semibold shadow-lg transition-colors">
+            <a href="/" className="btn-gold flex-1 justify-center">
               {lang === 'de' ? 'Startseite' : lang === 'en' ? 'Home' : 'Home'}
             </a>
           </div>
@@ -383,7 +383,7 @@ export default function Reserve() {
                 </div>
               )}
               <button onClick={() => setStep(2)} disabled={!date || slots.length === 0 || loading}
-                className="w-full py-4 bg-[#C9A96E] hover:bg-[#B8924A] disabled:bg-stone-200 disabled:text-stone-400 text-white rounded-2xl text-sm font-body font-semibold tracking-wider transition-all shadow-lg disabled:shadow-none flex items-center justify-center gap-2">
+                className="btn-gold w-full disabled:opacity-40 disabled:cursor-not-allowed justify-center">
                 {lang === 'de' ? 'Uhrzeit wählen' : lang === 'en' ? 'Choose Time' : 'Scegli orario'}<ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -479,7 +479,7 @@ export default function Reserve() {
                 )}
                 <p className="text-xs text-stone-400 font-body leading-relaxed">{c.policy}</p>
                 <button type="submit" disabled={submitting || !gdprConsent}
-                  className="w-full py-4 bg-[#8B6914] hover:bg-[#7A5A0F] disabled:opacity-50 text-white rounded-lg text-sm font-body font-bold tracking-widest uppercase transition-all shadow-lg flex items-center justify-center gap-2 hover:-translate-y-px">
+                  className="btn-gold w-full disabled:opacity-50 justify-center">
                   {submitting
                     ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     : <><UtensilsCrossed className="w-4 h-4" /> {c.confirm}</>}

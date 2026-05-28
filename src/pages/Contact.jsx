@@ -483,7 +483,7 @@ export default function Contact() {
 
                     {/* Submit */}
                     <button type="submit" disabled={submitting}
-                      className="w-full py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] disabled:opacity-50 text-white rounded-full text-xs tracking-[0.2em] uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(139,105,20,0.3)] hover:shadow-[0_10px_32px_rgba(139,105,20,0.45)] hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                      className="btn-gold w-full disabled:opacity-50 justify-center">
                       {submitting
                         ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />{t.sending}</>
                         : t.send}

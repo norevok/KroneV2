@@ -264,11 +264,11 @@ export default function Weddings() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.65 }}>
               <a href="#anfrage"
-                className="group inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full font-body font-bold text-xs tracking-widest uppercase transition-all shadow-[0_8px_28px_rgba(201,169,110,0.35)] hover:shadow-[0_12px_36px_rgba(201,169,110,0.5)] hover:-translate-y-0.5 w-full sm:w-auto">
-                {c.btn_enquire} <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                className="btn-gold w-full sm:w-auto">
+                {c.btn_enquire} <ArrowRight className="w-3.5 h-3.5" />
               </a>
               <a href={`tel:${s.phone}`}
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 border-2 border-white/30 hover:border-[#C9A96E]/70 text-white hover:text-[#C9A96E] rounded-full font-body font-semibold text-xs tracking-widest uppercase transition-all backdrop-blur-sm hover:-translate-y-0.5 w-full sm:w-auto">
+                className="btn-outline-dark w-full sm:w-auto">
                 <Phone className="w-3.5 h-3.5" /> {c.btn_consult}
               </a>
             </motion.div>
@@ -539,8 +539,7 @@ export default function Weddings() {
                 {/* Submit CTA */}
                 <div className="pt-2">
                   <button type="submit" disabled={submitting}
-                    className="group w-full py-4.5 bg-gradient-to-r from-[#C9A96E] to-[#B8924A] hover:from-[#D4B87C] hover:to-[#C9A96E] text-[#1C1714] rounded-xl font-body font-bold text-xs tracking-[0.18em] uppercase disabled:opacity-50 flex items-center justify-center gap-2.5 shadow-[0_8px_28px_rgba(201,169,110,0.3)] hover:shadow-[0_12px_36px_rgba(201,169,110,0.45)] transition-all duration-300 hover:-translate-y-0.5"
-                    style={{ paddingTop: '1.1rem', paddingBottom: '1.1rem' }}>
+                    className="btn-gold w-full disabled:opacity-50 justify-center">
                     {submitting
                       ? <div className="w-4 h-4 border-2 border-[#1C1714]/30 border-t-[#1C1714] rounded-full animate-spin" />
                       : <>{c.submit} <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" /></>

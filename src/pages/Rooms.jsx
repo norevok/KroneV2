@@ -190,11 +190,11 @@ export default function Rooms() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button onClick={() => handleBookNow(null)} disabled={savingIntent}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#0F0E0B] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(201,169,110,0.35)] hover:shadow-[0_10px_32px_rgba(201,169,110,0.5)] hover:-translate-y-0.5 disabled:opacity-50">
+              className="btn-gold disabled:opacity-50">
               {t.book_now} <ExternalLink className="w-4 h-4" />
             </button>
             <a href={`tel:${SITE_DEFAULTS.phone}`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-white/70 hover:border-[#C9A96E]/50 hover:text-[#C9A96E] rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
+              className="btn-outline-dark px-8">
               <Phone className="w-4 h-4" /> {SITE_DEFAULTS.phone}
             </a>
           </div>
@@ -240,7 +240,7 @@ export default function Rooms() {
                 {Math.round((new Date(checkOut) - new Date(checkIn)) / 86400000)} {t.nights_label} · {adults} {t.adults_label}
               </p>
               <button onClick={() => handleBookNow(null)} disabled={savingIntent}
-                className="flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white rounded-full text-xs font-body font-bold tracking-widest uppercase transition-all disabled:opacity-50 shadow-[0_6px_20px_rgba(139,105,20,0.3)] hover:shadow-[0_10px_28px_rgba(139,105,20,0.4)] hover:-translate-y-0.5">
+                className="btn-gold disabled:opacity-50">
                 {t.check_avail} <ExternalLink className="w-4 h-4" />
               </button>
             </div>
@@ -340,7 +340,7 @@ export default function Rooms() {
                     )}
 
                     <button onClick={() => handleBookNow(room.id)} disabled={savingIntent}
-                      className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white rounded-full text-xs font-body font-bold tracking-widest uppercase transition-all self-start disabled:opacity-50 shadow-[0_6px_20px_rgba(139,105,20,0.3)] hover:shadow-[0_10px_28px_rgba(139,105,20,0.45)] hover:-translate-y-0.5">
+                      className="btn-gold self-start disabled:opacity-50">
                       {t.view_book} <ExternalLink className="w-4 h-4" />
                     </button>
                   </div>
@@ -388,7 +388,7 @@ export default function Rooms() {
               {lang === 'de' ? 'Direkt online buchen — sicher, schnell und zum besten Preis.' : 'Book directly online — secure, fast, best price guaranteed.'}
             </p>
             <button onClick={() => handleBookNow(null)} disabled={savingIntent}
-              className="inline-flex items-center gap-2.5 px-10 py-4 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white rounded-full text-sm font-body font-bold tracking-widest uppercase transition-all shadow-[0_8px_28px_rgba(139,105,20,0.35)] hover:shadow-[0_12px_36px_rgba(139,105,20,0.5)] hover:-translate-y-0.5 disabled:opacity-60">
+              className="btn-gold px-10 disabled:opacity-60">
               {t.book_now} <ExternalLink className="w-4 h-4" />
             </button>
             <p className="text-white/20 text-xs font-body mt-4">{t.breakfast}</p>
@@ -416,7 +416,7 @@ export default function Rooms() {
           </div>
           <div className="mt-4 text-center">
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-[#C9A96E]/30 text-[#C9A96E]/70 hover:text-[#C9A96E] hover:border-[#C9A96E]/60 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5">
+              className="btn-ghost-gold px-6">
               <Navigation className="w-3.5 h-3.5" /> {t.open_maps}
             </a>
           </div>
@@ -454,11 +454,11 @@ export default function Rooms() {
           </div>
           <div className="flex gap-3 md:justify-end flex-wrap">
             <Link to="/weddings"
-              className="flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-[#8B6914] to-[#C9A96E] hover:from-[#9A7520] hover:to-[#D4B87C] text-white rounded-full text-xs font-body font-bold tracking-widest uppercase transition-all shadow-[0_6px_20px_rgba(139,105,20,0.3)] hover:-translate-y-0.5">
+              className="btn-gold px-6">
               {t.enquire} <ChevronRight className="w-4 h-4" />
             </Link>
             <Link to="/contact"
-              className="flex items-center gap-2 px-6 py-3.5 border border-[#C9A96E]/30 text-[#C9A96E]/70 hover:text-[#C9A96E] hover:border-[#C9A96E]/60 rounded-full text-xs font-body font-bold tracking-widest uppercase transition-all hover:-translate-y-0.5">
+              className="btn-ghost-gold px-6">
               {lang === 'de' ? 'Kontakt' : 'Contact'}
             </Link>
           </div>

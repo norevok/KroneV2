@@ -96,12 +96,10 @@ export default function Footer() {
             <p className="text-white/40 text-sm font-body mt-1">Krone Langenburg by Ammesso · Hohenlohe</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto flex-shrink-0">
-            <Link to="/booking"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_20px_rgba(201,169,110,0.3)] hover:shadow-[0_10px_28px_rgba(201,169,110,0.45)] hover:-translate-y-0.5 w-full sm:w-auto">
+            <Link to="/booking" className="btn-gold w-full sm:w-auto">
               {lang === 'de' ? 'Zimmer buchen' : lang === 'en' ? 'Book a Room' : 'Prenota'}
             </Link>
-            <Link to="/reserve"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-[#C9A96E]/30 text-[#C9A96E] hover:border-[#C9A96E]/60 hover:bg-[#C9A96E]/8 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5 w-full sm:w-auto">
+            <Link to="/reserve" className="btn-outline-dark w-full sm:w-auto">
               {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve Table' : 'Prenota tavolo'}
             </Link>
           </div>

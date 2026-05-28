@@ -140,11 +140,11 @@ export default function Restaurant() {
             <p className="text-white/90 font-body leading-relaxed max-w-2xl mb-8 text-sm sm:text-base" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>{c.intro}</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/reserve"
-                className="group inline-flex items-center justify-center gap-2 px-7 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(201,169,110,0.3)] hover:shadow-[0_10px_32px_rgba(201,169,110,0.45)] hover:-translate-y-0.5 w-full sm:w-auto">
+                className="btn-gold w-full sm:w-auto">
                 <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
               </Link>
               <Link to="/menu"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 border-2 border-white/30 text-white hover:border-[#C9A96E]/60 hover:text-[#C9A96E] rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5 w-full sm:w-auto">
+                className="btn-outline-dark w-full sm:w-auto">
                 {c.cta_menu} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -222,11 +222,11 @@ export default function Restaurant() {
           {/* Booking CTAs */}
           <div className="space-y-4">
             <Link to="/reserve"
-              className="flex items-center justify-center gap-2.5 w-full py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_6px_24px_rgba(201,169,110,0.25)] hover:shadow-[0_10px_32px_rgba(201,169,110,0.4)] hover:-translate-y-0.5">
+              className="btn-gold w-full">
               <UtensilsCrossed className="w-4 h-4" /> {c.cta_reserve}
             </Link>
             <Link to="/menu"
-              className="flex items-center justify-center gap-2.5 w-full py-4 border border-[#C9A96E]/40 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5">
+              className="btn-ghost-gold w-full">
               {c.cta_menu}
             </Link>
             <a href={`tel:${s.phone}`}
@@ -358,12 +358,12 @@ export default function Restaurant() {
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-sm sm:max-w-none mx-auto">
           <Link to="/reserve"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-bold transition-all shadow-[0_8px_28px_rgba(201,169,110,0.3)] hover:shadow-[0_12px_36px_rgba(201,169,110,0.45)] hover:-translate-y-0.5">
+            className="btn-gold w-full sm:w-auto px-9">
             <UtensilsCrossed className="w-4 h-4" />
             {c.cta_reserve}
           </Link>
           <a href={`tel:${s.phone}`}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-9 py-4 border border-[#C9A96E]/35 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all hover:-translate-y-0.5">
+            className="btn-ghost-gold w-full sm:w-auto px-9">
             <Phone className="w-4 h-4" /> {s.phone}
           </a>
         </div>
