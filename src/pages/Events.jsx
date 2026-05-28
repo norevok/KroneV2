@@ -162,7 +162,7 @@ export default function Events() {
     <div className="min-h-screen bg-white text-[#1C1714] pb-20 lg:pb-0">
 
       {/* Hero */}
-      <div className="relative h-[65vh] min-h-[520px] overflow-hidden pt-[126px] lg:pt-[166px]" style={{minHeight: 'calc(55vh + 166px)'}}>
+      <div className="relative hero-top overflow-hidden" style={{ minHeight: 'clamp(560px, 80vh, 900px)' }}>
         <img src={IMAGES.hero} alt="Events & Feiern — Krone Langenburg" className="w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/70 via-[#1C1714]/40 to-[#1C1714]/90" />
         <div className="absolute inset-0 flex items-end pb-16 px-5">

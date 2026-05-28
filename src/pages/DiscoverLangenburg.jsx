@@ -7,34 +7,39 @@ import { SITE_DEFAULTS } from '@/lib/siteData';
 import KroneLocationSection from '@/components/KroneLocationSection';
 
 // All images replaced with real, correctly matching photos
+const IMG_CASTLE = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png';
+const IMG_JAGSTTAL = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/257e19347_IMG_8593.png';
+const IMG_MUSEUM = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg';
+const IMG_ALTSTADT = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg';
+
 const ATTRACTIONS = [
   {
     id: 'schloss',
     icon: Castle,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg',
+    image: IMG_CASTLE,
     de: { title: 'Schloss Langenburg', desc: 'Das fürstliche Schloss Langenburg thront majestätisch über dem Jagsttal und zählt zu den beeindruckendsten Barockschlössern Baden-Württembergs. Geführte Touren, Ausstellungen und eine atemberaubende Aussicht über das Hohenloher Land erwarten Sie.', tag: '5 min zu Fuß' },
     en: { title: 'Langenburg Castle', desc: 'The princely Langenburg Castle majestically overlooks the Jagst valley and is one of the most impressive Baroque castles in Baden-Württemberg. Guided tours, exhibitions and breathtaking views over the Hohenlohe countryside await you.', tag: '5 min walk' },
   },
   {
     id: 'jagsttal',
     icon: Mountain,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Jagst_bei_Langenburg.jpg/1280px-Jagst_bei_Langenburg.jpg',
+    image: IMG_JAGSTTAL,
     de: { title: 'Jagsttal & Wanderungen', desc: 'Das Jagsttal gehört zu den schönsten Flusstälern Süddeutschlands. Malerische Wanderwege führen durch Wiesen, Wälder und historische Dörfer. Der Jagsttalweg verbindet auf über 200 km Kilometer Natur und Kultur.', tag: 'Wanderparadies' },
     en: { title: 'Jagst Valley & Hiking', desc: 'The Jagst valley is one of the most beautiful river valleys in southern Germany. Scenic hiking trails lead through meadows, forests and historic villages. The Jagst Valley Trail connects over 200 km of nature and culture.', tag: 'Hiking paradise' },
   },
   {
     id: 'automuseum',
     icon: Car,
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Deutsches_Automuseum_beim_Schloss_Langenburg_-_panoramio.jpg/1280px-Deutsches_Automuseum_beim_Schloss_Langenburg_-_panoramio.jpg',
+    image: IMG_MUSEUM,
     de: { title: 'Deutsches Automuseum Schloss Langenburg', desc: 'Das Deutsche Automuseum im Schloss Langenburg zählt zu den faszinierendsten Automobilausstellungen Deutschlands. Über 80 historische Fahrzeuge — von frühen Sportwagen bis zu legendären Rennwagen — erzählen die Geschichte des Automobils in einzigartiger Schlosskulisse.', tag: '5 min zu Fuß' },
     en: { title: 'German Automotive Museum Langenburg', desc: 'The German Automotive Museum at Langenburg Castle is one of Germany\'s most fascinating car exhibitions. Over 80 historic vehicles — from early sports cars to legendary racing cars — tell the story of the automobile in a unique castle setting.', tag: '5 min walk' },
   },
   {
     id: 'altstadt',
     icon: Compass,
-    image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&q=85',
-    de: { title: 'Altstadt & Ausflugsziele', desc: 'Langenburg ist idealer Ausgangspunkt für Tagesausflüge nach Schwäbisch Hall, Bad Mergentheim oder Rothenburg ob der Tauber. Die malerische Altstadt selbst lädt mit Fachwerkhäusern und gepflasterten Gassen zum Spazieren ein.', tag: 'Tagesausflüge' },
-    en: { title: 'Old Town & Day Trips', desc: 'Langenburg is the ideal base for day trips to Schwäbisch Hall, Bad Mergentheim or Rothenburg ob der Tauber. The picturesque old town itself invites you to stroll among half-timbered houses and cobbled alleys.', tag: 'Day trips' },
+    image: IMG_ALTSTADT,
+    de: { title: 'Langenburger Altstadt', desc: 'Langenburg ist idealer Ausgangspunkt für Tagesausflüge nach Schwäbisch Hall, Bad Mergentheim oder Rothenburg ob der Tauber. Die malerische Altstadt selbst lädt mit Fachwerkhäusern und gepflasterten Gassen zum Spazieren ein.', tag: 'Tagesausflüge' },
+    en: { title: 'Langenburg Old Town', desc: 'Langenburg is the ideal base for day trips to Schwäbisch Hall, Bad Mergentheim or Rothenburg ob der Tauber. The picturesque old town itself invites you to stroll among half-timbered houses and cobbled alleys.', tag: 'Day trips' },
   },
 ];
 
@@ -94,10 +99,10 @@ export default function DiscoverLangenburg() {
     <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-10 overflow-hidden">
 
       {/* ── HERO ── */}
-      <div className="relative h-[75vh] min-h-[500px] max-h-[800px] overflow-hidden">
+      <div className="relative hero-top overflow-hidden" style={{ minHeight: 'clamp(580px, 85vh, 860px)' }}>
         <motion.img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg"
-          alt="Schloss Langenburg im Morgennebel"
+          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png"
+          alt="Schloss Langenburg Luftaufnahme Hohenlohe"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.08 }}
           animate={{ scale: 1 }}
@@ -297,12 +302,12 @@ export default function DiscoverLangenburg() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/rooms" className="flex items-center gap-2 px-7 py-3.5 bg-[#C9A96E] hover:bg-[#B8924A] text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-colors shadow-lg">
+              <Link to="/rooms" className="btn-gold">
                 {t.cta_rooms} <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/contact" className="flex items-center gap-2 px-7 py-3.5 border border-[#C9A96E]/40 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E]/10 rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
+              <Link to="/contact" className="btn-outline-dark">
                 {t.cta_contact}
               </Link>
             </motion.div>

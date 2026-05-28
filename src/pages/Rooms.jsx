@@ -145,7 +145,7 @@ export default function Rooms() {
 
       {/* Return banners */}
       {returnState === 'confirmed' && (
-        <div className="max-w-5xl mx-auto px-5 pt-[134px] lg:pt-[174px]">
+        <div className="max-w-5xl mx-auto px-5 page-top">
           <div className="border border-emerald-700/40 bg-emerald-950/30 rounded-2xl p-5 flex gap-3 mb-4">
             <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
             <div>
@@ -156,7 +156,7 @@ export default function Rooms() {
         </div>
       )}
       {returnState === 'pending' && (
-        <div className="max-w-5xl mx-auto px-5 pt-[134px] lg:pt-[174px]">
+        <div className="max-w-5xl mx-auto px-5 page-top">
           <div className="border border-amber-700/40 bg-amber-950/30 rounded-2xl p-5 flex gap-3 mb-4">
             <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
             <p className="text-amber-300 font-body">{t.pending_msg}</p>
@@ -165,7 +165,7 @@ export default function Rooms() {
       )}
 
       {/* ── HERO ── */}
-      <div className={`relative overflow-hidden ${returnState ? 'pt-8' : 'pt-[126px] lg:pt-[166px]'}`} style={{ minHeight: '56vh' }}>
+      <div className={`relative overflow-hidden ${returnState ? 'pt-8' : 'hero-top'}`} style={{ minHeight: 'clamp(480px, 65vh, 780px)' }}>
         <img
           src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
           alt="Krone Langenburg Zimmer & Suiten — Panorama Hohenlohe"

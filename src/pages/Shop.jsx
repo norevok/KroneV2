@@ -185,7 +185,7 @@ export default function Shop() {
     <div className="min-h-screen bg-ivory text-charcoal pb-24 lg:pb-10">
 
       {/* Hero */}
-      <div className="relative bg-espresso pt-[126px] lg:pt-[166px] pb-14 sm:pb-20 px-5 overflow-hidden">
+      <div className="relative bg-espresso page-top pb-14 sm:pb-20 px-5 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1600&q=60"
           alt="" className="absolute inset-0 w-full h-full object-cover opacity-15" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-b from-espresso/80 to-espresso/95" />

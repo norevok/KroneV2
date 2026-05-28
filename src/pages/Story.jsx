@@ -181,10 +181,10 @@ export default function Story() {
     <div className="min-h-screen bg-[#F7F2EA] text-[#1A1A1A] pb-24 lg:pb-0">
 
       {/* ── HERO ── */}
-      <div className="relative overflow-hidden bg-[#171311] pt-[126px] lg:pt-[166px] pb-20 sm:pb-28">
+      <div className="relative overflow-hidden bg-[#171311] page-top pb-20 sm:pb-28">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg"
-          alt="Schloss Langenburg über dem Jagsttal"
+          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png"
+          alt="Schloss Langenburg Luftaufnahme — Hohenlohe"
           className="absolute inset-0 w-full h-full object-cover opacity-25"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/60 via-transparent to-[#171311]/85" />
@@ -379,8 +379,8 @@ export default function Story() {
       {/* ── FINAL VISUAL — Exterior image ── */}
       <div className="relative h-80 sm:h-[480px] overflow-hidden">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Schloss_Langenburg-msu-2021-0306-.jpg/1280px-Schloss_Langenburg-msu-2021-0306-.jpg"
-          alt="Langenburg — Historisches Stadtbild über dem Jagsttal"
+          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png"
+          alt="Schloss Langenburg Luftaufnahme — Historisches Stadtbild"
           className="w-full h-full object-cover object-center"
           loading="lazy"
         />

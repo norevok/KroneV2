@@ -88,7 +88,7 @@ export default function Booking() {
     <div className="min-h-screen bg-white text-[#1C1714]">
 
       {/* Header band */}
-      <div className="bg-[#1C1714] pt-[126px] lg:pt-[166px] pb-8 px-5">
+      <div className="bg-[#1C1714] page-top pb-8 px-5">
         <div className="max-w-6xl mx-auto">
           <Link to="/rooms" className="flex items-center gap-2 text-white/40 hover:text-white/70 text-xs font-body tracking-wider uppercase mb-5 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> {t.back}

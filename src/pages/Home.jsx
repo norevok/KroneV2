@@ -717,32 +717,32 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
             {[
               {
-                img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=90',
-                alt: 'Schloss Langenburg — Barockschloss Hohenlohe',
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png',
+                alt: 'Schloss Langenburg Luftaufnahme — Barockschloss Hohenlohe',
                 label: c.chip_castle,
                 desc: lang === 'de' ? 'Historisches Schloss mit Blick ins Jagsttal.' : 'Historic castle overlooking the Jagst valley.',
                 dist: '5 Min.',
               },
               {
-                img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=90',
-                alt: 'Jagsttal bei Langenburg — grüne Wiesen und Fluss',
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/257e19347_IMG_8593.png',
+                alt: 'Jagsttal bei Langenburg — Fluss und Natur',
                 label: c.chip_nature,
                 desc: lang === 'de' ? 'Natur, Ausblicke und ruhige Wege direkt vor der Tür.' : 'Nature, views and peaceful paths right at your doorstep.',
                 dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
               },
               {
-                img: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=90',
-                alt: 'Klassisches Automobil — Deutsches Automuseum Langenburg',
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg',
+                alt: 'Deutsches Automuseum Langenburg — Rennwagen Ausstellung',
                 label: c.chip_museum,
                 desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
                 dist: '5 Min.',
               },
               {
-                img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&q=90',
-                alt: 'Hohenloher Wein Weinberge Region Genuss',
-                label: c.chip_wine,
-                desc: lang === 'de' ? 'Wein, regionale Produkte und echte Hohenloher Gastlichkeit.' : 'Wine, regional produce and true Hohenlohe hospitality.',
-                dist: '15 Min.',
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg',
+                alt: 'Langenburger Altstadt — historische Fachwerkhäuser',
+                label: lang === 'de' ? 'Langenburger Altstadt' : 'Langenburg Old Town',
+                desc: lang === 'de' ? 'Historische Fachwerkhäuser und gepflasterte Gassen im Ortskern.' : 'Historic half-timbered houses and cobbled lanes in the town centre.',
+                dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
               },
             ].map((item, i) => (
               <motion.div

@@ -154,7 +154,7 @@ export default function Gallery() {
     <div className="min-h-screen bg-[#F7F2EA] text-[#1A1A1A] pb-24 lg:pb-10">
 
       {/* ── HERO ── */}
-      <div className="relative overflow-hidden bg-[#171311] pt-[126px] lg:pt-[166px] pb-16 sm:pb-20 px-5">
+      <div className="relative overflow-hidden bg-[#171311] page-top pb-16 sm:pb-20 px-5">
         <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
           alt="Krone Langenburg — Panorama Hohenlohe"
           className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" aria-hidden="true" />

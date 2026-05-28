@@ -138,7 +138,7 @@ export default function MenuPage() {
     <div className="min-h-screen bg-[#F7F3EC] text-[#1C1714]">
 
       {/* Hero */}
-      <div className="relative bg-[#1C1714] pt-[126px] lg:pt-[166px] pb-12 overflow-hidden">
+      <div className="relative bg-[#1C1714] page-top pb-12 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=70"
           alt="Krone Langenburg by Ammesso Restaurant" className="absolute inset-0 w-full h-full object-cover opacity-25" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/50 to-[#1C1714]/90" />
@@ -158,7 +158,7 @@ export default function MenuPage() {
       </div>
 
       {/* Sticky tab bar */}
-      <div className="sticky top-[126px] lg:top-[166px] z-30 bg-white border-b border-[#EDE6D8] shadow-sm">
+      <div className="sticky top-[var(--nav-h-mobile)] lg:top-[var(--nav-h-desktop)] z-30 bg-white border-b border-[#EDE6D8] shadow-sm">
         <div className="max-w-4xl mx-auto px-5">
           <div className="flex gap-1 py-2">
             {TABS.map(tab => (
