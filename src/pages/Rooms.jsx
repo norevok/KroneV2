@@ -170,7 +170,9 @@ export default function Rooms() {
   };
   const t = T[lang] || T.de;
 
-  const inputCls = "w-full bg-white/12 border-2 border-white/25 focus:border-[#C9A96E]/70 rounded-xl px-4 py-3.5 text-sm text-white placeholder-white/35 focus:outline-none transition-all font-body font-medium focus:bg-white/15";
+  const inputCls = "w-full bg-[#FAF7F2] border-2 border-[#EDE6D8] focus:border-[#C9A96E] rounded-xl px-4 py-3.5 text-sm text-[#1C1714] placeholder-[#8A7A6A] focus:outline-none transition-all font-body font-medium focus:bg-white";
+  
+  const inputLabelCls = "block text-[#C9A96E] text-[10px] tracking-[0.25em] uppercase font-body font-semibold mb-2";
 
   return (
     <div className="min-h-screen bg-[#0F0E0B] text-white pb-24 lg:pb-0">
@@ -307,23 +309,25 @@ export default function Rooms() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-white/40 text-[10px] tracking-[0.25em] uppercase font-body font-medium mb-2">{t.checkin}</label>
+              <label className={inputLabelCls}>{t.checkin}</label>
               <input type="date" min={today} value={checkIn}
                 onChange={e => { setCheckIn(e.target.value); if (checkOut && e.target.value >= checkOut) setCheckOut(''); }}
-                className={inputCls} />
+                className={inputCls} 
+                style={{ colorScheme: 'light' }} />
             </div>
             <div>
-              <label className="block text-white/40 text-[10px] tracking-[0.25em] uppercase font-body font-medium mb-2">{t.checkout}</label>
-              <input type="date" min={minCheckout} value={checkOut} onChange={e => setCheckOut(e.target.value)} className={inputCls} />
+              <label className={inputLabelCls}>{t.checkout}</label>
+              <input type="date" min={minCheckout} value={checkOut} onChange={e => setCheckOut(e.target.value)} className={inputCls} 
+                style={{ colorScheme: 'light' }} />
             </div>
             <div>
-              <label className="block text-white/40 text-[10px] tracking-[0.25em] uppercase font-body font-medium mb-2">{t.adults_label}</label>
+              <label className={inputLabelCls}>{t.adults_label}</label>
               <div className="flex items-center gap-3 h-[46px]">
                 <button onClick={() => setAdults(a => Math.max(1, a - 1))}
-                  className="w-11 h-11 rounded-full border border-white/15 text-white/50 hover:border-[#C9A96E]/50 hover:text-[#C9A96E] transition-colors text-xl flex items-center justify-center">−</button>
+                  className="w-11 h-11 rounded-full border-2 border-[#C9A96E]/30 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E] hover:text-white transition-all text-xl flex items-center justify-center font-light">−</button>
                 <span className="flex-1 text-center font-display text-3xl font-light text-white">{adults}</span>
                 <button onClick={() => setAdults(a => Math.min(8, a + 1))}
-                  className="w-11 h-11 rounded-full border border-white/15 text-white/50 hover:border-[#C9A96E]/50 hover:text-[#C9A96E] transition-colors text-xl flex items-center justify-center">+</button>
+                  className="w-11 h-11 rounded-full border-2 border-[#C9A96E]/30 text-[#C9A96E] hover:border-[#C9A96E] hover:bg-[#C9A96E] hover:text-white transition-all text-xl flex items-center justify-center font-light">+</button>
               </div>
             </div>
           </div>
@@ -444,8 +448,8 @@ export default function Rooms() {
         </div>
 
         {/* ── ALL-ROOM AMENITIES ── */}
-        <div className="bg-[#171411] border border-white/8 rounded-2xl p-6 sm:p-8 mb-12">
-          <p className="text-white/30 text-[10px] tracking-[0.35em] uppercase font-body text-center mb-6">
+        <div className="bg-white border border-[#EDE6D8] rounded-2xl p-6 sm:p-8 mb-12 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+          <p className="text-[#8B6914] text-[10px] tracking-[0.35em] uppercase font-body font-semibold text-center mb-6">
             {lang === 'de' ? 'In allen Zimmern enthalten' : 'Included in all rooms'}
           </p>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-5 text-center">
@@ -458,10 +462,10 @@ export default function Rooms() {
               { icon: MapPin, label: lang === 'de' ? 'Stadtlage' : 'Town Centre' },
             ].map((a, i) => (
               <div key={i} className="flex flex-col items-center gap-2.5">
-                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/8 flex items-center justify-center">
-                  <a.icon className="w-4 h-4 text-[#C9A96E]/60" />
+                <div className="w-10 h-10 rounded-full bg-[#F7F3EC] border border-[#EDE6D8] flex items-center justify-center">
+                  <a.icon className="w-4 h-4 text-[#8B6914]" />
                 </div>
-                <span className="text-white/40 text-xs font-body leading-tight">{a.label}</span>
+                <span className="text-[#4A3F35] text-xs font-body font-medium leading-tight">{a.label}</span>
               </div>
             ))}
           </div>
