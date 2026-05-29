@@ -341,41 +341,54 @@ export default function Home() {
         </div>
 
         {/* Hero text — FIXED layout, never moves between slides */}
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-5 pb-44 sm:pb-36" style={{ paddingTop: 'var(--nav-h-mobile)' }}>
-          {/* Badge — always same position, no per-slide animation on position */}
-          <div className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 mb-4">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-5 pb-48 sm:pb-40 lg:pb-36 page-top">
+          {/* Badge — always same position */}
+          <motion.div
+            className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}>
             <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C9A96E]" />
-            <span className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.3em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
-          </div>
-          <p className="text-[#C9A96E]/70 text-[10px] tracking-[0.5em] uppercase font-body mb-4 hidden sm:block">
+            <span className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
+          </motion.div>
+          <motion.p
+            className="text-[#C9A96E]/70 text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] uppercase font-body mb-3 sm:mb-5 hidden sm:block"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.1 }}>
             Krone · Langenburg · Deutschland
-          </p>
+          </motion.p>
           <AnimatePresence mode="wait">
             <motion.h1
               key={`title-${current}`}
-              className="font-display font-light text-white mb-4 max-w-4xl px-2"
+              className="font-display font-light text-white mb-3 sm:mb-5 max-w-4xl px-2"
               style={{
                 fontSize: 'clamp(2rem, 5.5vw, 4.5rem)',
                 lineHeight: '1.02',
                 textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)',
               }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
               {slideText.title}
             </motion.h1>
           </AnimatePresence>
-          <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-4" />
+          <motion.div
+            className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-3 sm:mb-5"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+          />
           <AnimatePresence mode="wait">
             <motion.p
               key={`sub-${current}`}
-              className="text-white/90 font-body text-sm sm:text-base lg:text-[1.05rem] max-w-sm sm:max-w-lg leading-relaxed px-2"
+              className="text-white/90 font-body text-sm sm:text-base lg:text-[1.1rem] max-w-sm sm:max-w-lg leading-relaxed px-2"
               style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}>
+              transition={{ delay: 0.25, duration: 0.8 }}>
               {slideText.sub}
             </motion.p>
           </AnimatePresence>
