@@ -530,10 +530,10 @@ export default function Rooms() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { id: 'schloss', icon: '🏰', de: 'Schloss Langenburg', en: 'Langenburg Castle', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/06db91e21_generated_image.png' },
-              { id: 'jagsttal', icon: '🌊', de: 'Jagsttal', en: 'Jagst Valley', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/5ae994faa_generated_image.png' },
-              { id: 'altstadt', icon: '🏘️', de: 'Altstadt Langenburg', en: 'Old Town Langenburg', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=85' },
-              { id: 'automuseum', icon: '🚗', de: 'Automuseum', en: 'Car Museum', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg' },
+              { id: 'schloss', de: 'Schloss Langenburg', en: 'Langenburg Castle', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg' },
+              { id: 'jagsttal', de: 'Jagsttal', en: 'Jagst Valley', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg' },
+              { id: 'altstadt', de: 'Altstadt Langenburg', en: 'Old Town Langenburg', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=85' },
+              { id: 'automuseum', de: 'Automuseum', en: 'Car Museum', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg' },
             ].map((item, i) => (
               <Link 
                 key={i} 
@@ -546,8 +546,7 @@ export default function Rooms() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-2 left-2 text-3xl">{item.icon}</div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
                 <div className="p-3 text-center">
                   <p className="text-[#1C1714] text-xs font-body font-semibold leading-tight">{lang === 'de' ? item.de : item.en}</p>
