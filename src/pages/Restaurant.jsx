@@ -3,7 +3,7 @@ import { useLang } from '@/lib/useLang';
 import { Clock, UtensilsCrossed, Phone, Mail, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
-const HERO_IMG = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/15c4ce145_kueche-innen.jpg';
+const HERO_IMG = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0ba635de8_Krone_innen.png';
 
 export default function Restaurant() {
   const { lang } = useLang();
@@ -244,8 +244,8 @@ export default function Restaurant() {
             <div className="md:col-span-1">
               <div className="relative rounded-xl overflow-hidden aspect-[3/4] shadow-lg">
                 <img
-                  src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2324c9bd7_generated_image.png"
-                  alt="Mediterranean Kitchen Krone Langenburg"
+                  src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/15c4ce145_kueche-innen.jpg"
+                  alt="Professionelle Küche Krone Langenburg"
                   className="w-full h-full object-cover object-center"
                   loading="lazy"
                 />
