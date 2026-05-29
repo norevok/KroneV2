@@ -561,12 +561,10 @@ export default function Home() {
               
                 <Link to={f.to} className="block">
                   <div className="h-52 overflow-hidden">
-                    <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/aef46bd59_Krone_innen.png"
-
+                    <img src={i === 1 ? "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/aef46bd59_Krone_innen.png" : f.img}
                   alt={f.alt || (f[lang] || f.de) + ' — Krone Langenburg by Ammesso'}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy" />
-                  
                   </div>
                   <div className="p-6">
                     <div className="w-10 h-10 bg-[#8B6914]/8 border border-[#8B6914]/15 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#8B6914]/15 transition-colors">
