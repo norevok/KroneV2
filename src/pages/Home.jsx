@@ -741,7 +741,7 @@ export default function Home() {
                 dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
               },
               {
-                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png',
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg',
                 alt: 'Deutsches Automuseum Langenburg — Rennwagen Ausstellung',
                 label: c.chip_museum,
                 desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
@@ -765,13 +765,13 @@ export default function Home() {
                 className="relative rounded-2xl overflow-hidden h-36 sm:h-44 group cursor-default"
                 style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,110,0.15)' }}>
                 <img src={item.img} alt={item.alt || item.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
                 {/* Gold top accent line */}
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#C9A96E]/60 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
-                  <p className="text-white font-body text-xs font-semibold leading-tight">{item.label}</p>
-                  {item.desc && <p className="text-white/65 text-[10px] font-body mt-0.5 leading-snug hidden sm:block">{item.desc}</p>}
-                  <p className="text-[#C9A96E] text-[10px] font-body mt-0.5 tracking-wider">{item.dist}</p>
+                  <p className="text-white font-body text-xs font-bold leading-tight drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">{item.label}</p>
+                  {item.desc && <p className="text-white/80 text-[10px] font-body mt-0.5 leading-snug hidden sm:block drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">{item.desc}</p>}
+                  <p className="text-[#C9A96E] text-[10px] font-body font-semibold mt-0.5 tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">{item.dist}</p>
                 </div>
               </motion.div>
             ))}
