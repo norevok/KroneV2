@@ -155,10 +155,10 @@ export default function Gallery() {
 
       {/* ── HERO ── */}
       <div className="relative overflow-hidden bg-[#171311] page-top pb-16 sm:pb-20 px-5">
-        <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
-          alt="Krone Langenburg — Panorama Hohenlohe"
-          className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/70 to-[#171311]/92" />
+        <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg"
+          alt="Krone Langenburg — Galerie"
+          className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none select-none" style={{ objectPosition: '50% 40%' }} aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/55 to-[#171311]/88" />
         <div className="relative max-w-4xl mx-auto text-center pt-8">
           <div className="flex items-center justify-center gap-3 mb-5">
             <div className="h-px w-10 bg-[#B08A42]/50" />
