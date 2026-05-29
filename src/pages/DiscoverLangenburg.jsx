@@ -98,39 +98,42 @@ export default function DiscoverLangenburg() {
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-10 overflow-hidden">
 
-      {/* ── HERO ── */}
-      <div className="page-top">
-        {/* Image — full width, not absolute, so it sits below the navbar */}
-        <div className="relative w-full overflow-hidden" style={{ height: 'clamp(340px, 52vw, 600px)' }}>
-          <img
-            src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c1e914581_langenburg_entdecken.jpg"
-            alt="Langenburg Stadtansicht mit Schloss und Hohenloher Landschaft"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: '50% 10%', objectFit: 'cover', imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+      {/* ── HERO — Bild beginnt am Seitenanfang (hinter Navbar), Text mit page-top Abstand ── */}
+      <div className="relative w-full overflow-hidden" style={{ height: 'clamp(480px, 65vw, 720px)' }}>
+        <img
+          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c1e914581_langenburg_entdecken.jpg"
+          alt="Langenburg Stadtansicht mit Schloss und Hohenloher Landschaft"
+          className="absolute inset-0 w-full h-full"
+          style={{
+            objectFit: 'cover',
+            objectPosition: '50% 15%',
+            imageRendering: 'crisp-edges',
+            WebkitBackfaceVisibility: 'hidden',
+            transform: 'scale(1.0)',
+          }}
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/65" />
 
-          {/* Text overlay — bottom of image */}
-          <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center text-center px-5 pb-8 sm:pb-12">
-            <motion.p
-              className="text-[#C9A96E] text-[10px] tracking-[0.6em] uppercase font-body mb-2"
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
-              {t.eyebrow}
-            </motion.p>
-            <motion.h1
-              className="font-display font-light text-white mb-3 max-w-3xl"
-              style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3.25rem)', lineHeight: '1.08', textShadow: '0 2px 24px rgba(0,0,0,0.9)' }}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9 }}>
-              {t.title}
-            </motion.h1>
-            <motion.p
-              className="text-white/85 font-body text-sm leading-relaxed max-w-lg"
-              style={{ textShadow: '0 1px 12px rgba(0,0,0,0.8)' }}
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
-              {t.sub}
-            </motion.p>
-          </div>
+        {/* Text overlay — unten, mit page-top Abstand damit Text nicht hinter Navbar liegt */}
+        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-5 pb-10 sm:pb-14">
+          <motion.p
+            className="text-[#C9A96E] text-[10px] tracking-[0.6em] uppercase font-body mb-2"
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
+            {t.eyebrow}
+          </motion.p>
+          <motion.h1
+            className="font-display font-light text-white mb-3 max-w-3xl"
+            style={{ fontSize: 'clamp(1.75rem, 3.5vw, 3.25rem)', lineHeight: '1.08', textShadow: '0 2px 24px rgba(0,0,0,0.9)' }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9 }}>
+            {t.title}
+          </motion.h1>
+          <motion.p
+            className="text-white/85 font-body text-sm leading-relaxed max-w-lg"
+            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.8)' }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
+            {t.sub}
+          </motion.p>
         </div>
       </div>
 
