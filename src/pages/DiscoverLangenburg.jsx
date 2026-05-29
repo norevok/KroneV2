@@ -99,53 +99,40 @@ export default function DiscoverLangenburg() {
     <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-10 overflow-hidden">
 
       {/* ── HERO ── */}
-      <div className="relative hero-top overflow-hidden" style={{ minHeight: 'clamp(580px, 85vh, 860px)' }}>
+      <div className="relative page-top overflow-hidden" style={{ minHeight: 'clamp(420px, 60vh, 640px)' }}>
         <img
-          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png"
-          alt="Schloss Langenburg Luftaufnahme Hohenlohe"
+          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c1e914581_langenburg_entdecken.jpg"
+          alt="Langenburg Stadtansicht mit Schloss und Hohenloher Landschaft"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '50% 40%' }}
+          style={{ objectPosition: '50% 55%' }}
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#FAF7F2]" />
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/70" />
 
-        {/* Gold accent lines */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent opacity-60" />
-
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-16">
+        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-5 pb-10 sm:pb-14">
           <motion.p
-            className="text-[#C9A96E] text-[10px] tracking-[0.6em] uppercase font-body mb-5"
+            className="text-[#C9A96E] text-[10px] tracking-[0.6em] uppercase font-body mb-3"
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
             {t.eyebrow}
           </motion.p>
           <motion.h1
-            className="font-display font-light text-white mb-6 max-w-4xl"
-            style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05', textShadow: '0 2px 24px rgba(0,0,0,0.9)' }}
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
+            className="font-display font-light text-white mb-4 max-w-3xl"
+            style={{ fontSize: 'clamp(2rem, 3.8vw, 3.5rem)', lineHeight: '1.08', textShadow: '0 2px 24px rgba(0,0,0,0.9)' }}
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9 }}>
             {t.title}
           </motion.h1>
           <motion.p
-            className="text-white/90 font-body text-sm sm:text-lg leading-relaxed max-w-2xl"
+            className="text-white/85 font-body text-sm sm:text-base leading-relaxed max-w-xl"
             style={{ textShadow: '0 1px 12px rgba(0,0,0,0.8)' }}
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.8 }}>
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
             {t.sub}
           </motion.p>
-          <motion.div
-            className="mt-10 flex flex-col items-center gap-2 cursor-pointer"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
-            onClick={() => document.getElementById('attractions')?.scrollIntoView({ behavior: 'smooth' })}>
-            <span className="text-white/40 text-[10px] tracking-[0.4em] uppercase font-body">{t.scroll_hint}</span>
-            <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}>
-              <ChevronDown className="w-5 h-5 text-[#C9A96E]" />
-            </motion.div>
-          </motion.div>
         </div>
       </div>
 
       {/* ── ATTRACTIONS ── */}
-      <div id="attractions" className="max-w-6xl mx-auto px-4 sm:px-5 py-16 sm:py-20">
-        <div className="space-y-10 sm:space-y-14">
+      <div id="attractions" className="max-w-6xl mx-auto px-4 sm:px-5 py-10 sm:py-14">
+        <div className="space-y-8 sm:space-y-10">
           {ATTRACTIONS.map((att, idx) => {
             const content = att[lang] || att.de;
             const isReversed = idx % 2 === 1;
@@ -236,7 +223,7 @@ export default function DiscoverLangenburg() {
 
         {/* ── GETTING HERE ── */}
         <motion.div
-          className="mt-20 sm:mt-24"
+          className="mt-12 sm:mt-16"
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Map */}
@@ -292,7 +279,7 @@ export default function DiscoverLangenburg() {
         {/* ── CTA STRIP ── */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="mt-14 sm:mt-16 bg-gradient-to-r from-[#1C1714] to-[#2A2118] border border-[#C9A96E]/20 rounded-3xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl overflow-hidden relative">
+          className="mt-10 sm:mt-12 bg-gradient-to-r from-[#1C1714] to-[#2A2118] border border-[#C9A96E]/20 rounded-3xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl overflow-hidden relative">
           {/* Decorative gold glow */}
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#C9A96E]/08 rounded-full blur-3xl pointer-events-none" />
           <div>
