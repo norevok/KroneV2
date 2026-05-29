@@ -74,22 +74,22 @@ export default function KroneLocationSection({ compact = false, darkBg = false }
             Deutschland
           </address>
         </div>
-        <div className="flex flex-col sm:flex-row gap-2">
+        <div className="grid grid-cols-2 gap-3">
           <a
             href={MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-full text-xs tracking-[0.15em] uppercase font-body font-bold transition-all btn-gold" style={{minHeight:'44px'}}>
-            <Navigation className="w-3.5 h-3.5" />
-            {t.route}
+            className="flex items-center justify-center gap-2 py-3 px-3 rounded-full text-xs tracking-[0.12em] uppercase font-body font-bold transition-all btn-gold" style={{minHeight:'44px'}}>
+            <Navigation className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="truncate">{t.route}</span>
           </a>
           <a
             href={MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 py-3 px-4 btn-ghost-gold rounded-full text-xs" style={{minHeight:'44px'}}>
-            <MapPin className="w-3.5 h-3.5" />
-            {t.open}
+            className="flex items-center justify-center gap-2 py-3 px-3 btn-ghost-gold rounded-full text-xs" style={{minHeight:'44px'}}>
+            <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+            <span className="truncate">{t.open}</span>
           </a>
         </div>
       </div>
