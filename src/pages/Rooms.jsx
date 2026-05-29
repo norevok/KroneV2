@@ -50,22 +50,25 @@ export default function Rooms() {
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState(2);
 
-  // Hero Slider Bilder
+  // Hero Slider Bilder - Hochwertige, scharfe Aufnahmen
   const HERO_IMAGES = [
     {
       src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
       alt: 'King Suite Zimmer Krone Langenburg by Ammesso',
-      pos: '50% 50%'
+      pos: '50% 50%',
+      blur: 0
     },
     {
       src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg',
       alt: 'Doppelzimmer mit Balkontür Krone Langenburg',
-      pos: '50% 45%'
+      pos: '50% 45%',
+      blur: 0
     },
     {
       src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg',
       alt: 'Doppelzimmer mit Stadtblick Krone Langenburg',
-      pos: '50% 50%'
+      pos: '50% 50%',
+      blur: 0
     }
   ];
 
@@ -195,7 +198,7 @@ export default function Rooms() {
 
       {/* ── HERO mit Slider ── */}
       <div className={`relative overflow-hidden ${returnState ? 'pt-8' : ''}`} style={{ minHeight: 'clamp(650px, 78vh, 900px)' }}>
-        {/* Slider Images */}
+        {/* Slider Images - Maximale Schärfe */}
         {HERO_IMAGES.map((slide, i) => (
           <div
             key={i}
@@ -206,7 +209,11 @@ export default function Rooms() {
               src={slide.src}
               alt={slide.alt}
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: slide.pos, filter: 'brightness(1.1) contrast(1.15) saturate(1.15) sharpen(1.2)' }}
+              style={{ 
+                objectPosition: slide.pos, 
+                filter: 'brightness(1.15) contrast(1.2) saturate(1.2) sharpness(1.3)',
+                transform: 'scale(1.02)'
+              }}
               loading={i === 0 ? 'eager' : 'lazy'}
             />
           </div>
@@ -216,22 +223,34 @@ export default function Rooms() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/35 via-[#0F0E0B]/5 to-[#0F0E0B]/85" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/15 via-transparent to-[#0F0E0B]/15" />
 
-        {/* Content */}
+        {/* Content mit Blur-Hintergrund für perfekte Lesbarkeit */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-10" style={{ paddingTop: '180px' }}>
           <div className="max-w-[860px] w-full relative z-10">
+            {/* Blur-Overlay hinter dem Text für bessere Lesbarkeit */}
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] rounded-3xl -z-10" style={{ margin: '-20px' }} />
+            
             <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#C9A96E]/70" />
-              <p className="text-[#C9A96E] text-[10px] tracking-[0.55em] uppercase font-body font-semibold">{t.eyebrow}</p>
-              <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#C9A96E]/70" />
+              <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#C9A96E]/90" />
+              <p className="text-[#C9A96E] text-[11px] tracking-[0.55em] uppercase font-body font-bold">{t.eyebrow}</p>
+              <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#C9A96E]/90" />
             </div>
             <h1
-              className="font-display font-light text-white mb-4"
-              style={{ fontSize: 'clamp(2.5rem, 4.5vw, 4.5rem)', lineHeight: '1.05', textShadow: '0 3px 30px rgba(0,0,0,0.9), 0 0 60px rgba(0,0,0,0.5)' }}>
+              className="font-display font-semibold text-white mb-4"
+              style={{ 
+                fontSize: 'clamp(2.8rem, 5vw, 5rem)', 
+                lineHeight: '1.1', 
+                textShadow: '0 4px 40px rgba(0,0,0,0.95), 0 0 80px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.9)',
+                fontWeight: '600'
+              }}>
               {t.title}
             </h1>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mx-auto mb-4" />
-            <p className="text-white/85 font-body max-w-[540px] mx-auto leading-relaxed mb-8"
-               style={{ fontSize: 'clamp(1rem, 1.4vw, 1.15rem)', textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}>
+            <p className="text-white font-body max-w-[540px] mx-auto leading-relaxed mb-8"
+               style={{ 
+                 fontSize: 'clamp(1.1rem, 1.6vw, 1.25rem)', 
+                 textShadow: '0 3px 24px rgba(0,0,0,0.95), 0 0 40px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.9)',
+                 fontWeight: '500'
+               }}>
               {t.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
