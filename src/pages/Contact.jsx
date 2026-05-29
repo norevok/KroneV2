@@ -52,8 +52,8 @@ const COPY = {
     eyebrow: 'Krone Langenburg by Ammesso',
     title: 'Kontakt',
     sub: 'Wir freuen uns, von Ihnen zu hören',
-    whatsapp: 'Direkt auf WhatsApp schreiben',
-    whatsapp_note: '· Antwort meist in unter 2 Stunden ·',
+    call_cta: 'Jetzt anrufen',
+    call_note: '· Bei Fragen rufen Sie uns gerne an ·',
     addr_title: 'Anschrift',
     hours_title: 'Öffnungszeiten',
     directions: 'Route planen',
@@ -80,8 +80,8 @@ const COPY = {
     eyebrow: 'Krone Langenburg by Ammesso',
     title: 'Contact',
     sub: 'We look forward to hearing from you',
-    whatsapp: 'Message us on WhatsApp',
-    whatsapp_note: '· Usually responds within 2 hours ·',
+    call_cta: 'Call Us Now',
+    call_note: '· Happy to answer your questions ·',
     addr_title: 'Address',
     hours_title: 'Opening Hours',
     directions: 'Get Directions',
@@ -108,8 +108,8 @@ const COPY = {
     eyebrow: 'Krone Langenburg by Ammesso',
     title: 'Contatti',
     sub: 'Siamo lieti di sentirvi',
-    whatsapp: 'Scrivici su WhatsApp',
-    whatsapp_note: '· Di solito risponde entro 2 ore ·',
+    call_cta: 'Chiamaci ora',
+    call_note: '· Siamo felici di rispondere alle vostre domande ·',
     addr_title: 'Indirizzo',
     hours_title: 'Orari di apertura',
     directions: 'Come raggiungerci',
@@ -136,8 +136,8 @@ const COPY = {
     eyebrow: 'Krone Langenburg by Ammesso',
     title: 'Contacto',
     sub: 'Estaremos encantados de atenderle',
-    whatsapp: 'Escríbanos por WhatsApp',
-    whatsapp_note: '· Normalmente respondemos en menos de 2 horas ·',
+    call_cta: 'Llámenos ahora',
+    call_note: '· Estamos disponibles para sus preguntas ·',
     addr_title: 'Dirección',
     hours_title: 'Horario de apertura',
     directions: 'Cómo llegar',
@@ -271,12 +271,13 @@ export default function Contact() {
           <p className="text-[#8B6914] text-[10px] tracking-[0.5em] uppercase font-body mb-3">{t.eyebrow}</p>
           <h1 className="font-display font-light text-[#1C1714] mb-3"
               style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05' }}>{t.title}</h1>
-          <p className="font-body text-[#8A7A6A] text-base">{t.sub}</p>
-          <a href="https://wa.me/4979059417700" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-[#25D366] text-[#0F1A0F] rounded-full text-xs font-body font-bold tracking-widest uppercase shadow-lg hover:shadow-xl transition-all">
-            💬 {t.whatsapp}
+          <p className="font-body text-[#8A7A6A] text-base mb-6">{t.sub}</p>
+          <a href={`tel:${SITE_DEFAULTS.phone}`}
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1C1714] text-white rounded-full text-xs font-body font-bold tracking-widest uppercase shadow-lg hover:bg-[#2A2118] hover:shadow-xl transition-all">
+            <Phone className="w-4 h-4 text-[#C9A96E]" />
+            {lang === 'de' ? 'Jetzt anrufen' : lang === 'en' ? 'Call Us Now' : 'Chiama ora'}
           </a>
-          <p className="text-[#8A7A6A]/50 text-[10px] font-body mt-2 tracking-wider">{t.whatsapp_note}</p>
+          <p className="text-[#8A7A6A]/50 text-[10px] font-body mt-2 tracking-wider">{SITE_DEFAULTS.phone}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-10">
