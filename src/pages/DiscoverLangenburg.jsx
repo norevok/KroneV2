@@ -106,7 +106,7 @@ export default function DiscoverLangenburg() {
             src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c1e914581_langenburg_entdecken.jpg"
             alt="Langenburg Stadtansicht mit Schloss und Hohenloher Landschaft"
             className="w-full h-full object-cover"
-            style={{ objectPosition: '50% 40%', objectFit: 'cover' }}
+            style={{ objectPosition: '50% 10%', objectFit: 'cover', imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
             loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
