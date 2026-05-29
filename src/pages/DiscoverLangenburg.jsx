@@ -125,20 +125,20 @@ export default function DiscoverLangenburg() {
               <span className="text-[#C9A96E] text-[10px] tracking-[0.6em] uppercase font-body font-semibold">{t.eyebrow}</span>
             </motion.div>
             <motion.h1
-              className="font-display font-semibold text-white mb-4 max-w-3xl"
+              className="font-display font-light text-white mb-4 max-w-3xl"
               style={{
-                fontSize: 'clamp(2rem, 4vw, 3.75rem)',
-                lineHeight: '1.06',
-                textShadow: '0 2px 8px rgba(0,0,0,1), 0 4px 32px rgba(0,0,0,0.9), 0 0 60px rgba(0,0,0,0.7)',
-                letterSpacing: '-0.01em',
+                fontSize: 'clamp(2rem, 3.8vw, 3.5rem)',
+                lineHeight: '1.1',
+                textShadow: '0 2px 20px rgba(0,0,0,0.85), 0 4px 40px rgba(0,0,0,0.6)',
+                letterSpacing: '0.01em',
               }}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9 }}>
               {t.title}
             </motion.h1>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-4" />
             <motion.p
-              className="text-white font-body text-sm sm:text-base leading-relaxed max-w-lg font-medium"
-              style={{ textShadow: '0 1px 8px rgba(0,0,0,1), 0 2px 20px rgba(0,0,0,0.8)' }}
+              className="text-white/90 font-body text-sm sm:text-base leading-relaxed max-w-lg font-light"
+              style={{ textShadow: '0 1px 12px rgba(0,0,0,0.9)' }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
               {t.sub}
             </motion.p>
