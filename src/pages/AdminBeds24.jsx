@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { format } from 'date-fns';
-import { RefreshCw, CheckCircle, AlertTriangle, Clock, XCircle, BedDouble, Activity, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import { RefreshCw, CheckCircle, AlertTriangle, Clock, XCircle, BedDouble, Activity, ExternalLink, ChevronDown, ChevronUp, Shield } from 'lucide-react';
+import Beds24ConfigStatus from '@/components/admin/Beds24ConfigStatus';
 
 const ADMIN_EMAILS = ['oammesso@gmail.com', 'omarouardaoui0@gmail.com', 'norevok@gmail.com'];
 
@@ -293,8 +294,11 @@ export default function AdminBeds24() {
           </div>
         )}
 
+        {/* Integration Config Status */}
+        <Beds24ConfigStatus />
+
         {/* Webhook Info */}
-        <div className="mt-8 glass-card border border-[#C9A96E]/08 rounded-xl p-5">
+        <div className="mt-4 glass-card border border-[#C9A96E]/08 rounded-xl p-5">
           <p className="text-ivory/30 text-[10px] tracking-[0.3em] uppercase font-body mb-3">Webhook Konfiguration</p>
           <p className="text-ivory/50 text-xs font-body mb-2">
             Beds24 Webhook URL → Dashboard › Code › Functions › <span className="font-mono text-gold/60">beds24BookingWebhook</span>

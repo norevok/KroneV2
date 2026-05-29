@@ -1,0 +1,75 @@
+{
+  "name": "IntegrationExecutionLog",
+  "type": "object",
+  "properties": {
+    "integration": {
+      "type": "string",
+      "enum": [
+        "beds24",
+        "stripe",
+        "slack",
+        "other"
+      ],
+      "default": "beds24"
+    },
+    "action": {
+      "type": "string",
+      "description": "e.g. token_refresh, api_request, webhook_received"
+    },
+    "endpoint": {
+      "type": "string",
+      "description": "API endpoint called (no credentials in path)"
+    },
+    "http_status": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean",
+      "default": true
+    },
+    "error_message": {
+      "type": "string"
+    },
+    "duration_ms": {
+      "type": "number"
+    },
+    "triggered_by": {
+      "type": "string",
+      "enum": [
+        "booking_return",
+        "guest_login",
+        "admin_lookup",
+        "webhook",
+        "system"
+      ],
+      "default": "system"
+    },
+    "related_ref": {
+      "type": "string",
+      "description": "booking_reference or intent_ref \u2014 NO token values ever stored here"
+    },
+    "token_used": {
+      "type": "string",
+      "enum": [
+        "access_token",
+        "refresh_token",
+        "none"
+      ],
+      "description": "Which token type was used \u2014 never the actual value"
+    },
+    "token_was_cached": {
+      "type": "boolean",
+      "default": false,
+      "description": "Was the access token served from in-memory cache?"
+    },
+    "executed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "integration",
+    "action",
+    "executed_at"
+  ]
+}
