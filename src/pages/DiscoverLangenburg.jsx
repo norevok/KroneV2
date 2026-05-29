@@ -6,11 +6,11 @@ import { ArrowRight, MapPin, Compass, Mountain, Castle, ChevronDown, Car } from 
 import { SITE_DEFAULTS } from '@/lib/siteData';
 import KroneLocationSection from '@/components/KroneLocationSection';
 
-// Correct real photos for each attraction
-const IMG_CASTLE = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png';
-const IMG_JAGSTTAL = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/257e19347_IMG_8593.png';
-const IMG_MUSEUM = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg';
-const IMG_ALTSTADT = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg';
+// Identical images as Home page location cards
+const IMG_CASTLE = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg';
+const IMG_JAGSTTAL = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg';
+const IMG_MUSEUM = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg';
+const IMG_ALTSTADT = 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=2400&q=95';
 
 const ATTRACTIONS = [
   {
@@ -175,7 +175,9 @@ export default function DiscoverLangenburg() {
                      alt={`${content.title} — Krone Langenburg Hotel Hohenlohe`}
                      className="w-full h-full object-cover"
                      style={{
-                       objectPosition: att.id === 'jagsttal' ? '50% 60%' : att.id === 'altstadt' ? '50% 55%' : att.id === 'schloss' ? '50% 40%' : '50% 50%'
+                       objectPosition: att.id === 'jagsttal' ? '50% 60%' : att.id === 'altstadt' ? '50% 55%' : att.id === 'schloss' ? '50% 40%' : '50% 50%',
+                       imageRendering: 'auto',
+                       WebkitBackfaceVisibility: 'hidden',
                      }}
                      whileHover={{ scale: 1.06 }}
                      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}

@@ -764,7 +764,7 @@ export default function Home() {
                 whileHover={{ y: -6, scale: 1.02 }}
                 className="relative rounded-2xl overflow-hidden h-36 sm:h-44 group cursor-default"
                 style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,110,0.15)' }}>
-                <img src={item.img} alt={item.alt || item.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+                <img src={item.img} alt={item.alt || item.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
                 {/* Gold top accent line */}
                 <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#C9A96E]/60 to-transparent" />
