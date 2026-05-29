@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
 import { SITE_DEFAULTS, ROOMS } from '@/lib/siteData';
-import { Star, Coffee, CheckCircle, AlertCircle, ExternalLink, Wifi, Bath, Wind, MapPin, ArrowRight, BedDouble, Users, CalendarDays, Phone, ChevronRight, Navigation, Check } from 'lucide-react';
+import { Star, Coffee, CheckCircle, AlertCircle, ExternalLink, Wifi, Bath, Wind, MapPin, ArrowRight, BedDouble, Users, CalendarDays, Phone, ChevronRight, Navigation, Check, ChevronLeft, ChevronRight as ChevronRightIcon } from 'lucide-react';
 
 const MAPS_URL = 'https://maps.app.goo.gl/GF5S8i2vASmpA7jUA';
 const MAPS_EMBED = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2604.2316221936717!2d9.8452029!3d49.2530556!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47985de90735ea63%3A0x86445a21b13205c1!2sKrone%20Langenburg%20by%20Ammesso!5e0!3m2!1sde!2sth!4v1779880134107!5m2!1sde!2sth';
@@ -43,11 +43,31 @@ export default function Rooms() {
   const [showBooking, setShowBooking] = useState(false);
   const [activePhotos, setActivePhotos] = useState({});
   const [savingIntent, setSavingIntent] = useState(false);
+  const [heroSlideIndex, setHeroSlideIndex] = useState(0);
 
   const today = new Date().toISOString().split('T')[0];
   const [checkIn, setCheckIn] = useState(today);
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState(2);
+
+  // Hero Slider Bilder
+  const HERO_IMAGES = [
+    {
+      src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
+      alt: 'King Suite Zimmer Krone Langenburg by Ammesso',
+      pos: '50% 50%'
+    },
+    {
+      src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg',
+      alt: 'Doppelzimmer mit Balkontür Krone Langenburg',
+      pos: '50% 45%'
+    },
+    {
+      src: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg',
+      alt: 'Doppelzimmer mit Stadtblick Krone Langenburg',
+      pos: '50% 50%'
+    }
+  ];
 
   const params = new URLSearchParams(window.location.search);
   const returnState = params.get('return');
@@ -57,6 +77,14 @@ export default function Rooms() {
   const minCheckout = checkIn
     ? new Date(new Date(checkIn).getTime() + 86400000).toISOString().split('T')[0]
     : new Date(new Date().getTime() + 86400000).toISOString().split('T')[0];
+
+  // Auto-Slider für Hero
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroSlideIndex(prev => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
 
   async function handleBookNow(roomId = null) {
     setSavingIntent(true);
@@ -165,33 +193,45 @@ export default function Rooms() {
         </div>
       )}
 
-      {/* ── HERO ── */}
+      {/* ── HERO mit Slider ── */}
       <div className={`relative overflow-hidden ${returnState ? 'pt-8' : ''}`} style={{ minHeight: 'clamp(650px, 78vh, 900px)' }}>
-        <img
-          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
-          alt="Krone Langenburg Zimmer & Suiten — King Suite"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '50% 50%', filter: 'brightness(1.08) contrast(1.1) saturate(1.12)' }}
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/40 via-[#0F0E0B]/10 to-[#0F0E0B]/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/10 via-transparent to-[#0F0E0B]/10" />
+        {/* Slider Images */}
+        {HERO_IMAGES.map((slide, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 transition-opacity duration-1000"
+            style={{ opacity: i === heroSlideIndex ? 1 : 0 }}
+          >
+            <img
+              src={slide.src}
+              alt={slide.alt}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: slide.pos, filter: 'brightness(1.1) contrast(1.15) saturate(1.15) sharpen(1.2)' }}
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+          </div>
+        ))}
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/35 via-[#0F0E0B]/5 to-[#0F0E0B]/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/15 via-transparent to-[#0F0E0B]/15" />
 
+        {/* Content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-10" style={{ paddingTop: '180px' }}>
-          <div className="max-w-[860px] w-full">
+          <div className="max-w-[860px] w-full relative z-10">
             <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#C9A96E]/60" />
-              <p className="text-[#C9A96E] text-[10px] tracking-[0.55em] uppercase font-body">{t.eyebrow}</p>
-              <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#C9A96E]/60" />
+              <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#C9A96E]/70" />
+              <p className="text-[#C9A96E] text-[10px] tracking-[0.55em] uppercase font-body font-semibold">{t.eyebrow}</p>
+              <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#C9A96E]/70" />
             </div>
             <h1
               className="font-display font-light text-white mb-4"
-              style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
+              style={{ fontSize: 'clamp(2.5rem, 4.5vw, 4.5rem)', lineHeight: '1.05', textShadow: '0 3px 30px rgba(0,0,0,0.9), 0 0 60px rgba(0,0,0,0.5)' }}>
               {t.title}
             </h1>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mx-auto mb-4" />
-            <p className="text-white/70 font-body max-w-[540px] mx-auto leading-relaxed mb-8"
-               style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1.05rem)', textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>
+            <p className="text-white/85 font-body max-w-[540px] mx-auto leading-relaxed mb-8"
+               style={{ fontSize: 'clamp(1rem, 1.4vw, 1.15rem)', textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}>
               {t.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -205,6 +245,33 @@ export default function Rooms() {
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Slider Controls */}
+        <button
+          onClick={() => setHeroSlideIndex(prev => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/40 hover:bg-[#C9A96E]/30 border border-white/20 hover:border-[#C9A96E]/50 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-all z-20"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={() => setHeroSlideIndex(prev => (prev + 1) % HERO_IMAGES.length)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/40 hover:bg-[#C9A96E]/30 border border-white/20 hover:border-[#C9A96E]/50 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-all z-20"
+        >
+          <ChevronRightIcon className="w-5 h-5" />
+        </button>
+
+        {/* Slider Dots */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+          {HERO_IMAGES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setHeroSlideIndex(i)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                i === heroSlideIndex ? 'bg-[#C9A96E] w-6' : 'bg-white/40 hover:bg-white/70'
+              }`}
+            />
+          ))}
         </div>
       </div>
 
