@@ -3,7 +3,7 @@ import { useLang } from '@/lib/useLang';
 import { Clock, UtensilsCrossed, Phone, Mail, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
-const HERO_IMG = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0ba635de8_Krone_innen.png';
+const HERO_IMG = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8013b3cc_generated_image.png';
 
 export default function Restaurant() {
   const { lang } = useLang();
@@ -113,25 +113,26 @@ export default function Restaurant() {
     <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-0">
 
       {/* ── HERO ── */}
-      <div className="relative page-top overflow-hidden" style={{ minHeight: 'clamp(400px, 55vh, 600px)' }}>
+      <div className="relative page-top overflow-hidden" style={{ minHeight: 'clamp(450px, 60vh, 650px)' }}>
         <img
           src={HERO_IMG}
           alt="Restaurant Krone Langenburg by Ammesso"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '50% 50%' }}
+          style={{ objectPosition: '50% 45%' }}
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/75" />
         
         <div className="absolute inset-0 flex items-center justify-center text-center px-5">
-          <div className="max-w-3xl">
-            <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-4">{t.eyebrow}</p>
-            <h1 className="font-display font-light text-white mb-4"
-                style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: '1.1', textShadow: '0 2px 20px rgba(0,0,0,0.8)' }}>
+          <div className="max-w-3xl relative z-10">
+            <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-5">{t.eyebrow}</p>
+            <h1 className="font-display font-light text-white mb-5"
+                style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)', lineHeight: '1.15', textShadow: '0 2px 24px rgba(0,0,0,0.85)' }}>
               {t.title}
             </h1>
-            <p className="text-white/90 font-body text-sm sm:text-base leading-relaxed mb-8" 
-               style={{ textShadow: '0 1px 12px rgba(0,0,0,0.8)' }}>
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/70 to-transparent mx-auto mb-5" />
+            <p className="text-white/95 font-body text-base sm:text-lg leading-relaxed mb-9 max-w-2xl mx-auto" 
+               style={{ textShadow: '0 2px 16px rgba(0,0,0,0.85)', fontWeight: '300' }}>
               {t.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -147,98 +148,91 @@ export default function Restaurant() {
       </div>
 
       {/* ── OPENING HOURS + STATUS ── */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-5 -mt-10 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-5 -mt-10 relative z-10">
         <div className={`${cardCls} mb-12`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            
-            {/* Status + Quick Info */}
-            <div>
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border mb-6"
-                   style={{ 
-                     borderColor: isOpen ? '#10b981' : '#ef4444',
-                     backgroundColor: isOpen ? '#f0fdf4' : '#fef2f2'
-                   }}>
-                <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
-                <span className={`text-sm font-body font-semibold ${isOpen ? 'text-emerald-700' : 'text-red-700'}`}>
-                  {isOpen ? t.open : t.closed}
-                </span>
+          {/* Header with Status */}
+          <div className="flex items-center justify-between mb-8 pb-6 border-b border-[#EDE6D8]">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-[#F2E8D0] border border-[#C9A96E]/30 flex items-center justify-center">
+                <Clock className="w-6 h-6 text-[#8B6914]" />
               </div>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 text-sm">
-                  <MapPin className="w-4 h-4 text-[#8B6914]" />
-                  <span className="text-[#4A3F35]">{t.capacity} · {t.terrace}</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm">
-                  <CheckCircle className="w-4 h-4 text-[#8B6914]" />
-                  <span className="text-[#4A3F35]">{t.diets}</span>
-                </div>
+              <div>
+                <h2 className="font-display text-2xl font-light text-[#1C1714]">{t.hours_title}</h2>
+                <p className="text-[#8A7A6A] text-xs font-body mt-0.5">
+                  {lang === 'de' ? 'Ihr Besuch bei uns' : lang === 'en' ? 'Your visit with us' : 'La tua visita da noi'}
+                </p>
               </div>
+            </div>
+            <div className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border-2 ${
+              isOpen 
+                ? 'border-emerald-500/30 bg-emerald-50' 
+                : 'border-red-500/30 bg-red-50'
+            }`}>
+              <span className={`w-3 h-3 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`} />
+              <span className={`text-sm font-body font-bold tracking-wide ${isOpen ? 'text-emerald-700' : 'text-red-700'}`}>
+                {isOpen ? t.open : t.closed}
+              </span>
+            </div>
+          </div>
 
-              <div className="flex flex-col gap-3">
-                <Link to="/reserve" className="btn-gold w-full justify-center">
-                  <UtensilsCrossed className="w-4 h-4" /> {t.reserve}
-                </Link>
-                <a href={`tel:${s.phone}`} className="btn-ghost-gold w-full justify-center">
-                  <Phone className="w-4 h-4" /> {s.phone}
-                </a>
+          {/* Hours Grid - Professional Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {/* Monday - Closed */}
+            <div className="bg-[#F7F3EC] border border-[#EDE6D8] rounded-xl p-5 text-center">
+              <p className="text-[#8B6914] text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-2">{t.mon}</p>
+              <div className="w-8 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/40 to-transparent mx-auto mb-3" />
+              <p className="text-[#8A7A6A] text-sm font-body italic">{t.mon_hours}</p>
+            </div>
+
+            {/* Tue-Fri */}
+            <div className="bg-white border-2 border-[#C9A96E]/20 rounded-xl p-5 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#C9A96E] to-[#8B6914]" />
+              <p className="text-[#8B6914] text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-3">{t.tue_fri}</p>
+              <div className="space-y-2.5">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#C9A96E]" />
+                  <span className="text-[#1C1714] text-sm font-semibold">12:00 – 14:30</span>
+                </div>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#C9A96E]" />
+                  <span className="text-[#1C1714] text-sm font-semibold">17:30 – 22:00</span>
+                </div>
               </div>
             </div>
 
-            {/* Hours Table */}
-            <div className="border-l border-[#EDE6D8] pl-0 md:pl-8">
-              <div className="flex items-center gap-2 mb-5">
-                <Clock className="w-5 h-5 text-[#8B6914]" />
-                <h2 className="font-display text-xl font-light text-[#1C1714]">{t.hours_title}</h2>
+            {/* Weekend */}
+            <div className="space-y-3">
+              <div className="bg-white border border-[#EDE6D8] rounded-xl p-4">
+                <p className="text-[#8B6914] text-[9px] tracking-[0.35em] uppercase font-body font-semibold mb-2">{t.sat}</p>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
+                  <span className="text-[#1C1714] text-sm font-semibold">17:30 – 22:00</span>
+                </div>
               </div>
-              
-              <ul className="space-y-3 font-body text-sm">
-                <li className="flex justify-between py-2 border-b border-[#EDE6D8]">
-                  <span className="text-[#4A3F35]">{t.mon}</span>
-                  <span className="text-[#8A7A6A] text-xs italic">{t.mon_hours}</span>
-                </li>
-                <li className="py-2 border-b border-[#EDE6D8]">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="text-[#1C1714] font-semibold">{t.tue_fri}</span>
-                  </div>
-                  <div className="space-y-1.5 ml-3">
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-                      <span className="text-[#8B6914] text-xs font-semibold">12:00 – 14:30</span>
-                      <span className="text-[#8A7A6A] text-xs">({t.lunch})</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-                      <span className="text-[#8B6914] text-xs font-semibold">17:30 – 22:00</span>
-                      <span className="text-[#8A7A6A] text-xs">({t.dinner})</span>
-                    </div>
-                  </div>
-                </li>
-                <li className="py-2 border-b border-[#EDE6D8]">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="text-[#1C1714] font-semibold">{t.sat}</span>
-                  </div>
-                  <div className="space-y-1.5 ml-3">
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-                      <span className="text-[#8B6914] text-xs font-semibold">17:30 – 22:00</span>
-                      <span className="text-[#8A7A6A] text-xs">({t.dinner})</span>
-                    </div>
-                  </div>
-                </li>
-                <li className="py-2">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="text-[#1C1714] font-semibold">{t.sun}</span>
-                  </div>
-                  <div className="flex items-center gap-2 ml-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-                    <span className="text-[#8B6914] text-xs font-semibold">12:00 – 20:00</span>
-                    <span className="text-[#8A7A6A] text-xs">({t.all_day})</span>
-                  </div>
-                </li>
-              </ul>
+              <div className="bg-white border border-[#EDE6D8] rounded-xl p-4">
+                <p className="text-[#8B6914] text-[9px] tracking-[0.35em] uppercase font-body font-semibold mb-2">{t.sun}</p>
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
+                  <span className="text-[#1C1714] text-sm font-semibold">12:00 – 20:00</span>
+                </div>
+              </div>
             </div>
+          </div>
 
+          {/* Quick Info Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[#EDE6D8]">
+            <div className="flex items-center gap-3">
+              <MapPin className="w-5 h-5 text-[#8B6914]" />
+              <span className="text-[#4A3F35] text-sm font-body">{t.capacity}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <CheckCircle className="w-5 h-5 text-[#8B6914]" />
+              <span className="text-[#4A3F35] text-sm font-body">{t.terrace}</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <UtensilsCrossed className="w-5 h-5 text-[#8B6914]" />
+              <span className="text-[#4A3F35] text-sm font-body">{t.diets}</span>
+            </div>
           </div>
         </div>
       </div>
