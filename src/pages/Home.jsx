@@ -727,28 +727,28 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
             {[
               {
-                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png',
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg',
                 alt: 'Schloss Langenburg Luftaufnahme — Barockschloss Hohenlohe',
                 label: c.chip_castle,
                 desc: lang === 'de' ? 'Historisches Schloss mit Blick ins Jagsttal.' : 'Historic castle overlooking the Jagst valley.',
                 dist: '5 Min.',
               },
               {
-                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/257e19347_IMG_8593.png',
-                alt: 'Jagsttal bei Langenburg — Fluss und Natur',
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg',
+                alt: 'Jagsttal bei Langenburg — Natur und Landschaft',
                 label: c.chip_nature,
                 desc: lang === 'de' ? 'Natur, Ausblicke und ruhige Wege direkt vor der Tür.' : 'Nature, views and peaceful paths right at your doorstep.',
                 dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
               },
               {
-                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg',
+                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png',
                 alt: 'Deutsches Automuseum Langenburg — Rennwagen Ausstellung',
                 label: c.chip_museum,
                 desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
                 dist: '5 Min.',
               },
               {
-                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg',
+                img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=2400&q=95',
                 alt: 'Langenburger Altstadt — historische Fachwerkhäuser',
                 label: lang === 'de' ? 'Langenburger Altstadt' : 'Langenburg Old Town',
                 desc: lang === 'de' ? 'Historische Fachwerkhäuser und gepflasterte Gassen im Ortskern.' : 'Historic half-timbered houses and cobbled lanes in the town centre.',
