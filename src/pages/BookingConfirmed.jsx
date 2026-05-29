@@ -410,7 +410,7 @@ export default function BookingConfirmed() {
               </div>
               {linkedBooking && <BookingCard link={linkedBooking} c={c} lang={lang} />}
               <div className="flex gap-3">
-                <Link to="/account/reservations" className="flex-1 py-4 text-center bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
+                <Link to="/meine-reisen?new=1" className="flex-1 py-4 text-center bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
                   {c.view_bookings}
                 </Link>
                 <Link to="/" className="flex-1 py-4 text-center border border-[#EDE6D8] text-[#8A7A6A] hover:text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body transition-colors">
@@ -434,7 +434,7 @@ export default function BookingConfirmed() {
               </div>
               {linkedBooking && <BookingCard link={linkedBooking} c={c} lang={lang} />}
               <div className="flex gap-3">
-                <Link to="/account/reservations" className="flex-1 py-4 text-center bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
+                <Link to="/meine-reisen?new=1" className="flex-1 py-4 text-center bg-[#1C1714] hover:bg-[#2A2118] text-white rounded-full text-xs tracking-widest uppercase font-body font-semibold transition-all">
                   {c.view_bookings}
                 </Link>
                 <Link to="/contact" className="flex-1 py-4 text-center border border-[#EDE6D8] text-[#8A7A6A] hover:text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body transition-colors">
@@ -461,7 +461,7 @@ export default function BookingConfirmed() {
                 {c.manual_title}
               </button>
               <div className="flex gap-3">
-                <Link to="/account/reservations" className="flex-1 py-4 text-center border border-[#EDE6D8] text-[#8A7A6A] hover:text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body transition-colors">
+                <Link to="/meine-reisen" className="flex-1 py-4 text-center border border-[#EDE6D8] text-[#8A7A6A] hover:text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body transition-colors">
                   {c.view_bookings}
                 </Link>
                 <Link to="/contact" className="flex-1 py-4 text-center border border-[#EDE6D8] text-[#8A7A6A] hover:text-[#1C1714] rounded-full text-xs tracking-widest uppercase font-body transition-colors">

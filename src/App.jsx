@@ -48,6 +48,8 @@ import AdminHeroSlides from './pages/AdminHeroSlides';
 import AdminOffers from './pages/AdminOffers';
 import AdminOpeningHours from './pages/AdminOpeningHours';
 import BookingConfirmed from './pages/BookingConfirmed';
+import BookingFailed from './pages/BookingFailed';
+import MeineReisen from './pages/MeineReisen';
 import AdminBeds24Bookings from './pages/AdminBeds24Bookings';
 import AdminReservations from './pages/AdminReservations';
 import AdminGuests from './pages/AdminGuests';
@@ -123,6 +125,8 @@ const AuthenticatedApp = () => {
         <Route path="/admin/offers" element={<AdminOffers />} />
         <Route path="/admin/opening-hours" element={<AdminOpeningHours />} />
         <Route path="/booking-confirmed" element={<BookingConfirmed />} />
+        <Route path="/booking-failed" element={<BookingFailed />} />
+        <Route path="/meine-reisen" element={<MeineReisen />} />
         <Route path="/admin/beds24-bookings" element={<AdminBeds24Bookings />} />
         <Route path="/admin/reservations" element={<AdminReservations />} />
         <Route path="/admin/guests" element={<AdminGuests />} />
