@@ -139,16 +139,21 @@ export default function Karriere() {
 
   return (
     <div className="min-h-screen bg-ivory text-charcoal pb-24 lg:pb-10">
-      {/* Hero */}
-      <div className="relative overflow-hidden bg-espresso page-top pb-16 sm:pb-20 px-5">
-        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85"
-          alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" style={{ objectPosition: '50% 60%' }} aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-b from-espresso/60 to-espresso/90" />
-        <div className="relative max-w-4xl mx-auto text-center">
+      {/* Hero — subtles Business-Bild im Hintergrund */}
+      <div className="relative overflow-hidden bg-espresso page-top pb-20 sm:pb-28 px-5">
+        <img
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=85"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: '50% 50%', opacity: 0.15 }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-espresso/85 via-espresso/90 to-espresso/95" />
+        <div className="relative max-w-4xl mx-auto text-center pt-8">
           <p className="text-gold-light text-[10px] tracking-[0.5em] uppercase font-body mb-5">{tx.eyebrow}</p>
           <h1 className="font-display font-light text-ivory mb-4"
               style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05' }}>{tx.title}</h1>
-          <p className="text-ivory/50 font-body text-sm max-w-lg mx-auto">{tx.sub}</p>
+          <p className="text-ivory/60 font-body text-sm max-w-lg mx-auto leading-relaxed">{tx.sub}</p>
         </div>
       </div>
 
