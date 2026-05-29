@@ -203,7 +203,7 @@ export default function Weddings() {
   };
   const c = C[lang] || C.de;
 
-  const inputCls = "w-full bg-white/8 border border-[#C9A96E]/35 rounded-xl px-4 py-4 text-sm text-white placeholder-[#D7D0C5]/45 focus:outline-none focus:border-[#C9A96E]/70 focus:ring-2 focus:ring-[#C9A96E]/20 transition-all font-body font-medium";
+  const inputCls = "w-full bg-white border border-[#C9A96E]/35 rounded-xl px-4 py-4 text-sm text-[#1C1714] placeholder-[#8A7A6A]/50 focus:outline-none focus:border-[#C9A96E]/70 focus:ring-2 focus:ring-[#C9A96E]/20 transition-all font-body font-medium";
 
   return (
     <div className="min-h-screen bg-[#171311] text-[#FAF8F5] pb-24 lg:pb-0">
