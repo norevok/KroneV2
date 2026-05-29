@@ -181,15 +181,17 @@ export default function Story() {
     <div className="min-h-screen bg-[#F7F2EA] text-[#1A1A1A] pb-24 lg:pb-0">
 
       {/* ── HERO ── */}
-      <div className="relative overflow-hidden bg-[#171311] page-top pb-20 sm:pb-28">
+      <div className="relative overflow-hidden bg-[#171311]" style={{ minHeight: 'clamp(600px, 90vh, 900px)' }}>
         <img
-          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png"
-          alt="Schloss Langenburg Luftaufnahme — Hohenlohe"
-          className="absolute inset-0 w-full h-full object-cover opacity-25"
-          style={{ objectPosition: '50% 40%' }}
+          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8b814211e_Krone_vorne.png"
+          alt="Krone Langenburg by Ammesso — Außenansicht Hotel"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: '50% 50%' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/60 via-transparent to-[#171311]/85" />
-        <div className="relative z-10 max-w-3xl mx-auto text-center px-5">
+        {/* Leichtes Overlay nur oben (Navbar) und unten (Text) — Mitte frei für das Gebäude */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/70" />
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 sm:pb-20 px-5" style={{ paddingTop: 'var(--nav-h-mobile)' }}>
+          <div className="relative z-10 max-w-3xl mx-auto text-center w-full">
           <motion.div className="flex items-center justify-center gap-2 mb-5"
             initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <MapPin className="w-4 h-4 text-[#B08A42]" />
@@ -207,9 +209,10 @@ export default function Story() {
           />
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/60 font-body text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+            className="text-white/70 font-body text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
             {heroSubs[lang] || heroSubs.de}
           </motion.p>
+        </div>
         </div>
       </div>
 
