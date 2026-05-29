@@ -43,7 +43,9 @@ export default function Rooms() {
   const [showBooking, setShowBooking] = useState(false);
   const [activePhotos, setActivePhotos] = useState({});
   const [savingIntent, setSavingIntent] = useState(false);
-  const [checkIn, setCheckIn] = useState('');
+
+  const today = new Date().toISOString().split('T')[0];
+  const [checkIn, setCheckIn] = useState(today);
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState(2);
 
@@ -52,7 +54,6 @@ export default function Rooms() {
   const intentRef = params.get('ref');
 
   const beds24Base = SITE_DEFAULTS.beds24_booking_url;
-  const today = new Date().toISOString().split('T')[0];
   const minCheckout = checkIn
     ? new Date(new Date(checkIn).getTime() + 86400000).toISOString().split('T')[0]
     : new Date(new Date().getTime() + 86400000).toISOString().split('T')[0];
@@ -138,7 +139,7 @@ export default function Rooms() {
   };
   const t = T[lang] || T.de;
 
-  const inputCls = "w-full bg-white/6 border border-white/12 focus:border-[#C9A96E]/50 rounded-xl px-4 py-3.5 text-sm text-white placeholder-white/25 focus:outline-none transition-colors font-body";
+  const inputCls = "w-full bg-white/12 border-2 border-white/25 focus:border-[#C9A96E]/70 rounded-xl px-4 py-3.5 text-sm text-white placeholder-white/35 focus:outline-none transition-all font-body font-medium focus:bg-white/15";
 
   return (
     <div className="min-h-screen bg-[#0F0E0B] text-white pb-24 lg:pb-0">
@@ -170,11 +171,11 @@ export default function Rooms() {
           src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
           alt="Krone Langenburg Zimmer & Suiten — King Suite"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '50% 35%' }}
+          style={{ objectPosition: '50% 40%', filter: 'brightness(1) contrast(1.05) saturate(1.05)' }}
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/55 via-[#0F0E0B]/25 to-[#0F0E0B]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/25 via-transparent to-[#0F0E0B]/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/50 via-[#0F0E0B]/20 to-[#0F0E0B]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/20 via-transparent to-[#0F0E0B]/20" />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-10">
           <div className="max-w-[860px] w-full">
@@ -261,10 +262,10 @@ export default function Rooms() {
             { t: t.benefit3_t, d: t.benefit3, icon: '◆' },
             { t: t.benefit4_t, d: t.benefit4, icon: '✦' },
           ].map((b, i) => (
-            <div key={i} className="bg-[#171411] border border-white/8 rounded-2xl p-5 hover:border-[#C9A96E]/20 transition-colors">
-              <p className="text-[#C9A96E] text-lg mb-3">{b.icon}</p>
-              <p className="text-white/85 font-body font-semibold text-sm mb-1.5">{b.t}</p>
-              <p className="text-white/40 text-sm font-body leading-relaxed">{b.d}</p>
+            <div key={i} className="bg-gradient-to-br from-[#1D1510] to-[#171411] border border-[#C9A96E]/25 rounded-2xl p-6 sm:p-7 hover:border-[#C9A96E]/50 hover:shadow-[0_8px_24px_rgba(201,169,110,0.12)] transition-all duration-300">
+              <p className="text-[#C9A96E] text-2xl mb-4">{b.icon}</p>
+              <p className="text-white font-body font-bold text-sm mb-2.5 leading-tight">{b.t}</p>
+              <p className="text-white/65 text-sm font-body leading-relaxed">{b.d}</p>
             </div>
           ))}
         </div>
