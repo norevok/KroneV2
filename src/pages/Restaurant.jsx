@@ -3,7 +3,7 @@ import { useLang } from '@/lib/useLang';
 import { Clock, UtensilsCrossed, Phone, Mail, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
-const HERO_IMG = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/0ba635de8_Krone_innen.png';
+const HERO_IMG = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/15c4ce145_kueche-innen.jpg';
 
 export default function Restaurant() {
   const { lang } = useLang();
