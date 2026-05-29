@@ -203,7 +203,7 @@ export default function Weddings() {
   };
   const c = C[lang] || C.de;
 
-  const inputCls = "w-full bg-[#0F0D0B]/80 border border-[#C9A96E]/20 rounded-xl px-4 py-4 text-sm text-[#FAF8F5] placeholder-[#D7D0C5]/25 focus:outline-none focus:border-[#C9A96E]/55 focus:ring-2 focus:ring-[#C9A96E]/12 transition-all font-body";
+  const inputCls = "w-full bg-white/8 border border-[#C9A96E]/35 rounded-xl px-4 py-4 text-sm text-white placeholder-[#D7D0C5]/45 focus:outline-none focus:border-[#C9A96E]/70 focus:ring-2 focus:ring-[#C9A96E]/20 transition-all font-body font-medium";
 
   return (
     <div className="min-h-screen bg-[#171311] text-[#FAF8F5] pb-24 lg:pb-0">
@@ -300,11 +300,15 @@ export default function Weddings() {
 
           <motion.div
             variants={fadeUp} transition={{ duration: 0.6 }}
-            className="flex flex-wrap justify-center gap-6 sm:gap-10">
-            {[c.capacity, c.rooms, c.flexible].map((item, i) => (
-              <div key={i} className="flex items-center gap-2.5 text-sm font-body text-[#FAF8F5]/60">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]/60 flex-shrink-0" />
-                {item}
+            className="flex flex-wrap justify-center gap-4 sm:gap-8">
+            {[
+              { label: c.capacity, icon: '👥' },
+              { label: c.rooms, icon: '🛏️' },
+              { label: c.flexible, icon: '🍽️' }
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3 px-4 sm:px-5 py-3 bg-[#1D1410] border border-[#C9A96E]/20 rounded-full hover:border-[#C9A96E]/40 transition-all duration-300">
+                <span className="text-base">{item.icon}</span>
+                <span className="text-sm font-body text-[#FAF8F5]/80 font-medium">{item.label}</span>
               </div>
             ))}
           </motion.div>
@@ -476,22 +480,22 @@ export default function Weddings() {
                 {/* Name row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#D7D0C5]/45 text-[10px] tracking-[0.28em] uppercase font-body mb-2">{c.first} *</label>
-                    <input type="text" required value={form.first_name}
-                      onChange={e => setForm(f => ({ ...f, first_name: e.target.value }))}
-                      className={inputCls} placeholder="Omar" />
+                   <label className="block text-[#C9A96E]/80 text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-2.5">{c.first} *</label>
+                   <input type="text" required value={form.first_name}
+                     onChange={e => setForm(f => ({ ...f, first_name: e.target.value }))}
+                     className={inputCls} placeholder="Omar" />
                   </div>
                   <div>
-                    <label className="block text-[#D7D0C5]/45 text-[10px] tracking-[0.28em] uppercase font-body mb-2">{c.last} *</label>
-                    <input type="text" required value={form.last_name}
-                      onChange={e => setForm(f => ({ ...f, last_name: e.target.value }))}
-                      className={inputCls} placeholder="Ammesso" />
+                   <label className="block text-[#C9A96E]/80 text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-2.5">{c.last} *</label>
+                   <input type="text" required value={form.last_name}
+                     onChange={e => setForm(f => ({ ...f, last_name: e.target.value }))}
+                     className={inputCls} placeholder="Ammesso" />
                   </div>
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-[#D7D0C5]/45 text-[10px] tracking-[0.28em] uppercase font-body mb-2">{c.email} *</label>
+                  <label className="block text-[#C9A96E]/80 text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-2.5">{c.email} *</label>
                   <input type="email" required value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                     className={inputCls} placeholder="name@email.de" />
@@ -500,13 +504,13 @@ export default function Weddings() {
                 {/* Phone + Guests */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#D7D0C5]/45 text-[10px] tracking-[0.28em] uppercase font-body mb-2">{c.phone}</label>
+                    <label className="block text-[#C9A96E]/80 text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-2.5">{c.phone}</label>
                     <input type="tel" value={form.phone}
                       onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                       className={inputCls} placeholder="+49 7905 …" />
                   </div>
                   <div>
-                    <label className="block text-[#D7D0C5]/45 text-[10px] tracking-[0.28em] uppercase font-body mb-2">{c.guests}</label>
+                    <label className="block text-[#C9A96E]/80 text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-2.5">{c.guests}</label>
                     <input type="number" min="1" value={form.guest_count}
                       onChange={e => setForm(f => ({ ...f, guest_count: e.target.value }))}
                       className={inputCls} placeholder="z.B. 60" />
@@ -515,7 +519,7 @@ export default function Weddings() {
 
                 {/* Date */}
                 <div>
-                  <label className="block text-[#D7D0C5]/45 text-[10px] tracking-[0.28em] uppercase font-body mb-2">{c.date}</label>
+                  <label className="block text-[#C9A96E]/80 text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-2.5">{c.date}</label>
                   <input type="date" value={form.preferred_date}
                     onChange={e => setForm(f => ({ ...f, preferred_date: e.target.value }))}
                     className={inputCls}
@@ -524,7 +528,7 @@ export default function Weddings() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-[#D7D0C5]/45 text-[10px] tracking-[0.28em] uppercase font-body mb-2">{c.message} *</label>
+                  <label className="block text-[#C9A96E]/80 text-[10px] tracking-[0.35em] uppercase font-body font-semibold mb-2.5">{c.message} *</label>
                   <textarea rows={5} required placeholder={c.msg_ph} value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                     className={`${inputCls} resize-none leading-relaxed`} />
