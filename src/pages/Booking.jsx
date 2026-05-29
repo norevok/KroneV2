@@ -87,15 +87,12 @@ export default function Booking() {
   return (
     <div className="min-h-screen bg-white text-[#1C1714]">
 
-      {/* Header band - hero-top to clear nav and events banner */}
-      <div className="bg-[#1C1714] hero-top pb-8 px-5">
+      {/* Header band - extra padding to clear nav and events banner */}
+      <div className="bg-[#1C1714] pt-48 pb-8 px-5">
         <div className="max-w-6xl mx-auto">
-          <button 
-            onClick={() => window.history.back()} 
-            className="flex items-center gap-2 text-white/40 hover:text-white/70 text-xs font-body tracking-wider uppercase mb-5 transition-colors cursor-pointer"
-          >
+          <Link to="/rooms" className="flex items-center gap-2 text-white/40 hover:text-white/70 text-xs font-body tracking-wider uppercase mb-5 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> {t.back}
-          </button>
+          </Link>
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
               <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-2">{t.eyebrow}</p>
@@ -168,17 +165,16 @@ export default function Booking() {
           </div>
         )}
 
-        {/* Iframe - seamless borderless integration */}
-        <div className={`${iframeLoaded ? 'block' : 'hidden'}`}>
+        {/* Iframe */}
+        <div className={`rounded-2xl overflow-hidden border border-[#EDE6D8] shadow-sm ${iframeLoaded ? 'block' : 'hidden'}`}>
           <iframe
             src={beds24IframeUrl}
             title="Krone Langenburg — Sichere Online-Buchung via Beds24"
             className="w-full"
-            style={{ minHeight: '750px', border: 'none', display: 'block' }}
+            style={{ minHeight: '700px', border: 'none' }}
             allow="payment"
             onLoad={() => setIframeLoaded(true)}
             onError={() => { setIframeLoaded(false); setIframeError(true); }}
-            scrolling="no"
           />
         </div>
 
