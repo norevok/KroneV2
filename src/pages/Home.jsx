@@ -303,9 +303,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
 
-      {/* ── HERO — balanced 78–82vh, never clips content ── */}
-      <div className="relative overflow-hidden" style={{ height: 'clamp(680px, 80vh, 880px)' }}>
-        {/* Slides with Ken Burns zoom effect */}
+      {/* ── HERO — full viewport height ── */}
+      <div className="relative overflow-hidden" style={{ height: '100vh', minHeight: '700px', maxHeight: '1000px' }}>
+        {/* Slides — only images animate, content stays fixed */}
         {SLIDES.map((s, i) => (
           <AnimatePresence key={i}>
             {i === current && (
@@ -333,62 +333,52 @@ export default function Home() {
           </AnimatePresence>
         ))}
 
-        {/* Slide counter top-right — offset below desktop navbar */}
-        <div className="absolute top-[178px] lg:top-[178px] right-6 z-10 hidden lg:flex items-center gap-2">
+        {/* Slide counter — fixed position below navbar */}
+        <div className="absolute right-6 z-10 hidden lg:flex items-center gap-2" style={{ top: 'calc(var(--nav-h-desktop) + 16px)' }}>
           <span className="font-display text-2xl font-light text-white/60">{String(current + 1).padStart(2, '0')}</span>
           <div className="w-px h-6 bg-white/20 mx-1" />
           <span className="font-display text-sm font-light text-white/30">{String(SLIDES.length).padStart(2, '0')}</span>
         </div>
 
-        {/* Hero text */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-48 sm:pb-40 lg:pb-36 page-top z-10">
-
-          <motion.div
-            key={`badge-${current}`}
-            className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}>
+        {/* Hero text — FIXED layout, never moves between slides */}
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-5 pb-44 sm:pb-36" style={{ paddingTop: 'var(--nav-h-mobile)' }}>
+          {/* Badge — always same position, no per-slide animation on position */}
+          <div className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 mb-4">
             <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C9A96E]" />
-            <span className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
-          </motion.div>
-          <motion.p
-            key={`eyebrow-${current}`}
-            className="text-[#C9A96E]/70 text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] uppercase font-body mb-3 sm:mb-5 hidden sm:block"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.1 }}>
-            Krone Langenburg · by Ammesso
-          </motion.p>
-          <motion.h1
-            key={`title-${current}`}
-            className="font-display font-light text-white mb-3 sm:mb-5 max-w-4xl px-2"
-            style={{
-              fontSize: 'clamp(2rem, 5.5vw, 4.5rem)',
-              lineHeight: '1.02',
-              textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)',
-            }}
-            initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-            {slideText.title}
-          </motion.h1>
-          <motion.div
-            key={`divider-${current}`}
-            className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-3 sm:mb-5"
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-          />
-          <motion.p
-            key={`sub-${current}`}
-            className="text-white/90 font-body text-sm sm:text-base lg:text-[1.1rem] max-w-sm sm:max-w-lg leading-relaxed px-2"
-            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25, duration: 0.8 }}>
-            {slideText.sub}
-          </motion.p>
+            <span className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.3em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
+          </div>
+          <p className="text-[#C9A96E]/70 text-[10px] tracking-[0.5em] uppercase font-body mb-4 hidden sm:block">
+            Krone · Langenburg · Deutschland
+          </p>
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={`title-${current}`}
+              className="font-display font-light text-white mb-4 max-w-4xl px-2"
+              style={{
+                fontSize: 'clamp(2rem, 5.5vw, 4.5rem)',
+                lineHeight: '1.02',
+                textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)',
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+              {slideText.title}
+            </motion.h1>
+          </AnimatePresence>
+          <div className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-4" />
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={`sub-${current}`}
+              className="text-white/90 font-body text-sm sm:text-base lg:text-[1.05rem] max-w-sm sm:max-w-lg leading-relaxed px-2"
+              style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}>
+              {slideText.sub}
+            </motion.p>
+          </AnimatePresence>
           {/* Scroll hint */}
           <motion.div
             className="mt-8 flex flex-col items-center gap-2"

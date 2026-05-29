@@ -209,7 +209,7 @@ export default function Weddings() {
     <div className="min-h-screen bg-[#171311] text-[#FAF8F5] pb-24 lg:pb-0">
 
       {/* ── PHASE 1: HERO ── */}
-      <div className="relative overflow-hidden" style={{ minHeight: 'calc(100vh)' }}>
+      <div className="relative overflow-hidden" style={{ height: '85vh', minHeight: '600px', maxHeight: '900px' }}>
         <img
           src={HERO_IMG}
           alt="Hochzeit & Events Krone Langenburg by Ammesso — Eventlocation Hohenlohe"
@@ -217,57 +217,52 @@ export default function Weddings() {
           loading="eager"
         />
         {/* Multi-layer cinematic overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0D0B]/70 via-[#171311]/30 to-[#171311]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0D0B]/30 via-transparent to-[#0F0D0B]/20" />
-        {/* Warm gold tint at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#B08A42]/6 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0D0B]/60 via-[#171311]/25 to-[#171311]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0D0B]/25 via-transparent to-[#0F0D0B]/15" />
 
-        {/* Hero Content — bottom aligned, generous padding */}
-        <div className="absolute inset-0 flex flex-col justify-end px-5 sm:px-10 pb-16 sm:pb-20 page-top">
-          <div className="max-w-4xl mx-auto w-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+        {/* Hero Content — centered */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 sm:px-10 pb-12 page-top">
+          <div className="max-w-3xl w-full">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.1 }}>
-              <p className="text-[#C9A96E] text-[10px] sm:text-[11px] tracking-[0.5em] uppercase font-body mb-4 sm:mb-5">{c.eyebrow}</p>
-            </motion.div>
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-4">{c.eyebrow}</motion.p>
 
             <motion.h1
-              initial={{ opacity: 0, y: 28, filter: 'blur(4px)' }}
+              initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.08] whitespace-pre-line mb-5 sm:mb-7"
-              style={{ textShadow: '0 2px 24px rgba(0,0,0,0.7), 0 4px 60px rgba(0,0,0,0.4)' }}>
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.1] whitespace-pre-line mb-5"
+              style={{ textShadow: '0 2px 24px rgba(0,0,0,0.7)' }}>
               {c.title}
             </motion.h1>
 
             <motion.div
-              className="w-14 sm:w-20 h-px bg-gradient-to-r from-[#C9A96E]/80 via-[#C9A96E]/50 to-transparent mb-5 sm:mb-7"
+              className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/80 to-transparent mx-auto mb-5"
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.45, transformOrigin: 'left' }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             />
 
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-white/75 font-body text-sm sm:text-base max-w-xl leading-relaxed mb-8 sm:mb-10"
+              transition={{ duration: 0.7, delay: 0.45 }}
+              className="text-white/75 font-body text-sm sm:text-base max-w-lg mx-auto leading-relaxed mb-8"
               style={{ textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}>
               {c.hero_sub}
             </motion.p>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-3"
-              initial={{ opacity: 0, y: 16 }}
+              className="flex flex-col sm:flex-row gap-3 justify-center"
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.65 }}>
-              <a href="#anfrage"
-                className="btn-gold w-full sm:w-auto">
+              transition={{ duration: 0.6, delay: 0.55 }}>
+              <a href="#anfrage" className="btn-gold w-full sm:w-auto">
                 {c.btn_enquire} <ArrowRight className="w-3.5 h-3.5" />
               </a>
-              <a href={`tel:${s.phone}`}
-                className="btn-outline-dark w-full sm:w-auto">
+              <a href={`tel:${s.phone}`} className="btn-outline-dark w-full sm:w-auto">
                 <Phone className="w-3.5 h-3.5" /> {c.btn_consult}
               </a>
             </motion.div>
@@ -275,11 +270,11 @@ export default function Weddings() {
         </div>
 
         {/* Scroll cue */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-40">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 opacity-35">
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
-            className="w-4 h-6 rounded-full border border-white/40 flex items-start justify-center pt-1">
+            className="w-4 h-7 rounded-full border border-white/40 flex items-start justify-center pt-1">
             <div className="w-0.5 h-1.5 bg-white/60 rounded-full" />
           </motion.div>
         </div>
