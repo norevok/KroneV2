@@ -6,11 +6,11 @@ import { ArrowRight, MapPin, Compass, Mountain, Castle, ChevronDown, Car } from 
 import { SITE_DEFAULTS } from '@/lib/siteData';
 import KroneLocationSection from '@/components/KroneLocationSection';
 
-// All images replaced with real, correctly matching photos
+// Correct real photos for each attraction
 const IMG_CASTLE = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png';
-const IMG_JAGSTTAL = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/257e19347_IMG_8593.png';
+const IMG_JAGSTTAL = 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=2400&q=90';
 const IMG_MUSEUM = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg';
-const IMG_ALTSTADT = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg';
+const IMG_ALTSTADT = 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=2400&q=90';
 
 const ATTRACTIONS = [
   {
@@ -171,12 +171,15 @@ export default function DiscoverLangenburg() {
                   <motion.div
                     className={`relative h-64 sm:h-80 md:h-auto md:min-h-[320px] overflow-hidden ${isReversed ? 'md:col-start-2' : ''}`}>
                     <motion.img
-                      src={att.image}
-                      alt={`${content.title} — Krone Langenburg Hotel Hohenlohe`}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.06 }}
-                      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                      loading="lazy"
+                     src={att.image}
+                     alt={`${content.title} — Krone Langenburg Hotel Hohenlohe`}
+                     className="w-full h-full object-cover"
+                     style={{
+                       objectPosition: att.id === 'jagsttal' ? '50% 60%' : att.id === 'altstadt' ? '50% 55%' : att.id === 'schloss' ? '50% 40%' : '50% 50%'
+                     }}
+                     whileHover={{ scale: 1.06 }}
+                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                     loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <motion.span
