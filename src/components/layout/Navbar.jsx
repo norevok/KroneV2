@@ -20,28 +20,28 @@ const LANG_LABEL = { de: 'Deutsch', en: 'English', it: 'Italiano', es: 'Español
 const NAV_PRIMARY = {
   de: [
     { to: '/booking', label: 'Suchen & Reservieren' },
-    { to: '/offers', label: 'Sonderangebote' },
+    { to: '/shop', label: 'Gutscheine' },
     { to: '/restaurant', label: 'Restaurant + Bar' },
     { to: '/rooms', label: 'Zimmer & Suiten' },
     { to: '/weddings', label: 'Events & Feiern' },
   ],
   en: [
     { to: '/booking', label: 'Search & Book' },
-    { to: '/offers', label: 'Special Offers' },
+    { to: '/shop', label: 'Gift Shop' },
     { to: '/restaurant', label: 'Restaurant + Bar' },
     { to: '/rooms', label: 'Rooms & Suites' },
     { to: '/weddings', label: 'Events & Celebrations' },
   ],
   it: [
     { to: '/booking', label: 'Cerca & Prenota' },
-    { to: '/offers', label: 'Offerte' },
+    { to: '/shop', label: 'Buoni Regalo' },
     { to: '/restaurant', label: 'Ristorante + Bar' },
     { to: '/rooms', label: 'Camere & Suite' },
     { to: '/weddings', label: 'Events & Feste' },
   ],
   es: [
     { to: '/booking', label: 'Buscar & Reservar' },
-    { to: '/offers', label: 'Ofertas' },
+    { to: '/shop', label: 'Tienda Regalos' },
     { to: '/restaurant', label: 'Restaurante + Bar' },
     { to: '/rooms', label: 'Habitaciones' },
     { to: '/weddings', label: 'Eventos' },
@@ -333,7 +333,7 @@ export default function Navbar() {
             <div className="flex items-center justify-center gap-6 xl:gap-8 h-10">
               {navSecondary.map((l) => (
                 <Link key={`s-${l.to}`} to={l.to}
-                  className={`font-body text-[9px] xl:text-[10px] tracking-[0.12em] uppercase whitespace-nowrap transition-colors pb-0.5 group relative flex-shrink-0 font-medium ${
+                  className={`font-body text-[10px] xl:text-[11px] tracking-[0.12em] uppercase whitespace-nowrap transition-colors pb-0.5 group relative flex-shrink-0 font-semibold ${
                     location.pathname === l.to
                       ? 'text-[#8B6914]'
                       : 'text-[#1C1714]/55 hover:text-[#1C1714]/85'
