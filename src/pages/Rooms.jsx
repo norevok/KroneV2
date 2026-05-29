@@ -166,18 +166,18 @@ export default function Rooms() {
       )}
 
       {/* ── HERO ── */}
-      <div className={`relative overflow-hidden ${returnState ? 'pt-8' : 'hero-top'}`} style={{ minHeight: 'clamp(520px, 70vh, 780px)' }}>
+      <div className={`relative overflow-hidden ${returnState ? 'pt-8' : ''}`} style={{ minHeight: 'clamp(650px, 78vh, 900px)' }}>
         <img
           src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
           alt="Krone Langenburg Zimmer & Suiten — King Suite"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '50% 40%', filter: 'brightness(1) contrast(1.05) saturate(1.05)' }}
+          style={{ objectPosition: '50% 50%', filter: 'brightness(1.08) contrast(1.1) saturate(1.12)' }}
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/50 via-[#0F0E0B]/20 to-[#0F0E0B]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/20 via-transparent to-[#0F0E0B]/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/40 via-[#0F0E0B]/10 to-[#0F0E0B]/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/10 via-transparent to-[#0F0E0B]/10" />
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-10" style={{ paddingTop: '180px' }}>
           <div className="max-w-[860px] w-full">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#C9A96E]/60" />
