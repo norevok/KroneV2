@@ -56,8 +56,8 @@
      Pages use: pt-[var(--nav-h)] — applied via .page-top class
   ──────────────────────────────────────────────────────────────────── */
   :root {
-    --nav-h-mobile: 126px;
-    --nav-h-desktop: 166px;
+    --nav-h-mobile: 128px;
+    --nav-h-desktop: 168px;
   }
 
   .page-top {
@@ -69,7 +69,7 @@
     }
   }
 
-  /* Hero variant: used for full-bleed heroes where the page controls its own top padding */
+  /* Hero variant: same as page-top — full-bleed heroes also need correct offset */
   .hero-top {
     padding-top: var(--nav-h-mobile);
   }
