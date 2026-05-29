@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
-import { Gift, Check, ArrowRight, UtensilsCrossed, BedDouble, Heart, Star, Lock, Mail, User, MessageSquare, ChevronDown, X } from 'lucide-react';
+import { Gift, Check, ArrowRight, UtensilsCrossed, BedDouble, Star, Lock, Mail, User, MessageSquare } from 'lucide-react';
 
 // ── Voucher products ──────────────────────────────────────────────────────────
 const VOUCHERS = [
@@ -18,19 +18,6 @@ const VOUCHERS = [
     de_tag: 'Für Genießer',
     en_tag: 'For Foodies',
     amounts: [25, 50, 75, 100],
-    color: '#8B6914',
-  },
-  {
-    id: 'dinner_for_two',
-    icon: Heart,
-    image: 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=900&q=90',
-    de_title: 'Abendessen für Zwei',
-    en_title: 'Dinner for Two',
-    de_desc: 'Ein stilvolles Erlebnis für zwei Personen — ideal für Geburtstage, Jahrestage oder als besonderes Dankeschön.',
-    en_desc: 'A stylish experience for two — ideal for birthdays, anniversaries or as a special thank you.',
-    de_tag: 'Romantisch',
-    en_tag: 'Romantic',
-    amounts: [75, 100, 150],
     popular: true,
     color: '#8B6914',
   },
@@ -45,20 +32,6 @@ const VOUCHERS = [
     de_tag: 'Unvergesslich',
     en_tag: 'Unforgettable',
     amounts: [100, 150, 200, 250],
-    color: '#8B6914',
-  },
-  {
-    id: 'value_voucher',
-    icon: Gift,
-    image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900&q=90',
-    de_title: 'Wertgutschein',
-    en_title: 'Flexible Value Voucher',
-    de_desc: 'Flexibel einlösbar für Restaurantbesuche, Übernachtungen oder besondere Erlebnisse im Haus.',
-    en_desc: 'Flexibly redeemable for restaurant visits, overnight stays or special experiences in-house.',
-    de_tag: 'Flexibel',
-    en_tag: 'Flexible',
-    amounts: [10, 20, 50, 100],
-    customAmount: true,
     color: '#8B6914',
   },
 ];
@@ -534,7 +507,7 @@ export default function Shop() {
           {[
             { icon: Gift, label: tx.trust_1 },
             { icon: Star, label: tx.trust_2 },
-            { icon: Heart, label: tx.trust_3 },
+            { icon: BedDouble, label: tx.trust_3 },
           ].map((item, i) => (
             <div key={i} className="bg-white border border-[#EDE6D8] rounded-xl sm:rounded-2xl p-3 sm:p-4 flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left shadow-sm">
               <div className="w-8 h-8 rounded-full bg-[#F2E8D0] flex items-center justify-center flex-shrink-0">
