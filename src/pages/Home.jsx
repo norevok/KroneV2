@@ -16,8 +16,8 @@ function RestaurantBlock({ lang }) {
   const hour = now.getHours() + now.getMinutes() / 60;
   let isOpen = false;
   // Mo (1) = Ruhetag, Di–Sa (2–6): 12–14:30 & 17:30–22:00, So (0): 12–20:00
-  if (day === 0) isOpen = hour >= 12 && hour < 20;
-  else if (day >= 2 && day <= 6) isOpen = (hour >= 12 && hour < 14.5) || (hour >= 17.5 && hour < 22);
+  if (day === 0) isOpen = hour >= 12 && hour < 20;else
+  if (day >= 2 && day <= 6) isOpen = hour >= 12 && hour < 14.5 || hour >= 17.5 && hour < 22;
 
   return (
     <div className="relative overflow-hidden h-auto">
@@ -26,8 +26,8 @@ function RestaurantBlock({ lang }) {
         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=95"
         alt="Restaurant Krone Langenburg by Ammesso — Atmosphäre"
         className="absolute inset-0 w-full h-full object-cover object-center"
-        style={{ filter: 'brightness(0.45) contrast(1.1)' }}
-      />
+        style={{ filter: 'brightness(0.45) contrast(1.1)' }} />
+      
       {/* Subtle gradient only at bottom for readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10" />
 
@@ -38,25 +38,25 @@ function RestaurantBlock({ lang }) {
           {/* Left: name + status */}
           <div>
             <p className="font-display text-2xl sm:text-3xl font-semibold text-white leading-tight"
-               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.6)' }}>
+            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.6)' }}>
               Krone Langenburg <span className="text-[#F0C96E] italic">by Ammesso</span>
             </p>
             <div className="flex items-center gap-2 mt-2 flex-wrap">
               <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${isOpen ? 'bg-emerald-400 animate-pulse' : 'bg-red-400'}`} />
               <span className={`text-sm font-body font-bold ${isOpen ? 'text-emerald-300' : 'text-red-300'}`}
-                    style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
-                {isOpen
-                  ? (lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora')
-                  : (lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso')}
+              style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+                {isOpen ?
+                lang === 'de' ? 'Jetzt geöffnet' : lang === 'en' ? 'Open now' : 'Aperto ora' :
+                lang === 'de' ? 'Aktuell geschlossen' : lang === 'en' ? 'Currently closed' : 'Attualmente chiuso'}
               </span>
               <span className="text-white/90 text-sm font-body font-medium hidden sm:inline"
-                    style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+              style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
                 · {lang === 'de' ? 'Di–Sa 12–14:30 & 17:30–22:00 · So 12–20:00 · Mo Ruhetag' : 'Tue–Sat 12–14:30 & 17:30–22:00 · Sun 12–20:00 · Mon closed'}
               </span>
             </div>
             {/* Mobile hours */}
             <p className="text-white/90 text-xs font-body font-medium mt-1 sm:hidden"
-               style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
+            style={{ textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>
               {lang === 'de' ? 'Di–Sa 12–14:30 & 17:30–22:00 · So 12–20:00 · Mo Ruhetag' : 'Tue–Sat 12–14:30 & 17:30–22:00 · Sun 12–20:00 · Mon closed'}
             </p>
           </div>
@@ -75,55 +75,55 @@ function RestaurantBlock({ lang }) {
 
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
 
 const SLIDES = [
-  {
-    url: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1800&q=85',
-    pos: '50% 55%',
-    de: { title: 'Willkommen in Langenburg.', sub: 'Boutique-Hotel, Restaurant und echte Gastfreundschaft im Herzen von Hohenlohe.' },
-    en: { title: 'Welcome to Langenburg.', sub: 'Boutique hotel, restaurant and genuine hospitality in the heart of Hohenlohe.' },
-    it: { title: 'Benvenuti a Langenburg.', sub: 'Boutique hotel, ristorante e vera ospitalità nel cuore di Hohenlohe.' },
-  },
-  {
-    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
-    pos: '50% 40%',
-    de: { title: 'Die King-Suite — Ihr Rückzugsort.', sub: 'Großzügig, stilvoll, unvergesslich — buchen Sie direkt zum besten Preis.' },
-    en: { title: 'The King Suite — Your Retreat.', sub: 'Spacious, stylish, unforgettable — book directly at the best price.' },
-    it: { title: 'La King Suite — Il vostro rifugio.', sub: 'Spaziosa, elegante, indimenticabile — prenota direttamente al miglior prezzo.' },
-  },
-  {
-    url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg',
-    pos: '50% 35%',
-    de: { title: 'Stilvoll wohnen in Langenburg.', sub: 'Zehn Zimmer und Suiten mit historischem Charme und modernem Komfort.' },
-    en: { title: 'Live in Style in Langenburg.', sub: 'Ten rooms and suites with historic charm and modern comfort.' },
-    it: { title: 'Vivere in stile a Langenburg.', sub: 'Dieci camere e suite con fascino storico e comfort moderno.' },
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85',
-    pos: '50% 50%',
-    de: { title: 'Mediterrane Küche mit Herz.', sub: 'Regionale Zutaten, italienische Wärme — Krone Langenburg by Ammesso.' },
-    en: { title: 'Mediterranean Cuisine with Heart.', sub: 'Regional ingredients, Italian warmth — Krone Langenburg by Ammesso.' },
-    it: { title: 'Cucina mediterranea con cuore.', sub: 'Ingredienti regionali, calore italiano — Krone Langenburg by Ammesso.' },
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1800&q=85',
-    pos: '50% 45%',
-    de: { title: 'Hochzeiten & Events in Langenburg.', sub: 'Unvergessliche Momente — wir gestalten Ihren besonderen Anlass.' },
-    en: { title: 'Weddings & Events in Langenburg.', sub: 'Unforgettable moments — we craft your special occasion.' },
-    it: { title: 'Matrimoni & eventi a Langenburg.', sub: 'Momenti indimenticabili — creiamo la vostra occasione speciale.' },
-  },
-];
+{
+  url: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1800&q=85',
+  pos: '50% 55%',
+  de: { title: 'Willkommen in Langenburg.', sub: 'Boutique-Hotel, Restaurant und echte Gastfreundschaft im Herzen von Hohenlohe.' },
+  en: { title: 'Welcome to Langenburg.', sub: 'Boutique hotel, restaurant and genuine hospitality in the heart of Hohenlohe.' },
+  it: { title: 'Benvenuti a Langenburg.', sub: 'Boutique hotel, ristorante e vera ospitalità nel cuore di Hohenlohe.' }
+},
+{
+  url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
+  pos: '50% 40%',
+  de: { title: 'Die King-Suite — Ihr Rückzugsort.', sub: 'Großzügig, stilvoll, unvergesslich — buchen Sie direkt zum besten Preis.' },
+  en: { title: 'The King Suite — Your Retreat.', sub: 'Spacious, stylish, unforgettable — book directly at the best price.' },
+  it: { title: 'La King Suite — Il vostro rifugio.', sub: 'Spaziosa, elegante, indimenticabile — prenota direttamente al miglior prezzo.' }
+},
+{
+  url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg',
+  pos: '50% 35%',
+  de: { title: 'Stilvoll wohnen in Langenburg.', sub: 'Zehn Zimmer und Suiten mit historischem Charme und modernem Komfort.' },
+  en: { title: 'Live in Style in Langenburg.', sub: 'Ten rooms and suites with historic charm and modern comfort.' },
+  it: { title: 'Vivere in stile a Langenburg.', sub: 'Dieci camere e suite con fascino storico e comfort moderno.' }
+},
+{
+  url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85',
+  pos: '50% 50%',
+  de: { title: 'Mediterrane Küche mit Herz.', sub: 'Regionale Zutaten, italienische Wärme — Krone Langenburg by Ammesso.' },
+  en: { title: 'Mediterranean Cuisine with Heart.', sub: 'Regional ingredients, Italian warmth — Krone Langenburg by Ammesso.' },
+  it: { title: 'Cucina mediterranea con cuore.', sub: 'Ingredienti regionali, calore italiano — Krone Langenburg by Ammesso.' }
+},
+{
+  url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1800&q=85',
+  pos: '50% 45%',
+  de: { title: 'Hochzeiten & Events in Langenburg.', sub: 'Unvergessliche Momente — wir gestalten Ihren besonderen Anlass.' },
+  en: { title: 'Weddings & Events in Langenburg.', sub: 'Unforgettable moments — we craft your special occasion.' },
+  it: { title: 'Matrimoni & eventi a Langenburg.', sub: 'Momenti indimenticabili — creiamo la vostra occasione speciale.' }
+}];
+
 
 const BENEFITS = [
-  { icon: BedDouble, de: 'Direktbuchung', en: 'Direct Booking', it: 'Prenotazione diretta', desc_de: 'Bester Preis garantiert', desc_en: 'Best price guaranteed', desc_it: 'Miglior prezzo garantito' },
-  { icon: Wifi, de: 'Gratis WLAN', en: 'Free Wi-Fi', it: 'Wi-Fi gratuito', desc_de: 'In allen Zimmern & Bereichen', desc_en: 'In all rooms & areas', desc_it: 'In tutte le camere e aree' },
-  { icon: Gift, de: 'Persönliche Angebote', en: 'Personal Offers', it: 'Offerte personali', desc_de: 'Exklusiv für Stammgäste', desc_en: 'Exclusive for returning guests', desc_it: 'Esclusivo per ospiti abituali' },
-  { icon: Calendar, de: 'Reservierungen im Blick', en: 'Reservations Overview', it: 'Prenotazioni a portata di mano', desc_de: 'Alles im Gäste-Konto', desc_en: 'All in your guest account', desc_it: 'Tutto nel vostro account ospiti' },
-  { icon: Users, de: 'Persönlicher Service', en: 'Personal Service', it: 'Servizio personale', desc_de: 'Direkt mit unserem Team', desc_en: 'Directly with our team', desc_it: 'Direttamente con il nostro team' },
-];
+{ icon: BedDouble, de: 'Direktbuchung', en: 'Direct Booking', it: 'Prenotazione diretta', desc_de: 'Bester Preis garantiert', desc_en: 'Best price guaranteed', desc_it: 'Miglior prezzo garantito' },
+{ icon: Wifi, de: 'Gratis WLAN', en: 'Free Wi-Fi', it: 'Wi-Fi gratuito', desc_de: 'In allen Zimmern & Bereichen', desc_en: 'In all rooms & areas', desc_it: 'In tutte le camere e aree' },
+{ icon: Gift, de: 'Persönliche Angebote', en: 'Personal Offers', it: 'Offerte personali', desc_de: 'Exklusiv für Stammgäste', desc_en: 'Exclusive for returning guests', desc_it: 'Esclusivo per ospiti abituali' },
+{ icon: Calendar, de: 'Reservierungen im Blick', en: 'Reservations Overview', it: 'Prenotazioni a portata di mano', desc_de: 'Alles im Gäste-Konto', desc_en: 'All in your guest account', desc_it: 'Tutto nel vostro account ospiti' },
+{ icon: Users, de: 'Persönlicher Service', en: 'Personal Service', it: 'Servizio personale', desc_de: 'Direkt mit unserem Team', desc_en: 'Directly with our team', desc_it: 'Direttamente con il nostro team' }];
+
 
 export default function Home() {
   const { lang } = useLang();
@@ -133,13 +133,13 @@ export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    base44.auth.isAuthenticated().then(a => setIsLoggedIn(a)).catch(() => {});
+    base44.auth.isAuthenticated().then((a) => setIsLoggedIn(a)).catch(() => {});
   }, []);
 
   function startTimer() {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setCurrent(c => (c + 1) % SLIDES.length);
+      setCurrent((c) => (c + 1) % SLIDES.length);
     }, 5500);
   }
 
@@ -153,48 +153,48 @@ export default function Home() {
     setCurrent(idx);
     startTimer();
   }
-  function prev() { goTo((current - 1 + SLIDES.length) % SLIDES.length); }
-  function next() { goTo((current + 1) % SLIDES.length); }
+  function prev() {goTo((current - 1 + SLIDES.length) % SLIDES.length);}
+  function next() {goTo((current + 1) % SLIDES.length);}
 
   const slide = SLIDES[current];
   const slideText = slide[lang] || slide.de;
 
   const features = [
-    {
-      icon: BedDouble,
-      to: '/rooms',
-      de: 'Zimmer & Suiten', en: 'Rooms & Suites', it: 'Camere & Suite', es: 'Habitaciones & Suites',
-      desc_de: '10 exklusive Zimmer — sieben Doppelzimmer, ein Einzelzimmer und zwei großzügige King-Suites',
-      desc_en: '10 exclusive rooms — seven double rooms, one single room and two generous King Suites',
-      desc_it: '10 camere esclusive — sette doppie, una singola e due generose King Suite',
-      desc_es: '10 habitaciones exclusivas — siete dobles, una individual y dos generosas King Suites',
-      img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
-      alt: 'Zimmer Krone Langenburg Hotel Boutique Suite',
-    },
-    {
-      icon: UtensilsCrossed,
-      to: '/restaurant',
-      de: 'Restaurant + Bar', en: 'Restaurant + Bar', it: 'Ristorante + Bar', es: 'Restaurante + Bar',
-      desc_de: 'Mediterrane Küche mit regionalen Zutaten — Di–Sa Mittag & Abend, So ganztags geöffnet',
-      desc_en: 'Mediterranean cuisine with regional ingredients — Tue–Sat lunch & dinner, Sun all day',
-      desc_it: 'Cucina mediterranea con ingredienti regionali — Mar–Sab pranzo & cena, Dom tutto il giorno',
-      desc_es: 'Cocina mediterránea con ingredientes regionales — Mar–Sáb almuerzo & cena, Dom todo el día',
-      img: 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=85',
-      alt: 'Krone Langenburg by Ammesso — Restaurant mediterrane Küche Tischreservierung',
-    },
-    {
-      icon: Star,
-      to: '/weddings',
-      de: 'Events & Feiern', en: 'Events & Celebrations', it: 'Events & Feste', es: 'Eventos & Celebraciones',
-      desc_de: 'Hochzeiten, Firmenevents und private Feste — individuell gestaltet und unvergesslich',
-      desc_en: 'Weddings, corporate events and private celebrations — individually crafted and unforgettable',
-      desc_it: 'Matrimoni, eventi aziendali e feste private — su misura e indimenticabili',
-      desc_es: 'Bodas, eventos corporativos y celebraciones privadas — a medida e inolvidables',
-      // Wedding celebration dinner setup — white flowers, elegant long table
-      img: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=85',
-      alt: 'Eventlocation Hochzeit Firmenfeier Langenburg Krone by Ammesso',
-    },
-  ];
+  {
+    icon: BedDouble,
+    to: '/rooms',
+    de: 'Zimmer & Suiten', en: 'Rooms & Suites', it: 'Camere & Suite', es: 'Habitaciones & Suites',
+    desc_de: '10 exklusive Zimmer — sieben Doppelzimmer, ein Einzelzimmer und zwei großzügige King-Suites',
+    desc_en: '10 exclusive rooms — seven double rooms, one single room and two generous King Suites',
+    desc_it: '10 camere esclusive — sette doppie, una singola e due generose King Suite',
+    desc_es: '10 habitaciones exclusivas — siete dobles, una individual y dos generosas King Suites',
+    img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
+    alt: 'Zimmer Krone Langenburg Hotel Boutique Suite'
+  },
+  {
+    icon: UtensilsCrossed,
+    to: '/restaurant',
+    de: 'Restaurant + Bar', en: 'Restaurant + Bar', it: 'Ristorante + Bar', es: 'Restaurante + Bar',
+    desc_de: 'Mediterrane Küche mit regionalen Zutaten — Di–Sa Mittag & Abend, So ganztags geöffnet',
+    desc_en: 'Mediterranean cuisine with regional ingredients — Tue–Sat lunch & dinner, Sun all day',
+    desc_it: 'Cucina mediterranea con ingredienti regionali — Mar–Sab pranzo & cena, Dom tutto il giorno',
+    desc_es: 'Cocina mediterránea con ingredientes regionales — Mar–Sáb almuerzo & cena, Dom todo el día',
+    img: 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=85',
+    alt: 'Krone Langenburg by Ammesso — Restaurant mediterrane Küche Tischreservierung'
+  },
+  {
+    icon: Star,
+    to: '/weddings',
+    de: 'Events & Feiern', en: 'Events & Celebrations', it: 'Events & Feste', es: 'Eventos & Celebraciones',
+    desc_de: 'Hochzeiten, Firmenevents und private Feste — individuell gestaltet und unvergesslich',
+    desc_en: 'Weddings, corporate events and private celebrations — individually crafted and unforgettable',
+    desc_it: 'Matrimoni, eventi aziendali e feste private — su misura e indimenticabili',
+    desc_es: 'Bodas, eventos corporativos y celebraciones privadas — a medida e inolvidables',
+    // Wedding celebration dinner setup — white flowers, elegant long table
+    img: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=85',
+    alt: 'Eventlocation Hochzeit Firmenfeier Langenburg Krone by Ammesso'
+  }];
+
 
   const t = {
     de: {
@@ -221,7 +221,7 @@ export default function Home() {
       chip_nature: 'Jagsttal-Natur',
       chip_wine: 'Hohenloher Wein',
       chip_museum: 'Automuseum',
-      account_cta: 'Zum Gäste-Konto',
+      account_cta: 'Zum Gäste-Konto'
     },
     en: {
       discover: 'Discover',
@@ -247,7 +247,7 @@ export default function Home() {
       chip_nature: 'Jagst Valley',
       chip_wine: 'Hohenlohe Wine',
       chip_museum: 'Automotive Museum',
-      account_cta: 'Go to Guest Account',
+      account_cta: 'Go to Guest Account'
     },
     it: {
       discover: 'Scopri',
@@ -273,7 +273,7 @@ export default function Home() {
       chip_nature: 'Valle del Jagst',
       chip_wine: 'Vino di Hohenlohe',
       chip_museum: 'Museo dell\'automobile',
-      account_cta: 'Vai all\'account ospiti',
+      account_cta: 'Vai all\'account ospiti'
     },
     es: {
       discover: 'Descubra',
@@ -299,8 +299,8 @@ export default function Home() {
       chip_nature: 'Valle del Jagst',
       chip_wine: 'Vino de Hohenlohe',
       chip_museum: 'Museo del automóvil',
-      account_cta: 'Ir a mi cuenta',
-    },
+      account_cta: 'Ir a mi cuenta'
+    }
   };
   const c = t[lang] || t.de;
 
@@ -311,28 +311,28 @@ export default function Home() {
       <div className="relative overflow-hidden" style={{ height: '92vh', minHeight: '680px', maxHeight: '960px' }}>
 
         {/* LAYER 1: Only background images animate */}
-        {SLIDES.map((s, i) => (
-          <AnimatePresence key={i}>
-            {i === current && (
-              <motion.div
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1.0, ease: 'easeInOut' }}>
+        {SLIDES.map((s, i) =>
+        <AnimatePresence key={i}>
+            {i === current &&
+          <motion.div
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.0, ease: 'easeInOut' }}>
                 <img
-                  src={s.url}
-                  alt={s.de.title}
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: s.pos || '50% 40%' }}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                />
+              src={s.url}
+              alt={s.de.title}
+              className="w-full h-full object-cover"
+              style={{ objectPosition: s.pos || '50% 40%' }}
+              loading={i === 0 ? 'eager' : 'lazy'} />
+            
                 <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/15 to-black/80" />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
               </motion.div>
-            )}
+          }
           </AnimatePresence>
-        ))}
+        )}
 
         {/* LAYER 2: Fixed hero text — NEVER moves, NEVER animates position */}
         <div
@@ -340,7 +340,7 @@ export default function Home() {
           style={{
             paddingTop: 'calc(var(--nav-h-mobile) + 40px)',
             paddingBottom: '200px',
-            justifyContent: 'center',
+            justifyContent: 'center'
           }}>
 
           {/* Badge — static, only fades in on mount */}
@@ -363,7 +363,7 @@ export default function Home() {
                 style={{
                   fontSize: 'clamp(2.1rem, 4.2vw, 4.25rem)',
                   lineHeight: '1.06',
-                  textShadow: '0 2px 16px rgba(0,0,0,0.85), 0 4px 32px rgba(0,0,0,0.5)',
+                  textShadow: '0 2px 16px rgba(0,0,0,0.85), 0 4px 32px rgba(0,0,0,0.5)'
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -385,7 +385,7 @@ export default function Home() {
                 className="text-white/88 font-body leading-relaxed px-2"
                 style={{
                   fontSize: 'clamp(0.9rem, 1.35vw, 1.1rem)',
-                  textShadow: '0 1px 10px rgba(0,0,0,0.7)',
+                  textShadow: '0 1px 10px rgba(0,0,0,0.7)'
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -409,7 +409,7 @@ export default function Home() {
 
         {/* Slide counter */}
         <div className="absolute right-6 z-10 hidden lg:flex items-center gap-2"
-          style={{ top: 'calc(var(--nav-h-desktop) + 20px)' }}>
+        style={{ top: 'calc(var(--nav-h-desktop) + 20px)' }}>
           <span className="font-display text-2xl font-light text-white/50">{String(current + 1).padStart(2, '0')}</span>
           <div className="w-px h-5 bg-white/20 mx-1" />
           <span className="font-display text-sm font-light text-white/25">{String(SLIDES.length).padStart(2, '0')}</span>
@@ -417,22 +417,22 @@ export default function Home() {
 
         {/* Arrow controls */}
         <button onClick={prev}
-          className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 h-20 w-11 sm:w-10 sm:h-10 bg-transparent sm:bg-black/20 sm:hover:bg-[#C9A96E]/25 sm:border sm:border-white/15 sm:hover:border-[#C9A96E]/50 sm:rounded-full flex items-center justify-center text-white/60 sm:text-white transition-all sm:backdrop-blur-sm z-10">
+        className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 h-20 w-11 sm:w-10 sm:h-10 bg-transparent sm:bg-black/20 sm:hover:bg-[#C9A96E]/25 sm:border sm:border-white/15 sm:hover:border-[#C9A96E]/50 sm:rounded-full flex items-center justify-center text-white/60 sm:text-white transition-all sm:backdrop-blur-sm z-10">
           <ChevronLeft className="w-6 h-6 sm:w-5 sm:h-5 drop-shadow" />
         </button>
         <button onClick={next}
-          className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 h-20 w-11 sm:w-10 sm:h-10 bg-transparent sm:bg-black/20 sm:hover:bg-[#C9A96E]/25 sm:border sm:border-white/15 sm:hover:border-[#C9A96E]/50 sm:rounded-full flex items-center justify-center text-white/60 sm:text-white transition-all z-10">
+        className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 h-20 w-11 sm:w-10 sm:h-10 bg-transparent sm:bg-black/20 sm:hover:bg-[#C9A96E]/25 sm:border sm:border-white/15 sm:hover:border-[#C9A96E]/50 sm:rounded-full flex items-center justify-center text-white/60 sm:text-white transition-all z-10">
           <ChevronRight className="w-6 h-6 sm:w-5 sm:h-5 drop-shadow" />
         </button>
 
         {/* Dots */}
         <div className="absolute z-10 flex gap-2"
-          style={{ bottom: '180px', left: '50%', transform: 'translateX(-50%)' }}>
-          {SLIDES.map((_, i) => (
-            <button key={i} onClick={() => goTo(i)}>
+        style={{ bottom: '180px', left: '50%', transform: 'translateX(-50%)' }}>
+          {SLIDES.map((_, i) =>
+          <button key={i} onClick={() => goTo(i)}>
               <span className={`block rounded-full transition-all duration-400 ${i === current ? 'w-7 h-1.5 bg-[#C9A96E]' : 'w-1.5 h-1.5 bg-white/35 hover:bg-white/55'}`} />
             </button>
-          ))}
+          )}
         </div>
 
         {/* Booking bar — pinned to bottom */}
@@ -448,7 +448,7 @@ export default function Home() {
       <RestaurantBlock lang={lang} />
 
       {/* ── BENEFIT STRIP ── */}
-      <motion.div 
+      <motion.div
         className="bg-[#1C1714] py-14 sm:py-16 px-4 sm:px-8 relative overflow-hidden"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -458,7 +458,7 @@ export default function Home() {
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#C9A96E]/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#C9A96E]/5 rounded-full blur-3xl" />
         <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div 
+          <motion.div
             className="text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -468,21 +468,21 @@ export default function Home() {
             <h2 className="font-display text-2xl sm:text-3xl font-light text-white">{c.benefits_title}</h2>
           </motion.div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 justify-items-center">
-            {BENEFITS.map((b, i) => (
-              <motion.div 
-                key={i} 
-                className="flex flex-col items-center text-center gap-3"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -4, scale: 1.02 }}
-              >
-                <motion.div 
-                  className="w-11 h-11 bg-[#C9A96E]/10 border border-[#C9A96E]/20 rounded-full flex items-center justify-center flex-shrink-0"
-                  whileHover={{ scale: 1.1, rotate: 5, borderColor: 'rgba(201,169,110,0.4)' }}
-                  transition={{ duration: 0.3 }}
-                >
+            {BENEFITS.map((b, i) =>
+            <motion.div
+              key={i}
+              className="flex flex-col items-center text-center gap-3"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -4, scale: 1.02 }}>
+              
+                <motion.div
+                className="w-11 h-11 bg-[#C9A96E]/10 border border-[#C9A96E]/20 rounded-full flex items-center justify-center flex-shrink-0"
+                whileHover={{ scale: 1.1, rotate: 5, borderColor: 'rgba(201,169,110,0.4)' }}
+                transition={{ duration: 0.3 }}>
+                
                   <b.icon className="w-5 h-5 text-[#C9A96E]" />
                 </motion.div>
                 <div>
@@ -494,54 +494,54 @@ export default function Home() {
                   </p>
                 </div>
               </motion.div>
-            ))}
+            )}
           </div>
-          <motion.div 
+          <motion.div
             className="mt-8 text-center flex flex-col sm:flex-row gap-3 justify-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}>
-            {!isLoggedIn ? (
-              <>
-                <motion.button 
-                  onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="btn-gold px-8 text-sm"
-                >
+            {!isLoggedIn ?
+            <>
+                <motion.button
+                onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="btn-gold px-8 text-sm">
+                
                   {c.register}
                 </motion.button>
-                <motion.button 
-                  onClick={() => base44.auth.redirectToLogin(window.location.href)}
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="btn-outline-dark px-8"
-                >
+                <motion.button
+                onClick={() => base44.auth.redirectToLogin(window.location.href)}
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="btn-outline-dark px-8">
+                
                   {lang === 'de' ? 'Anmelden' : lang === 'en' ? 'Sign In' : 'Accedi'}
                 </motion.button>
-              </>
-            ) : (
-              <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
+              </> :
+
+            <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link to="/account"
-                  className="btn-gold px-8 text-sm">
+              className="btn-gold px-8 text-sm">
                   {c.account_cta} <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
-            )}
+            }
           </motion.div>
         </div>
       </motion.div>
 
       {/* ── FEATURE CARDS ── */}
-      <motion.div 
+      <motion.div
         className="bg-[#FAF7F2] py-16 sm:py-20 px-4 sm:px-8"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}>
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -551,22 +551,22 @@ export default function Home() {
             <h2 className="font-display text-3xl sm:text-4xl font-light text-[#1C1714]">{c.experience}</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <motion.div 
-                key={i} 
-                whileHover={{ y: -6, scale: 1.01 }} 
-                whileTap={{ scale: 0.98 }} 
-                transition={{ duration: 0.25 }}
-                className="bg-white border border-[#EDE6D8] rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 block"
-              >
+            {features.map((f, i) =>
+            <motion.div
+              key={i}
+              whileHover={{ y: -6, scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.25 }}
+              className="bg-white border border-[#EDE6D8] rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 block">
+              
                 <Link to={f.to} className="block">
                   <div className="h-52 overflow-hidden">
-                    <img
-                      src={f.img}
-                      alt={f.alt || (f[lang] || f.de) + ' — Krone Langenburg by Ammesso'}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      loading="lazy"
-                    />
+                    <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/aef46bd59_Krone_innen.png"
+
+                  alt={f.alt || (f[lang] || f.de) + ' — Krone Langenburg by Ammesso'}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy" />
+                  
                   </div>
                   <div className="p-6">
                     <div className="w-10 h-10 bg-[#8B6914]/8 border border-[#8B6914]/15 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#8B6914]/15 transition-colors">
@@ -584,13 +584,13 @@ export default function Home() {
                   </div>
                 </Link>
               </motion.div>
-            ))}
+            )}
           </div>
         </div>
       </motion.div>
 
       {/* ── ROOMS PREVIEW ── */}
-      <motion.div 
+      <motion.div
         className="bg-white py-16 sm:py-20 px-4 sm:px-8 border-t border-[#EDE6D8]"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -604,18 +604,18 @@ export default function Home() {
               <p className="font-body text-[#4A3F35] leading-relaxed mb-8">{c.rooms_text}</p>
               <div className="space-y-3 mb-8">
                 {[
-                  lang === 'de' ? 'Bester Preis bei Direktbuchung' : lang === 'en' ? 'Best rate guaranteed on direct booking' : lang === 'es' ? 'Mejor precio garantizado al reservar directo' : 'Miglior prezzo garantito con prenotazione diretta',
-                  lang === 'de' ? 'Frühstück optional ab €14 p.P.' : lang === 'en' ? 'Breakfast available from €14 per person' : lang === 'es' ? 'Desayuno disponible desde €14 por persona' : 'Colazione disponibile da €14 a persona',
-                  lang === 'de' ? 'Kostenloses WLAN in allen Zimmern' : lang === 'en' ? 'Complimentary Wi-Fi throughout' : lang === 'es' ? 'Wi-Fi gratuito en todas las habitaciones' : 'Wi-Fi gratuito in tutte le camere',
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
+                lang === 'de' ? 'Bester Preis bei Direktbuchung' : lang === 'en' ? 'Best rate guaranteed on direct booking' : lang === 'es' ? 'Mejor precio garantizado al reservar directo' : 'Miglior prezzo garantito con prenotazione diretta',
+                lang === 'de' ? 'Frühstück optional ab €14 p.P.' : lang === 'en' ? 'Breakfast available from €14 per person' : lang === 'es' ? 'Desayuno disponible desde €14 por persona' : 'Colazione disponibile da €14 a persona',
+                lang === 'de' ? 'Kostenloses WLAN in allen Zimmern' : lang === 'en' ? 'Complimentary Wi-Fi throughout' : lang === 'es' ? 'Wi-Fi gratuito en todas las habitaciones' : 'Wi-Fi gratuito in tutte le camere'].
+                map((item, i) =>
+                <div key={i} className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-[#8B6914] flex-shrink-0" />
                     <span className="text-[#4A3F35] font-body text-sm">{item}</span>
                   </div>
-                ))}
+                )}
               </div>
               <Link to="/rooms"
-                className="btn-gold px-8 text-sm">
+              className="btn-gold px-8 text-sm">
                 {c.rooms_cta} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -624,22 +624,22 @@ export default function Home() {
               <div className="flex flex-col gap-3">
                 <div className="rounded-xl overflow-hidden h-56 sm:h-64 shadow-md">
                   <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/46611ec66_krone-dz-bett-balkontuer-01.jpg"
-                    alt="Doppelzimmer mit Balkontür im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="Doppelzimmer mit Balkontür im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
                 </div>
                 <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
                   <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
-                    alt="King Suite 2 im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="King Suite 2 im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
                 </div>
               </div>
               {/* Rechte Spalte — zwei Bilder untereinander, versetzt */}
               <div className="flex flex-col gap-3 mt-8">
                 <div className="rounded-xl overflow-hidden h-40 sm:h-44 shadow-md">
                   <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/69a6d105a_krone-dz-aussicht-talblick-01.jpg"
-                    alt="Doppelzimmer mit Stadtblick im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="Doppelzimmer mit Stadtblick im Krone Langenburg by Ammesso" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
                 </div>
                 <div className="rounded-xl overflow-hidden h-56 sm:h-64 shadow-md">
                   <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
-                    alt="Zimmer in Langenburg Hotel Krone — Panorama Aussicht" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+                  alt="Zimmer in Langenburg Hotel Krone — Panorama Aussicht" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
                 </div>
               </div>
             </div>
@@ -648,7 +648,7 @@ export default function Home() {
       </motion.div>
 
       {/* ── RESTAURANT PREVIEW ── */}
-      <motion.div 
+      <motion.div
         className="bg-[#1C1714] py-16 sm:py-20 px-4 sm:px-8"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -658,8 +658,8 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden h-72 sm:h-96">
               <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2d765545e_generated_image.png"
-                alt="Restaurant Krone Langenburg by Ammesso — mediterrane Küche Langenburg"
-                className="w-full h-full object-cover object-center" loading="lazy" />
+              alt="Restaurant Krone Langenburg by Ammesso — mediterrane Küche Langenburg"
+              className="w-full h-full object-cover object-center" loading="lazy" />
             </div>
             <div className="order-1 lg:order-2">
               <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body mb-3">
@@ -669,11 +669,11 @@ export default function Home() {
                 {lang === 'de' ? 'Mediterrane Küche. Hohenlohes Seele.' : lang === 'en' ? 'Mediterranean Cuisine. Hohenlohe Soul.' : 'Cucina mediterranea. Anima di Hohenlohe.'}
               </h2>
               <p className="font-body text-white/60 leading-relaxed mb-8">
-                {lang === 'de'
-                  ? 'Krone Langenburg by Ammesso verbindet die Wärme der italienischen Küche mit den besten Zutaten der Region. Pasta, Fleisch, Fisch — alles mit Liebe zubereitet, direkt aus unserer Küche auf Ihren Tisch.'
-                  : lang === 'en'
-                  ? 'Krone Langenburg by Ammesso combines the warmth of Italian cuisine with the finest regional ingredients. Pasta, meat, fish — all prepared with love, straight from our kitchen to your table.'
-                  : 'Krone Langenburg by Ammesso combina il calore della cucina italiana con i migliori ingredienti regionali.'}
+                {lang === 'de' ?
+                'Krone Langenburg by Ammesso verbindet die Wärme der italienischen Küche mit den besten Zutaten der Region. Pasta, Fleisch, Fisch — alles mit Liebe zubereitet, direkt aus unserer Küche auf Ihren Tisch.' :
+                lang === 'en' ?
+                'Krone Langenburg by Ammesso combines the warmth of Italian cuisine with the finest regional ingredients. Pasta, meat, fish — all prepared with love, straight from our kitchen to your table.' :
+                'Krone Langenburg by Ammesso combina il calore della cucina italiana con i migliori ingredienti regionali.'}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
                 <Link to="/reserve" className="btn-gold px-6">
@@ -689,7 +689,7 @@ export default function Home() {
       </motion.div>
 
       {/* ── LOCATION TEASER ── */}
-      <motion.div 
+      <motion.div
         className="relative bg-[#1C1714] py-20 sm:py-28 px-4 sm:px-8 overflow-hidden"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -701,8 +701,8 @@ export default function Home() {
             src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85"
             alt="Langenburg"
             className="w-full h-full object-cover opacity-20"
-            loading="lazy"
-          />
+            loading="lazy" />
+          
           <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/80 via-[#1C1714]/60 to-[#1C1714]/95" />
         </div>
 
@@ -726,44 +726,44 @@ export default function Home() {
           {/* Premium 3D-style highlight cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-12">
             {[
-              {
-                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg',
-                alt: 'Schloss Langenburg Luftaufnahme — Barockschloss Hohenlohe',
-                label: c.chip_castle,
-                desc: lang === 'de' ? 'Historisches Schloss mit Blick ins Jagsttal.' : 'Historic castle overlooking the Jagst valley.',
-                dist: '5 Min.',
-              },
-              {
-                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg',
-                alt: 'Jagsttal bei Langenburg — Natur und Landschaft',
-                label: c.chip_nature,
-                desc: lang === 'de' ? 'Natur, Ausblicke und ruhige Wege direkt vor der Tür.' : 'Nature, views and peaceful paths right at your doorstep.',
-                dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
-              },
-              {
-                img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg',
-                alt: 'Deutsches Automuseum Langenburg — Rennwagen Ausstellung',
-                label: c.chip_museum,
-                desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
-                dist: '5 Min.',
-              },
-              {
-                img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=2400&q=95',
-                alt: 'Langenburger Altstadt — historische Fachwerkhäuser',
-                label: lang === 'de' ? 'Langenburger Altstadt' : 'Langenburg Old Town',
-                desc: lang === 'de' ? 'Historische Fachwerkhäuser und gepflasterte Gassen im Ortskern.' : 'Historic half-timbered houses and cobbled lanes in the town centre.',
-                dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep',
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="relative rounded-2xl overflow-hidden h-36 sm:h-44 group cursor-default"
-                style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,110,0.15)' }}>
+            {
+              img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg',
+              alt: 'Schloss Langenburg Luftaufnahme — Barockschloss Hohenlohe',
+              label: c.chip_castle,
+              desc: lang === 'de' ? 'Historisches Schloss mit Blick ins Jagsttal.' : 'Historic castle overlooking the Jagst valley.',
+              dist: '5 Min.'
+            },
+            {
+              img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg',
+              alt: 'Jagsttal bei Langenburg — Natur und Landschaft',
+              label: c.chip_nature,
+              desc: lang === 'de' ? 'Natur, Ausblicke und ruhige Wege direkt vor der Tür.' : 'Nature, views and peaceful paths right at your doorstep.',
+              dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep'
+            },
+            {
+              img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg',
+              alt: 'Deutsches Automuseum Langenburg — Rennwagen Ausstellung',
+              label: c.chip_museum,
+              desc: lang === 'de' ? 'Automobilgeschichte in besonderer Schlosskulisse.' : 'Automotive history in a unique castle setting.',
+              dist: '5 Min.'
+            },
+            {
+              img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=2400&q=95',
+              alt: 'Langenburger Altstadt — historische Fachwerkhäuser',
+              label: lang === 'de' ? 'Langenburger Altstadt' : 'Langenburg Old Town',
+              desc: lang === 'de' ? 'Historische Fachwerkhäuser und gepflasterte Gassen im Ortskern.' : 'Historic half-timbered houses and cobbled lanes in the town centre.',
+              dist: lang === 'de' ? 'Direkt vor der Tür' : 'On your doorstep'
+            }].
+            map((item, i) =>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="relative rounded-2xl overflow-hidden h-36 sm:h-44 group cursor-default"
+              style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,110,0.15)' }}>
                 <img src={item.img} alt={item.alt || item.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
                 {/* Gold top accent line */}
@@ -774,19 +774,19 @@ export default function Home() {
                   <p className="text-[#C9A96E] text-[10px] font-body font-semibold mt-0.5 tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">{item.dist}</p>
                 </div>
               </motion.div>
-            ))}
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link to="/discover"
-                className="btn-gold px-8 text-sm w-full sm:w-auto justify-center">
+              className="btn-gold px-8 text-sm w-full sm:w-auto justify-center">
                 {c.discover_btn}
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <a href="https://maps.app.goo.gl/GF5S8i2vASmpA7jUA" target="_blank" rel="noopener noreferrer"
-                className="btn-outline-dark w-full sm:w-auto justify-center">
+              className="btn-outline-dark w-full sm:w-auto justify-center">
                 🗺️ {lang === 'de' ? 'Route starten' : lang === 'en' ? 'Get Directions' : 'Navigazione'}
               </a>
             </motion.div>
@@ -796,6 +796,6 @@ export default function Home() {
 
       {/* AI Chat Widget */}
       <ChatWidget />
-    </div>
-  );
+    </div>);
+
 }
