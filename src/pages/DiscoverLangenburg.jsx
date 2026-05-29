@@ -8,9 +8,9 @@ import KroneLocationSection from '@/components/KroneLocationSection';
 
 // Correct real photos for each attraction
 const IMG_CASTLE = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png';
-const IMG_JAGSTTAL = 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=2400&q=90';
+const IMG_JAGSTTAL = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/257e19347_IMG_8593.png';
 const IMG_MUSEUM = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg';
-const IMG_ALTSTADT = 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=2400&q=90';
+const IMG_ALTSTADT = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg';
 
 const ATTRACTIONS = [
   {
