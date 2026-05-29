@@ -520,25 +520,44 @@ export default function Rooms() {
         </div>
 
         {/* ── REGION ── */}
-        <div className="bg-[#171411] border border-white/8 rounded-2xl p-6 sm:p-8 mb-10">
-          <h3 className="font-display text-2xl font-light text-white mb-3">{t.region_title}</h3>
-          <p className="text-white/45 text-base font-body leading-relaxed mb-6">{t.region_text}</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="bg-white border border-[#EDE6D8] rounded-2xl p-6 sm:p-8 mb-10 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+          <div className="text-center mb-7">
+            <p className="text-[#8B6914] text-[10px] tracking-[0.45em] uppercase font-body font-semibold mb-2">{t.region_title}</p>
+            <h3 className="font-display text-2xl font-light text-[#1C1714] mb-3">Entdecken Sie Langenburg & Hohenlohe</h3>
+            <p className="text-[#4A3F35] text-sm font-body leading-relaxed max-w-2xl mx-auto">
+              {lang === 'de' ? 'Langenburg liegt im malerischen Jagsttal — umgeben von Schlössern, Wäldern und der Weite des Hohenloher Landes.' : 'Langenburg lies in the picturesque Jagst Valley — surrounded by castles, forests and the Hohenlohe countryside.'}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { e: '🏰', de: 'Schloss Langenburg', en: 'Langenburg Castle' },
-              { e: '🌊', de: 'Jagsttal', en: 'Jagst Valley' },
-              { e: '🍷', de: 'Hohenloher Wein', en: 'Hohenlohe Wine' },
-              { e: '🚗', de: 'Automuseum', en: 'Car Museum' },
+              { id: 'schloss', icon: '🏰', de: 'Schloss Langenburg', en: 'Langenburg Castle', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/06db91e21_generated_image.png' },
+              { id: 'jagsttal', icon: '🌊', de: 'Jagsttal', en: 'Jagst Valley', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/5ae994faa_generated_image.png' },
+              { id: 'altstadt', icon: '🏘️', de: 'Altstadt Langenburg', en: 'Old Town Langenburg', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=85' },
+              { id: 'automuseum', icon: '🚗', de: 'Automuseum', en: 'Car Museum', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg' },
             ].map((item, i) => (
-              <div key={i} className="bg-white/4 border border-white/8 rounded-xl p-4 text-center hover:border-[#C9A96E]/20 transition-colors">
-                <div className="text-2xl mb-2">{item.e}</div>
-                <p className="text-white/45 text-xs font-body">{lang === 'de' ? item.de : item.en}</p>
-              </div>
+              <Link 
+                key={i} 
+                to="/discover"
+                className="group bg-[#F7F3EC] border border-[#EDE6D8] rounded-xl overflow-hidden hover:border-[#C9A96E]/40 hover:shadow-[0_8px_24px_rgba(139,105,20,0.12)] transition-all duration-300">
+                <div className="relative h-32 overflow-hidden">
+                  <img 
+                    src={item.img} 
+                    alt={lang === 'de' ? item.de : item.en}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-2 left-2 text-3xl">{item.icon}</div>
+                </div>
+                <div className="p-3 text-center">
+                  <p className="text-[#1C1714] text-xs font-body font-semibold leading-tight">{lang === 'de' ? item.de : item.en}</p>
+                </div>
+              </Link>
             ))}
           </div>
-          <div className="mt-5 text-center">
-            <Link to="/discover" className="inline-flex items-center gap-2 text-[#C9A96E]/60 hover:text-[#C9A96E] text-sm font-body font-semibold tracking-wider transition-colors">
-              {lang === 'de' ? 'Region entdecken' : 'Explore Region'} <ArrowRight className="w-4 h-4" />
+          <div className="mt-6 text-center">
+            <Link to="/discover" className="btn-gold inline-flex items-center gap-2 px-6">
+              {lang === 'de' ? 'Alle Sehenswürdigkeiten entdecken' : 'Discover All Attractions'} <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
