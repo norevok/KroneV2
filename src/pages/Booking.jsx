@@ -87,10 +87,10 @@ export default function Booking() {
   return (
     <div className="min-h-screen bg-white text-[#1C1714]">
 
-      {/* Header band - extra padding to clear nav and events banner */}
-      <div className="bg-[#1C1714] pt-48 pb-8 px-5">
+      {/* Header band - padding to clear nav and events banner */}
+      <div className="bg-[#1C1714] pt-44 pb-6 px-5">
         <div className="max-w-6xl mx-auto">
-          <Link to="/rooms" className="flex items-center gap-2 text-white/40 hover:text-white/70 text-xs font-body tracking-wider uppercase mb-5 transition-colors">
+          <Link to="/rooms" className="flex items-center gap-2 text-white/40 hover:text-white/70 text-xs font-body tracking-wider uppercase mb-4 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> {t.back}
           </Link>
           <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -106,7 +106,7 @@ export default function Booking() {
           </div>
 
           {/* Trust strip */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
             {t.trust.map((item, i) => (
               <div key={i} className="flex items-center gap-2">
                 <Check className="w-3.5 h-3.5 text-[#C9A96E]/70 flex-shrink-0" />
@@ -155,7 +155,7 @@ export default function Booking() {
       )}
 
       {/* Booking widget area */}
-      <div className="max-w-6xl mx-auto px-5 py-8">
+      <div className="max-w-6xl mx-auto px-5 py-6">
 
         {/* Loading indicator */}
         {!iframeLoaded && !iframeError && (
