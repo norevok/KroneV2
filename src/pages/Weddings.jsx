@@ -233,8 +233,8 @@ export default function Weddings() {
               initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.1] whitespace-pre-line mb-5"
-              style={{ textShadow: '0 2px 24px rgba(0,0,0,0.7)' }}>
+              className="font-display font-light text-white whitespace-pre-line mb-5"
+              style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05', textShadow: '0 2px 24px rgba(0,0,0,0.7)' }}>
               {c.title}
             </motion.h1>
 

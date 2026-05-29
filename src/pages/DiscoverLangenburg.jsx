@@ -120,8 +120,8 @@ export default function DiscoverLangenburg() {
             {t.eyebrow}
           </motion.p>
           <motion.h1
-            className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-white mb-6 leading-[0.9] max-w-4xl"
-            style={{ textShadow: '0 2px 24px rgba(0,0,0,0.9), 0 4px 48px rgba(0,0,0,0.6)' }}
+            className="font-display font-light text-white mb-6 max-w-4xl"
+            style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05', textShadow: '0 2px 24px rgba(0,0,0,0.9)' }}
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
             {t.title}
           </motion.h1>

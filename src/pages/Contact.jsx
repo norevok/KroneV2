@@ -269,7 +269,8 @@ export default function Contact() {
           className="text-center pt-8 pb-12 sm:pt-10 sm:pb-16"
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <p className="text-[#8B6914] text-[10px] tracking-[0.5em] uppercase font-body mb-3">{t.eyebrow}</p>
-          <h1 className="font-display text-5xl sm:text-6xl font-light text-[#1C1714] mb-3">{t.title}</h1>
+          <h1 className="font-display font-light text-[#1C1714] mb-3"
+              style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05' }}>{t.title}</h1>
           <p className="font-body text-[#8A7A6A] text-base">{t.sub}</p>
           <a href="https://wa.me/4979059417700" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-[#25D366] text-[#0F1A0F] rounded-full text-xs font-body font-bold tracking-widest uppercase shadow-lg hover:shadow-xl transition-all">

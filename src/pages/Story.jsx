@@ -186,6 +186,7 @@ export default function Story() {
           src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png"
           alt="Schloss Langenburg Luftaufnahme — Hohenlohe"
           className="absolute inset-0 w-full h-full object-cover opacity-25"
+          style={{ objectPosition: '50% 40%' }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/60 via-transparent to-[#171311]/85" />
         <div className="relative z-10 max-w-3xl mx-auto text-center px-5">
@@ -196,7 +197,8 @@ export default function Story() {
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display text-4xl sm:text-6xl font-light text-white mb-5 leading-tight">
+            className="font-display font-light text-white mb-5"
+            style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05' }}>
             {heroTitles[lang] || heroTitles.de}
           </motion.h1>
           <motion.div

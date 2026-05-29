@@ -6,10 +6,9 @@ import { CheckCircle, ArrowRight, Phone, Mail, Users, Calendar, Building2, Heart
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
 const IMAGES = {
-  hero: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1600&q=80",
-  corporate: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80",
-  wedding: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80",
-  dining: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
+  corporate: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=88",
+  wedding: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=88",
+  dining: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=88",
 };
 
 const EVENT_TYPES = [
@@ -162,14 +161,28 @@ export default function Events() {
     <div className="min-h-screen bg-white text-[#1C1714] pb-20 lg:pb-0">
 
       {/* Hero */}
-      <div className="relative hero-top overflow-hidden" style={{ minHeight: 'clamp(560px, 80vh, 900px)' }}>
-        <img src={IMAGES.hero} alt="Events & Feiern — Krone Langenburg" className="w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/70 via-[#1C1714]/40 to-[#1C1714]/90" />
-        <div className="absolute inset-0 flex items-end pb-16 px-5">
-          <div className="max-w-4xl mx-auto w-full">
+      <div className="relative hero-top overflow-hidden" style={{ minHeight: 'clamp(540px, 72vh, 780px)' }}>
+        <img
+          src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=2400&q=90"
+          alt="Events & Feiern — Krone Langenburg"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: '50% 40%' }}
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1C1714]/65 via-[#1C1714]/30 to-[#1C1714]/88" />
+        <div className="absolute inset-0 flex items-center justify-center text-center px-5 pb-8">
+          <div className="max-w-[860px] w-full">
             <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-4">{c.eyebrow}</p>
-            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-white leading-[1.0] whitespace-pre-line mb-4">{c.title}</h1>
-            <p className="text-white/65 font-body text-lg max-w-2xl leading-relaxed">{c.subtitle}</p>
+            <h1
+              className="font-display font-light text-white whitespace-pre-line mb-5"
+              style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
+              {c.title}
+            </h1>
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mx-auto mb-5" />
+            <p className="text-white/75 font-body max-w-[640px] mx-auto leading-relaxed"
+               style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1.1rem)', textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>
+              {c.subtitle}
+            </p>
           </div>
         </div>
       </div>

@@ -146,7 +146,8 @@ export default function Karriere() {
         <div className="absolute inset-0 bg-gradient-to-b from-espresso/60 to-espresso/90" />
         <div className="relative max-w-4xl mx-auto text-center">
           <p className="text-gold-light text-[10px] tracking-[0.5em] uppercase font-body mb-5">{tx.eyebrow}</p>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-light text-ivory mb-4 leading-[1.0]">{tx.title}</h1>
+          <h1 className="font-display font-light text-ivory mb-4"
+              style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05' }}>{tx.title}</h1>
           <p className="text-ivory/50 font-body text-sm max-w-lg mx-auto">{tx.sub}</p>
         </div>
       </div>

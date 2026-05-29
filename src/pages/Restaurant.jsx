@@ -138,7 +138,8 @@ export default function Restaurant() {
               <span className="text-white/50 text-sm font-body hidden sm:inline">Di–Sa 12–14:30 & 17:30–22:00 · So 12–20:00 · Mo Ruhetag</span>
             </div>
             <p className="text-[#B08A42] text-[10px] tracking-[0.4em] uppercase font-body mb-4">{c.label}</p>
-            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-light text-white mb-5 leading-tight" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8)' }}>{c.title}</h1>
+            <h1 className="font-display font-light text-white mb-5"
+                style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05', textShadow: '0 2px 20px rgba(0,0,0,0.8)' }}>{c.title}</h1>
             <p className="text-white/90 font-body leading-relaxed max-w-2xl mb-8 text-sm sm:text-base" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>{c.intro}</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/reserve"

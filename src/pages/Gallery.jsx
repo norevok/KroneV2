@@ -165,7 +165,8 @@ export default function Gallery() {
             <p className="text-[#B08A42] text-[10px] tracking-[0.5em] uppercase font-body">Krone Langenburg by Ammesso</p>
             <div className="h-px w-10 bg-[#B08A42]/50" />
           </div>
-          <h1 className="font-display text-4xl sm:text-6xl font-light text-white mb-4 leading-tight">{t.title}</h1>
+          <h1 className="font-display font-light text-white mb-4"
+              style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05' }}>{t.title}</h1>
           <p className="text-white/55 font-body text-sm sm:text-base max-w-md mx-auto mb-10">{t.sub}</p>
 
           {/* Video CTA — clean centered button */}

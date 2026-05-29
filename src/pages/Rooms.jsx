@@ -165,38 +165,44 @@ export default function Rooms() {
       )}
 
       {/* ── HERO ── */}
-      <div className={`relative overflow-hidden ${returnState ? 'pt-8' : 'hero-top'}`} style={{ minHeight: 'clamp(480px, 65vh, 780px)' }}>
+      <div className={`relative overflow-hidden ${returnState ? 'pt-8' : 'hero-top'}`} style={{ minHeight: 'clamp(520px, 70vh, 780px)' }}>
         <img
-          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg"
-          alt="Krone Langenburg Zimmer & Suiten — Panorama Hohenlohe"
-          className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
+          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg"
+          alt="Krone Langenburg Zimmer & Suiten — King Suite"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: '50% 35%' }}
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/55 via-[#0F0E0B]/30 to-[#0F0E0B]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/30 via-transparent to-[#0F0E0B]/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/55 via-[#0F0E0B]/25 to-[#0F0E0B]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/25 via-transparent to-[#0F0E0B]/25" />
 
-        <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pb-20 pt-10 sm:pt-16">
-          <div className="flex items-center justify-center gap-3 mb-5">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C9A96E]/60" />
-            <p className="text-[#C9A96E] text-[10px] tracking-[0.55em] uppercase font-body">{t.eyebrow}</p>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C9A96E]/60" />
-          </div>
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-white mb-5 leading-tight"
-              style={{ textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
-            {t.title}
-          </h1>
-          <p className="text-white/65 font-body text-base sm:text-lg max-w-lg mx-auto leading-relaxed mb-8">
-            {t.subtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button onClick={() => handleBookNow(null)} disabled={savingIntent}
-              className="btn-gold disabled:opacity-50">
-              {t.book_now} <ExternalLink className="w-4 h-4" />
-            </button>
-            <a href={`tel:${SITE_DEFAULTS.phone}`}
-              className="btn-outline-dark px-8">
-              <Phone className="w-4 h-4" /> {SITE_DEFAULTS.phone}
-            </a>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-10">
+          <div className="max-w-[860px] w-full">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#C9A96E]/60" />
+              <p className="text-[#C9A96E] text-[10px] tracking-[0.55em] uppercase font-body">{t.eyebrow}</p>
+              <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#C9A96E]/60" />
+            </div>
+            <h1
+              className="font-display font-light text-white mb-4"
+              style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
+              {t.title}
+            </h1>
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mx-auto mb-4" />
+            <p className="text-white/70 font-body max-w-[540px] mx-auto leading-relaxed mb-8"
+               style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1.05rem)', textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>
+              {t.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button onClick={() => handleBookNow(null)} disabled={savingIntent}
+                className="btn-gold disabled:opacity-50">
+                {t.book_now} <ExternalLink className="w-4 h-4" />
+              </button>
+              <a href={`tel:${SITE_DEFAULTS.phone}`}
+                className="btn-outline-dark px-8">
+                <Phone className="w-4 h-4" /> {SITE_DEFAULTS.phone}
+              </a>
+            </div>
           </div>
         </div>
       </div>
