@@ -99,17 +99,16 @@ export default function DiscoverLangenburg() {
     <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-10 overflow-hidden">
 
       {/* ── HERO — Bild beginnt am Seitenanfang (hinter Navbar), Text mit page-top Abstand ── */}
-      <div className="relative w-full overflow-hidden" style={{ height: 'clamp(480px, 65vw, 720px)' }}>
+      <div className="relative w-full overflow-hidden" style={{ height: 'clamp(360px, 45vw, 520px)' }}>
         <img
           src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c1e914581_langenburg_entdecken.jpg"
           alt="Langenburg Stadtansicht mit Schloss und Hohenloher Landschaft"
           className="absolute inset-0 w-full h-full"
           style={{
             objectFit: 'cover',
-            objectPosition: '50% 15%',
+            objectPosition: '50% 55%',
             imageRendering: 'crisp-edges',
             WebkitBackfaceVisibility: 'hidden',
-            transform: 'scale(1.0)',
           }}
           loading="eager"
         />
