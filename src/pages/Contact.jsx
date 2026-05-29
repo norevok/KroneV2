@@ -261,12 +261,12 @@ export default function Contact() {
   }
 
   return (
-  <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pt-[128px] lg:pt-[170px] pb-24">
+  <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] page-top pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-5">
 
         {/* ── HEADER ── */}
         <motion.div
-          className="text-center py-12 sm:py-16"
+          className="text-center pt-8 pb-12 sm:pt-10 sm:pb-16"
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <p className="text-[#8B6914] text-[10px] tracking-[0.5em] uppercase font-body mb-3">{t.eyebrow}</p>
           <h1 className="font-display text-5xl sm:text-6xl font-light text-[#1C1714] mb-3">{t.title}</h1>

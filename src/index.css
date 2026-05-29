@@ -69,6 +69,16 @@
     }
   }
 
+  /* Anchor scroll offset — sections with IDs must not hide behind sticky header */
+  [id] {
+    scroll-margin-top: calc(var(--nav-h-mobile) + 16px);
+  }
+  @media (min-width: 1024px) {
+    [id] {
+      scroll-margin-top: calc(var(--nav-h-desktop) + 16px);
+    }
+  }
+
   /* Hero variant: same as page-top — full-bleed heroes also need correct offset */
   .hero-top {
     padding-top: var(--nav-h-mobile);

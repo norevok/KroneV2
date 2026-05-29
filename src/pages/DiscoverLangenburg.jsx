@@ -100,13 +100,11 @@ export default function DiscoverLangenburg() {
 
       {/* ── HERO ── */}
       <div className="relative hero-top overflow-hidden" style={{ minHeight: 'clamp(580px, 85vh, 860px)' }}>
-        <motion.img
+        <img
           src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/dcd1ee530_IMG_8599.png"
           alt="Schloss Langenburg Luftaufnahme Hohenlohe"
           className="absolute inset-0 w-full h-full object-cover"
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 2.5, ease: 'easeOut' }}
+          style={{ objectPosition: '50% 40%' }}
           loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#FAF7F2]" />
