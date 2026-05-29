@@ -88,7 +88,7 @@ export default function Booking() {
     <div className="min-h-screen bg-white text-[#1C1714]">
 
       {/* Header band - padding to clear nav and events banner */}
-      <div className="bg-[#1C1714] pt-44 pb-6 px-5">
+      <div className="bg-[#1C1714] pt-52 pb-6 px-5">
         <div className="max-w-6xl mx-auto">
           <Link to="/rooms" className="flex items-center gap-2 text-white/40 hover:text-white/70 text-xs font-body tracking-wider uppercase mb-4 transition-colors">
             <ArrowLeft className="w-3.5 h-3.5" /> {t.back}
