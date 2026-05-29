@@ -198,7 +198,7 @@ export default function Rooms() {
 
       {/* ── HERO mit Slider ── */}
       <div className={`relative overflow-hidden ${returnState ? 'pt-8' : ''}`} style={{ minHeight: 'clamp(650px, 78vh, 900px)' }}>
-        {/* Slider Images - Maximale Schärfe */}
+        {/* Slider Images - Kristallklare Qualität */}
         {HERO_IMAGES.map((slide, i) => (
           <div
             key={i}
@@ -211,8 +211,8 @@ export default function Rooms() {
               className="absolute inset-0 w-full h-full object-cover"
               style={{ 
                 objectPosition: slide.pos, 
-                filter: 'brightness(1.15) contrast(1.2) saturate(1.2) sharpness(1.3)',
-                transform: 'scale(1.02)'
+                filter: 'brightness(1.08) contrast(1.15) saturate(1.1)',
+                transform: 'scale(1.01)'
               }}
               loading={i === 0 ? 'eager' : 'lazy'}
             />
@@ -223,33 +223,33 @@ export default function Rooms() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0F0E0B]/35 via-[#0F0E0B]/5 to-[#0F0E0B]/85" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0F0E0B]/15 via-transparent to-[#0F0E0B]/15" />
 
-        {/* Content mit Blur-Hintergrund für perfekte Lesbarkeit */}
+        {/* Content - Elegant & Premium */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5 pb-10" style={{ paddingTop: '180px' }}>
-          <div className="max-w-[860px] w-full relative z-10">
-            {/* Blur-Overlay hinter dem Text für bessere Lesbarkeit */}
-            <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] rounded-3xl -z-10" style={{ margin: '-20px' }} />
+          <div className="max-w-[900px] w-full relative z-10">
+            {/* Sanfter Blur-Hintergrund für Lesbarkeit */}
+            <div className="absolute -inset-8 bg-gradient-to-b from-black/40 via-black/20 to-black/40 backdrop-blur-[1px] rounded-[32px] -z-10" />
             
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-px w-10 bg-gradient-to-r from-transparent to-[#C9A96E]/90" />
-              <p className="text-[#C9A96E] text-[11px] tracking-[0.55em] uppercase font-body font-bold">{t.eyebrow}</p>
-              <div className="h-px w-10 bg-gradient-to-l from-transparent to-[#C9A96E]/90" />
+            <div className="flex items-center justify-center gap-3 mb-5">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#C9A96E]/60" />
+              <p className="text-[#C9A96E] text-[10px] tracking-[0.6em] uppercase font-body font-medium">{t.eyebrow}</p>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#C9A96E]/60" />
             </div>
             <h1
-              className="font-display font-semibold text-white mb-4"
+              className="font-display font-light text-white mb-5"
               style={{ 
-                fontSize: 'clamp(2.8rem, 5vw, 5rem)', 
-                lineHeight: '1.1', 
-                textShadow: '0 4px 40px rgba(0,0,0,0.95), 0 0 80px rgba(0,0,0,0.7), 0 2px 8px rgba(0,0,0,0.9)',
-                fontWeight: '600'
+                fontSize: 'clamp(2.5rem, 4.8vw, 4.5rem)', 
+                lineHeight: '1.15', 
+                textShadow: '0 2px 32px rgba(0,0,0,0.85), 0 1px 8px rgba(0,0,0,0.7)',
+                letterSpacing: '0.02em'
               }}>
               {t.title}
             </h1>
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mx-auto mb-4" />
-            <p className="text-white font-body max-w-[540px] mx-auto leading-relaxed mb-8"
+            <div className="w-20 h-px bg-gradient-to-r from-transparent via-[#C9A96E]/70 to-transparent mx-auto mb-5" />
+            <p className="text-white/90 font-body max-w-[560px] mx-auto leading-relaxed mb-9"
                style={{ 
-                 fontSize: 'clamp(1.1rem, 1.6vw, 1.25rem)', 
-                 textShadow: '0 3px 24px rgba(0,0,0,0.95), 0 0 40px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.9)',
-                 fontWeight: '500'
+                 fontSize: 'clamp(1.05rem, 1.5vw, 1.15rem)', 
+                 textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.7)',
+                 fontWeight: '400'
                }}>
               {t.subtitle}
             </p>
