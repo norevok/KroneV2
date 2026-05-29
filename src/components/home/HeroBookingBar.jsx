@@ -67,13 +67,11 @@ export default function HeroBookingBar({ lang = 'de' }) {
           style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(201,169,110,0.08)' }}>
 
           {/* Destination header row */}
-          <div className="flex items-center justify-center gap-2 px-6 py-3 border-b border-white/6 bg-[#C9A96E]/5">
-            <MapPin className="w-3.5 h-3.5 text-[#C9A96E] flex-shrink-0" />
-            <p className="text-white font-body font-semibold text-sm tracking-wide whitespace-nowrap">
-              {c.dest_value} <span className="text-[#C9A96E]">by Ammesso</span>
+          <div className="flex items-center justify-center gap-2 px-6 py-2.5 border-b border-white/6 bg-[#C9A96E]/5">
+            <MapPin className="w-3 h-3 text-[#C9A96E] flex-shrink-0" />
+            <p className="text-white/80 font-body font-medium text-xs tracking-wide whitespace-nowrap">
+              Krone Langenburg <span className="text-white/35 font-normal">· Hauptstraße 24 · 74595 Langenburg</span>
             </p>
-            <span className="text-white/25 text-xs font-body">·</span>
-            <p className="text-white/35 text-xs font-body">{c.dest_sub}</p>
           </div>
 
           {/* Fields row */}
@@ -150,10 +148,8 @@ export default function HeroBookingBar({ lang = 'de' }) {
 
           {/* Destination */}
           <div className="flex items-center justify-center gap-2 px-4 py-2.5 bg-[#C9A96E]/8 border-b border-[#C9A96E]/15">
-            <MapPin className="w-3.5 h-3.5 text-[#C9A96E] flex-shrink-0" />
-            <p className="text-white text-xs font-body font-semibold">
-              {c.dest_value} <span className="text-[#C9A96E]">by Ammesso</span>
-            </p>
+            <MapPin className="w-3 h-3 text-[#C9A96E] flex-shrink-0" />
+            <p className="text-white/80 text-xs font-body font-medium">Krone Langenburg · Langenburg</p>
           </div>
 
           {/* Date row */}

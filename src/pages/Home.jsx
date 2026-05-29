@@ -82,31 +82,35 @@ function RestaurantBlock({ lang }) {
 const SLIDES = [
   {
     url: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1800&q=85',
+    pos: '50% 55%',
     de: { title: 'Willkommen in Langenburg.', sub: 'Boutique-Hotel, Restaurant und echte Gastfreundschaft im Herzen von Hohenlohe.' },
     en: { title: 'Welcome to Langenburg.', sub: 'Boutique hotel, restaurant and genuine hospitality in the heart of Hohenlohe.' },
     it: { title: 'Benvenuti a Langenburg.', sub: 'Boutique hotel, ristorante e vera ospitalità nel cuore di Hohenlohe.' },
   },
   {
     url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg',
+    pos: '50% 40%',
     de: { title: 'Die King-Suite — Ihr Rückzugsort.', sub: 'Großzügig, stilvoll, unvergesslich — buchen Sie direkt zum besten Preis.' },
     en: { title: 'The King Suite — Your Retreat.', sub: 'Spacious, stylish, unforgettable — book directly at the best price.' },
     it: { title: 'La King Suite — Il vostro rifugio.', sub: 'Spaziosa, elegante, indimenticabile — prenota direttamente al miglior prezzo.' },
   },
   {
-    // Wohnbereich King Suite 1 — neu hinzugefügt
     url: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/a8e3a47b0_krone-kingsuite-1-zimmer-wohnbereich-02.jpg',
+    pos: '50% 35%',
     de: { title: 'Stilvoll wohnen in Langenburg.', sub: 'Zehn Zimmer und Suiten mit historischem Charme und modernem Komfort.' },
     en: { title: 'Live in Style in Langenburg.', sub: 'Ten rooms and suites with historic charm and modern comfort.' },
     it: { title: 'Vivere in stile a Langenburg.', sub: 'Dieci camere e suite con fascino storico e comfort moderno.' },
   },
   {
     url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85',
+    pos: '50% 50%',
     de: { title: 'Mediterrane Küche mit Herz.', sub: 'Regionale Zutaten, italienische Wärme — Krone Langenburg by Ammesso.' },
     en: { title: 'Mediterranean Cuisine with Heart.', sub: 'Regional ingredients, Italian warmth — Krone Langenburg by Ammesso.' },
     it: { title: 'Cucina mediterranea con cuore.', sub: 'Ingredienti regionali, calore italiano — Krone Langenburg by Ammesso.' },
   },
   {
     url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1800&q=85',
+    pos: '50% 45%',
     de: { title: 'Hochzeiten & Events in Langenburg.', sub: 'Unvergessliche Momente — wir gestalten Ihren besonderen Anlass.' },
     en: { title: 'Weddings & Events in Langenburg.', sub: 'Unforgettable moments — we craft your special occasion.' },
     it: { title: 'Matrimoni & eventi a Langenburg.', sub: 'Momenti indimenticabili — creiamo la vostra occasione speciale.' },
@@ -303,9 +307,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
 
-      {/* ── HERO — full viewport height ── */}
-      <div className="relative overflow-hidden" style={{ height: '100vh', minHeight: '700px', maxHeight: '1000px' }}>
-        {/* Slides — only images animate, content stays fixed */}
+      {/* ── HERO — fixed height, text layer never moves ── */}
+      <div className="relative overflow-hidden" style={{ height: '92vh', minHeight: '680px', maxHeight: '960px' }}>
+
+        {/* LAYER 1: Only background images animate */}
         {SLIDES.map((s, i) => (
           <AnimatePresence key={i}>
             {i === current && (
@@ -314,122 +319,124 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1.2, ease: 'easeInOut' }}>
-                <motion.img
+                transition={{ duration: 1.0, ease: 'easeInOut' }}>
+                <img
                   src={s.url}
                   alt={s.de.title}
-                  className="w-full h-full object-cover object-center"
-                  style={{ objectPosition: '50% 35%' }}
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: s.pos || '50% 40%' }}
                   loading={i === 0 ? 'eager' : 'lazy'}
-                  initial={{ scale: 1.05, filter: 'brightness(0.82)' }}
-                  animate={{ scale: 1.0, filter: 'brightness(0.95)' }}
-                  transition={{ duration: 7, ease: 'easeOut' }}
                 />
-                {/* Multi-layer gradient for depth */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/20 to-black/85" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-black/25" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/15 to-black/80" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
               </motion.div>
             )}
           </AnimatePresence>
         ))}
 
-        {/* Slide counter — fixed position below navbar */}
-        <div className="absolute right-6 z-10 hidden lg:flex items-center gap-2" style={{ top: 'calc(var(--nav-h-desktop) + 16px)' }}>
-          <span className="font-display text-2xl font-light text-white/60">{String(current + 1).padStart(2, '0')}</span>
-          <div className="w-px h-6 bg-white/20 mx-1" />
-          <span className="font-display text-sm font-light text-white/30">{String(SLIDES.length).padStart(2, '0')}</span>
-        </div>
+        {/* LAYER 2: Fixed hero text — NEVER moves, NEVER animates position */}
+        <div
+          className="absolute inset-0 z-10 flex flex-col items-center text-center px-5"
+          style={{
+            paddingTop: 'calc(var(--nav-h-mobile) + 40px)',
+            paddingBottom: '200px',
+            justifyContent: 'center',
+          }}>
 
-        {/* Hero text — FIXED layout, never moves between slides */}
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-5 pb-48 sm:pb-40 lg:pb-36 page-top">
-          {/* Badge — always same position */}
-          <motion.div
-            className="inline-flex items-center gap-2 bg-[#C9A96E]/20 backdrop-blur-sm border border-[#C9A96E]/30 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}>
-            <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C9A96E]" />
-            <span className="text-[#C9A96E] text-[9px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
-          </motion.div>
-          <motion.p
-            className="text-[#C9A96E]/70 text-[9px] sm:text-[10px] tracking-[0.4em] sm:tracking-[0.6em] uppercase font-body mb-3 sm:mb-5 hidden sm:block"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.1 }}>
+          {/* Badge — static, only fades in on mount */}
+          <div className="inline-flex items-center gap-2 bg-[#C9A96E]/18 backdrop-blur-sm border border-[#C9A96E]/35 rounded-full px-4 py-1.5 mb-3">
+            <Sparkles className="w-3 h-3 text-[#C9A96E]" />
+            <span className="text-[#C9A96E] text-[10px] tracking-[0.35em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
+          </div>
+
+          {/* Location line — static */}
+          <p className="text-[#C9A96E]/65 text-[10px] tracking-[0.55em] uppercase font-body mb-4 hidden sm:block">
             Krone · Langenburg · Deutschland
-          </motion.p>
-          <AnimatePresence mode="wait">
-            <motion.h1
-              key={`title-${current}`}
-              className="font-display font-light text-white mb-3 sm:mb-5 max-w-4xl px-2"
-              style={{
-                fontSize: 'clamp(2rem, 5.5vw, 4.5rem)',
-                lineHeight: '1.02',
-                textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.5)',
-              }}
-              initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-              {slideText.title}
-            </motion.h1>
-          </AnimatePresence>
-          <motion.div
-            className="w-16 sm:w-24 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-3 sm:mb-5"
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-          />
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={`sub-${current}`}
-              className="text-white/90 font-body text-sm sm:text-base lg:text-[1.1rem] max-w-sm sm:max-w-lg leading-relaxed px-2"
-              style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.25, duration: 0.8 }}>
-              {slideText.sub}
-            </motion.p>
-          </AnimatePresence>
-          {/* Scroll hint */}
-          <motion.div
-            className="mt-8 flex flex-col items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.7 }}>
+          </p>
+
+          {/* Headline — only text content changes, NOT position */}
+          <div className="w-full max-w-[850px] mb-4">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={`h-${current}`}
+                className="font-display font-light text-white w-full"
+                style={{
+                  fontSize: 'clamp(2.1rem, 4.2vw, 4.25rem)',
+                  lineHeight: '1.06',
+                  textShadow: '0 2px 16px rgba(0,0,0,0.85), 0 4px 32px rgba(0,0,0,0.5)',
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.55 }}>
+                {slideText.title}
+              </motion.h1>
+            </AnimatePresence>
+          </div>
+
+          {/* Gold divider — static */}
+          <div className="w-20 sm:w-28 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-4" />
+
+          {/* Subtitle — only text content changes */}
+          <div className="w-full max-w-[640px]">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`s-${current}`}
+                className="text-white/88 font-body leading-relaxed px-2"
+                style={{
+                  fontSize: 'clamp(0.9rem, 1.35vw, 1.1rem)',
+                  textShadow: '0 1px 10px rgba(0,0,0,0.7)',
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}>
+                {slideText.sub}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          {/* Scroll indicator — static */}
+          <div className="mt-8">
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-              className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center pt-1.5">
+              animate={{ y: [0, 7, 0] }}
+              transition={{ repeat: Infinity, duration: 2.1, ease: 'easeInOut' }}
+              className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center pt-1.5 mx-auto">
               <div className="w-1 h-2 bg-white/50 rounded-full" />
             </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Arrow controls — mobile: edge tap zones, desktop: visible buttons */}
-        <motion.button onClick={prev} whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}
-          className="absolute left-0 sm:left-5 top-1/2 -translate-y-1/2 h-24 w-12 sm:w-11 sm:h-11 bg-transparent sm:bg-black/25 sm:hover:bg-[#C9A96E]/30 sm:border sm:border-white/20 sm:hover:border-[#C9A96E]/60 sm:rounded-full flex items-center justify-center text-white/70 sm:text-white transition-all backdrop-blur-none sm:backdrop-blur-sm z-10">
-          <ChevronLeft className="w-6 h-6 sm:w-5 sm:h-5 drop-shadow-lg" />
-        </motion.button>
-        <motion.button onClick={next} whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}
-          className="absolute right-0 sm:right-5 top-1/2 -translate-y-1/2 h-24 w-12 sm:w-11 sm:h-11 bg-transparent sm:bg-black/25 sm:hover:bg-[#C9A96E]/30 sm:border sm:border-white/20 sm:hover:border-[#C9A96E]/60 sm:rounded-full flex items-center justify-center text-white/70 sm:text-white transition-all z-10">
-          <ChevronRight className="w-6 h-6 sm:w-5 sm:h-5 drop-shadow-lg" />
-        </motion.button>
-
-        {/* Progress bar + dots */}
-        <div className="absolute bottom-40 sm:bottom-32 lg:bottom-28 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
-          <div className="flex gap-2">
-            {SLIDES.map((_, i) => (
-              <button key={i} onClick={() => goTo(i)} className="relative overflow-hidden rounded-full transition-all">
-                <span className={`block rounded-full transition-all duration-500 ${i === current ? 'w-8 h-1.5 bg-[#C9A96E]' : 'w-1.5 h-1.5 bg-white/35 hover:bg-white/60'}`} />
-              </button>
-            ))}
           </div>
         </div>
 
-        {/* Floating booking bar */}
-        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-8 pb-6 sm:pb-8 lg:pb-10 z-10">
+        {/* Slide counter */}
+        <div className="absolute right-6 z-10 hidden lg:flex items-center gap-2"
+          style={{ top: 'calc(var(--nav-h-desktop) + 20px)' }}>
+          <span className="font-display text-2xl font-light text-white/50">{String(current + 1).padStart(2, '0')}</span>
+          <div className="w-px h-5 bg-white/20 mx-1" />
+          <span className="font-display text-sm font-light text-white/25">{String(SLIDES.length).padStart(2, '0')}</span>
+        </div>
+
+        {/* Arrow controls */}
+        <button onClick={prev}
+          className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 h-20 w-11 sm:w-10 sm:h-10 bg-transparent sm:bg-black/20 sm:hover:bg-[#C9A96E]/25 sm:border sm:border-white/15 sm:hover:border-[#C9A96E]/50 sm:rounded-full flex items-center justify-center text-white/60 sm:text-white transition-all sm:backdrop-blur-sm z-10">
+          <ChevronLeft className="w-6 h-6 sm:w-5 sm:h-5 drop-shadow" />
+        </button>
+        <button onClick={next}
+          className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 h-20 w-11 sm:w-10 sm:h-10 bg-transparent sm:bg-black/20 sm:hover:bg-[#C9A96E]/25 sm:border sm:border-white/15 sm:hover:border-[#C9A96E]/50 sm:rounded-full flex items-center justify-center text-white/60 sm:text-white transition-all z-10">
+          <ChevronRight className="w-6 h-6 sm:w-5 sm:h-5 drop-shadow" />
+        </button>
+
+        {/* Dots */}
+        <div className="absolute z-10 flex gap-2"
+          style={{ bottom: '180px', left: '50%', transform: 'translateX(-50%)' }}>
+          {SLIDES.map((_, i) => (
+            <button key={i} onClick={() => goTo(i)}>
+              <span className={`block rounded-full transition-all duration-400 ${i === current ? 'w-7 h-1.5 bg-[#C9A96E]' : 'w-1.5 h-1.5 bg-white/35 hover:bg-white/55'}`} />
+            </button>
+          ))}
+        </div>
+
+        {/* Booking bar — pinned to bottom */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 pb-5 sm:pb-7 z-10">
           <HeroBookingBar lang={lang} />
         </div>
       </div>
