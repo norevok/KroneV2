@@ -657,7 +657,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden h-72 sm:h-96">
-              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=95"
+              <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2d765545e_generated_image.png"
                 alt="Restaurant Krone Langenburg by Ammesso — mediterrane Küche Langenburg"
                 className="w-full h-full object-cover object-center" loading="lazy" />
             </div>
