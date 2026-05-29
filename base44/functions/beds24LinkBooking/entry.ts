@@ -15,34 +15,16 @@ async function _getAccessToken(base44) {
   const now = Date.now();
   if (_cachedToken && now < _tokenExpires) return _cachedToken;
 
-  const refreshToken = Deno.env.get('BEDS24_REFRESH_TOKEN');
-  const baseUrl      = Deno.env.get('BEDS24_API_BASE_URL') || 'https://api.beds24.com/v2';
+  // Use LONG_LIFE_TOKEN directly (more reliable than refresh token flow)
+  const longLifeToken = Deno.env.get('BEDS24_LONG_LIFE_TOKEN');
+  const baseUrl       = Deno.env.get('BEDS24_API_BASE_URL') || 'https://api.beds24.com/v2';
 
-  if (!refreshToken) throw new Error('BEDS24_REFRESH_TOKEN not configured');
+  if (!longLifeToken) throw new Error('BEDS24_LONG_LIFE_TOKEN not configured');
 
-  const t0  = Date.now();
-  const res = await fetch(`${baseUrl}/authentication/token`, {
-    method: 'GET',
-    headers: { 'refreshToken': refreshToken },
-  });
-
-  _audit(base44, {
-    action: 'token_refresh', endpoint: '/authentication/token',
-    http_status: res.status, success: res.ok,
-    duration_ms: Date.now() - t0, token_used: 'refresh_token',
-    token_was_cached: false, triggered_by: 'booking_return',
-  });
-
-  if (!res.ok) throw new Error(`Beds24 token refresh failed: HTTP ${res.status}`);
-
-  const data      = await res.json();
-  const token     = data.token || data.access_token || data.Token;
-  const expiresIn = data.expiresIn || data.expires_in || 3600;
-
-  if (!token) throw new Error('Beds24 token refresh: no token in response');
-
+  // No API call needed - use token directly
+  const token = longLifeToken;
   _cachedToken  = token;
-  _tokenExpires = Date.now() + (expiresIn - 300) * 1000;
+  _tokenExpires = Date.now() + (365 * 24 * 60 * 60 * 1000); // 1 year
   return token;
 }
 
@@ -135,7 +117,7 @@ Deno.serve(async (req) => {
   // ── Try Beds24 V2 API lookup ──
   let bookingData   = null;
   let verifiedByApi = false;
-  const isConfigured = !!Deno.env.get('BEDS24_REFRESH_TOKEN') && !!Deno.env.get('BEDS24_PROPERTY_ID');
+  const isConfigured = !!Deno.env.get('BEDS24_LONG_LIFE_TOKEN') && !!Deno.env.get('BEDS24_PROPERTY_ID');
 
   if (isConfigured && booking_reference) {
     try {
