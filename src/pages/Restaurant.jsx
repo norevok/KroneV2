@@ -3,10 +3,11 @@ import { useLang } from '@/lib/useLang';
 import { ArrowRight, Clock, UtensilsCrossed, Star, MapPin, Phone } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
-// ── Authentic Krone Langenburg hotel images ──
-const IMG_FOOD1 = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8742a972c_krone-kingsuite-2-aussicht-panorama-01.jpg';
-const IMG_FOOD2 = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/d8a0d0a11_krone-kingsuite-1-zimmer-bett-01.jpg';
-const IMG_PANORAMA = 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/737cda4af_krone-kingsuite-1-aussicht-panorama-01.jpg';
+// ── Restaurant & atmosphere images ──
+const IMG_HERO    = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2400&q=90';
+const IMG_FOOD1   = 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1800&q=88';
+const IMG_FOOD2   = 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1800&q=88';
+const IMG_PANORAMA = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&q=88';
 
 export default function Restaurant() {
   const { lang } = useLang();
@@ -116,9 +117,10 @@ export default function Restaurant() {
       <div className="relative page-top overflow-hidden" style={{ minHeight: 'clamp(540px, 88vh, 960px)' }}>
         {/* Warm atmospheric dining image */}
         <img
-          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=90"
+          src={IMG_HERO}
           alt="Krone Langenburg by Ammesso — Restaurant, mediterrane Küche Hohenlohe"
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: '50% 55%' }}
           loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#171311]/65 via-[#171311]/30 to-[#171311]" />
@@ -250,32 +252,32 @@ export default function Restaurant() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] col-span-2 md:col-span-2 row-span-1 group">
-              <img src={IMG_FOOD1} alt="Panorama Hohenlohe — Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src={IMG_FOOD1} alt="Restaurant Atmosphäre — Krone Langenburg by Ammesso" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/50 to-transparent" />
               <div className="absolute bottom-4 left-5">
                 <p className="text-white/70 text-xs font-body tracking-wider">
-                  {lang === 'de' ? 'Panorama Hohenlohe' : lang === 'en' ? 'Panoramic Hohenlohe' : 'Panorama Hohenlohe'}
+                  {lang === 'de' ? 'Restaurant & Bar' : lang === 'en' ? 'Restaurant & Bar' : 'Ristorante & Bar'}
                 </p>
               </div>
             </div>
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] group">
-              <img src={IMG_FOOD2} alt="King Suite — Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src={IMG_FOOD2} alt="Mediterrane Küche — Krone Langenburg by Ammesso" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/50 to-transparent" />
               <div className="absolute bottom-4 left-4">
-                <p className="text-white/70 text-xs font-body tracking-wider">King Suite</p>
+                <p className="text-white/70 text-xs font-body tracking-wider">{lang === 'de' ? 'Mediterrane Küche' : 'Mediterranean Cuisine'}</p>
               </div>
             </div>
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] group">
-              <img src={IMG_PANORAMA} alt="Aussicht Krone Langenburg — Hohenlohe" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src={IMG_PANORAMA} alt="Atmosphäre Krone Langenburg — Gastraum" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/50 to-transparent" />
               <div className="absolute bottom-4 left-4">
                 <p className="text-white/70 text-xs font-body tracking-wider">
-                  {lang === 'de' ? 'Ausblick' : lang === 'en' ? 'View' : 'Vista'}
+                  {lang === 'de' ? 'Gastraum' : lang === 'en' ? 'Dining Room' : 'Sala'}
                 </p>
               </div>
             </div>
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] col-span-1 md:col-span-2 group">
-              <img src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/804199c28_krone-kingsuite-1-zimmer-uebersicht-01.jpg" alt="Suite Krone Langenburg by Ammesso" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=88" alt="Restaurant Abendstimmung — Krone Langenburg by Ammesso" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#171311]/50 to-transparent" />
               <div className="absolute bottom-4 left-5">
                 <p className="text-white/70 text-xs font-body tracking-wider">

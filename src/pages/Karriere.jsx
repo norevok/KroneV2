@@ -140,9 +140,9 @@ export default function Karriere() {
   return (
     <div className="min-h-screen bg-ivory text-charcoal pb-24 lg:pb-10">
       {/* Hero */}
-      <div className="relative overflow-hidden bg-espresso pt-24 pb-16 sm:pb-20 px-5">
-        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=60"
-          alt="" className="absolute inset-0 w-full h-full object-cover opacity-15" aria-hidden="true" />
+      <div className="relative overflow-hidden bg-espresso page-top pb-16 sm:pb-20 px-5">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85"
+          alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" style={{ objectPosition: '50% 60%' }} aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-b from-espresso/60 to-espresso/90" />
         <div className="relative max-w-4xl mx-auto text-center">
           <p className="text-gold-light text-[10px] tracking-[0.5em] uppercase font-body mb-5">{tx.eyebrow}</p>
