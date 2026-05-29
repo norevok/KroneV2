@@ -82,17 +82,38 @@ const CAT_LABELS = {
 function FAQItem({ q, a }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`border rounded-2xl transition-all duration-300 ${open ? 'border-gold/25 bg-gold/4' : 'border-[#C9A96E]/08 bg-transparent'}`}>
-      <button className="w-full text-left px-6 py-5 flex items-start justify-between gap-4" onClick={() => setOpen(o => !o)}>
-        <span className="font-body text-sm text-ivory/85 leading-relaxed font-medium">{q}</span>
-        <ChevronDown className={`w-4 h-4 text-gold/50 flex-shrink-0 mt-0.5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`} />
-      </button>
-      {open && (
-        <div className="px-6 pb-6">
-          <div className="h-px bg-[#C9A96E]/10 mb-4" />
-          <p className="text-ivory/55 text-sm font-body leading-relaxed">{a}</p>
+    <div className={`border rounded-2xl transition-all duration-300 overflow-hidden ${
+      open 
+        ? 'border-[#C9A96E]/30 bg-white/5 shadow-lg' 
+        : 'border-[#C9A96E]/10 bg-white/[0.02] hover:border-[#C9A96E]/20 hover:bg-white/[0.03]'
+    }`}>
+      <button 
+        className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 group" 
+        onClick={() => setOpen(o => !o)}
+      >
+        <span className={`font-body text-sm leading-relaxed transition-colors ${
+          open ? 'text-white font-semibold' : 'text-ivory/80 font-medium group-hover:text-ivory/95'
+        }`}>
+          {q}
+        </span>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+          open 
+            ? 'bg-[#C9A96E]/20 rotate-180' 
+            : 'bg-[#C9A96E]/10 group-hover:bg-[#C9A96E]/15'
+        }`}>
+          <ChevronDown className={`w-4 h-4 transition-all duration-300 ${
+            open ? 'text-[#C9A96E]' : 'text-[#C9A96E]/60 group-hover:text-[#C9A96E]/80'
+          }`} />
         </div>
-      )}
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+        open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+      }`}>
+        <div className="px-6 pb-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-[#C9A96E]/15 to-transparent mb-4" />
+          <p className="text-ivory/60 text-sm font-body leading-relaxed pl-1">{a}</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -127,16 +148,24 @@ export default function FAQ() {
         {/* Category pills */}
         <div className="flex flex-wrap gap-2 mb-10">
           {categories.map(cat => (
-            <button key={cat} onClick={() => setActiveCat(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-body tracking-wider uppercase border transition-all ${activecat === cat ? 'border-gold bg-gold/10 text-gold' : 'border-[#C9A96E]/15 text-ivory/40 hover:border-[#C9A96E]/30 hover:text-ivory/60'}`}>
+            <button 
+              key={cat} 
+              onClick={() => setActiveCat(cat)}
+              className={`px-5 py-2.5 rounded-full text-xs font-body tracking-wider uppercase border transition-all duration-300 flex items-center gap-2 ${
+                activecat === cat 
+                  ? 'border-[#C9A96E] bg-[#C9A96E]/15 text-[#C9A96E] shadow-md' 
+                  : 'border-[#C9A96E]/15 text-ivory/50 hover:border-[#C9A96E]/30 hover:text-ivory/70 hover:bg-white/[0.02]'
+              }`}>
               {cat === 'all' ? (allLabel[lang] || allLabel.de) : labels[cat]}
             </button>
           ))}
         </div>
 
         {/* FAQ items */}
-        <div className="space-y-2 mb-14">
-          {filtered.map((f, i) => <FAQItem key={i} q={f.q} a={f.a} />)}
+        <div className="space-y-3 mb-14">
+          {filtered.map((f, i) => (
+            <FAQItem key={i} q={f.q} a={f.a} />
+          ))}
         </div>
 
         {/* Still have questions */}
