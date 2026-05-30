@@ -6,7 +6,7 @@ import { SITE_DEFAULTS } from '@/lib/siteData';
 export default function StickyMobileCTA() {
   const { lang } = useLang();
   const location = useLocation();
-  const hide = ['/reserve', '/rooms', '/book', '/admin', '/account', '/activity-log', '/dashboard', '/booking-return'].some(p => location.pathname.startsWith(p));
+  const hide = ['/reserve', '/rooms', '/book', '/admin', '/account', '/activity-log', '/dashboard', '/booking-return', '/discover', '/langenburg'].some(p => location.pathname.startsWith(p));
   if (hide) return null;
 
   return (

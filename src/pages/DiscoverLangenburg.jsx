@@ -96,7 +96,7 @@ export default function DiscoverLangenburg() {
   const t = T[lang] || T.de;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-10 overflow-hidden">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-10 overflow-hidden">
 
       {/* ── HERO — Bild startet NACH der Navbar (page-top padding), dann volle Höhe ── */}
       <div className="page-top">
