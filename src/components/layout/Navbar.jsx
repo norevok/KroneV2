@@ -202,24 +202,27 @@ export default function Navbar() {
             {/* Language selector */}
             <div className="relative">
               <button onClick={() => setLangOpen(p => !p)}
-                className="flex items-center gap-1 text-white/50 hover:text-white/80 text-[11px] font-body tracking-wider transition-colors">
-                <Globe className="w-3 h-3" />
+                className="flex items-center gap-1.5 text-white/60 hover:text-white/90 text-[11px] font-body tracking-wider transition-colors py-1 px-1">
+                <span className="text-base leading-none">{FLAG[lang]}</span>
                 <span className="hidden sm:inline">{LANG_LABEL[lang]}</span>
-                <span className="sm:hidden">{FLAG[lang]}</span>
                 <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${langOpen ? 'rotate-180' : ''}`} />
               </button>
               <AnimatePresence>
                 {langOpen && (
-                  <motion.div initial={{ opacity: 0, y: -8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.95 }} transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-1.5 bg-white border border-[#EDE6D8] rounded-xl shadow-xl py-1 min-w-[120px] z-50">
-                    {supported.map(l => (
-                      <button key={l} onClick={() => { setLang(l); setLangOpen(false); }}
-                        className={`w-full text-left px-4 py-2.5 text-xs flex items-center gap-2 transition-colors hover:bg-[#F7F3EC] ${lang === l ? 'text-[#8B6914] font-semibold' : 'text-[#1C1714]/60'}`}>
-                        <span>{FLAG[l]}</span><span>{LANG_LABEL[l]}</span>
-                      </button>
-                    ))}
-                  </motion.div>
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setLangOpen(false)} />
+                    <motion.div initial={{ opacity: 0, y: -8, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -8, scale: 0.95 }} transition={{ duration: 0.15 }}
+                      className="absolute right-0 top-full mt-1.5 bg-white border border-[#EDE6D8] rounded-xl shadow-xl py-1 min-w-[140px] z-50">
+                      {supported.map(l => (
+                        <button key={l} onClick={() => { setLang(l); setLangOpen(false); }}
+                          className={`w-full text-left px-4 py-2.5 text-xs flex items-center gap-2.5 transition-colors hover:bg-[#F7F3EC] ${lang === l ? 'text-[#8B6914] font-semibold bg-[#F7F3EC]' : 'text-[#1C1714]/70'}`}>
+                          <span className="text-base">{FLAG[l]}</span><span>{LANG_LABEL[l]}</span>
+                          {lang === l && <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#8B6914]" />}
+                        </button>
+                      ))}
+                    </motion.div>
+                  </>
                 )}
               </AnimatePresence>
             </div>

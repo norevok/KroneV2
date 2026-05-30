@@ -344,13 +344,14 @@ export default function Home() {
           }}>
 
           {/* Badge — static, only fades in on mount */}
-          <div className="inline-flex items-center gap-2 bg-[#C9A96E]/18 backdrop-blur-sm border border-[#C9A96E]/35 rounded-full px-4 py-1.5 mb-3">
+          <div className="inline-flex items-center gap-2 bg-black/40 backdrop-blur-sm border border-[#C9A96E]/50 rounded-full px-4 py-1.5 mb-3">
             <Sparkles className="w-3 h-3 text-[#C9A96E]" />
-            <span className="text-[#C9A96E] text-[10px] tracking-[0.35em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
+            <span className="text-[#E8C878] text-[10px] tracking-[0.35em] uppercase font-body font-semibold">Premium Boutique Hotel</span>
           </div>
 
           {/* Location line — static */}
-          <p className="text-[#C9A96E]/65 text-[10px] tracking-[0.55em] uppercase font-body mb-4 hidden sm:block">
+          <p className="text-white/75 text-[10px] tracking-[0.55em] uppercase font-body mb-4 hidden sm:block"
+            style={{ textShadow: '0 1px 8px rgba(0,0,0,0.9)' }}>
             Krone · Langenburg · Deutschland
           </p>
 
