@@ -98,49 +98,49 @@ export default function DiscoverLangenburg() {
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#1C1714] pb-24 lg:pb-10 overflow-hidden">
 
-      {/* ── HERO — uses page-top to clear sticky navbar + events banner ── */}
-      <div className="relative w-full overflow-hidden page-top" style={{ minHeight: 'clamp(480px, 70vw, 680px)' }}>
-        <img
-          src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c1e914581_langenburg_entdecken.jpg"
-          alt="Langenburg Stadtansicht mit Schloss und Hohenloher Landschaft"
-          className="absolute inset-0 w-full h-full"
-          style={{
-            objectFit: 'cover',
-            objectPosition: '50% 55%',
-            imageRendering: 'crisp-edges',
-            WebkitBackfaceVisibility: 'hidden',
-          }}
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/70" />
+      {/* ── HERO — Bild startet NACH der Navbar (page-top padding), dann volle Höhe ── */}
+      <div className="page-top">
+        <div className="relative w-full overflow-hidden" style={{ height: 'clamp(320px, 55vw, 560px)' }}>
+          <img
+            src="https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/c1e914581_langenburg_entdecken.jpg"
+            alt="Langenburg Stadtansicht mit Schloss und Hohenloher Landschaft"
+            className="absolute inset-0 w-full h-full"
+            style={{
+              objectFit: 'cover',
+              objectPosition: '50% 55%',
+            }}
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/70" />
 
-        {/* Text overlay — unten, sicher unterhalb der Navbar */}
-        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-5 pb-10 sm:pb-16">
-          <div className="absolute bottom-0 left-0 right-0 h-3/5 bg-gradient-to-t from-black/80 via-black/45 to-transparent pointer-events-none" />
-          <div className="relative z-10 flex flex-col items-center max-w-3xl w-full">
-            <motion.div
-              className="inline-flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-[#C9A96E]/40 rounded-full px-5 py-2 mb-4"
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
-              <span className="text-[#C9A96E] text-[10px] tracking-[0.6em] uppercase font-body font-semibold">{t.eyebrow}</span>
-            </motion.div>
-            <motion.h1
-              className="font-display font-light text-white mb-4 px-4"
-              style={{
-                fontSize: 'clamp(1.75rem, 4vw, 3.5rem)',
-                lineHeight: '1.15',
-                textShadow: '0 2px 20px rgba(0,0,0,0.9), 0 4px 40px rgba(0,0,0,0.7)',
-                letterSpacing: '0.01em',
-              }}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9 }}>
-              {t.title}
-            </motion.h1>
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-4" />
-            <motion.p
-              className="text-white/90 font-body text-sm sm:text-base leading-relaxed max-w-xl font-light px-4"
-              style={{ textShadow: '0 1px 12px rgba(0,0,0,0.95)' }}
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
-              {t.sub}
-            </motion.p>
+          {/* Text overlay — zentriert im sichtbaren Bild */}
+          <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-5 pb-10 sm:pb-14">
+            <div className="absolute bottom-0 left-0 right-0 h-3/5 bg-gradient-to-t from-black/80 via-black/45 to-transparent pointer-events-none" />
+            <div className="relative z-10 flex flex-col items-center max-w-3xl w-full">
+              <motion.div
+                className="inline-flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-[#C9A96E]/40 rounded-full px-5 py-2 mb-4"
+                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
+                <span className="text-[#C9A96E] text-[10px] tracking-[0.6em] uppercase font-body font-semibold">{t.eyebrow}</span>
+              </motion.div>
+              <motion.h1
+                className="font-display font-light text-white mb-4 px-4"
+                style={{
+                  fontSize: 'clamp(1.6rem, 3.8vw, 3.2rem)',
+                  lineHeight: '1.15',
+                  textShadow: '0 2px 20px rgba(0,0,0,0.9), 0 4px 40px rgba(0,0,0,0.7)',
+                  letterSpacing: '0.01em',
+                }}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9 }}>
+                {t.title}
+              </motion.h1>
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mb-4" />
+              <motion.p
+                className="text-white/90 font-body text-sm sm:text-base leading-relaxed max-w-xl font-light px-4"
+                style={{ textShadow: '0 1px 12px rgba(0,0,0,0.95)' }}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }}>
+                {t.sub}
+              </motion.p>
+            </div>
           </div>
         </div>
       </div>
@@ -306,16 +306,12 @@ export default function DiscoverLangenburg() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/rooms" className="btn-gold">
-                {t.cta_rooms} <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link to="/contact" className="btn-outline-dark">
-                {t.cta_contact}
-              </Link>
-            </motion.div>
+            <Link to="/booking" className="btn-gold">
+              {t.cta_rooms} <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+            <Link to="/reserve" className="btn-outline-dark">
+              {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve Table' : 'Tavolo'}
+            </Link>
           </div>
         </motion.div>
       </div>
