@@ -79,7 +79,7 @@ Deno.serve(async (req) => {
       email_sent: false,
     });
 
-    const origin = req.headers.get('origin') || 'https://krone.base44.app';
+    const origin = req.headers.get('origin') || 'https://www.krone-ammesso.de';
 
     const descriptionDe = `Krone Langenburg Gutschein · Gültig 2 Jahre · Code: ${code}`;
     const descriptionEn = `Krone Langenburg Voucher · Valid 2 years · Code: ${code}`;

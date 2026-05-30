@@ -200,7 +200,7 @@ Deno.serve(async (req) => {
       base44.asServiceRole.integrations.Core.SendEmail({
         to: 'oammesso@gmail.com',
         subject: `⚠️ Beds24 Buchung manuell prüfen – ${booking_reference}`,
-        body: `Gast ${user.email} hat Buchung ${booking_reference} verknüpft, aber API-Verifikation war nicht möglich.\n\nBitte prüfen: https://krone-ammesso.de/admin/beds24-bookings\n\nRef: ${link.id}`,
+        body: `Gast ${user.email} hat Buchung ${booking_reference} verknüpft, aber API-Verifikation war nicht möglich.\n\nBitte prüfen: https://www.krone-ammesso.de/admin/beds24-bookings\n\nRef: ${link.id}`,
       }).catch(() => {});
       base44.asServiceRole.entities.EmailLog.create({
         recipient: 'oammesso@gmail.com', template: 'new_reservation_admin', status: 'sent',
@@ -227,7 +227,7 @@ Deno.serve(async (req) => {
   base44.asServiceRole.integrations.Core.SendEmail({
     to: 'oammesso@gmail.com',
     subject: `🔍 Beds24 Buchung nicht zugeordnet – ${booking_reference || user.email}`,
-    body: `Gast ${user.email} kehrte von Beds24 zurück, Buchung ${booking_reference || '(keine Ref)'} konnte nicht zugeordnet werden.\n\nBitte prüfen: https://krone-ammesso.de/admin/beds24-bookings\n\nLookup-Request ID: ${lookupReq.id}`,
+    body: `Gast ${user.email} kehrte von Beds24 zurück, Buchung ${booking_reference || '(keine Ref)'} konnte nicht zugeordnet werden.\n\nBitte prüfen: https://www.krone-ammesso.de/admin/beds24-bookings\n\nLookup-Request ID: ${lookupReq.id}`,
   }).catch(() => {});
   base44.asServiceRole.entities.EmailLog.create({
     recipient: 'oammesso@gmail.com', template: 'new_reservation_admin', status: 'sent',
