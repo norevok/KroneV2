@@ -12,7 +12,7 @@ import {
   MessageSquare, BedDouble, FileText, Download, Gift,
   Users, Briefcase, Image, BookOpen, Shield, BarChart, Calendar,
   Phone, ChevronDown, ChevronUp, ChevronRight, ArrowRight, RefreshCw, Sparkles,
-  TrendingUp, Activity, Tag, Check, X, Star, Zap
+  Activity, Tag, Check, X
 } from 'lucide-react';
 import AdminMessageCenter from '@/components/admin/AdminMessageCenter';
 import AdminShell from '@/components/admin/AdminShell';
