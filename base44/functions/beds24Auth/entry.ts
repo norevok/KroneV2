@@ -15,8 +15,8 @@ let _cachedAccessToken = null;
 let _tokenExpiresAt    = 0;
 
 async function _getBeds24AccessToken(triggeredBy, base44) {
-  const refreshToken = Deno.env.get('BEDS24_REFRESH_TOKEN') || '';
-  const baseUrl      = Deno.env.get('BEDS24_API_BASE_URL') || 'https://api.beds24.com/v2';
+  const longLifeToken = Deno.env.get('BEDS24_LONG_LIFE_TOKEN') || '';
+  const baseUrl       = Deno.env.get('BEDS24_API_BASE_URL') || 'https://api.beds24.com/v2';
 
   const now = Date.now();
   if (_cachedAccessToken && now < _tokenExpiresAt) {
@@ -24,33 +24,30 @@ async function _getBeds24AccessToken(triggeredBy, base44) {
     return _cachedAccessToken;
   }
 
+  if (!longLifeToken) throw new Error('BEDS24_LONG_LIFE_TOKEN not configured');
+
+  // Validate token is still live against /authentication/details
   const t0  = Date.now();
-  const res = await fetch(`${baseUrl}/authentication/token`, {
+  const res = await fetch(`${baseUrl}/authentication/details`, {
     method: 'GET',
-    headers: { 'refreshToken': refreshToken },
+    headers: { 'token': longLifeToken },
   });
   const duration = Date.now() - t0;
 
   if (!res.ok) {
     const err = await res.text().catch(() => res.statusText);
-    _audit(base44, { action: 'token_refresh', endpoint: '/authentication/token', http_status: res.status, success: false, error_message: `HTTP ${res.status}: ${err.slice(0, 200)}`, duration_ms: duration, token_used: 'refresh_token', token_was_cached: false, triggered_by: triggeredBy });
-    throw new Error(`Beds24 token refresh failed: HTTP ${res.status}`);
+    _audit(base44, { action: 'token_refresh', endpoint: '/authentication/details', http_status: res.status, success: false, error_message: `HTTP ${res.status}: ${err.slice(0, 200)}`, duration_ms: duration, token_used: 'access_token', token_was_cached: false, triggered_by: triggeredBy });
+    throw new Error(`Beds24 token validation failed: HTTP ${res.status}`);
   }
 
-  const data        = await res.json();
-  const accessToken = data.token || data.access_token || data.Token;
-  const expiresIn   = data.expiresIn || data.expires_in || 3600;
+  const data      = await res.json();
+  const expiresIn = data?.token?.expiresIn || 7776000;
 
-  if (!accessToken) {
-    _audit(base44, { action: 'token_refresh', endpoint: '/authentication/token', http_status: res.status, success: false, error_message: 'No token in response', duration_ms: duration, token_used: 'refresh_token', token_was_cached: false, triggered_by: triggeredBy });
-    throw new Error('Beds24 token refresh: no token in response');
-  }
+  _cachedAccessToken = longLifeToken;
+  _tokenExpiresAt    = Date.now() + Math.min(expiresIn - 300, 86400) * 1000;
 
-  _cachedAccessToken = accessToken;
-  _tokenExpiresAt    = Date.now() + (expiresIn - 300) * 1000;
-
-  _audit(base44, { action: 'token_refresh', endpoint: '/authentication/token', http_status: res.status, success: true, duration_ms: duration, token_used: 'refresh_token', token_was_cached: false, triggered_by: triggeredBy });
-  return accessToken;
+  _audit(base44, { action: 'token_refresh', endpoint: '/authentication/details', http_status: res.status, success: true, duration_ms: duration, token_used: 'access_token', token_was_cached: false, triggered_by: triggeredBy });
+  return longLifeToken;
 }
 
 function _audit(base44, fields) {
@@ -68,14 +65,14 @@ Deno.serve(async (req) => {
     return Response.json({ error: 'Forbidden' }, { status: 403 });
   }
 
-  const refreshToken = Deno.env.get('BEDS24_REFRESH_TOKEN') || '';
-  const propertyId   = Deno.env.get('BEDS24_PROPERTY_ID')   || '';
-  const baseUrl      = Deno.env.get('BEDS24_API_BASE_URL')  || '';
+  const longLifeToken = Deno.env.get('BEDS24_LONG_LIFE_TOKEN') || '';
+  const propertyId    = Deno.env.get('BEDS24_PROPERTY_ID')    || '';
+  const baseUrl       = Deno.env.get('BEDS24_API_BASE_URL')   || '';
 
   const missing = [];
-  if (!refreshToken) missing.push('BEDS24_REFRESH_TOKEN');
-  if (!propertyId)   missing.push('BEDS24_PROPERTY_ID');
-  if (!baseUrl)      missing.push('BEDS24_API_BASE_URL');
+  if (!longLifeToken) missing.push('BEDS24_LONG_LIFE_TOKEN');
+  if (!propertyId)    missing.push('BEDS24_PROPERTY_ID');
+  if (!baseUrl)       missing.push('BEDS24_API_BASE_URL');
 
   const isConfigured = missing.length === 0;
 
@@ -96,9 +93,9 @@ Deno.serve(async (req) => {
     config_status: isConfigured ? 'PASS' : 'FAIL',
     warning: isConfigured ? null : 'Beds24 integration not configured.',
     secrets: {
-      BEDS24_REFRESH_TOKEN: {
+      BEDS24_LONG_LIFE_TOKEN: {
         storage:          'Base44 Encrypted Secrets (Deno.env — server-side only)',
-        present:          !!refreshToken,
+        present:          !!longLifeToken,
         encrypted:        true,
         frontend_exposed: false,
         value:            '[REDACTED — never exposed]',
