@@ -327,8 +327,8 @@ export default function Home() {
               style={{ objectPosition: s.pos || '50% 40%' }}
               loading={i === 0 ? 'eager' : 'lazy'} />
             
-                <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/15 to-black/80" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/85" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-black/25" />
               </motion.div>
           }
           </AnimatePresence>
@@ -360,11 +360,12 @@ export default function Home() {
             <AnimatePresence mode="wait">
               <motion.h1
                 key={`h-${current}`}
-                className="font-display font-light text-white w-full"
+                className="font-display font-light w-full"
                 style={{
                   fontSize: 'clamp(2.1rem, 4.2vw, 4.25rem)',
                   lineHeight: '1.06',
-                  textShadow: '0 2px 16px rgba(0,0,0,0.85), 0 4px 32px rgba(0,0,0,0.5)'
+                  color: '#FFFFFF',
+                  textShadow: '0 2px 20px rgba(0,0,0,0.95), 0 4px 40px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,0.5)'
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -383,10 +384,11 @@ export default function Home() {
             <AnimatePresence mode="wait">
               <motion.p
                 key={`s-${current}`}
-                className="text-white/88 font-body leading-relaxed px-2"
+                className="font-body leading-relaxed px-2"
                 style={{
                   fontSize: 'clamp(0.9rem, 1.35vw, 1.1rem)',
-                  textShadow: '0 1px 10px rgba(0,0,0,0.7)'
+                  color: '#E8C878',
+                  textShadow: '0 1px 12px rgba(0,0,0,0.95), 0 2px 20px rgba(0,0,0,0.7)'
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
