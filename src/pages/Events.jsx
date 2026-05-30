@@ -6,11 +6,7 @@ import { base44 } from '@/api/base44Client';
 import { CheckCircle, ArrowRight, Phone, Mail, Users, Calendar, Building2, Heart, Utensils, GlassWater, Sparkles, Music } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
-const IMAGES = {
-  corporate: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=88",
-  wedding: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=88",
-  dining: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=88",
-};
+
 
 const EVENT_TYPES = [
   { id: 'wedding',      de: '💍 Hochzeit',                 en: '💍 Wedding' },
@@ -157,34 +153,36 @@ export default function Events() {
   return (
     <div className="min-h-screen bg-[#171311] text-white pb-20 lg:pb-0">
 
-      {/* ── HERO — page-top für korrekte Ausrichtung ── */}
-      <div className="relative overflow-hidden page-top" style={{ minHeight: 'clamp(540px, 72vh, 780px)' }}>
+      {/* ── HERO — korrektes Padding inkl. EventsBanner ── */}
+      <div className="relative overflow-hidden" style={{ minHeight: 'clamp(580px, 80vh, 860px)' }}>
         <img
           src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=2400&q=90"
           alt="Events & Feiern — Krone Langenburg"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: '50% 40%' }}
+          style={{ objectPosition: '50% 55%' }}
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0D0B]/60 via-[#171311]/25 to-[#171311]" />
-        <div className="absolute inset-0 flex items-center justify-center text-center px-5 pb-8">
-          <div className="max-w-[860px] w-full">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0D0B]/55 via-[#171311]/20 to-[#171311]" />
+        {/* Padding: Utility(36) + Row1(56) + EventsBanner(34) = 126px mobile / +Row2(40) = 166px desktop */}
+        <div className="absolute inset-0 flex flex-col justify-center text-center px-5"
+          style={{ paddingTop: 'calc(var(--nav-h-mobile) + 40px)', paddingBottom: '80px' }}>
+          <div className="max-w-[860px] w-full mx-auto">
             <motion.p
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
               className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body mb-4">{c.eyebrow}</motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2 }}
               className="font-display font-light text-white whitespace-pre-line mb-5"
-              style={{ fontSize: 'clamp(2.25rem, 4.2vw, 4rem)', lineHeight: '1.05', textShadow: '0 2px 24px rgba(0,0,0,0.85)' }}>
+              style={{ fontSize: 'clamp(2.4rem, 4.5vw, 4.5rem)', lineHeight: '1.05', textShadow: '0 2px 32px rgba(0,0,0,0.95), 0 4px 60px rgba(0,0,0,0.7)' }}>
               {c.title}
             </motion.h1>
             <motion.div
-              className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mx-auto mb-5"
+              className="w-20 h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent mx-auto mb-5"
               initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ duration: 0.8, delay: 0.4 }} />
             <motion.p
               initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }}
               className="font-body max-w-[640px] mx-auto leading-relaxed"
-              style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1.1rem)', color: '#E8C878', textShadow: '0 1px 12px rgba(0,0,0,0.9)' }}>
+              style={{ fontSize: 'clamp(0.95rem, 1.4vw, 1.15rem)', color: '#F0D990', textShadow: '0 1px 16px rgba(0,0,0,0.95), 0 2px 30px rgba(0,0,0,0.8)' }}>
               {c.subtitle}
             </motion.p>
             <motion.div
@@ -201,60 +199,94 @@ export default function Events() {
         </div>
       </div>
 
-      {/* ── UPCOMING EVENT: 6. Juni ── */}
-      <section className="bg-[#1A1108] border-y border-[#C9A96E]/25 py-10 sm:py-14 px-5">
+      {/* ── UPCOMING EVENT: 6. Juni — Premium Card ── */}
+      <section className="bg-[#0F0D0B] border-b border-[#C9A96E]/20 py-12 sm:py-16 px-5">
         <div className="max-w-5xl mx-auto">
-          <div className="flex items-center gap-3 mb-7">
-            <div className="w-1 h-8 bg-gradient-to-b from-[#C9A96E] to-[#C9A96E]/30 rounded-full flex-shrink-0" />
-            <div>
-              <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body font-semibold">{c.upcoming_eyebrow}</p>
-              <p className="text-white/50 text-xs font-body mt-0.5">{c.upcoming_title}</p>
-            </div>
+
+          {/* Section label */}
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-8 h-px bg-gradient-to-r from-[#C9A96E]/60 to-transparent" />
+            <p className="text-[#C9A96E] text-[10px] tracking-[0.5em] uppercase font-body font-semibold">{c.upcoming_eyebrow}</p>
+            <div className="flex-1 h-px bg-gradient-to-r from-[#C9A96E]/20 to-transparent" />
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-[#C9A96E]/15 border border-[#C9A96E]/40 rounded-full px-4 py-2 mb-5">
-                <Music className="w-3.5 h-3.5 text-[#C9A96E]" />
-                <span className="text-[#E8C878] text-[10px] tracking-[0.3em] uppercase font-body font-bold">Special Event · 6. Juni 2026</span>
-              </div>
-              <h2 className="font-display text-3xl sm:text-4xl font-light text-white mb-4 leading-tight">
-                Ein Abend voller Genuss,<br /><span className="text-[#C9A96E] italic">Musik & Leidenschaft</span>
-              </h2>
-              <p className="text-white/70 font-body text-sm leading-relaxed mb-6">
-                Am <strong className="text-white">6. Juni ab 18:00 Uhr</strong> erwartet euch eine Nacht voller Geschmack und Emotionen. Live-Band <strong className="text-[#C9A96E]">„I Genio per 2"</strong> begleitet euch — ab 21:00 Uhr wird getanzt. 🕺💃
-              </p>
-              <div className="grid grid-cols-2 gap-2.5 mb-6">
-                {['🐟 Fisch-Menü', '🥬 Vegetarisches Menü', '🍖 Fleisch-Menü', '✨ Überraschungsmenü'].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 bg-white/5 border border-[#C9A96E]/20 rounded-xl px-3 py-2.5">
-                    <span className="text-[#E8C878] text-xs font-body font-medium">{item}</span>
+
+          {/* Event Card */}
+          <div className="relative rounded-3xl overflow-hidden border border-[#C9A96E]/20 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+            {/* Background image */}
+            <img
+              src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1600&q=85"
+              alt="Live Musik Gala Dinner"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              style={{ filter: 'brightness(0.22) saturate(0.8)' }}
+            />
+            {/* Gold accent border top */}
+            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent" />
+
+            <div className="relative z-10 p-7 sm:p-10">
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+
+                {/* Left: main info */}
+                <div className="lg:col-span-3">
+                  <div className="inline-flex items-center gap-2.5 bg-[#C9A96E]/15 border border-[#C9A96E]/35 rounded-full px-4 py-2 mb-6">
+                    <Music className="w-3.5 h-3.5 text-[#C9A96E]" />
+                    <span className="text-[#E8C878] text-[10px] tracking-[0.35em] uppercase font-body font-bold">Special Event · 6. Juni 2026</span>
                   </div>
-                ))}
-              </div>
-              <p className="text-[#C9A96E]/50 text-xs font-body mb-5 italic">
-                ✨ „Manchmal braucht Liebe keine Worte. Gutes Essen und Musik reichen aus." ✨
-              </p>
-              <Link to="/reserve" className="btn-gold inline-flex">
-                🌐 {lang === 'de' ? 'Tisch reservieren' : 'Reserve a Table'}
-              </Link>
-            </div>
-            <div className="bg-[#1D1410] border border-[#C9A96E]/20 rounded-2xl p-6">
-              <div className="grid grid-cols-2 gap-5">
-                {[
-                  { icon: '📅', label: 'Datum', value: '6. Juni 2026' },
-                  { icon: '⏰', label: 'Beginn', value: 'Ab 18:00 Uhr' },
-                  { icon: '🎤', label: 'Live-Band', value: 'I Genio per 2' },
-                  { icon: '💃', label: 'Tanzen ab', value: '21:00 Uhr' },
-                  { icon: '🍽', label: 'Menüs', value: 'Min. 5 Gänge' },
-                  { icon: '📍', label: 'Ort', value: 'Krone Langenburg' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <span className="text-xl flex-shrink-0">{item.icon}</span>
-                    <div>
-                      <p className="text-[#C9A96E]/60 text-[10px] uppercase tracking-widest font-body">{item.label}</p>
-                      <p className="text-white text-sm font-body font-semibold mt-0.5">{item.value}</p>
-                    </div>
+
+                  <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-white mb-3 leading-[1.08]"
+                    style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8)' }}>
+                    I Genio per 2<br />
+                    <span className="text-[#C9A96E] italic text-2xl sm:text-3xl">Live-Musik & Gala-Dinner</span>
+                  </h2>
+
+                  <div className="w-12 h-px bg-gradient-to-r from-[#C9A96E]/60 to-transparent mb-5" />
+
+                  <p className="text-white/75 font-body text-sm sm:text-base leading-relaxed mb-7 max-w-lg">
+                    Am <strong className="text-white font-semibold">6. Juni ab 18:00 Uhr</strong> erwartet euch im Krone Langenburg by Ammesso eine unvergessliche Nacht — Live-Band, 5-Gang-Menü nach Wahl, und ab 21:00 Uhr der Dancefloor. 🕺💃
+                  </p>
+
+                  {/* Menu choices */}
+                  <div className="grid grid-cols-2 gap-2.5 mb-7">
+                    {[
+                      { emoji: '🐟', text: 'Fisch-Menü' },
+                      { emoji: '🥬', text: 'Vegetarisches Menü' },
+                      { emoji: '🍖', text: 'Fleisch-Menü' },
+                      { emoji: '✨', text: 'Überraschungsmenü' },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-2.5 bg-white/5 border border-[#C9A96E]/18 rounded-xl px-3.5 py-3 backdrop-blur-sm">
+                        <span className="text-base flex-shrink-0">{item.emoji}</span>
+                        <span className="text-white/85 text-xs font-body font-medium">{item.text}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
+
+                  <Link to="/reserve" className="btn-gold inline-flex">
+                    {lang === 'de' ? 'Jetzt Tisch reservieren' : 'Reserve your Table'} <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                {/* Right: details box */}
+                <div className="lg:col-span-2 bg-white/5 border border-[#C9A96E]/25 rounded-2xl p-6 backdrop-blur-sm">
+                  <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body font-semibold mb-5">Details</p>
+                  <div className="space-y-4">
+                    {[
+                      { icon: '📅', label: 'Datum', value: 'Freitag, 6. Juni 2026' },
+                      { icon: '⏰', label: 'Einlass', value: 'Ab 18:00 Uhr' },
+                      { icon: '🎤', label: 'Live-Band', value: 'I Genio per 2' },
+                      { icon: '💃', label: 'Tanzfläche ab', value: '21:00 Uhr' },
+                      { icon: '🍽', label: 'Menü', value: 'Mind. 5 Gänge nach Wahl' },
+                      { icon: '📍', label: 'Location', value: 'Krone Langenburg, Hauptstr. 24' },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-3 pb-4 border-b border-white/6 last:border-0 last:pb-0">
+                        <span className="text-lg flex-shrink-0 w-6 text-center">{item.icon}</span>
+                        <div>
+                          <p className="text-[#C9A96E]/55 text-[10px] uppercase tracking-widest font-body mb-0.5">{item.label}</p>
+                          <p className="text-white text-sm font-body font-semibold leading-snug">{item.value}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -306,13 +338,19 @@ export default function Events() {
         </div>
       </motion.section>
 
-      {/* ── IMAGE GALLERY ── */}
+      {/* ── IMAGE GALLERY — nur echte Krone-Bilder ── */}
       <section className="px-5 pb-16 bg-[#171311]">
-        <div className="max-w-6xl mx-auto grid grid-cols-3 gap-4 h-48 sm:h-72">
-          {[IMAGES.wedding, IMAGES.corporate, IMAGES.dining].map((src, i) => (
-            <div key={i} className="rounded-2xl overflow-hidden relative">
-              <img src={src} alt="" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F0D0B]/50 to-transparent" />
+        <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3 h-52 sm:h-64">
+          {[
+            { src: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg", label: lang === 'de' ? 'Zimmer & Suiten' : 'Rooms & Suites' },
+            { src: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2bf4a9028_Krone_innen.png", label: lang === 'de' ? 'Restaurant' : 'Restaurant' },
+            { src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85", label: lang === 'de' ? 'Kulinarik' : 'Cuisine' },
+            { src: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/aef46bd59_Krone_innen.png", label: lang === 'de' ? 'Ambiente' : 'Ambiance' },
+          ].map((item, i) => (
+            <div key={i} className="rounded-2xl overflow-hidden relative group">
+              <img src={item.src} alt={item.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F0D0B]/75 via-transparent to-transparent" />
+              <p className="absolute bottom-3 left-3 text-white/90 text-xs font-body font-semibold tracking-wider uppercase drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">{item.label}</p>
             </div>
           ))}
         </div>
