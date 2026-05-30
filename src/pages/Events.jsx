@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
-import { CheckCircle, ArrowRight, Phone, Mail, Users, Calendar, Building2, Heart, Utensils, GlassWater, Sparkles, Music } from 'lucide-react';
+import { CheckCircle, ArrowRight, Phone, Mail, Users, Calendar, Building2, Heart, Utensils, GlassWater, Music } from 'lucide-react';
 import { SITE_DEFAULTS } from '@/lib/siteData';
 
 
@@ -81,6 +81,38 @@ export default function Events() {
   }
 
   const C = {
+    it: {
+      eyebrow: 'Events & Feste',
+      title: 'Il vostro momento indimenticabile.\nTutto il nostro cuore.',
+      subtitle: 'Dal matrimonio dei sogni all\'evento aziendale esclusivo — organizziamo la vostra occasione con ospitalità personale e passione mediterranea.',
+      upcoming_eyebrow: '🎶 Prossimi eventi',
+      upcoming_title: 'Prossimo evento',
+      events: [
+        { icon: Heart, title: 'Matrimoni', text: 'Il vostro giorno più bello in un contesto storico. Menù individuale, fino a 120 ospiti, contingenti di camere disponibili.' },
+        { icon: GlassWater, title: 'Feste & anniversari', text: 'Compleanni, anniversari rotondi, riunioni di famiglia — organizziamo la vostra serata con calore, eleganza e cucina casalinga.' },
+        { icon: Building2, title: 'Evento aziendale', text: 'Ambiente professionale per meeting, presentazioni e team event. Catering su misura.' },
+        { icon: Utensils, title: 'Private Dining', text: 'Cena esclusiva per il vostro gruppo. Lo chef Omar Ammesso crea un menù indimenticabile per la vostra occasione.' },
+      ],
+      how_title: 'Come funziona',
+      steps: [
+        { n: '01', t: 'Invia richiesta', d: 'Raccontateci del vostro evento: tipo, data, numero ospiti e desideri.' },
+        { n: '02', t: 'Consulenza personale', d: 'Vi rispondiamo entro 24 ore e definiamo insieme il concetto ideale.' },
+        { n: '03', t: 'Il vostro giorno', d: 'Il nostro team cura ogni dettaglio — menù, decorazioni e ospitalità.' },
+      ],
+      form_title: 'Richiedi evento',
+      form_sub: 'Descrivete il vostro desiderio — risponderemo entro 24 ore.',
+      et_label: 'Tipo di evento',
+      first: 'Nome', last: 'Cognome', company: 'Azienda (opzionale)',
+      email: 'Email', phone: 'Telefono', guests: 'Numero stimato di ospiti',
+      date: 'Data preferita (ca.)', budget: 'Budget (opzionale)',
+      services: 'Servizi richiesti (opzionale)', message: 'Il vostro messaggio *',
+      msg_ph: 'Cosa state pianificando? Che atmosfera desiderate?',
+      gdpr: 'Ho letto l\'informativa sulla privacy e acconsento al trattamento dei miei dati.',
+      submit: 'Invia richiesta',
+      success_title: 'Grazie!',
+      success_text: 'La vostra richiesta è stata ricevuta. Vi risponderemo entro 24 ore.',
+      or_contact: 'Oppure contattateci direttamente:',
+    },
     de: {
       eyebrow: 'Events & Feiern',
       title: 'Ihr unvergesslicher Moment.\nUnser ganzes Herz.',
@@ -192,7 +224,7 @@ export default function Events() {
                 {c.form_title} <ArrowRight className="w-3.5 h-3.5" />
               </a>
               <a href={`tel:${s.phone}`} className="btn-outline-dark">
-                <Phone className="w-3.5 h-3.5" /> {lang === 'de' ? 'Direkt anrufen' : 'Call us'}
+                <Phone className="w-3.5 h-3.5" /> {lang === 'de' ? 'Direkt anrufen' : lang === 'en' ? 'Call us' : 'Chiama'}
               </a>
             </motion.div>
           </div>
@@ -241,7 +273,12 @@ export default function Events() {
                   <div className="w-12 h-px bg-gradient-to-r from-[#C9A96E]/60 to-transparent mb-5" />
 
                   <p className="text-white/75 font-body text-sm sm:text-base leading-relaxed mb-7 max-w-lg">
-                    Am <strong className="text-white font-semibold">6. Juni ab 18:00 Uhr</strong> erwartet euch im Krone Langenburg by Ammesso eine unvergessliche Nacht — Live-Band, 5-Gang-Menü nach Wahl, und ab 21:00 Uhr der Dancefloor. 🕺💃
+                    {lang === 'it'
+                      ? <>{`Il `}<strong className="text-white font-semibold">6 giugno dalle 18:00</strong>{` al Krone Langenburg by Ammesso: una notte indimenticabile — Live Band, menù a 5 portate a scelta, dalle 21:00 si balla. 🕺💃`}</>
+                      : lang === 'en'
+                      ? <>On <strong className="text-white font-semibold">June 6th from 6pm</strong> join us at Krone Langenburg by Ammesso for an unforgettable night — Live Band, 5-course menu of your choice, dancing from 9pm. 🕺💃</>
+                      : <>Am <strong className="text-white font-semibold">6. Juni ab 18:00 Uhr</strong> erwartet euch im Krone Langenburg by Ammesso eine unvergessliche Nacht — Live-Band, 5-Gang-Menü nach Wahl, und ab 21:00 Uhr der Dancefloor. 🕺💃</>
+                   }
                   </p>
 
                   {/* Menu choices */}
@@ -260,20 +297,20 @@ export default function Events() {
                   </div>
 
                   <Link to="/reserve" className="btn-gold inline-flex">
-                    {lang === 'de' ? 'Jetzt Tisch reservieren' : 'Reserve your Table'} <ArrowRight className="w-3.5 h-3.5" />
+                    {lang === 'de' ? 'Jetzt Tisch reservieren' : lang === 'en' ? 'Reserve your Table' : 'Prenota il tuo tavolo'} <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
 
                 {/* Right: details box */}
                 <div className="lg:col-span-2 bg-white/5 border border-[#C9A96E]/25 rounded-2xl p-6 backdrop-blur-sm">
-                  <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body font-semibold mb-5">Details</p>
+                  <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body font-semibold mb-5">{lang === 'de' ? 'Details' : lang === 'en' ? 'Details' : 'Dettagli'}</p>
                   <div className="space-y-4">
                     {[
-                      { icon: '📅', label: 'Datum', value: 'Freitag, 6. Juni 2026' },
-                      { icon: '⏰', label: 'Einlass', value: 'Ab 18:00 Uhr' },
+                      { icon: '📅', label: lang === 'de' ? 'Datum' : lang === 'en' ? 'Date' : 'Data', value: lang === 'it' ? 'Venerdì, 6 giugno 2026' : lang === 'en' ? 'Friday, 6 June 2026' : 'Freitag, 6. Juni 2026' },
+                      { icon: '⏰', label: lang === 'de' ? 'Einlass' : lang === 'en' ? 'Doors open' : 'Apertura', value: lang === 'it' ? 'Dalle 18:00' : lang === 'en' ? 'From 6:00 pm' : 'Ab 18:00 Uhr' },
                       { icon: '🎤', label: 'Live-Band', value: 'I Genio per 2' },
-                      { icon: '💃', label: 'Tanzfläche ab', value: '21:00 Uhr' },
-                      { icon: '🍽', label: 'Menü', value: 'Mind. 5 Gänge nach Wahl' },
+                      { icon: '💃', label: lang === 'de' ? 'Tanzfläche ab' : lang === 'en' ? 'Dancing from' : 'Balli dalle', value: '21:00' },
+                      { icon: '🍽', label: lang === 'de' ? 'Menü' : 'Menu', value: lang === 'de' ? 'Mind. 5 Gänge nach Wahl' : lang === 'en' ? 'Min. 5 courses of your choice' : 'Min. 5 portate a scelta' },
                       { icon: '📍', label: 'Location', value: 'Krone Langenburg, Hauptstr. 24' },
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3 pb-4 border-b border-white/6 last:border-0 last:pb-0">
@@ -319,7 +356,7 @@ export default function Events() {
           <motion.div variants={fadeUp} transition={{ duration: 0.7 }} className="text-center mb-12">
             <p className="text-[#C9A96E] text-[11px] tracking-[0.5em] uppercase font-body font-medium mb-3">{c.eyebrow}</p>
             <h2 className="font-display text-3xl sm:text-5xl font-light text-white leading-tight">
-              {lang === 'de' ? 'Jeder Anlass. Unser Herzstück.' : 'Every Occasion. Our Specialty.'}
+              {lang === 'de' ? 'Jeder Anlass. Unser Herzstück.' : lang === 'en' ? 'Every Occasion. Our Specialty.' : 'Ogni occasione. La nostra specialità.'}
             </h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -349,7 +386,7 @@ export default function Events() {
           <motion.div variants={fadeUp} transition={{ duration: 0.7 }} className="text-center mb-10">
             <p className="text-[#C9A96E] text-[11px] tracking-[0.5em] uppercase font-body font-medium mb-3">{c.how_title}</p>
             <h2 className="font-display text-3xl sm:text-4xl font-light text-white">
-              {lang === 'de' ? 'Von der ersten Idee bis zum unvergesslichen Abend' : 'From the first idea to the unforgettable evening'}
+              {lang === 'de' ? 'Von der ersten Idee bis zum unvergesslichen Abend' : lang === 'en' ? 'From the first idea to the unforgettable evening' : 'Dalla prima idea alla serata indimenticabile'}
             </h2>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -502,7 +539,7 @@ export default function Events() {
                 </button>
 
                 <p className="text-center text-white/30 text-xs font-body">
-                  {lang === 'de' ? 'Wir antworten innerhalb von 24 Stunden.' : 'We respond within 24 hours.'}
+                  {lang === 'de' ? 'Wir antworten innerhalb von 24 Stunden.' : lang === 'en' ? 'We respond within 24 hours.' : 'Risponderemo entro 24 ore.'}
                 </p>
               </form>
             </motion.div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/lib/useLang';
 import { base44 } from '@/api/base44Client';
-import { Gift, Check, ArrowRight, UtensilsCrossed, BedDouble, Star, Lock, Mail, User, MessageSquare } from 'lucide-react';
+import { Gift, Check, ArrowRight, UtensilsCrossed, BedDouble, Star, Lock, Mail, User, MessageSquare, ShoppingCart } from 'lucide-react';
 
 // ── Voucher products ──────────────────────────────────────────────────────────
 const VOUCHERS = [
@@ -83,6 +83,7 @@ export default function Shop() {
       recipient_email: 'E-Mail des Empfängers',
       message_label: 'Persönliche Nachricht (optional)',
       message_placeholder: 'Schreiben Sie eine persönliche Botschaft...',
+      total_label: 'Gesamt',
       pay_btn: 'Sicher bezahlen via Stripe',
       secure_note: '🔒 SSL-verschlüsselte Zahlung · 2 Jahre gültig · Nicht erstattungsfähig',
       redeem_note: 'Bitte geben Sie Ihren Gutscheincode bei der Reservierung an oder zeigen Sie ihn bei Ihrem Besuch vor.',
@@ -124,6 +125,7 @@ export default function Shop() {
       recipient_email: 'Recipient Email',
       message_label: 'Personal Message (optional)',
       message_placeholder: 'Write a personal message...',
+      total_label: 'Total',
       pay_btn: 'Pay Securely via Stripe',
       secure_note: '🔒 SSL-encrypted payment · Valid 2 years · Non-refundable',
       redeem_note: 'Please provide your voucher code when making a reservation or present it during your visit.',
@@ -251,12 +253,20 @@ export default function Shop() {
     return (
       <div className="min-h-screen bg-[#FAF7F2] page-top pb-24 lg:pb-12">
         <div className="max-w-2xl mx-auto px-4 sm:px-5 py-10 sm:py-14">
-          {/* Back */}
-          <button onClick={() => setStep('products')}
-            className="text-[#8A7A6A] hover:text-[#1C1714] text-sm font-body mb-8 flex items-center gap-1 transition-colors">
-            {tx.back}
-          </button>
-
+          {/* Back + Cart */}
+          <div className="flex items-center justify-between mb-8">
+            <button onClick={() => setStep('products')}
+              className="text-[#8A7A6A] hover:text-[#1C1714] text-sm font-body flex items-center gap-1 transition-colors">
+              {tx.back}
+            </button>
+            <div className="flex items-center gap-2 bg-[#F2E8D0] border border-[#C9A96E]/30 rounded-full px-4 py-2">
+              <ShoppingCart className="w-4 h-4 text-[#8B6914]" />
+              <span className="text-[#8B6914] text-xs font-body font-semibold">
+                {lang === 'de' ? selectedVoucher.de_title : selectedVoucher.en_title}
+                {finalAmount > 0 ? ` · €${finalAmount}` : ''}
+              </span>
+            </div>
+          </div>
           {/* Progress */}
           <div className="flex items-center gap-3 mb-10">
             {[tx.step_select, tx.step_configure, tx.step_pay].map((s, i) => (
@@ -337,7 +347,7 @@ export default function Shop() {
               )}
               {finalAmount > 0 && (
                 <div className="mt-4 flex items-center justify-between bg-[#F2E8D0] border border-[#C9A96E]/20 rounded-xl px-4 py-3">
-                  <span className="text-[#8A7A6A] text-sm font-body">Gesamt</span>
+                  <span className="text-[#8A7A6A] text-sm font-body">{tx.total_label}</span>
                   <span className="font-display text-2xl font-light text-[#8B6914]">€{finalAmount}</span>
                 </div>
               )}
@@ -457,6 +467,17 @@ export default function Shop() {
 
       {/* Hero */}
       <div className="relative bg-[#1C1714] page-top pb-16 sm:pb-20 px-5 overflow-hidden">
+        {/* Cart icon top-right */}
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+          <div className="flex items-center gap-2 bg-white/10 border border-[#C9A96E]/30 backdrop-blur-sm rounded-full px-4 py-2">
+            <ShoppingCart className="w-4 h-4 text-[#C9A96E]" />
+            <span className="text-[#C9A96E] text-xs font-body font-semibold">
+              {selectedVoucher
+                ? `${lang === 'de' ? selectedVoucher.de_title : selectedVoucher.en_title} · €${finalAmount || '—'}`
+                : lang === 'de' ? 'Leer' : lang === 'en' ? 'Empty' : 'Vuoto'}
+            </span>
+          </div>
+        </div>
         <img
           src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1600&q=85"
           alt=""
