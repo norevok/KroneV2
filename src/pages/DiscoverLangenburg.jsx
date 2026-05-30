@@ -295,22 +295,18 @@ export default function DiscoverLangenburg() {
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="mt-10 sm:mt-12 bg-gradient-to-r from-[#1C1714] to-[#2A2118] border border-[#C9A96E]/20 rounded-3xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl overflow-hidden relative">
-          {/* Decorative gold glow */}
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#C9A96E]/08 rounded-full blur-3xl pointer-events-none" />
           <div>
             <p className="font-display text-2xl sm:text-3xl font-light text-white mb-2">
               {lang === 'de' ? 'Bereit für Ihren Aufenthalt?' : 'Ready for your stay?'}
             </p>
             <p className="text-white/50 text-sm font-body">
-              {lang === 'de' ? 'Buchen Sie direkt bei uns — ohne Gebühren, mit persönlichem Service.' : 'Book directly with us — no fees, with personal service.'}
+              {lang === 'de' ? 'Krone Langenburg by Ammesso · Hohenlohe' : 'Krone Langenburg by Ammesso · Hohenlohe'}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-            <Link to="/booking" className="btn-gold">
-              {t.cta_rooms} <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-            <Link to="/reserve" className="btn-outline-dark">
-              {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve Table' : 'Tavolo'}
+          <div className="flex flex-col w-full sm:w-auto gap-3 flex-shrink-0">
+            <Link to="/booking" className="btn-gold w-full sm:w-auto justify-center">
+              {t.cta_rooms}
             </Link>
           </div>
         </motion.div>
