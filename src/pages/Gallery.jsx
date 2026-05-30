@@ -148,7 +148,7 @@ export default function Gallery() {
     de: { title: 'Galerie', sub: 'Eindrücke aus unseren Zimmern, Suiten und dem Krone-Erlebnis.', reserve: 'Tisch reservieren', rooms: 'Zimmer ansehen', video_btn: 'Unternehmensfilm ansehen' },
     en: { title: 'Gallery', sub: 'Impressions from our rooms, suites and the Krone experience.', reserve: 'Reserve Table', rooms: 'View Rooms', video_btn: 'Watch Our Film' },
     it: { title: 'Galleria', sub: 'Impressioni dalle camere, suite e dall\'esperienza Krone.', reserve: 'Prenota tavolo', rooms: 'Vedi camere', video_btn: 'Guarda il film' },
-  }[lang] || { title: 'Galerie', sub: '', reserve: 'Tisch reservieren', rooms: 'Zimmer', video_btn: 'Unternehmensfilm' };
+  }[lang] || { title: 'Galerie', sub: 'Eindrücke aus unseren Zimmern, Suiten und dem Krone-Erlebnis.', reserve: 'Tisch reservieren', rooms: 'Zimmer ansehen', video_btn: 'Unternehmensfilm ansehen' };
 
   return (
     <div className="min-h-screen bg-[#F7F2EA] text-[#1A1A1A] pb-24 lg:pb-10">
@@ -179,7 +179,9 @@ export default function Gallery() {
             </div>
             <div className="text-left">
               <p className="text-[#B08A42] text-[9px] tracking-[0.3em] uppercase font-body mb-0.5">Krone Langenburg</p>
-              <p className="text-white font-display text-base font-light">{t.video_btn}</p>
+              <p className="text-white font-display text-base font-light">
+                    {lang === 'de' ? 'Unternehmensfilm ansehen' : lang === 'en' ? 'Watch Our Film' : 'Guarda il film'}
+                  </p>
             </div>
           </button>
         </div>
@@ -212,7 +214,7 @@ export default function Gallery() {
         </div>
 
         <p className="text-[10px] font-body tracking-[0.3em] uppercase mb-7 text-[#4A4A4A]/60">
-          {filtered.length} {lang === 'de' ? 'Bilder' : lang === 'en' ? 'Photos' : 'Foto'}
+          {filtered.length} {lang === 'de' ? 'Fotos' : lang === 'en' ? 'Photos' : 'Foto'}
         </p>
 
         {/* ── MASONRY ── */}
@@ -262,7 +264,7 @@ export default function Gallery() {
 
         {filtered.length === 0 && (
           <div className="text-center py-20 text-[#4A4A4A]/40 font-body text-sm">
-            {lang === 'de' ? 'Keine Bilder in dieser Kategorie.' : 'No photos in this category.'}
+            {lang === 'de' ? 'Keine Fotos in dieser Kategorie.' : lang === 'en' ? 'No photos in this category.' : 'Nessuna foto in questa categoria.'}
           </div>
         )}
 

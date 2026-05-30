@@ -20,6 +20,13 @@ const FAQ_EN = [
   { q: 'Are pets allowed?', a: 'Please ask us directly — we are happy to consider exceptions for well-behaved pets.' },
   { q: 'Is breakfast available?', a: 'Breakfast is optionally bookable at €14 per person. Please indicate this when booking.' },
 ];
+const FAQ_IT = [
+  { q: 'Quali sono gli orari di check-in e check-out?', a: 'Check-in dalle 15:00, check-out entro le 11:00. Check-in anticipato o check-out posticipato disponibili su richiesta.' },
+  { q: 'Come prenoto un tavolo al ristorante?', a: 'Potete prenotare online tramite il nostro sito o contattarci direttamente al +49 7905 941770 o info@krone-ammesso.de.' },
+  { q: 'C\'è parcheggio?', a: 'Parcheggio gratuito disponibile nelle immediate vicinanze dell\'hotel nel centro storico di Langenburg.' },
+  { q: 'Sono ammessi gli animali domestici?', a: 'Contattateci direttamente — siamo felici di valutare eccezioni per animali ben educati.' },
+  { q: 'È disponibile la colazione?', a: 'La colazione è opzionale a €14 a persona. Indicatelo alla prenotazione.' },
+];
 
 function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false);
@@ -505,7 +512,7 @@ export default function Contact() {
             {lang === 'de' ? 'Häufige Fragen' : lang === 'en' ? 'Frequently Asked Questions' : 'Domande frequenti'}
           </h2>
           <div className="max-w-3xl mx-auto bg-white border border-[#EDE6D8] rounded-2xl px-6 py-2 shadow-[0_4px_20px_rgba(28,23,20,0.06)]">
-            {(lang === 'en' ? FAQ_EN : FAQ_DE).map((item, i) => (
+            {(lang === 'en' ? FAQ_EN : lang === 'it' ? FAQ_IT : FAQ_DE).map((item, i) => (
               <FaqItem key={i} q={item.q} a={item.a} />
             ))}
           </div>

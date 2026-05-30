@@ -69,22 +69,31 @@ function MenuSection({ title, eyebrow, items, lang, showCTA = false }) {
 
 const DRINKS = {
   de: [
-    { name_de: 'Aperol Spritz', desc_de: 'Aperol, Prosecco, Soda', price: 7.5 },
-    { name_de: 'Prosecco', desc_de: 'Glas', price: 5.5 },
-    { name_de: 'Wein des Hauses', desc_de: 'Weiß oder Rot, 0,2 l', price: 5.0 },
-    { name_de: 'Bier vom Fass', desc_de: '0,3 l', price: 4.2 },
-    { name_de: 'Softdrinks', desc_de: 'Wasser, Cola, Limo, 0,3 l', price: 3.5 },
-    { name_de: 'Kaffee / Espresso', price: 2.8 },
-    { name_de: 'Cappuccino', price: 3.5 },
+    { name_de: 'Aperol Spritz', name_en: 'Aperol Spritz', name_it: 'Aperol Spritz', desc_de: 'Aperol, Prosecco, Soda', desc_en: 'Aperol, Prosecco, Soda', desc_it: 'Aperol, Prosecco, Soda', price: 7.5 },
+    { name_de: 'Prosecco', name_en: 'Prosecco', name_it: 'Prosecco', desc_de: 'Glas', desc_en: 'Glass', desc_it: 'Bicchiere', price: 5.5 },
+    { name_de: 'Wein des Hauses', name_en: 'House Wine', name_it: 'Vino della Casa', desc_de: 'Weiß oder Rot, 0,2 l', desc_en: 'White or Red, 0.2 l', desc_it: 'Bianco o Rosso, 0,2 l', price: 5.0 },
+    { name_de: 'Bier vom Fass', name_en: 'Draught Beer', name_it: 'Birra alla Spina', desc_de: '0,3 l', desc_en: '0.3 l', desc_it: '0,3 l', price: 4.2 },
+    { name_de: 'Softdrinks', name_en: 'Soft Drinks', name_it: 'Bibite', desc_de: 'Wasser, Cola, Limo, 0,3 l', desc_en: 'Water, Cola, Lemonade, 0.3 l', desc_it: 'Acqua, Cola, Limonata, 0,3 l', price: 3.5 },
+    { name_de: 'Kaffee / Espresso', name_en: 'Coffee / Espresso', name_it: 'Caffè / Espresso', price: 2.8 },
+    { name_de: 'Cappuccino', name_en: 'Cappuccino', name_it: 'Cappuccino', price: 3.5 },
   ],
   en: [
-    { name_de: 'Aperol Spritz', name_en: 'Aperol Spritz', desc_en: 'Aperol, Prosecco, Soda', price: 7.5 },
-    { name_de: 'Prosecco', name_en: 'Prosecco', desc_en: 'Glass', price: 5.5 },
-    { name_de: 'House Wine', name_en: 'House Wine', desc_en: 'White or Red, 0.2 l', price: 5.0 },
-    { name_de: 'Draught Beer', name_en: 'Draught Beer', desc_en: '0.3 l', price: 4.2 },
-    { name_de: 'Soft Drinks', name_en: 'Soft Drinks', desc_en: 'Water, Cola, Lemonade, 0.3 l', price: 3.5 },
-    { name_de: 'Coffee / Espresso', name_en: 'Coffee / Espresso', price: 2.8 },
-    { name_de: 'Cappuccino', name_en: 'Cappuccino', price: 3.5 },
+    { name_de: 'Aperol Spritz', name_en: 'Aperol Spritz', name_it: 'Aperol Spritz', desc_de: 'Aperol, Prosecco, Soda', desc_en: 'Aperol, Prosecco, Soda', desc_it: 'Aperol, Prosecco, Soda', price: 7.5 },
+    { name_de: 'Prosecco', name_en: 'Prosecco', name_it: 'Prosecco', desc_de: 'Glas', desc_en: 'Glass', desc_it: 'Bicchiere', price: 5.5 },
+    { name_de: 'House Wine', name_en: 'House Wine', name_it: 'Vino della Casa', desc_de: 'Weiß oder Rot, 0,2 l', desc_en: 'White or Red, 0.2 l', desc_it: 'Bianco o Rosso, 0,2 l', price: 5.0 },
+    { name_de: 'Draught Beer', name_en: 'Draught Beer', name_it: 'Birra alla Spina', desc_de: '0,3 l', desc_en: '0.3 l', desc_it: '0,3 l', price: 4.2 },
+    { name_de: 'Soft Drinks', name_en: 'Soft Drinks', name_it: 'Bibite', desc_de: 'Wasser, Cola, Limo, 0,3 l', desc_en: 'Water, Cola, Lemonade, 0.3 l', desc_it: 'Acqua, Cola, Limonata, 0,3 l', price: 3.5 },
+    { name_de: 'Coffee / Espresso', name_en: 'Coffee / Espresso', name_it: 'Caffè / Espresso', price: 2.8 },
+    { name_de: 'Cappuccino', name_en: 'Cappuccino', name_it: 'Cappuccino', price: 3.5 },
+  ],
+  it: [
+    { name_de: 'Aperol Spritz', name_en: 'Aperol Spritz', name_it: 'Aperol Spritz', desc_it: 'Aperol, Prosecco, Soda', price: 7.5 },
+    { name_de: 'Prosecco', name_en: 'Prosecco', name_it: 'Prosecco', desc_it: 'Bicchiere', price: 5.5 },
+    { name_de: 'House Wine', name_en: 'House Wine', name_it: 'Vino della Casa', desc_it: 'Bianco o Rosso, 0,2 l', price: 5.0 },
+    { name_de: 'Draught Beer', name_en: 'Draught Beer', name_it: 'Birra alla Spina', desc_it: '0,3 l', price: 4.2 },
+    { name_de: 'Soft Drinks', name_en: 'Soft Drinks', name_it: 'Bibite', desc_it: 'Acqua, Cola, Limonata, 0,3 l', price: 3.5 },
+    { name_de: 'Kaffee / Espresso', name_en: 'Coffee / Espresso', name_it: 'Caffè / Espresso', price: 2.8 },
+    { name_de: 'Cappuccino', name_en: 'Cappuccino', name_it: 'Cappuccino', price: 3.5 },
   ],
 };
 
@@ -93,40 +102,40 @@ export default function MenuPage() {
   const [activeTab, setActiveTab] = useState('food');
 
   const TABS = [
-    { id: 'food', de: 'Speisen', en: 'Food' },
-    { id: 'drinks', de: 'Getränke', en: 'Drinks' },
+    { id: 'food', de: 'Speisen', en: 'Food', it: 'Piatti' },
+    { id: 'drinks', de: 'Getränke', en: 'Drinks', it: 'Bevande' },
   ];
 
   const SECTIONS_FOOD = [
     {
       id: 'starters',
-      eyebrow_de: 'Zum Anfangen', eyebrow_en: 'To Start',
-      title_de: 'Antipasti & Vorspeisen', title_en: 'Starters & Appetisers',
+      eyebrow_de: 'Zum Anfangen', eyebrow_en: 'To Start', eyebrow_it: 'Per iniziare',
+      title_de: 'Antipasti & Vorspeisen', title_en: 'Starters & Appetisers', title_it: 'Antipasti & Entrée',
       items: MENU_DATA.starters,
     },
     {
       id: 'mains',
-      eyebrow_de: 'Pasta & Hauptgerichte', eyebrow_en: 'Pasta & Mains',
-      title_de: 'Unsere Pasta & Gerichte', title_en: 'Our Pasta & Dishes',
+      eyebrow_de: 'Pasta & Hauptgerichte', eyebrow_en: 'Pasta & Mains', eyebrow_it: 'Pasta & Piatti Principali',
+      title_de: 'Unsere Pasta & Gerichte', title_en: 'Our Pasta & Dishes', title_it: 'La Nostra Pasta & Piatti',
       items: MENU_DATA.mains,
       showCTA: true,
     },
     {
       id: 'meat_fish',
-      eyebrow_de: 'Fleisch & Fisch', eyebrow_en: 'Meat & Fish',
-      title_de: 'Fleisch & Fisch', title_en: 'Meat & Fish',
+      eyebrow_de: 'Fleisch & Fisch', eyebrow_en: 'Meat & Fish', eyebrow_it: 'Carne & Pesce',
+      title_de: 'Fleisch & Fisch', title_en: 'Meat & Fish', title_it: 'Carne & Pesce',
       items: MENU_DATA.meat_fish,
     },
     {
       id: 'sides',
-      eyebrow_de: 'Beilagen', eyebrow_en: 'Sides',
-      title_de: 'Beilagen', title_en: 'Side Dishes',
+      eyebrow_de: 'Beilagen', eyebrow_en: 'Sides', eyebrow_it: 'Contorni',
+      title_de: 'Beilagen', title_en: 'Side Dishes', title_it: 'Contorni',
       items: MENU_DATA.sides,
     },
     {
       id: 'desserts',
-      eyebrow_de: 'Süßes', eyebrow_en: 'Desserts',
-      title_de: 'Desserts & Dolci', title_en: 'Desserts & Dolci',
+      eyebrow_de: 'Süßes', eyebrow_en: 'Desserts', eyebrow_it: 'Dolci',
+      title_de: 'Desserts & Dolci', title_en: 'Desserts & Dolci', title_it: 'Dolci & Dessert',
       items: MENU_DATA.desserts,
       showCTA: true,
     },
@@ -152,7 +161,7 @@ export default function MenuPage() {
             {lang === 'de' ? 'Unsere Speisekarte' : lang === 'en' ? 'Our Menu' : 'La Nostra Carta'}
           </h1>
           <p className="text-white/55 font-body text-base">
-            {lang === 'de' ? 'Mediterrane Küche · Hausgemachte Pasta · Saisonale Zutaten' : 'Mediterranean cuisine · Handmade pasta · Seasonal ingredients'}
+            {lang === 'de' ? 'Mediterrane Küche · Hausgemachte Pasta · Saisonale Zutaten' : lang === 'en' ? 'Mediterranean cuisine · Handmade pasta · Seasonal ingredients' : 'Cucina mediterranea · Pasta fatta a mano · Ingredienti di stagione'}
           </p>
         </div>
       </div>
@@ -168,7 +177,7 @@ export default function MenuPage() {
                     ? 'bg-[#8B6914] text-white shadow-sm'
                     : 'text-[#1C1714]/50 hover:text-[#1C1714] hover:bg-[#F7F3EC]'
                 }`}>
-                {lang === 'de' ? tab.de : tab.en}
+                {lang === 'de' ? tab.de : lang === 'en' ? tab.en : tab.it}
               </button>
             ))}
           </div>
@@ -183,8 +192,8 @@ export default function MenuPage() {
             {SECTIONS_FOOD.map(section => (
               <MenuSection
                 key={section.id}
-                eyebrow={lang === 'de' ? section.eyebrow_de : section.eyebrow_en}
-                title={lang === 'de' ? section.title_de : section.title_en}
+                eyebrow={lang === 'de' ? section.eyebrow_de : lang === 'en' ? section.eyebrow_en : section.eyebrow_it}
+                title={lang === 'de' ? section.title_de : lang === 'en' ? section.title_en : section.title_it}
                 items={section.items}
                 lang={lang}
                 showCTA={section.showCTA}
@@ -195,8 +204,8 @@ export default function MenuPage() {
 
         {activeTab === 'drinks' && (
           <MenuSection
-            eyebrow={lang === 'de' ? 'Getränke' : 'Drinks'}
-            title={lang === 'de' ? 'Getränkekarte' : 'Drinks Menu'}
+            eyebrow={lang === 'de' ? 'Getränke' : lang === 'en' ? 'Drinks' : 'Bevande'}
+            title={lang === 'de' ? 'Getränkekarte' : lang === 'en' ? 'Drinks Menu' : 'Lista delle Bevande'}
             items={drinkItems}
             lang={lang}
             showCTA
@@ -209,7 +218,9 @@ export default function MenuPage() {
           <p>
             {lang === 'de'
               ? 'Informationen zu Allergenen und Unverträglichkeiten erhalten Sie auf Anfrage von unserem Personal. Preise inkl. MwSt.'
-              : 'Information on allergens and intolerances is available on request from our staff. Prices include VAT.'}
+              : lang === 'en'
+              ? 'Information on allergens and intolerances is available on request from our staff. Prices include VAT.'
+              : 'Informazioni su allergeni e intolleranze disponibili su richiesta. I prezzi sono IVA inclusa.'}
           </p>
         </div>
 
@@ -217,14 +228,14 @@ export default function MenuPage() {
         <div className="mt-12 bg-[#1C1714] rounded-3xl p-8 sm:p-10 text-center">
           <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body mb-3">Krone Langenburg by Ammesso</p>
           <h2 className="font-display text-3xl sm:text-4xl font-light text-white mb-3">
-            {lang === 'de' ? 'Tisch reservieren' : 'Reserve a Table'}
+            {lang === 'de' ? 'Tisch reservieren' : lang === 'en' ? 'Reserve a Table' : 'Prenota un Tavolo'}
           </h2>
           <p className="text-white/50 font-body text-base mb-7">
-            {lang === 'de' ? 'Di–Sa: 12–14:30 & 18–22:30 Uhr · So: 12–21 Uhr · Mo: Ruhetag' : 'Tue–Sat: 12–14:30 & 18:00–22:30 · Sun: 12–21 · Mon: Closed'}
+            {lang === 'de' ? 'Di–Sa: 12–14:30 & 18–22:30 Uhr · So: 12–21 Uhr · Mo: Ruhetag' : lang === 'en' ? 'Tue–Sat: 12–14:30 & 18:00–22:30 · Sun: 12–21 · Mon: Closed' : 'Mar–Sab: 12–14:30 & 18–22:30 · Dom: 12–21 · Lun: Chiuso'}
           </p>
           <Link to="/reserve" className="inline-flex items-center gap-2.5 px-9 py-4 bg-[#8B6914] hover:bg-[#7A5A0F] text-white rounded-full text-sm font-body font-semibold tracking-widest uppercase transition-all shadow-lg">
             <UtensilsCrossed className="w-4 h-4" />
-            {lang === 'de' ? 'Jetzt reservieren' : 'Reserve Now'}
+            {lang === 'de' ? 'Jetzt reservieren' : lang === 'en' ? 'Reserve Now' : 'Prenota Ora'}
           </Link>
         </div>
 

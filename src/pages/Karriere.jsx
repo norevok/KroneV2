@@ -10,40 +10,50 @@ const POSITIONS = [
     icon: '🤝',
     de_title: 'Service & Empfang',
     en_title: 'Service & Front of House',
+    it_title: 'Servizio & Accoglienza',
     de_desc: 'Sie sind das Gesicht der Krone. Gastfreundschaft ist Ihre Leidenschaft.',
     en_desc: 'You are the face of the Krone. Hospitality is your passion.',
+    it_desc: 'Siete il volto della Krone. L\'ospitalità è la vostra passione.',
   },
   {
     id: 'kitchen',
     icon: '🍳',
     de_title: 'Küche & Kochen',
     en_title: 'Kitchen & Cooking',
+    it_title: 'Cucina',
     de_desc: 'Mediterrane Küche, Handwerk, Leidenschaft — wir suchen Köche mit Seele.',
     en_desc: 'Mediterranean cuisine, craftsmanship, passion — we look for chefs with soul.',
+    it_desc: 'Cucina mediterranea, artigianato, passione — cerchiamo cuochi con anima.',
   },
   {
     id: 'reception',
     icon: '🏨',
     de_title: 'Rezeption & Housekeeping',
     en_title: 'Reception & Housekeeping',
+    it_title: 'Ricevimento & Housekeeping',
     de_desc: 'Ein perfektes Gästeerlebnis beginnt beim Check-in. Sie machen den Unterschied.',
     en_desc: 'A perfect guest experience starts at check-in. You make the difference.',
+    it_desc: 'Un\'esperienza ospite perfetta inizia al check-in. Voi fate la differenza.',
   },
   {
     id: 'events',
     icon: '✨',
     de_title: 'Events & Hochzeiten',
     en_title: 'Events & Weddings',
+    it_title: 'Eventi & Matrimoni',
     de_desc: 'Hochzeiten, Firmenevents, besondere Abende. Planung ist Ihre Stärke.',
     en_desc: 'Weddings, corporate events, special evenings. Planning is your strength.',
+    it_desc: 'Matrimoni, eventi aziendali, serate speciali. La pianificazione è il vostro punto di forza.',
   },
   {
     id: 'initiative',
     icon: '💡',
     de_title: 'Initiativbewerbung',
     en_title: 'Open Application',
+    it_title: 'Candidatura Spontanea',
     de_desc: 'Keine passende Stelle gefunden? Überzeugen Sie uns trotzdem.',
     en_desc: 'No matching position? Convince us anyway.',
+    it_desc: 'Nessuna posizione adatta? Convinceteci comunque.',
   },
 ];
 
@@ -61,7 +71,7 @@ export default function Karriere() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (!selectedPosition) {
-      setError(lang === 'de' ? 'Bitte wählen Sie eine Stelle.' : 'Please select a position.');
+      setError(tx.error_position);
       return;
     }
     setSubmitting(true);
@@ -109,6 +119,10 @@ export default function Karriere() {
       success_title: 'Vielen Dank für Ihre Bewerbung!',
       success_sub: 'Wir melden uns innerhalb von 5 Werktagen bei Ihnen.',
       values_title: 'Was uns ausmacht',
+      error_position: 'Bitte wählen Sie eine Stelle.',
+      questions: 'Fragen zur Bewerbung?',
+      placeholder_message: 'Warum möchten Sie bei uns arbeiten?',
+      data_note: '✓ Ihre Daten werden vertraulich behandelt.',
     },
     en: {
       eyebrow: 'Careers at Krone Langenburg',
@@ -126,15 +140,40 @@ export default function Karriere() {
       success_title: 'Thank you for your application!',
       success_sub: 'We will be in touch within 5 working days.',
       values_title: 'What defines us',
+      error_position: 'Please select a position.',
+      questions: 'Questions about applying?',
+      placeholder_message: 'Why do you want to work with us?',
+      data_note: '✓ Your data is handled confidentially.',
+    },
+    it: {
+      eyebrow: 'Lavora con noi — Krone Langenburg',
+      title: 'Entra a far parte della nostra storia.',
+      sub: 'Non cerchiamo curriculum. Cerchiamo persone — con passione, calore e il desiderio di creare qualcosa di speciale.',
+      open_title: 'Posizioni aperte',
+      form_title: 'Candidati ora',
+      position_hint: 'Seleziona posizione *',
+      first: 'Nome *',
+      last: 'Cognome *',
+      email: 'Email *',
+      phone: 'Telefono',
+      message: 'Motivazione & Lettera di presentazione *',
+      send: 'Invia candidatura',
+      success_title: 'Grazie per la tua candidatura!',
+      success_sub: 'Vi risponderemo entro 5 giorni lavorativi.',
+      values_title: 'I nostri valori',
+      error_position: 'Seleziona una posizione.',
+      questions: 'Domande sulla candidatura?',
+      placeholder_message: 'Perché volete lavorare con noi?',
+      data_note: '✓ I vostri dati sono trattati in modo riservato.',
     },
   };
   const tx = t[lang] || t.de;
 
   const VALUES = [
-    { icon: ChefHat, de: 'Handwerk & Qualität', en: 'Craft & Quality', de_d: 'Wir kochen und arbeiten mit Leidenschaft — nicht nach Rezept, sondern aus Überzeugung.', en_d: 'We cook and work with passion — not by recipe, but by conviction.' },
-    { icon: Heart, de: 'Herzlichkeit', en: 'Warmth', de_d: 'Jeder Gast soll sich wie zu Hause fühlen. Dafür braucht es Menschen, die das wirklich meinen.', en_d: 'Every guest should feel at home. That takes people who truly mean it.' },
-    { icon: Users, de: 'Ein echtes Team', en: 'A Real Team', de_d: 'Kein Hierarchie-Denken. Wir arbeiten zusammen, lernen voneinander, wachsen gemeinsam.', en_d: 'No hierarchical thinking. We work together, learn from each other, grow together.' },
-    { icon: Lightbulb, de: 'Entwicklung & Förderung', en: 'Growth & Development', de_d: 'Wir investieren in unsere Mitarbeiter — mit Schulungen, Verantwortung und echten Perspektiven.', en_d: 'We invest in our people — with training, responsibility and real prospects.' },
+    { icon: ChefHat, de: 'Handwerk & Qualität', en: 'Craft & Quality', it: 'Artigianato & Qualità', de_d: 'Wir kochen und arbeiten mit Leidenschaft — nicht nach Rezept, sondern aus Überzeugung.', en_d: 'We cook and work with passion — not by recipe, but by conviction.', it_d: 'Cuciniamo e lavoriamo con passione — non per ricetta, ma per convinzione.' },
+    { icon: Heart, de: 'Herzlichkeit', en: 'Warmth', it: 'Calore', de_d: 'Jeder Gast soll sich wie zu Hause fühlen. Dafür braucht es Menschen, die das wirklich meinen.', en_d: 'Every guest should feel at home. That takes people who truly mean it.', it_d: 'Ogni ospite deve sentirsi a casa. Servono persone che lo sentano davvero.' },
+    { icon: Users, de: 'Ein echtes Team', en: 'A Real Team', it: 'Un team vero', de_d: 'Kein Hierarchie-Denken. Wir arbeiten zusammen, lernen voneinander, wachsen gemeinsam.', en_d: 'No hierarchical thinking. We work together, learn from each other, grow together.', it_d: 'Niente gerarchie. Lavoriamo insieme, impariamo gli uni dagli altri, cresciamo insieme.' },
+    { icon: Lightbulb, de: 'Entwicklung & Förderung', en: 'Growth & Development', it: 'Crescita & Sviluppo', de_d: 'Wir investieren in unsere Mitarbeiter — mit Schulungen, Verantwortung und echten Perspektiven.', en_d: 'We invest in our people — with training, responsibility and real prospects.', it_d: 'Investiamo nelle nostre persone — con formazione, responsabilità e vere prospettive.' },
   ];
 
   return (
@@ -166,8 +205,8 @@ export default function Karriere() {
             {VALUES.map((v, i) => (
               <div key={i} className="surface-card rounded-2xl p-5 sm:p-6">
                 <v.icon className="w-5 h-5 text-gold mb-4" />
-                <h3 className="font-display text-xl font-light text-charcoal mb-2">{lang === 'de' ? v.de : v.en}</h3>
-                <p className="text-sm font-body leading-relaxed" style={{color:'#7A6A5A'}}>{lang === 'de' ? v.de_d : v.en_d}</p>
+                <h3 className="font-display text-xl font-light text-charcoal mb-2">{lang === 'de' ? v.de : lang === 'en' ? v.en : v.it}</h3>
+                <p className="text-sm font-body leading-relaxed" style={{color:'#7A6A5A'}}>{lang === 'de' ? v.de_d : lang === 'en' ? v.en_d : v.it_d}</p>
               </div>
             ))}
           </div>
@@ -188,8 +227,8 @@ export default function Karriere() {
                   <div className="flex items-start gap-3">
                     <span className="text-xl flex-shrink-0 mt-0.5">{pos.icon}</span>
                     <div>
-                      <p className="font-body font-semibold text-sm text-charcoal">{lang === 'de' ? pos.de_title : pos.en_title}</p>
-                      <p className="text-xs font-body mt-1" style={{color:'#7A6A5A'}}>{lang === 'de' ? pos.de_desc : pos.en_desc}</p>
+                      <p className="font-body font-semibold text-sm text-charcoal">{lang === 'de' ? pos.de_title : lang === 'en' ? pos.en_title : (pos.it_title || pos.en_title)}</p>
+                      <p className="text-xs font-body mt-1" style={{color:'#7A6A5A'}}>{lang === 'de' ? pos.de_desc : lang === 'en' ? pos.en_desc : (pos.it_desc || pos.en_desc)}</p>
                     </div>
                     {selectedPosition === pos.id && <CheckCircle className="w-4 h-4 text-gold flex-shrink-0 ml-auto mt-0.5" />}
                   </div>
@@ -215,7 +254,7 @@ export default function Karriere() {
                   {selectedPosition && (
                     <div className="bg-gold-pale border border-gold/20 rounded-xl px-4 py-3 flex items-center gap-2">
                       <span className="text-sm font-body text-gold font-semibold">
-                        {POSITIONS.find(p => p.id === selectedPosition)?.[lang === 'de' ? 'de_title' : 'en_title']}
+                        {POSITIONS.find(p => p.id === selectedPosition)?.[lang === 'de' ? 'de_title' : lang === 'en' ? 'en_title' : 'it_title'] || POSITIONS.find(p => p.id === selectedPosition)?.en_title}
                       </span>
                     </div>
                   )}
@@ -246,7 +285,7 @@ export default function Karriere() {
                     <label className="block text-[10px] tracking-[0.25em] uppercase font-body mb-1.5" style={{color:'#8A7A6A'}}>{tx.message}</label>
                     <textarea rows={6} required value={form.message}
                       onChange={e => setForm(f => ({...f, message: e.target.value}))}
-                      placeholder={lang === 'de' ? 'Warum möchten Sie bei uns arbeiten?' : 'Why do you want to work with us?'}
+                      placeholder={tx.placeholder_message}
                       className={`${inputCls} resize-none`} />
                   </div>
                   {error && <p className="text-red-600 text-xs font-body">{error}</p>}
@@ -254,9 +293,7 @@ export default function Karriere() {
                     className="w-full py-4 btn-gold rounded-full text-xs tracking-[0.15em] uppercase font-body font-semibold disabled:opacity-50 flex items-center justify-center gap-2">
                     {submitting ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <>{tx.send} <ArrowRight className="w-3.5 h-3.5" /></>}
                   </button>
-                  <p className="text-center text-[10px] font-body" style={{color:'#8A7A6A'}}>
-                    {lang === 'de' ? '✓ Ihre Daten werden vertraulich behandelt.' : '✓ Your data is handled confidentially.'}
-                  </p>
+                  <p className="text-center text-[10px] font-body" style={{color:'#8A7A6A'}}>{tx.data_note}</p>
                 </form>
               </div>
             )}
@@ -265,9 +302,7 @@ export default function Karriere() {
 
         {/* Contact strip */}
         <div className="pb-10 border-t border-stone-mid pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm font-body" style={{color:'#7A6A5A'}}>
-            {lang === 'de' ? 'Fragen zur Bewerbung?' : 'Questions about applying?'}
-          </p>
+          <p className="text-sm font-body" style={{color:'#7A6A5A'}}>{tx.questions}</p>
           <a href={`mailto:${s.email_info}`}
             className="flex items-center gap-2 px-6 py-3 btn-ghost-gold rounded-full text-xs tracking-widest uppercase font-body font-semibold">
             {s.email_info} <ArrowRight className="w-3.5 h-3.5" />

@@ -167,6 +167,30 @@ export default function Rooms() {
       region_text: 'Langenburg lies in the picturesque Jagst Valley — surrounded by castles, vineyards and the Hohenlohe countryside.',
       open_maps: 'Open in Google Maps',
     },
+    it: {
+      eyebrow: 'Alloggio', title: 'Camere & Suite',
+      subtitle: 'Soggiorni raffinati nel cuore storico dell\'Hohenlohe.',
+      checkin: 'Check-in', checkout: 'Check-out', adults_label: 'Adulti',
+      check_avail: 'Verifica disponibilità',
+      direct_title: 'Perché prenotare direttamente?',
+      benefit1_t: 'Miglior prezzo garantito', benefit1: 'Prezzo più basso — nessun supplemento.',
+      benefit2_t: 'Contatto personale', benefit2: 'Direttamente con il nostro team — richieste speciali benvenute.',
+      benefit3_t: 'Edificio storico', benefit3: 'Dormire in un edificio storico tutelato con carattere.',
+      benefit4_t: 'Ristorante in loco', benefit4: 'Cucina mediterranea direttamente in hotel.',
+      breakfast: 'Colazione su richiesta · €14 a persona',
+      book_now: 'Prenota ora', book_close: 'Chiudi',
+      price_from: 'Da', per_night: '/ notte', view_book: 'Prenota camera',
+      features: 'Dotazioni',
+      confirmed_msg: 'La vostra prenotazione è confermata — non vediamo l\'ora di accogliervi!',
+      pending_msg: 'La vostra prenotazione è in elaborazione. Contattateci per qualsiasi domanda.',
+      group_title: 'Gruppi, Matrimoni & Eventi',
+      group_text: 'Per occasioni speciali e viaggi di gruppo, creiamo offerte personalizzate.',
+      enquire: 'Richiedi informazioni', nights_label: 'notti',
+      location_title: 'Visitateci a Langenburg',
+      region_title: 'Langenburg & Hohenlohe',
+      region_text: 'Langenburg si trova nella pittoresca Valle del Jagst — circondata da castelli, vigneti e la campagna dell\'Hohenlohe.',
+      open_maps: 'Apri in Google Maps',
+    },
   };
   const t = T[lang] || T.de;
 
@@ -365,7 +389,7 @@ export default function Rooms() {
           {ROOMS.map((room, idx) => {
             const photos = ROOM_PHOTOS[room.id] || [room.image];
             const activePhoto = activePhotos[room.id] || 0;
-            const features = lang === 'de' ? room.features_de : room.features_en;
+            const features = lang === 'de' ? room.features_de : lang === 'en' ? room.features_en : (room.features_it || room.features_en);
             const isReversed = idx % 2 === 1;
 
             return (
@@ -403,23 +427,24 @@ export default function Rooms() {
                   {/* Content */}
                   <div className={`p-7 sm:p-10 flex flex-col justify-center ${isReversed ? 'lg:col-start-1' : ''}`}>
                     <p className="text-[#C9A96E] text-[10px] tracking-[0.4em] uppercase font-body font-medium mb-3">
-                      {idx === 0 ? (lang === 'de' ? 'Einzelzimmer' : 'Single Room') : idx < 2 ? (lang === 'de' ? 'Doppelzimmer' : 'Double Room') : '✦ Suite'}
+                      {idx === 0 ? (lang === 'de' ? 'Einzelzimmer' : lang === 'en' ? 'Single Room' : 'Camera Singola') : idx < 2 ? (lang === 'de' ? 'Doppelzimmer' : lang === 'en' ? 'Double Room' : 'Camera Doppia') : '✦ Suite'}
                     </p>
                     <h2 className="font-display text-3xl sm:text-4xl font-light text-white mb-4 leading-tight">
-                      {lang === 'de' ? room.key_de : room.key_en}
+                      {lang === 'de' ? room.key_de : lang === 'en' ? room.key_en : (room.key_it || room.key_en)}
                     </h2>
                     <p className="text-white/55 text-base font-body leading-relaxed mb-6">
-                      {lang === 'de' ? room.description_de : room.description_en}
+                      {lang === 'de' ? room.description_de : lang === 'en' ? room.description_en : (room.description_it || room.description_en)}
                     </p>
 
                     {/* Specs */}
                     <div className="flex flex-wrap gap-2 mb-6">
                       <span className="flex items-center gap-1.5 text-sm text-white/50 font-body bg-white/5 rounded-full px-3 py-1.5 border border-white/8">
-                        <Users className="w-3.5 h-3.5 text-[#C9A96E]/50" /> max. {room.max_guests} {lang === 'de' ? 'Pers.' : 'guests'}
+                        <Users className="w-3.5 h-3.5 text-[#C9A96E]/50" /> max. {room.max_guests} {lang === 'de' ? 'Pers.' : lang === 'en' ? 'guests' : 'pers.'}
                       </span>
                       <span className="flex items-center gap-1.5 text-sm text-white/50 font-body bg-white/5 rounded-full px-3 py-1.5 border border-white/8">
                         <BedDouble className="w-3.5 h-3.5 text-[#C9A96E]/50" /> {lang === 'de' ? room.bed_de : room.bed_en}
                       </span>
+                      
                     </div>
 
                     {/* Features */}
@@ -450,16 +475,16 @@ export default function Rooms() {
         {/* ── ALL-ROOM AMENITIES ── */}
         <div className="bg-white border border-[#EDE6D8] rounded-2xl p-6 sm:p-8 mb-12 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
           <p className="text-[#8B6914] text-[10px] tracking-[0.35em] uppercase font-body font-semibold text-center mb-6">
-            {lang === 'de' ? 'In allen Zimmern enthalten' : 'Included in all rooms'}
+            {lang === 'de' ? 'In allen Zimmern enthalten' : lang === 'en' ? 'Included in all rooms' : 'Incluso in tutte le camere'}
           </p>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-5 text-center">
             {[
               { icon: Wifi, label: 'WLAN' },
-              { icon: Wind, label: lang === 'de' ? 'Klimaanlage' : 'A/C' },
-              { icon: Bath, label: lang === 'de' ? 'Bad' : 'Bathroom' },
-              { icon: Coffee, label: lang === 'de' ? 'Frühstück opt.' : 'Breakfast opt.' },
-              { icon: Star, label: lang === 'de' ? 'Premium-Bettwäsche' : 'Premium Linen' },
-              { icon: MapPin, label: lang === 'de' ? 'Stadtlage' : 'Town Centre' },
+              { icon: Wind, label: lang === 'de' ? 'Klimaanlage' : lang === 'en' ? 'A/C' : 'Aria Condizionata' },
+              { icon: Bath, label: lang === 'de' ? 'Bad' : lang === 'en' ? 'Bathroom' : 'Bagno' },
+              { icon: Coffee, label: lang === 'de' ? 'Frühstück opt.' : lang === 'en' ? 'Breakfast opt.' : 'Colazione opz.' },
+              { icon: Star, label: lang === 'de' ? 'Premium-Bettwäsche' : lang === 'en' ? 'Premium Linen' : 'Biancheria premium' },
+              { icon: MapPin, label: lang === 'de' ? 'Stadtlage' : lang === 'en' ? 'Town Centre' : 'Centro città' },
             ].map((a, i) => (
               <div key={i} className="flex flex-col items-center gap-2.5">
                 <div className="w-10 h-10 rounded-full bg-[#F7F3EC] border border-[#EDE6D8] flex items-center justify-center">
@@ -476,13 +501,13 @@ export default function Rooms() {
           <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#C9A96E]/5 rounded-full blur-3xl" />
           <div className="relative z-10">
             <p className="text-[#C9A96E] text-[10px] tracking-[0.45em] uppercase font-body mb-4">
-              {lang === 'de' ? 'Sichere Buchung via Beds24 · Sofortige Bestätigung' : 'Secure booking via Beds24 · Instant confirmation'}
+              {lang === 'de' ? 'Sichere Buchung via Beds24 · Sofortige Bestätigung' : lang === 'en' ? 'Secure booking via Beds24 · Instant confirmation' : 'Prenotazione sicura via Beds24 · Conferma immediata'}
             </p>
             <h2 className="font-display text-3xl sm:text-4xl font-light text-white mb-4">
-              {lang === 'de' ? 'Verfügbarkeit & Preise prüfen' : 'Check Availability & Rates'}
+              {lang === 'de' ? 'Verfügbarkeit & Preise prüfen' : lang === 'en' ? 'Check Availability & Rates' : 'Verifica disponibilità & tariffe'}
             </h2>
             <p className="text-white/40 font-body text-base mb-8 max-w-sm mx-auto">
-              {lang === 'de' ? 'Direkt online buchen — sicher, schnell und zum besten Preis.' : 'Book directly online — secure, fast, best price guaranteed.'}
+              {lang === 'de' ? 'Direkt online buchen — sicher, schnell und zum besten Preis.' : lang === 'en' ? 'Book directly online — secure, fast, best price guaranteed.' : 'Prenota direttamente online — sicuro, veloce e al miglior prezzo.'}
             </p>
             <button onClick={() => handleBookNow(null)} disabled={savingIntent}
               className="btn-gold px-10 disabled:opacity-60">
@@ -523,17 +548,17 @@ export default function Rooms() {
         <div className="bg-white border border-[#EDE6D8] rounded-2xl p-6 sm:p-8 mb-10 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
           <div className="text-center mb-7">
             <p className="text-[#8B6914] text-[10px] tracking-[0.45em] uppercase font-body font-semibold mb-2">{t.region_title}</p>
-            <h3 className="font-display text-2xl font-light text-[#1C1714] mb-3">Entdecken Sie Langenburg & Hohenlohe</h3>
+            <h3 className="font-display text-2xl font-light text-[#1C1714] mb-3">{lang === 'de' ? 'Entdecken Sie Langenburg & Hohenlohe' : lang === 'en' ? 'Discover Langenburg & Hohenlohe' : 'Scoprite Langenburg & Hohenlohe'}</h3>
             <p className="text-[#4A3F35] text-sm font-body leading-relaxed max-w-2xl mx-auto">
               {lang === 'de' ? 'Langenburg liegt im malerischen Jagsttal — umgeben von Schlössern, Wäldern und der Weite des Hohenloher Landes.' : 'Langenburg lies in the picturesque Jagst Valley — surrounded by castles, forests and the Hohenlohe countryside.'}
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { id: 'schloss', de: 'Schloss Langenburg', en: 'Langenburg Castle', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg' },
-              { id: 'jagsttal', de: 'Jagsttal', en: 'Jagst Valley', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg' },
-              { id: 'altstadt', de: 'Altstadt Langenburg', en: 'Old Town Langenburg', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=85' },
-              { id: 'automuseum', de: 'Automuseum', en: 'Car Museum', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg' },
+              { id: 'schloss', de: 'Schloss Langenburg', en: 'Langenburg Castle', it: 'Castello di Langenburg', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/148e52538_IMG_8597.jpeg' },
+              { id: 'jagsttal', de: 'Jagsttal', en: 'Jagst Valley', it: 'Valle del Jagst', img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/24196381a_IMG_8595.jpeg' },
+              { id: 'altstadt', de: 'Altstadt Langenburg', en: 'Old Town Langenburg', it: 'Centro Storico', img: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=85' },
+              { id: 'automuseum', de: 'Automuseum', en: 'Car Museum', it: "Museo dell'Auto", img: 'https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/6d234abbe_Automuseum_Langenburg.jpg' },
             ].map((item, i) => (
               <Link 
                 key={i} 
@@ -542,21 +567,21 @@ export default function Rooms() {
                 <div className="relative h-32 overflow-hidden">
                   <img 
                     src={item.img} 
-                    alt={lang === 'de' ? item.de : item.en}
+                    alt={lang === 'de' ? item.de : lang === 'en' ? item.en : item.it}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
                 <div className="p-3 text-center">
-                  <p className="text-[#1C1714] text-xs font-body font-semibold leading-tight">{lang === 'de' ? item.de : item.en}</p>
+                  <p className="text-[#1C1714] text-xs font-body font-semibold leading-tight">{lang === 'de' ? item.de : lang === 'en' ? item.en : item.it}</p>
                 </div>
               </Link>
             ))}
           </div>
           <div className="mt-6 text-center">
             <Link to="/discover" className="btn-gold inline-flex items-center gap-2 px-6">
-              {lang === 'de' ? 'Alle Sehenswürdigkeiten entdecken' : 'Discover All Attractions'} <ArrowRight className="w-3.5 h-3.5" />
+              {lang === 'de' ? 'Alle Sehenswürdigkeiten entdecken' : lang === 'en' ? 'Discover All Attractions' : 'Scopri tutte le attrazioni'} <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
@@ -574,7 +599,7 @@ export default function Rooms() {
             </Link>
             <Link to="/contact"
               className="btn-ghost-gold px-6">
-              {lang === 'de' ? 'Kontakt' : 'Contact'}
+              {lang === 'de' ? 'Kontakt' : lang === 'en' ? 'Contact' : 'Contatti'}
             </Link>
           </div>
         </div>
@@ -588,7 +613,7 @@ export default function Rooms() {
             <div>
               <p className="font-display text-lg font-light text-white">Krone Langenburg</p>
               <p className="text-[#C9A96E] text-[10px] tracking-[0.3em] uppercase font-body">
-                {lang === 'de' ? 'Sichere Online-Buchung' : 'Secure Online Booking'}
+                {lang === 'de' ? 'Sichere Online-Buchung' : lang === 'en' ? 'Secure Online Booking' : 'Prenotazione sicura online'}
               </p>
             </div>
             <button onClick={() => setShowBooking(false)}
@@ -599,7 +624,7 @@ export default function Rooms() {
           <iframe src={beds24EmbedUrl} title="Beds24 Secure Booking" className="flex-1 w-full border-0 bg-white min-h-[60vh]" allow="payment" />
           <div className="flex-shrink-0 text-center py-3 px-5 bg-[#171411] border-t border-[#C9A96E]/10">
             <a href={beds24EmbedUrl} target="_blank" rel="noopener noreferrer" className="text-[#C9A96E]/60 text-xs font-body hover:text-[#C9A96E] transition-colors">
-              {lang === 'de' ? 'Direkt in neuer Seite öffnen →' : 'Open directly in new tab →'}
+              {lang === 'de' ? 'Direkt in neuer Seite öffnen →' : lang === 'en' ? 'Open directly in new tab →' : 'Apri direttamente in una nuova scheda →'}
             </a>
           </div>
         </div>

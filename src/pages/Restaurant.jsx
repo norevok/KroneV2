@@ -283,7 +283,7 @@ export default function Restaurant() {
               </div>
             </div>
             <p className="text-[#4A3F35]/60 text-xs font-body leading-relaxed">
-              {lang === 'de' ? 'Mo–Sa: 12–14:30 & 17:30–22 Uhr · So: 12–20 Uhr' : 'Mon–Sat: 12–14:30 & 17:30–22 · Sun: 12–20'}
+              {lang === 'de' ? 'Mo–Sa: 12–14:30 & 17:30–22 Uhr · So: 12–20 Uhr' : lang === 'en' ? 'Mon–Sat: 12–14:30 & 17:30–22 · Sun: 12–20' : 'Lun–Sab: 12–14:30 & 17:30–22 · Dom: 12–20'}
             </p>
           </div>
 

@@ -19,6 +19,7 @@ const ATTRACTIONS = [
     image: IMG_CASTLE,
     de: { title: 'Schloss Langenburg', desc: 'Das fürstliche Schloss Langenburg thront majestätisch über dem Jagsttal und zählt zu den beeindruckendsten Barockschlössern Baden-Württembergs. Geführte Touren, Ausstellungen und eine atemberaubende Aussicht über das Hohenloher Land erwarten Sie.', tag: '5 min zu Fuß' },
     en: { title: 'Langenburg Castle', desc: 'The princely Langenburg Castle majestically overlooks the Jagst valley and is one of the most impressive Baroque castles in Baden-Württemberg. Guided tours, exhibitions and breathtaking views over the Hohenlohe countryside await you.', tag: '5 min walk' },
+    it: { title: 'Castello di Langenburg', desc: 'Il principesco Castello di Langenburg domina maestosamente la Valle del Jagst ed è uno dei più imponenti castelli barocchi del Baden-Württemberg. Tour guidati, mostre e viste mozzafiato sulla campagna dell\'Hohenlohe vi aspettano.', tag: '5 min a piedi' },
   },
   {
     id: 'jagsttal',
@@ -26,6 +27,7 @@ const ATTRACTIONS = [
     image: IMG_JAGSTTAL,
     de: { title: 'Jagsttal & Wanderungen', desc: 'Das Jagsttal gehört zu den schönsten Flusstälern Süddeutschlands. Malerische Wanderwege führen durch Wiesen, Wälder und historische Dörfer. Der Jagsttalweg verbindet auf über 200 km Kilometer Natur und Kultur.', tag: 'Wanderparadies' },
     en: { title: 'Jagst Valley & Hiking', desc: 'The Jagst valley is one of the most beautiful river valleys in southern Germany. Scenic hiking trails lead through meadows, forests and historic villages. The Jagst Valley Trail connects over 200 km of nature and culture.', tag: 'Hiking paradise' },
+    it: { title: 'Valle del Jagst & Escursioni', desc: 'La Valle del Jagst è una delle più belle valli fluviali del sud della Germania. Pittoreschi sentieri escursionistici attraversano prati, foreste e villaggi storici. Il percorso della Valle del Jagst collega oltre 200 km di natura e cultura.', tag: 'Paradiso escursionistico' },
   },
   {
     id: 'automuseum',
@@ -33,6 +35,7 @@ const ATTRACTIONS = [
     image: IMG_MUSEUM,
     de: { title: 'Deutsches Automuseum Schloss Langenburg', desc: 'Das Deutsche Automuseum im Schloss Langenburg zählt zu den faszinierendsten Automobilausstellungen Deutschlands. Über 80 historische Fahrzeuge — von frühen Sportwagen bis zu legendären Rennwagen — erzählen die Geschichte des Automobils in einzigartiger Schlosskulisse.', tag: '5 min zu Fuß' },
     en: { title: 'German Automotive Museum Langenburg', desc: 'The German Automotive Museum at Langenburg Castle is one of Germany\'s most fascinating car exhibitions. Over 80 historic vehicles — from early sports cars to legendary racing cars — tell the story of the automobile in a unique castle setting.', tag: '5 min walk' },
+    it: { title: 'Museo Tedesco dell\'Automobile', desc: 'Il Museo Tedesco dell\'Automobile al Castello di Langenburg è una delle mostre automobilistiche più affascinanti della Germania. Oltre 80 veicoli storici — dalle prime auto sportive alle leggendarie vetture da corsa — raccontano la storia dell\'automobile in un\'ambientazione unica.', tag: '5 min a piedi' },
   },
   {
     id: 'altstadt',
@@ -40,16 +43,17 @@ const ATTRACTIONS = [
     image: IMG_ALTSTADT,
     de: { title: 'Langenburger Altstadt', desc: 'Langenburg ist idealer Ausgangspunkt für Tagesausflüge nach Schwäbisch Hall, Bad Mergentheim oder Rothenburg ob der Tauber. Die malerische Altstadt selbst lädt mit Fachwerkhäusern und gepflasterten Gassen zum Spazieren ein.', tag: 'Tagesausflüge' },
     en: { title: 'Langenburg Old Town', desc: 'Langenburg is the ideal base for day trips to Schwäbisch Hall, Bad Mergentheim or Rothenburg ob der Tauber. The picturesque old town itself invites you to stroll among half-timbered houses and cobbled alleys.', tag: 'Day trips' },
+    it: { title: 'Centro Storico di Langenburg', desc: 'Langenburg è la base ideale per gite giornaliere a Schwäbisch Hall, Bad Mergentheim o Rothenburg ob der Tauber. Il pittoresco centro storico stesso invita a passeggiare tra case a graticcio e vicoli acciottolati.', tag: 'Gite giornaliere' },
   },
 ];
 
 const NEARBY = [
-  { de: 'Schwäbisch Hall', en: 'Schwäbisch Hall', km: '25 km', time: '30 min' },
-  { de: 'Rothenburg ob der Tauber', en: 'Rothenburg ob der Tauber', km: '58 km', time: '50 min' },
-  { de: 'Bad Mergentheim', en: 'Bad Mergentheim', km: '38 km', time: '40 min' },
-  { de: 'Nürnberg', en: 'Nuremberg', km: '110 km', time: '1h 15min' },
-  { de: 'Stuttgart', en: 'Stuttgart', km: '100 km', time: '1h 10min' },
-  { de: 'Frankfurt', en: 'Frankfurt', km: '155 km', time: '1h 45min' },
+  { de: 'Schwäbisch Hall', en: 'Schwäbisch Hall', it: 'Schwäbisch Hall', km: '25 km', time: '30 min' },
+  { de: 'Rothenburg ob der Tauber', en: 'Rothenburg ob der Tauber', it: 'Rothenburg ob der Tauber', km: '58 km', time: '50 min' },
+  { de: 'Bad Mergentheim', en: 'Bad Mergentheim', it: 'Bad Mergentheim', km: '38 km', time: '40 min' },
+  { de: 'Nürnberg', en: 'Nuremberg', it: 'Norimberga', km: '110 km', time: '1h 15min' },
+  { de: 'Stuttgart', en: 'Stuttgart', it: 'Stoccarda', km: '100 km', time: '1h 10min' },
+  { de: 'Frankfurt', en: 'Frankfurt', it: 'Francoforte', km: '155 km', time: '1h 45min' },
 ];
 
 const fadeUp = {
@@ -79,6 +83,8 @@ export default function DiscoverLangenburg() {
       cta_rooms: 'Zimmer buchen',
       cta_contact: 'Kontakt',
       directions_label: 'Route planen',
+      learn_more: 'Mehr erfahren',
+      ready: 'Bereit für Ihren Aufenthalt?',
     },
     en: {
       eyebrow: 'Langenburg & Hohenlohe',
@@ -91,6 +97,22 @@ export default function DiscoverLangenburg() {
       cta_rooms: 'Book a Room',
       cta_contact: 'Contact',
       directions_label: 'Get Directions',
+      learn_more: 'Learn more',
+      ready: 'Ready for your stay?',
+    },
+    it: {
+      eyebrow: 'Langenburg & Hohenlohe',
+      title: 'Scoprite uno degli angoli più belli della Germania.',
+      sub: 'Langenburg si trova nel cuore dell\'Hohenlohe — circondata da foreste, vigneti, castelli storici e uno dei paesaggi fluviali più pittoreschi del sud della Germania.',
+      scroll_hint: 'Scopri',
+      how_label: 'Come arrivare',
+      address_note: 'Ci troviamo nel centro di Langenburg.',
+      nearby_title: 'Distanze',
+      cta_rooms: 'Prenota una camera',
+      cta_contact: 'Contatti',
+      directions_label: 'Indicazioni stradali',
+      learn_more: 'Scopri di più',
+      ready: 'Pronti per il vostro soggiorno?',
     },
   };
   const t = T[lang] || T.de;
@@ -224,7 +246,7 @@ export default function DiscoverLangenburg() {
                             to={att.id === 'schloss' ? 'https://schloss-langenburg.de' : att.id === 'ausflug' ? '/discover' : '/contact'}
                             target={att.id === 'schloss' ? '_blank' : undefined}
                             className="inline-flex items-center gap-2 text-[#8B6914] text-xs font-body font-semibold tracking-widest uppercase hover:gap-3 transition-all">
-                            {lang === 'de' ? 'Mehr erfahren' : 'Learn more'} <ArrowRight className="w-3.5 h-3.5" />
+                            {t.learn_more} <ArrowRight className="w-3.5 h-3.5" />
                           </Link>
                         </motion.div>
                       )}
@@ -262,7 +284,7 @@ export default function DiscoverLangenburg() {
                     viewport={{ once: true }} custom={i * 0.5}
                     whileHover={{ x: 4 }}
                     className="bg-white border border-[#EDE6D8] rounded-xl px-5 py-3.5 flex items-center justify-between shadow-sm hover:border-[#C9A96E]/40 hover:shadow-md transition-all duration-200 cursor-default">
-                    <span className="text-[#4A3F35] text-sm font-body">{lang === 'de' ? n.de : n.en}</span>
+                    <span className="text-[#4A3F35] text-sm font-body">{lang === 'de' ? n.de : lang === 'en' ? n.en : n.it}</span>
                     <div className="flex items-center gap-3">
                       <span className="text-[#8A7A6A] text-xs font-body">{n.km}</span>
                       <span className="text-[#8B6914] text-xs font-body border border-[#C9A96E]/30 bg-[#F2E8D0] rounded-full px-3 py-1">{n.time}</span>
@@ -275,7 +297,7 @@ export default function DiscoverLangenburg() {
               <motion.div
                 whileHover={{ y: -2 }}
                 className="mt-6 bg-[#1C1714] border border-[#C9A96E]/20 rounded-2xl p-6 shadow-lg">
-                <p className="text-[#C9A96E] text-[10px] uppercase tracking-[0.35em] font-body mb-4">Adresse</p>
+                <p className="text-[#C9A96E] text-[10px] uppercase tracking-[0.35em] font-body mb-4">{lang === 'de' ? 'Adresse' : lang === 'en' ? 'Address' : 'Indirizzo'}</p>
                 <p className="text-white font-body text-sm leading-relaxed">
                   Krone Langenburg by Ammesso<br />
                   {s.address_street}<br />
@@ -297,9 +319,7 @@ export default function DiscoverLangenburg() {
           className="mt-10 sm:mt-12 bg-gradient-to-r from-[#1C1714] to-[#2A2118] border border-[#C9A96E]/20 rounded-3xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl overflow-hidden relative">
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#C9A96E]/08 rounded-full blur-3xl pointer-events-none" />
           <div>
-            <p className="font-display text-2xl sm:text-3xl font-light text-white mb-2">
-              {lang === 'de' ? 'Bereit für Ihren Aufenthalt?' : 'Ready for your stay?'}
-            </p>
+            <p className="font-display text-2xl sm:text-3xl font-light text-white mb-2">{t.ready}</p>
             <p className="text-white/50 text-sm font-body">
               {lang === 'de' ? 'Krone Langenburg by Ammesso · Hohenlohe' : 'Krone Langenburg by Ammesso · Hohenlohe'}
             </p>
