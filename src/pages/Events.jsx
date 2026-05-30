@@ -338,23 +338,7 @@ export default function Events() {
         </div>
       </motion.section>
 
-      {/* ── IMAGE GALLERY — nur echte Krone-Bilder ── */}
-      <section className="px-5 pb-16 bg-[#171311]">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3 h-52 sm:h-64">
-          {[
-            { src: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/8c381b8e8_krone-kingsuite-2-zimmer-favorit-01.jpg", label: lang === 'de' ? 'Zimmer & Suiten' : 'Rooms & Suites' },
-            { src: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/2bf4a9028_Krone_innen.png", label: lang === 'de' ? 'Restaurant' : 'Restaurant' },
-            { src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85", label: lang === 'de' ? 'Kulinarik' : 'Cuisine' },
-            { src: "https://media.base44.com/images/public/69e1fb8a73bbccc7f63ef768/aef46bd59_Krone_innen.png", label: lang === 'de' ? 'Ambiente' : 'Ambiance' },
-          ].map((item, i) => (
-            <div key={i} className="rounded-2xl overflow-hidden relative group">
-              <img src={item.src} alt={item.label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F0D0B]/75 via-transparent to-transparent" />
-              <p className="absolute bottom-3 left-3 text-white/90 text-xs font-body font-semibold tracking-wider uppercase drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">{item.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* ── HOW IT WORKS ── */}
       <motion.section
