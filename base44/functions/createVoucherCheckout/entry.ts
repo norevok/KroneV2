@@ -83,18 +83,20 @@ Deno.serve(async (req) => {
 
     const descriptionDe = `Krone Langenburg Gutschein · Gültig 2 Jahre · Code: ${code}`;
     const descriptionEn = `Krone Langenburg Voucher · Valid 2 years · Code: ${code}`;
+    const descriptionIt = `Krone Langenburg Buono · Valido 2 anni · Codice: ${code}`;
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
       customer_email: purchaser_email,
+      locale: language === 'it' ? 'it' : language === 'en' ? 'en' : 'de',
       line_items: [{
         price_data: {
           currency: 'eur',
           unit_amount: Math.round(amountNum * 100),
           product_data: {
             name: `${product_name} — Krone Langenburg by Ammesso`,
-            description: language === 'en' ? descriptionEn : descriptionDe,
+            description: language === 'en' ? descriptionEn : language === 'it' ? descriptionIt : descriptionDe,
             images: ['https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&q=80'],
           },
         },

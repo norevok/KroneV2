@@ -550,7 +550,7 @@ export default function Rooms() {
             <p className="text-[#8B6914] text-[10px] tracking-[0.45em] uppercase font-body font-semibold mb-2">{t.region_title}</p>
             <h3 className="font-display text-2xl font-light text-[#1C1714] mb-3">{lang === 'de' ? 'Entdecken Sie Langenburg & Hohenlohe' : lang === 'en' ? 'Discover Langenburg & Hohenlohe' : 'Scoprite Langenburg & Hohenlohe'}</h3>
             <p className="text-[#4A3F35] text-sm font-body leading-relaxed max-w-2xl mx-auto">
-              {lang === 'de' ? 'Langenburg liegt im malerischen Jagsttal — umgeben von Schlössern, Wäldern und der Weite des Hohenloher Landes.' : 'Langenburg lies in the picturesque Jagst Valley — surrounded by castles, forests and the Hohenlohe countryside.'}
+              {lang === 'de' ? 'Langenburg liegt im malerischen Jagsttal — umgeben von Schlössern, Wäldern und der Weite des Hohenloher Landes.' : lang === 'en' ? 'Langenburg lies in the picturesque Jagst Valley — surrounded by castles, forests and the Hohenlohe countryside.' : 'Langenburg si trova nella pittoresca Valle del Jagst — circondata da castelli, foreste e la campagna dell\'Hohenlohe.'}
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
